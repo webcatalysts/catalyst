@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalyst Schema feature.
+ */
+
+include_once 'catalyst_schema.features.inc';

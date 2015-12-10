@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalyst Core feature.
+ */
+
+include_once 'catalyst_core.features.inc';

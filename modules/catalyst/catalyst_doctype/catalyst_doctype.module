@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalyst Doctype feature.
+ */
+
+include_once 'catalyst_doctype.features.inc';

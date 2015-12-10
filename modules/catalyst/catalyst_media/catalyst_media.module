@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalyst Media feature.
+ */
+
+include_once 'catalyst_media.features.inc';

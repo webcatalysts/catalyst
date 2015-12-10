@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalyst Block feature.
+ */
+
+include_once 'catalyst_block.features.inc';
