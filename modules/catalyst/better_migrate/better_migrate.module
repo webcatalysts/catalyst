@@ -1,0 +1,53 @@
+<?php
+
+/**
+ * @file
+ * This module does nothing on it's own.
+ */
+
+function better_migrate_generate_image_name($value){
+  if (!empty($value)) {
+    return $value;
+  }
+  if (module_exists('devel_generate')) {
+    module_load_include('inc', 'devel_generate', 'image.devel_generate');
+    $image = devel_generate_image('png', '600x600', '800x800');
+    $image_name = basename($image);
+    return $image_name;
+  }
+}
+
+function better_migrate_handle_boolean($value) {
+  $value_str = strtolower($value);
+  switch (true) {
+    // Obvious boolean
+    case $value === TRUE:
+    case $value === FALSE:
+    case $value === 0:
+    case $value === 1:
+      return (bool)$value;
+    // Possible true value strings
+    case $value_str == 'yes':
+    case $value_str == 'y':
+    case $value_str == 'on':
+    case $value_str == '1':
+      return TRUE;
+  }
+  return FALSE;
+}
+
+/**
+ * Custom callback for encoding multiple value
+ * fields.
+ */
+function better_migrate_utf8_encode($mixed_value) {
+  if (is_array($mixed_value)) {
+    foreach (array_keys($mixed_value) AS $i) {
+      $mixed_value[$i] = utf8_encode($mixed_value[$i]);
+    }
+  }
+  else {
+    $mixed_value = utf8_encode($mixed_value);
+  }
+  return $mixed_value;
+}

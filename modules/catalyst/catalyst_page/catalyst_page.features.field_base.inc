@@ -127,6 +127,41 @@ function catalyst_page_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
+  // Exported field_base: 'field_cpage_layout'.
+  $field_bases['field_cpage_layout'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_cpage_layout',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 0,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'layout' => 'layout',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
   // Exported field_base: 'field_custom_js'.
   $field_bases['field_custom_js'] = array(
     'active' => 1,

@@ -5,3 +5,91 @@
  */
 
 include_once 'catalyst_media.features.inc';
+
+define('CATALYST_MEDIA_GROUP_LAYOUT', 101);
+define('CATALYST_MEDIA_GROUP_PAGE', 202);
+define('CATALYST_MEDIA_GROUP_OTHER', 303);
+
+/**
+ * Implements hook_catalyst_twig_render_alter().
+ */
+function catalyst_media_catalyst_twig_render_alter(&$twig, &$variables, $key = NULL) {
+  $twig->addFunction(new Twig_SimpleFunction('filepath', 'catalyst_media_filepath'));
+}
+
+function catalyst_media_filepath($machine_name) {
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'catalyst')
+    ->entityCondition('bundle', 'file')
+    ->fieldCondition('field_file_machine', 'machine', $machine_name, '=')
+    ->addTag(__FUNCTION__);
+  $result = $query->execute();
+  if (isset($result['catalyst'])) {
+    $results = entity_load('catalyst', array_keys($result['catalyst']));
+    $file = array_pop($results);
+    $file = entity_metadata_wrapper('catalyst', $file);
+    switch ($file->field_media_type->value()) {
+      case 'local':
+        return url($file->field_media_path->value());
+    }
+  }
+}
+
+function catalyst_media_form_alter(&$form, &$form_state, $form_id) {
+  if (strpos($form_id, 'eck__entity__form') === 0 && isset($form['field_media_type'])) {
+    $form['#attached']['js'][] = drupal_get_path('module', 'catalyst_media') . '/catalyst_media.admin.js';
+    $form['#after_build'][] = 'catalyst_media_admin_form_after_build';
+  }
+}
+
+function catalyst_media_admin_form_after_build($form, &$form_state) {
+  $ids = array(
+    'type' => $form['field_media_type']['#id'],
+    'path' => $form['field_media_path']['#id'],
+  );
+  if (isset($form['field_media_content'])) {
+    $ids['custom'] = $form['field_media_content']['#id'];
+  }
+  elseif (isset($form['field_media_file'])) {
+    $ids['custom'] = $form['field_media_file']['#id'];
+  }
+
+  $form['#attached']['js'][] = array(
+    'data' => array('catalystMediaAdmin' => array('ids' => $ids)),
+    'type' => 'setting'
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_entity_view().
+ */
+function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
+  $collection = array(
+    'css' => array(
+      'field_layout_includes_css' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field_cpage_includes_css' => CATALYST_MEDIA_GROUP_PAGE,
+      'field_catalyst_includes_css' => CATALYST_MEDIA_GROUP_OTHER,
+    ),
+    'js' => array(
+      'field_layout_includes_js' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field_cpage_includes_js' => CATALYST_MEDIA_GROUP_PAGE,
+      'field_catalyst_includes_js' => CATALYST_MEDIA_GROUP_OTHER,
+    ),
+  );
+
+  drupal_alter('catalyst_includes_fields', $collection);
+  $wrapper = entity_metadata_wrapper($type, $entity);
+  foreach ($collection AS $type => $fields) {
+    $callback = 'catalyst_add_' . $type;
+    foreach ($fields AS $field => $group) {
+      if (isset($entity->$field)) {
+        foreach ($wrapper->$field->value() AS $include) {
+          dsm($include->title);
+          $include = entity_metadata_wrapper('catalyst', $include);
+          $callback($include, $group);
+        }
+      }
+    }
+  }
+}

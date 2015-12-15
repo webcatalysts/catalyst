@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * better_migrate_example.install
+ */
+
+function better_migrate_example_install() {
+  better_migrate_example_install_tags_vocabulary();
+}
+
+function better_migrate_example_install_tags_vocabulary() {
+  module_load_include('module', 'taxonomy', 'taxonomy');
+  $t = get_t();
+
+  // Create the vocabulary programatically.
+  $vocab = (object)array(
+    'name' => $t('Tags'),
+    'machine_name' => 'tags',
+    'description' => $t('Tags for every_field'),
+    'relations' => 0,
+    'hierarchy' => 0,
+    'multiple' => 1,
+    'required' => 1,
+    'tags' => 1,
+    'module' => 'taxonomy',
+    'weight' => 0,
+  );
+  taxonomy_vocabulary_save($vocab);
+}

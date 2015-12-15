@@ -1,12 +1,4 @@
-name = Minimal
-description = Start with only a few modules enabled.
-version = VERSION
+name = Catalyst
+description = The Catalyst CMS hybrid for Drupal
+version = 0.1
 core = 7.x
-dependencies[] = block
-dependencies[] = dblog
-
-; Information added by Drupal.org packaging script on 2015-10-21
-version = "7.41"
-project = "drupal"
-datestamp = "1445457729"
-

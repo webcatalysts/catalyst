@@ -5,3 +5,43 @@
  */
 
 include_once 'catalyst_layout.features.inc';
+
+function catalyst_layout_form_eck__entity__form_edit_catalyst_layout_alter(&$form, &$form_state) {
+  return;
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'catalyst')
+    ->entityCondition('bundle', 'doctype')
+    ->addMetaData('account', user_load(1))
+    ->addTag(__FUNCTION__);
+  $result = $query->execute();
+  if (isset($result['catalyst'])) {
+    $callbacks = array(
+      'onselect' => array(),
+      'ondeselect' => array(),
+    );
+    $doctypes = entity_load('catalyst', array_keys($result['catalyst']));
+    foreach ($doctypes AS $id => $_doctype) {
+      $doctype = entity_metadata_wrapper('catalyst', $_doctype);
+      $onselect = $doctype->field_doctype_onselect->value();
+      $ondeselect = $doctype->field_doctype_ondeselect->value();
+      if (!empty($onselect) || !empty($ondeselect)) {
+        if (!empty($onselect)) {
+          $callbacks['onselect'][$id] = $onselect;
+        }
+        if (!empty($ondeselect)) {
+          $callbacks['ondeselect'][$id] = $ondeselect;
+        }
+      }
+    }
+  }
+
+  $form['#attached']['js']['catalyst_layout'] = drupal_get_path('module', 'catalyst_layout') . '/catalyst_layout_form.js';
+  drupal_add_js(array(
+      'layoutDoctypeOnChange' => array(
+        'selector' => '#edit-field-layout-doctype-und',
+        'callbacks' => $callbacks,
+      ),
+    ),
+    'setting'
+  );
+}

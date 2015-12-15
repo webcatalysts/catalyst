@@ -66,7 +66,7 @@ function catalyst_page_field_default_field_instances() {
         'rows' => 10,
       ),
       'type' => 'text_textarea',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -232,6 +232,39 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-cpage-field_cpage_layout'.
+  $field_instances['node-cpage-field_cpage_layout'] = array(
+    'bundle' => 'cpage',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field_cpage_layout',
+    'label' => 'Layout',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'node-cpage-field_custom_js'.
   $field_instances['node-cpage-field_custom_js'] = array(
     'bundle' => 'cpage',
@@ -290,6 +323,7 @@ function catalyst_page_field_default_field_instances() {
   t('Custom javascript specific to this page.');
   t('Custom markup that will be added the <head> tag of the layout. Allows for metatags, external javascript/stylesheets, etc.');
   t('Javascript Includes');
+  t('Layout');
   t('Stylesheet Includes');
 
   return $field_instances;

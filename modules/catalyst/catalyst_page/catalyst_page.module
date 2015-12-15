@@ -5,3 +5,45 @@
  */
 
 include_once 'catalyst_page.features.inc';
+
+function catalyst_page_form_cpage_node_form_alter(&$form, &$form_state) {
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'catalyst')
+    ->entityCondition('bundle', 'layout')
+    ->addMetaData('account', user_load(1))
+    ->addTag(__FUNCTION__);
+  $result = $query->execute();
+  if (isset($result['catalyst'])) {
+    $callbacks = array(
+      'onselect' => array(),
+      'ondeselect' => array(),
+    );
+    $layouts = entity_load('catalyst', array_keys($result['catalyst']));
+    foreach ($layouts AS $id => $_layout) {
+      $layout = entity_metadata_wrapper('catalyst', $_layout);
+      if ($onselect = $layout->field_layout_onselect->value()) {
+        $callbacks['onselect'][$id] = $onselect;
+      }
+      if ($ondeselect = $layout->field_layout_ondeselect->value()) {
+        $callbacks['ondeselect'][$id] = $ondeselect;
+      }
+    }
+    $form['#attached']['js']['catalyst_page'] = drupal_get_path('module', 'catalyst_page') . '/catalyst_page_form.js';
+    drupal_add_js(array(
+      'pageLayoutOnChange' => array(
+        'selector' => '#edit-field-cpage-layout-und',
+        'callbacks' => $callbacks,
+      )),
+      'setting'
+    );
+  }
+}
+
+function catalyst_page_node_view($node, $view_mode, $langcode) {
+  $wrapper = entity_metadata_wrapper('node', $node);
+  if ($wrapper->getBundle() == 'cpage' && $view_mode == 'full') {
+    if ($layout = $wrapper->field_cpage_layout->value()) {
+      catalyst_set_layout($layout);
+    }
+  }
+}

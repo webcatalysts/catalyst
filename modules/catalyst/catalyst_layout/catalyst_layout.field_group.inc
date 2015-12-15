@@ -13,6 +13,35 @@ function catalyst_layout_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_layout_advanced|catalyst|layout|form';
+  $field_group->group_name = 'group_layout_advanced';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'layout';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Advanced Settings',
+    'weight' => '7',
+    'children' => array(
+      0 => 'field_layout_onselect',
+      1 => 'field_layout_ondeselect',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Advanced Settings',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-layout-advanced field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $export['group_layout_advanced|catalyst|layout|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_layout_css|catalyst|layout|form';
   $field_group->group_name = 'group_layout_css';
   $field_group->entity_type = 'catalyst';
@@ -21,7 +50,7 @@ function catalyst_layout_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Cascading Style Sheets',
-    'weight' => '4',
+    'weight' => '3',
     'children' => array(
       0 => 'field_layout_includes_css',
       1 => 'field_layout_css',
@@ -50,7 +79,7 @@ function catalyst_layout_field_group_info() {
   $field_group->parent_name = '';
   $field_group->data = array(
     'label' => 'Javascript',
-    'weight' => '6',
+    'weight' => '4',
     'children' => array(
       0 => 'field_layout_includes_js',
       1 => 'field_layout_js',

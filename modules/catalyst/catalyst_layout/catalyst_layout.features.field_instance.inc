@@ -36,6 +36,32 @@ function catalyst_layout_field_default_field_instances() {
     'label' => 'Content',
     'required' => 1,
     'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'ace_editor' => 'ace_editor',
+          'cpage_html' => 'cpage_html',
+          'layout_html' => 'layout_html',
+          'plain_text' => 'plain_text',
+        ),
+        'allowed_formats_toggle' => 0,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'ace_editor' => array(
+              'weight' => -50,
+            ),
+            'cpage_html' => array(
+              'weight' => 0,
+            ),
+            'layout_html' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
       'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
@@ -43,7 +69,7 @@ function catalyst_layout_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 10,
+        'rows' => 20,
       ),
       'type' => 'text_textarea',
       'weight' => 2,
@@ -325,7 +351,7 @@ function catalyst_layout_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 8,
+      'weight' => 6,
     ),
   );
 
@@ -379,7 +405,7 @@ function catalyst_layout_field_default_field_instances() {
         'rows' => 5,
       ),
       'type' => 'text_textarea',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 

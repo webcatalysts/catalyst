@@ -1,0 +1,6 @@
+name = Better Migrate Example
+description = Provides example migrations for utilizing the better_migrate migration structure.
+core = 7.x
+dependencies[] = better_migrate
+dependencies[] = every_field
+files[] = migrations/example_node.inc

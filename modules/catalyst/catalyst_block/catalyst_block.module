@@ -5,3 +5,26 @@
  */
 
 include_once 'catalyst_block.features.inc';
+
+/**
+ * Implements hook_catalyst_twig_render_alter().
+ */
+function catalyst_block_catalyst_twig_render_alter(&$twig, &$variables, $key = NULL) {
+  $twig->addFunction(new Twig_SimpleFunction('showblock', 'catalyst_block_showblock'));
+}
+
+function catalyst_block_showblock($machine_name) {
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'catalyst')
+    ->entityCondition('bundle', 'block')
+    ->fieldCondition('field_block_machine', 'machine', $machine_name, '=')
+    ->addTag(__FUNCTION__);
+  $result = $query->execute();
+  if (isset($result['catalyst'])) {
+    $blocks = entity_load('catalyst', array_keys($result['catalyst']));
+    $block = array_pop($blocks);
+    return render(entity_view('catalyst', array($block)));
+  }
+  // Check permission and output dummy block warning of missing block
+  //return  '<h3>Block content here</h3>';
+}

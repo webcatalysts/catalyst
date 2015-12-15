@@ -7,3 +7,13 @@ function notheme_field($variables) {
   }
   return $output;
 }
+
+/**
+function notheme_html($variables) {
+  return '';
+}
+
+function notheme_page($variables) {
+  print $variables['messages'];
+}
+**/

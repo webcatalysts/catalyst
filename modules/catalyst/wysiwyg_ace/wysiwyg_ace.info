@@ -1,0 +1,4 @@
+name = WYSIWYG Ace
+description = Integrates the Ace web code editor utility with the WYSIWYG api.
+core = 7.x
+dependencies[] = wysiwyg
