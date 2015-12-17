@@ -1,0 +1,31 @@
+<?php
+
+/**
+ * Implements hook_form_alter().
+ */
+function catalyst_save_edit_form_alter(&$form, &$form_state, $form_id) {
+  $save_edit_forms = array(
+    // base form id => forms submit callback function
+    'eck__entity__form' => 'eck__entity__form_submit',
+    'node_form' => 'node_form_submit',
+  );
+  $base_form_id = $form_state['build_info']['base_form_id'];
+  if (array_key_exists($base_form_id, $save_edit_forms)) {
+    $form['actions']['catatalyst_save_edit'] = array(
+      '#type' => 'submit',
+      '#value' => t('Save & Edit'),
+      '#submit' => array(
+        'base_form_submit' => $save_edit_forms[$base_form_id],
+        'catalyst_save_edit' => 'catalyst_save_edit_submit',
+      ),
+    );
+  }
+}
+
+/**
+ * Submit redirect handler.
+ */
+function catalyst_save_edit_submit(&$form, &$form_state) {
+  unset($_REQUEST['destination']);
+  $form_state['redirect'] = request_path();
+}
