@@ -35,15 +35,20 @@ function catalyst_theme() {
 
 /**
  * Implements hook_page_delivery_callback_alter().
- * 
+ *
  * @see drupal_deliver_page()
  */
 function catalyst_page_delivery_callback_alter(&$delivery_callback) {
+  if ($delivery_callback != 'drupal_deliver_html_page') {
+    return;
+  }
+
   global $theme, $catalyst_layout;
+  catalyst_layout_initialize();
   drupal_theme_initialize();
   // Might need to allow subthemes here for hybrid integrations
-  if (isset($catalyst_layout) && $theme == 'notheme') {
-    $delivery_callback = 'catalyst_deliver_page';
+  if ($theme == 'notheme' && !path_is_admin($_GET['q'])) {
+    $delivery_callback = 'catalyst_deliver_html_page';
   }
 }
 
@@ -55,4 +60,14 @@ function catalyst_page_delivery_callback_alter(&$delivery_callback) {
 function catalyst_form_install_configure_form_alter(&$form, $form_state) {
   // Pre-populate the site name with the server name.
   $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
+}
+
+function catalyst_load($bundle, $ids = FALSE, $conditions = array(), $reset = FALSE) {
+  $conditions['type'] = $bundle;
+  return entity_load('catalyst', $ids, $conditions, $reset);
+}
+
+function catalyst_load_single($id) {
+  $entities = entity_load_single($id);
+  return reset($entities);
 }
