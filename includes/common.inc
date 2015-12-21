@@ -7,9 +7,111 @@
 /**
  * Custom delivery callback for Catalyst CMS.
  *
+ * Mostly identical to the default callbac, except catalyst_render_page() is
+ * called instead of drupal_render_page().
+ *
+ * @see catalyst_render_page()
  */
-function catalyst_deliver_page($page_callback_result) {
-  print catalyst_render_page($page_callback_result);
+function catalyst_deliver_html_page($page_callback_result) {
+  // Emit the correct charset HTTP header, but not if the page callback
+  // result is NULL, since that likely indicates that it printed something
+  // in which case, no further headers may be sent, and not if code running
+  // for this page request has already set the content type header.
+  if (isset($page_callback_result) && is_null(drupal_get_http_header('Content-Type'))) {
+    drupal_add_http_header('Content-Type', 'text/html; charset=utf-8');
+  }
+
+  // Send appropriate HTTP-Header for browsers and search engines.
+  global $language;
+  drupal_add_http_header('Content-Language', $language->language);
+
+ // Menu status constants are integers; page content is a string or array.
+  if (is_int($page_callback_result)) {
+    // @todo: Break these up into separate functions?
+    switch ($page_callback_result) {
+      case MENU_NOT_FOUND:
+        // Print a 404 page.
+        drupal_add_http_header('Status', '404 Not Found');
+
+        watchdog('page not found', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
+
+        // Check for and return a fast 404 page if configured.
+        drupal_fast_404();
+
+        // Keep old path for reference, and to allow forms to redirect to it.
+        if (!isset($_GET['destination'])) {
+          // Make sure that the current path is not interpreted as external URL.
+          if (!url_is_external($_GET['q'])) {
+            $_GET['destination'] = $_GET['q'];
+          }
+        }
+
+        $path = drupal_get_normal_path(variable_get('site_404', ''));
+        if ($path && $path != $_GET['q']) {
+          // Custom 404 handler. Set the active item in case there are tabs to
+          // display, or other dependencies on the path.
+          menu_set_active_item($path);
+          $return = menu_execute_active_handler($path, FALSE);
+        }
+
+        if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
+          // Standard 404 handler.
+          drupal_set_title(t('Page not found'));
+          $return = t('The requested page "@path" could not be found.', array('@path' => request_uri()));
+        }
+
+        drupal_set_page_content($return);
+        $page = element_info('page');
+        print drupal_render_page($page);
+        break;
+
+      case MENU_ACCESS_DENIED:
+        // Print a 403 page.
+        drupal_add_http_header('Status', '403 Forbidden');
+        watchdog('access denied', check_plain($_GET['q']), NULL, WATCHDOG_WARNING);
+
+        // Keep old path for reference, and to allow forms to redirect to it.
+        if (!isset($_GET['destination'])) {
+          // Make sure that the current path is not interpreted as external URL.
+          if (!url_is_external($_GET['q'])) {
+            $_GET['destination'] = $_GET['q'];
+          }
+        }
+
+        $path = drupal_get_normal_path(variable_get('site_403', ''));
+        if ($path && $path != $_GET['q']) {
+          // Custom 403 handler. Set the active item in case there are tabs to
+          // display or other dependencies on the path.
+          menu_set_active_item($path);
+          $return = menu_execute_active_handler($path, FALSE);
+        }
+
+        if (empty($return) || $return == MENU_NOT_FOUND || $return == MENU_ACCESS_DENIED) {
+          // Standard 403 handler.
+          drupal_set_title(t('Access denied'));
+          $return = t('You are not authorized to access this page.');
+        }
+
+        print drupal_render_page($return);
+        break;
+
+      case MENU_SITE_OFFLINE:
+        // Print a 503 page.
+        drupal_maintenance_theme();
+        drupal_add_http_header('Status', '503 Service unavailable');
+        drupal_set_title(t('Site under maintenance'));
+        print theme('maintenance_page', array('content' => filter_xss_admin(variable_get('maintenance_mode_message',
+        t('@site is currently under maintenance. We should be back shortly. Thank you for your patience.', array('@site' => variable_get('site_name', 'Drupal')))))));
+        break;
+    }
+  }
+  elseif (isset($page_callback_result)) {
+    // Print anything besides a menu constant, assuming it's not NULL or
+    // undefined.
+    print catalyst_render_page($page_callback_result);
+  }
+  // Perform end-of-request tasks.
+  drupal_page_footer();
 }
 
 /**
@@ -17,32 +119,55 @@ function catalyst_deliver_page($page_callback_result) {
  *
  * @see drupal_render_page()
  */
-function catalyst_render_page($main_content) {
-  $page = element_info('layout');
-  $page['content'] = $main_content;
+function catalyst_render_page($page) {
+  $main_content_display = &drupal_static('system_main_content_added', FALSE);
+
+  // Allow menu callbacks to return strings or arbitrary arrays to render.
+  // If the array returned is not of #type page directly, we need to fill
+  // in the page with defaults.
+  if (is_string($page) || (is_array($page) && (!isset($page['#type']) || ($page['#type'] != 'layout')))) {
+    drupal_set_page_content($page);
+    $page = element_info('layout');
+  }
+
+  // Modules can add elements to $page as needed in hook_page_build().
+  foreach (module_implements('page_build') as $module) {
+    $function = $module . '_page_build';
+    $function($page);
+  }
+  // Modules alter the $page as needed. Blocks are populated into regions like
+  // 'sidebar_first', 'footer', etc.
+  drupal_alter('page', $page);
+
+  // If no module has taken care of the main content, add it to the page now.
+  // This allows the site to still be usable even if no modules that
+  // control page regions (for example, the Block module) are enabled.
+  if (!$main_content_display) {
+    $page['content']['system_main'] = drupal_set_page_content();
+  }
+
   return drupal_render($page);
 }
 
 function catalyst_add_css($stylesheet, $group = CATALYST_MEDIA_GROUP_OTHER) {
   $options = array(
     'group' => $group,
-    //'media' => $stylesheet->field_stylesheet_media->value(),
-    'media' => 'all',
+    'media' => $stylesheet->field_stylesheet_media->value(),
   );
 
   $options['basename'] = $stylesheet->field_stylesheet_machine->value()['machine'];
-  switch ($stylesheet->field_stylesheet_type->value()) {
+  switch ($stylesheet->field_media_type->value()) {
     case 'custom':
-      $data = $stylesheet->field_stylesheet_content->value();
+      $data = $stylesheet->field_media_content->value()['value'];
       $options['type'] = 'inline';
       //$options['basename'] = $stylesheet->field_stylesheet_machine->value()['machine'];
       break;
     case 'local':
-      $data = $stylesheet->field_stylesheet_path->value();
+      $data = $stylesheet->field_media_path->value();
       $options['type'] = 'file';
       break;
     case 'remote':
-      $data = $stylesheet->field_stylesheet_path->value();
+      $data = $stylesheet->field_media_path->value();
       $options['type'] = 'external';
       break;
   }
@@ -60,24 +185,24 @@ function catalyst_add_js($javascript, $group = CATALYST_MEDIA_GROUP_OTHER) {
   $options = array(
     'group' => $group,
     'requires_jquery' => FALSE,
+    'scope' => $javascript->field_javascript_scope->value(),
+    'defer' => $javascript->field_javascript_defer->value(),
   );
 
-  switch ($javascript->field_javascript_type->value()) {
+  switch ($javascript->field_media_type->value()) {
     case 'custom':
-      $data = $javascript->field_javascript_content->value();
+      $data = $javascript->field_media_content->value()['value'];
       $options['type'] = 'inline';
       break;
     case 'local':
-      $data = $javascript->field_javascript_path->value();
+      $data = $javascript->field_media_path->value();
       $options['type'] = 'file';
       break;
     case 'remote':
-      $data = $javascript->field_javascript_path->value();
+      $data = $javascript->field_media_path->value();
       $options['type'] = 'external';
       break;
   }
-
-  // Add scope handling
 
   if ($group == CATALYST_MEDIA_GROUP_LAYOUT) {
     $options['every_page'] = TRUE;
@@ -108,12 +233,48 @@ function catalyst_get_css() {
 
 function catalyst_get_js($scope = 'header') {
   $javascript = &drupal_static('drupal_add_js', array());
-  $remove_groups = array(JS_DEFAULT, JS_LIBRARY, JS_SETTING, JS_THEME);
+  $remove_groups = array(JS_DEFAULT, JS_LIBRARY, JS_THEME);
   foreach (array_keys($javascript) AS $i) {
+    if ($i == 'settings') continue;
+
     if ($javascript[$i]['scope'] == $scope
       && in_array($javascript[$i]['group'], $remove_groups)) {
       unset($javascript[$i]);
     }
   }
   return drupal_get_js($scope, $javascript);
+}
+
+function catalyst_load_blocks() {
+  $block_info = module_invoke_all('block_placements');
+  drupal_alter('block_placements', $block_info);
+
+  $blocks = array();
+  foreach ($block_info AS $placement) {
+    $placement = (object)$placement;
+    $block = entity_load_single('catalyst', $placement->block_id);
+    $machine = $block->field_block_machine[$block->language][0]['machine'];
+    $blocks[$placement->region][$machine] = array(
+      'content' => entity_view('catalyst', array($block)),
+      '#weight' => $placement->weight,
+    );
+  }
+  return $blocks;
+}
+
+/**
+ *
+ */
+function catalyst_blocks_by_region($region) {
+  $blocks = &drupal_static(__FUNCTION__);
+
+  if (!isset($blocks)) {
+    $blocks = catalyst_load_blocks();
+  }
+
+  if (!isset($blocks[$region])) {
+    $blocks[$region] = array();
+  }
+
+  return $blocks[$region];
 }
