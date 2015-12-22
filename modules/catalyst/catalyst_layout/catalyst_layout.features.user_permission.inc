@@ -13,7 +13,11 @@ function catalyst_layout_user_default_permissions() {
   // Exported permission: 'eck add catalyst layout entities'.
   $permissions['eck add catalyst layout entities'] = array(
     'name' => 'eck add catalyst layout entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
   );
 
@@ -27,29 +31,58 @@ function catalyst_layout_user_default_permissions() {
   // Exported permission: 'eck delete catalyst layout entities'.
   $permissions['eck delete catalyst layout entities'] = array(
     'name' => 'eck delete catalyst layout entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck edit catalyst layout entities'.
   $permissions['eck edit catalyst layout entities'] = array(
     'name' => 'eck edit catalyst layout entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck list catalyst layout entities'.
   $permissions['eck list catalyst layout entities'] = array(
     'name' => 'eck list catalyst layout entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck view catalyst layout entities'.
   $permissions['eck view catalyst layout entities'] = array(
     'name' => 'eck view catalyst layout entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
+  );
+
+  // Exported permission: 'use text format layout_html'.
+  $permissions['use text format layout_html'] = array(
+    'name' => 'use text format layout_html',
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
+    'module' => 'filter',
   );
 
   return $permissions;

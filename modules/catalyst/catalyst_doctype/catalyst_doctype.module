@@ -5,3 +5,80 @@
  */
 
 include_once 'catalyst_doctype.features.inc';
+
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function catalyst_doctype_url_outbound_alter(&$path, &$options, $original_path) {
+  catalyst_admin_eck_url_outbound('doctype', $path, $options, $original_path);
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function catalyst_doctype_menu_alter(&$items) {
+  catalyst_admin_alter_eck_entity_menu($items, 'doctype', 'admin/structure', FALSE);
+}
+
+/**
+ * Implements hook_menu().
+ */
+function catalyst_doctype_menu() {
+  $items['admin/structure/doctype/%eckentity/preview'] = array(
+    'title' => 'Preview',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('catalyst_doctype_preview_form', 3),
+    // Preview access with edit access
+    'access callback' => 'eck__entity_menu_access',
+    'access arguments' => array('edit', 'catalyst', 'doctype', 3),
+    'type' => MENU_LOCAL_TASK,
+    'file' => 'catalyst_doctype.pages.inc',
+    'weight' => 9,
+    'theme callback' => 'catalyst_doctype_custom_theme',
+  );
+  return $items;
+}
+
+/**
+ * Implements hook_custom_theme().
+ */
+function catalyst_doctype_custom_theme() {
+  if (preg_match('/admin\/structure\/doctype\/[0-9]+\/preview/i', request_path()) && count($_POST)) {
+    return 'notheme';
+  }
+}
+
+/**
+ * Preprocess a doctype element.
+ */
+function catalyst_doctype_preprocess_doctype(&$variables) {
+  $doctype = $variables['page']['#doctype'];
+
+  if (!isset($variables['http_content_type'])) {
+    $variables['http_content_type'] = $doctype->field_doctype_content_type->value();
+  }
+
+  if (!isset($variables['http_charset'])) {
+    $variables['http_charset'] = $doctype->field_doctype_charset->value();
+  }
+
+  // Custom Preprocessing defined by the doctype
+  if ($preprocess_php = $doctype->field_doctype_preprocess->value()) {
+    catalyst_eval($preprocess_php['value'], $variables);
+  }
+}
+
+function catalyst_doctype_process_doctype(&$variables) {
+  if (!isset($variables['http_content_type_header'])) {
+    $variables['http_content_type_header'] = implode(';', array(
+      $variables['http_content_type'],
+      'charset=' . $variables['http_charset'],
+    ));
+  }
+  drupal_add_http_header('Content-type', $variables['http_content_type_header']);
+}
+
+function catalyst_doctype_get_template(Entity $doctype) {
+  $build = eck__entity__view('catalyst', 'doctype', $doctype);
+  return render($build);
+}

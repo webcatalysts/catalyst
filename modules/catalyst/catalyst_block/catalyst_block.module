@@ -3,8 +3,228 @@
  * @file
  * Code for the Catalyst Block feature.
  */
+define('CATALYST_BLOCK_VISIBILITY_ALL', 0);
+define('CATALYST_BLOCK_VISIBILITY_ONLY', 1);
+define('CATALYST_BLOCK_VISIBILITY_EXCEPT', 2);
+define('CATALYST_BLOCK_VISIBILITY_PHP', 3);
 
 include_once 'catalyst_block.features.inc';
+
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function catalyst_block_url_outbound_alter(&$path, &$options, $original_path) {
+  catalyst_admin_eck_url_outbound('block', $path, $options, $original_path);
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function catalyst_block_menu_alter(&$items) {
+  catalyst_admin_alter_eck_entity_menu($items, 'block', 'admin/structure', FALSE);
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function catalyst_block_entity_view_alter(&$build, $type) {
+  if (isset($build['field_block_content'])) {
+    if ($template = $build['field_block_content'][0]['#markup']) {
+      $build['field_block_content'][0]['#markup'] = theme('block_content', array(
+        'block' => entity_metadata_wrapper('catalyst', $build['#entity']),
+        'template' => $template,
+      ));
+    }
+  }
+}
+
+/**
+ * Preprocess block content.
+ */
+function catalyst_block_preprocess_block_content(&$variables) {
+  $block = $variables['block'];
+  if ($preprocess_php = $block->field_block_preprocess->value()['value']) {
+    catalyst_eval($preprocess_php, $variables);
+  }
+}
+
+/**
+ * Theme the block content to render the twig template.
+ */
+function theme_block_content($variables) {
+  module_load_include('inc', 'catalyst', 'includes/twig');
+  return catalyst_twig_render($variables['template'], $variables, 'block_content__' . $variables['block']->getIdentifier());
+}
+
+/**
+ * Implements hook_theme().
+ */
+function catalyst_block_theme() {
+  $module_path = drupal_get_path('module', 'catalyst_block');
+  return array(
+    'block_content' => array(
+      'variables' => array('template' => NULL),
+    ),
+    'block_placement_block_widget' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'block.inc',
+    ),
+    'block_placement_layout_field_widget' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'layout_field.inc',
+    ),
+    'block_placement_layout_field_container_no_layout' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'layout_field.inc',
+    ),
+    'block_placement_layout_field_container_no_regions' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'layout_field.inc',
+    ),
+    'block_placement_layout_widget' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'layout.inc',
+    ),
+    'block_placement_layout_container_no_regions' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'layout.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function catalyst_block_page_build(&$page) {
+  $page['region'] = array();
+  if ($regions = catalyst_layout_system_regions()) {
+    foreach ($regions AS $region) {
+      $page['region'][$region] = catalyst_blocks_by_region($region);
+    }
+  }
+}
+
+/**
+ * Implements hook_block_placements_alter().
+ */
+function catalyst_block_block_placements_alter(&$placements) {
+  foreach ($placements AS $key => $placement) {
+    if (isset($placement['visibility']) && $placement['visibility']) {
+      $pages = drupal_strtolower($placement['pages']);
+      // Not using the function here see block_block_list_alter()
+      $request_path = drupal_strtolower($_GET['q']);
+      if ($placement['visibility'] > CATALYST_BLOCK_VISIBILITY_ALL) {
+        $path = drupal_strtolower(drupal_get_path_alias($request_path));
+        $page_match = drupal_match_path($path, $pages);
+        if ($path != $request_path) {
+          $page_match = $page_match || drupal_match_path($request_path, $pages);
+        }
+        if (($placement['visibility'] == CATALYST_BLOCK_VISIBILITY_ONLY && !$page_match)
+          || ($placement['visibility'] == CATALYST_BLOCK_VISIBILITY_EXCEPT && $page_match)) {
+          unset($placements[$key]);
+        }
+      }
+      else continue;
+    }
+  }
+}
+
+/**
+ * Implements hook_field_info().
+ */
+function catalyst_block_field_info() {
+  return array(
+    'block_placement_block' => array(
+      'label' => t('Block placement (block)'),
+      'description' => t('Inject the block entity into layouts'),
+      'default_widget' => 'block_placement_block_widget',
+      'default_formatter' => 'block_placement_block_formatter',
+      'property_type' => 'block_placement',
+      'property_callbacks' => array('block_placement_property_info'),
+    ),
+    'block_placement_layout' => array(
+      'label' => t('Block placement (layout)'),
+      'description' => t('Place blocks into the layout'),
+      'default_widget' => 'block_placement_layout_widget',
+      'default_formatter' => 'block_placement_layout_formatter',
+      'property_type' => 'block_placement',
+      'property_callbacks' => array('block_placement_property_info'),
+    ),
+    'block_placement_layout_field' => array(
+      'label' => t('Block placement (layout field)'),
+      'description' => t('Add blocks to the node/entities layout'),
+      'default_widget' => 'block_placement_layout_field_widget',
+      'default_formatter' => 'block_placement_layout_field_formatter',
+      'property_type' => 'block_placement',
+      'property_callbacks' => array('block_placement_property_info'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function catalyst_block_field_widget_info() {
+  return array(
+    'block_placement_block_widget' => array(
+      'label' => t('Block placement (block)'),
+      'field types' => array('block_placement_block'),
+    ),
+    'block_placement_layout_widget' => array(
+      'label' => t('Block placement widget (layout)'),
+      'field types' => array('block_placement_layout'),
+    ),
+    'block_placement_layout_field_widget' => array(
+      'label' => t('Block placement widget (layout field)'),
+      'field types' => array('block_placement_layout_field'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function catalyst_block_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  form_load_include($form_state, 'inc', 'catalyst_block', 'widget/common');
+
+  switch ($instance['widget']['type']) {
+    case 'block_placement_block_widget':
+      form_load_include($form_state, 'inc', 'catalyst_block', 'widget/block');
+      return block_placement_block_widget_form($form, $form_state, $field, $instance, $langcode, $items, $delta, $element);
+    case 'block_placement_layout_widget':
+      form_load_include($form_state, 'inc', 'catalyst_block', 'widget/layout');
+      return block_placement_layout_widget_form($form, $form_state, $field, $instance, $langcode, $items, $delta, $element);
+      break;
+    case 'block_placement_layout_field_widget':
+      form_load_include($form_state, 'inc', 'catalyst_block', 'widget/layout_field');
+      return block_placement_layout_field_widget_form($form, $form_state, $field, $instance, $langcode, $items, $delta, $element);
+  }
+}
+
+function catalyst_block_field_widget_form_alter(&$element, $form_state, $context) {
+  if (strpos($context['field']['type'], 'block_placement') === 0) {
+    $element['#nodrag'] = TRUE;
+  }
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function catalyst_block_field_is_empty($item, $field) {
+  switch ($field['type']) {
+    case 'block_placement_block':
+      return empty($item['layout_id']) || empty($item['region']);
+    case 'block_placement_layout':
+    case 'block_placement_layout_field':
+      return empty($item['block_id']) || empty($item['region']);
+  }
+}
 
 /**
  * Implements hook_catalyst_twig_render_alter().
@@ -22,9 +242,75 @@ function catalyst_block_showblock($machine_name) {
   $result = $query->execute();
   if (isset($result['catalyst'])) {
     $blocks = entity_load('catalyst', array_keys($result['catalyst']));
-    $block = array_pop($blocks);
-    return render(entity_view('catalyst', array($block)));
+    $build = entity_view('catalyst', $blocks);
+    return render($build);
   }
   // Check permission and output dummy block warning of missing block
   //return  '<h3>Block content here</h3>';
+}
+
+/**
+ * Load multiple blocks with or without conditions.
+ */
+function catalyst_block_load($bids = FALSE, $conditions = array(), $reset = FALSE) {
+  return catalyst_load('block', $bids, $conditions, $reset);
+}
+
+/**
+ * Property info callback
+ *
+ * @see catalyst_block_field_info().
+ */
+function block_placement_property_info(&$info, $entity_type, $field, $instance, $field_type) {
+  $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$field['field_name']];
+  $property['getter callback'] = 'entity_metadata_field_verbatim_get';
+  $property['setter callback'] = 'entity_metadata_field_verbatim_set';
+  $property['property info'] = array(
+    'layout_id' => array(
+      'label' => t('Layout ID'),
+    ),
+    'block_id' => array(
+      'label' => t('Block ID'),
+    ),
+    'region' => array(
+      'label' => t('Region Machine'),
+    ),
+    'weight' => array(
+      'label' => t('Weight'),
+    ),
+    'visibility' => array(
+      'label' => t('Visibility'),
+    ),
+    'pages' => array(
+      'label' => t('Pages'),
+    ),
+    'cache' => array(
+      'label' => t('Cache'),
+    ),
+  );
+  unset($property['query callback']);
+
+  switch ($field_type) {
+    case 'block_placement_layout':
+      unset($property['property info']['layout_id']);
+      break;
+    case 'block_placement_block':
+      unset($property['property info']['block_id']);
+      break;
+    case 'block_placement_with_layout':
+      unset($property['property info']['visibility']);
+      unset($property['property info']['pages']);
+      break;
+  }
+
+  foreach (array_keys($property['property info']) AS $i) {
+    $property['property info'][$i] += array(
+      'description' => t('!label of field %name', array(
+        '!label' => $property['property info'][$i]['label'],
+        '%name' => $field['field_name'],
+      )),
+      'getter callback' => 'entity_property_verbatim_get',
+      'setter callback' => 'entity_property_verbatim_set',
+    );
+  }
 }

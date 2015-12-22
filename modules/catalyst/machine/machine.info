@@ -1,0 +1,3 @@
+name = Machine
+description = Provides configuration machine name fields to the Field API
+core = 7.x

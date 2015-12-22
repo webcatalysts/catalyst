@@ -1,0 +1,20 @@
+<?php
+
+/**
+ * @file
+ * Install hooks for Menu Lockdown. 
+ */
+
+/**
+ * Implements hook_uninstall().
+ */
+function menu_lockdown_uninstall() {
+  // Delete Menu Lockdown variables
+  variable_del('menu_lockdown_whitelist');
+  variable_del('menu_lockdown_blacklist');
+  variable_del('menu_lockdown_warn_disabled');
+  variable_del('menu_lockdown_warn_debug');
+  variable_del('menu_lockdown_debug');
+  // Rebuild the menu to remove overrides
+  menu_rebuild();
+}

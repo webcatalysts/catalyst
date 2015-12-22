@@ -1,4 +1,5 @@
 <?php
+
 /**
  * @file
  * Code for the Catalyst Layout feature.
@@ -6,42 +7,101 @@
 
 include_once 'catalyst_layout.features.inc';
 
-function catalyst_layout_form_eck__entity__form_edit_catalyst_layout_alter(&$form, &$form_state) {
-  return;
-  $query = new EntityFieldQuery;
-  $query->entityCondition('entity_type', 'catalyst')
-    ->entityCondition('bundle', 'doctype')
-    ->addMetaData('account', user_load(1))
-    ->addTag(__FUNCTION__);
-  $result = $query->execute();
-  if (isset($result['catalyst'])) {
-    $callbacks = array(
-      'onselect' => array(),
-      'ondeselect' => array(),
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function catalyst_layout_url_outbound_alter(&$path, &$options, $original_path) {
+  catalyst_admin_eck_url_outbound('layout', $path, $options, $original_path);
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function catalyst_layout_menu_alter(&$items) {
+  catalyst_admin_alter_eck_entity_menu($items, 'layout', 'admin/structure', FALSE);
+}
+
+/**
+ * Implements hook_page_build().
+ */
+function catalyst_layout_page_build(&$page) {
+  global $theme;
+  if ($theme == 'notheme' && !isset($page['#layout'])) {
+    global $catalyst_layout;
+    catalyst_layout_initialize();
+    $page['#layout'] = $catalyst_layout;
+    $page['#doctype'] = entity_metadata_wrapper('catalyst', $catalyst_layout->field_layout_doctype->value());
+  }
+}
+
+/**
+ * Preprocess the layout.
+ */
+function catalyst_preprocess_layout(&$variables) {
+  $layout = $variables['page']['#layout'];
+
+  // Inject the template for later rendering by twig
+  $variables['template'] = catalyst_layout_get_template($layout->value());
+
+  if ($add_html_head = $layout->field_layout_html_head->value()['value']) {
+    drupal_add_html_head(
+      array(
+        '#type' => 'markup',
+        '#markup' => $add_html_head,
+      ),
+      'layout_html_head'
     );
-    $doctypes = entity_load('catalyst', array_keys($result['catalyst']));
-    foreach ($doctypes AS $id => $_doctype) {
-      $doctype = entity_metadata_wrapper('catalyst', $_doctype);
-      $onselect = $doctype->field_doctype_onselect->value();
-      $ondeselect = $doctype->field_doctype_ondeselect->value();
-      if (!empty($onselect) || !empty($ondeselect)) {
-        if (!empty($onselect)) {
-          $callbacks['onselect'][$id] = $onselect;
-        }
-        if (!empty($ondeselect)) {
-          $callbacks['ondeselect'][$id] = $ondeselect;
-        }
-      }
-    }
   }
 
-  $form['#attached']['js']['catalyst_layout'] = drupal_get_path('module', 'catalyst_layout') . '/catalyst_layout_form.js';
-  drupal_add_js(array(
-      'layoutDoctypeOnChange' => array(
-        'selector' => '#edit-field-layout-doctype-und',
-        'callbacks' => $callbacks,
+  // Preprocessing defined by the layout
+  if ($preprocess_php = $layout->field_layout_preprocess->value()['value']) {
+    catalyst_eval($preprocess_php, $variables);
+  }
+}
+
+/**
+ * Preprocess a doctype based on layout configuration.
+ */
+function catalyst_preprocess_doctype(&$variables) {
+  $layout = $variables['page']['#layout'];
+  // Customize the page title based on the layouts pattern
+  if ($page_title_pattern = $layout->field_layout_page_title_pattern->value()) {
+    module_load_include('inc', 'catalyst', 'includes/twig');
+    $variables['head_title'] = catalyst_twig_render(
+      $page_title_pattern,
+      array(
+        'site_name' => variable_get('site_name', t('Catalyst')),
+        'title' => drupal_get_title(),
       ),
-    ),
-    'setting'
-  );
+      'layout_page_title_pattern'
+    );
+  }
+}
+
+/**
+ * Helper shortcut function for fetching a layout template.
+ */
+function catalyst_layout_get_template(Entity $layout) {
+  $build = eck__entity__view('catalyst', 'layout', $layout);
+  return render($build);
+}
+
+function catalyst_layout_system_regions($layout = NULL) {
+  if ($layout === NULL) {
+    global $catalyst_layout;
+    $layout = $catalyst_layout;
+  }
+  $return = array();
+  foreach ($layout->field_layout_regions->value() AS $region) {
+    $return[] = $region['machine'];
+  }
+  return $return;
+}
+
+/**
+ * Implements hook_block_placements().
+ */
+function catalyst_layout_block_placements() {
+  global $catalyst_layout;
+  return $catalyst_layout->field_layout_blocks->value();
 }

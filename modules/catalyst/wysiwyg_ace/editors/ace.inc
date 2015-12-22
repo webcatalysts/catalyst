@@ -49,6 +49,7 @@ function wysiwyg_ace_default_settings() {
     // markbegin, markbeginend, manual
     'fold_widgets' => 'markbeginend',
     'fold_widgets_fade' => TRUE,
+    'fontfont' => 12,
     'gutter' => TRUE,
     'indent_guildes' => TRUE,
     'invisibles' => TRUE,
@@ -68,6 +69,7 @@ function wysiwyg_ace_default_settings() {
     'theme' => 'cobalt',
     'wrap' => TRUE,
     'resizable' => TRUE,
+    'toolbar' => FALSE,
   );
   return $settings;
 }
@@ -128,5 +130,10 @@ function wysiwyg_ace_settings_form(&$form, &$form_state) {
 
 function _wysiwyg_ace_plugins($editor) {
   return array(
+    'default' => array(
+      'buttons' => array(
+        'fullscreen' => t('Fullscreen'),
+      ),
+    ),
   );
 }

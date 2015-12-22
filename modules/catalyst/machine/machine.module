@@ -1,0 +1,139 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_field_info().
+ */
+function machine_field_info() {
+  $shared_settings = array(
+    'machine_max_length' => 255,
+    'unique_values_per' => 'entity',
+  );
+  return array(
+    'machine' => array(
+      'label' => t('Machine'),
+      'description' => t('Machine name value only (can be derrived from title)'),
+      'settings' => $shared_settings,
+      'instance settings' => array(),
+      'default_widget' => 'machine_default_widget',
+      'default_formatter' => 'machine_default_formatter',
+      'property_type' => 'machine',
+      'property_callbacks' => array('machine_property_info'),
+    ),
+    'machine_with_text' => array(
+      'label' => t('Machine with Text'),
+      'description' => t('Machine name and text value'),
+      'default_widget' => 'machine_with_text_widget',
+      'default_formatter' => 'machine_with_text_formatter',
+      'property_type' => 'machine',
+      'property_callbacks' => array('machine_property_info'),
+      'settings' => $shared_settings += array(
+        'text_max_length' => 255,
+        'unique_text' => FALSE,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_info().
+ */
+function machine_field_widget_info() {
+  return array(
+    'machine_default_widget' => array(
+      'label' => t('Machine'),
+      'field types' => array('machine'),
+      'settings' => array(
+        'machine_size' => 128,
+      ),
+      'behaviors' => array(
+        'default value' => FIELD_BEHAVIOR_NONE,
+      ),
+    ),
+    'machine_from_title_widget' => array(
+      'label' => t('Machine from title'),
+      'field types' => array('machine'),
+      'settings' => array(
+        'machine_size' => 128,
+      ),
+      'behaviors' => array(
+        'default value' => FIELD_BEHAVIOR_NONE,
+      ),
+    ),
+    'machine_with_text_widget' => array(
+      'label' => t('Machine with text'),
+      'field types' => array('machine_with_text'),
+      'settings' => array(
+        'machine_size' => 128,
+        'text_size' => 128,
+      ),
+      'behaviors' => array(
+        'default value' => FIELD_BEHAVIOR_NONE,
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_widget_form().
+ */
+function machine_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  form_load_include($form_state, 'inc', 'machine', 'widgets/common');
+  switch ($instance['widget']['type']) {
+    case 'machine_default_widget':
+      form_load_include($form_state, 'inc', 'machine', 'widgets/default');
+      $callback = 'machine_default_widget';
+      break;
+    case 'machine_from_title_widget':
+      form_load_include($form_state, 'inc', 'machine', 'widgets/from_title');
+      $callback = 'machine_from_title_widget';
+      break;
+    case 'machine_with_text_widget':
+      form_load_include($form_state, 'inc', 'machine', 'widgets/with_text');
+      $callback = 'machine_with_text_widget';
+      break;
+  }
+  return $callback($form, $form_state, $field, $instance, $langcode, $items, $delta, $element);
+}
+
+/**
+ * Implements hook_field_is_empty().
+ */
+function machine_field_is_empty($item, $field) {
+  switch ($field['type']) {
+    case 'machine':
+      return empty($item['machine']);
+    case 'machine_with_text':
+      return empty($item['machine']) || empty($item['text']);
+  }
+}
+
+/**
+ * Property info callback.
+ *
+ * @see machine_field_info().
+ */
+function machine_property_info(&$info, $entity_type, $field, $instance, $field_type) {
+  $property = &$info[$entity_type]['bundles'][$instance['bundle']]['properties'][$field['field_name']];
+
+  $property['getter callback'] = 'entity_metadata_field_verbatim_get';
+  $property['setter callback'] = 'entity_metadata_field_verbatim_set';
+  unset($property['query callback']);
+
+  $property['property info'] = array(
+    'machine' => array(
+      'type' => 'text',
+      'label' => t('Machine value'),
+      'setter callback' => 'entity_property_verbatim_set',
+    ),
+    'text' => array(
+      'type' => 'text',
+      'label' => t('Text'),
+      'setter callback' => 'entity_property_verbatim_set',
+    ),
+  );
+}
+

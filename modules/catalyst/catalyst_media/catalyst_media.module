@@ -7,14 +7,33 @@
 include_once 'catalyst_media.features.inc';
 
 define('CATALYST_MEDIA_GROUP_LAYOUT', 101);
-define('CATALYST_MEDIA_GROUP_PAGE', 202);
-define('CATALYST_MEDIA_GROUP_OTHER', 303);
+define('CATALYST_MEDIA_GROUP_LIBRARY', 202);
+define('CATALYST_MEDIA_GROUP_PAGE', 303);
+define('CATALYST_MEDIA_GROUP_OTHER', 404);
+
+/**
+ * Implements hook_url_outbound_alter().
+ */
+function catalyst_media_url_outbound_alter(&$path, &$options, $original_path) {
+  catalyst_admin_eck_url_outbound('stylesheet', $path, $options, $original_path);
+  catalyst_admin_eck_url_outbound('javascript', $path, $options, $original_path);
+  catalyst_admin_eck_url_outbound('file', $path, $options, $original_path);
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function catalyst_media_menu_alter(&$items) {
+  catalyst_admin_alter_eck_entity_menu($items, 'stylesheet', 'admin/structure', FALSE);
+  catalyst_admin_alter_eck_entity_menu($items, 'javascript', 'admin/structure', FALSE);
+  catalyst_admin_alter_eck_entity_menu($items, 'file', 'admin/structure', FALSE);
+}
 
 /**
  * Implements hook_catalyst_twig_render_alter().
  */
-function catalyst_media_catalyst_twig_render_alter(&$twig, &$variables, $key = NULL) {
-  $twig->addFunction(new Twig_SimpleFunction('filepath', 'catalyst_media_filepath'));
+function catalyst_media_catalyst_twig_render_alter(&$twig, &$extensions, &$variables, $key = NULL) {
+  $extensions['addFunction']['filepath'] = new Twig_SimpleFunction('filepath', 'catalyst_media_filepath');
 }
 
 function catalyst_media_filepath($machine_name) {
@@ -35,11 +54,24 @@ function catalyst_media_filepath($machine_name) {
   }
 }
 
+function catalyst_load_single_by_machine($bundle, $machine_name, $field = NULL) {
+}
+
+/**
+ * Implements hook_form_alter().
+ */
 function catalyst_media_form_alter(&$form, &$form_state, $form_id) {
-  if (strpos($form_id, 'eck__entity__form') === 0 && isset($form['field_media_type'])) {
+  if (isset($form['field_media_type'], $form['field_media_path'])) {
     $form['#attached']['js'][] = drupal_get_path('module', 'catalyst_media') . '/catalyst_media.admin.js';
     $form['#after_build'][] = 'catalyst_media_admin_form_after_build';
   }
+}
+
+/**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function catalyst_media_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  catalyst_media_form_alter($entity_form, $form_state, NULL);
 }
 
 function catalyst_media_admin_form_after_build($form, &$form_state) {
@@ -53,7 +85,6 @@ function catalyst_media_admin_form_after_build($form, &$form_state) {
   elseif (isset($form['field_media_file'])) {
     $ids['custom'] = $form['field_media_file']['#id'];
   }
-
   $form['#attached']['js'][] = array(
     'data' => array('catalystMediaAdmin' => array('ids' => $ids)),
     'type' => 'setting'
@@ -78,16 +109,39 @@ function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
     ),
   );
 
-  drupal_alter('catalyst_includes_fields', $collection);
   $wrapper = entity_metadata_wrapper($type, $entity);
+
   foreach ($collection AS $type => $fields) {
     $callback = 'catalyst_add_' . $type;
     foreach ($fields AS $field => $group) {
       if (isset($entity->$field)) {
         foreach ($wrapper->$field->value() AS $include) {
-          dsm($include->title);
           $include = entity_metadata_wrapper('catalyst', $include);
           $callback($include, $group);
+        }
+      }
+    }
+  }
+
+  // Process custom fields
+  $collection = array(
+    'css' => array(
+      'field_layout_css' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field_cpage_custom_css' => CATALYST_MEDIA_GROUP_PAGE,
+      'field_catalyst_custom_css' => CATALYST_MEDIA_GROUP_OTHER,
+    ),
+    'js' => array(
+      'field_layout_js' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field_cpage_custom_js' => CATALYST_MEDIA_GROUP_PAGE,
+      'field_catalyst_custom_js' => CATALYST_MEDIA_GROUP_OTHER,
+    ),
+  );
+  foreach ($collection AS $type => $fields) {
+    $callback = 'catalyst_add_custom_' . $type;
+    foreach ($fields AS $field => $group) {
+      if (!empty($entity->$field)) {
+        foreach ($wrapper->$field->value() AS $data) {
+          $callback($data, $group, $field, $wrapper->getIdentifier());
         }
       }
     }

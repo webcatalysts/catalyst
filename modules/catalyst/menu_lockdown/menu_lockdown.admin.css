@@ -1,0 +1,25 @@
+
+
+tr.module {
+  font-weight: bold;
+  text-transform: uppercase;
+}
+td.blacklist-add, th.blacklist-add,
+td.whitelist-add, th.whitelist-add {
+  text-align: center;
+}
+
+#menu-lockdown-settings {
+  position: relative;
+}
+
+@media all and (min-width: 1000px) {
+#menu-lockdown-settings .left,
+#menu-lockdown-settings .right {
+  float: left;
+  width: 49%;
+}
+#menu-lockdown-settings .left {
+  margin-right: 2%;
+}
+}

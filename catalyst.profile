@@ -16,8 +16,13 @@ require_once 'profiles/catalyst/includes/theme.inc';
 function catalyst_element_info() {
   return array(
     'layout' => array(
-      '#show_messages' => TRUE,
       '#theme' => 'layout',
+      '#theme_wrappers' => array('doctype'),
+      '#layout' => NULL,
+      '#doctype' => NULL,
+    ),
+    'doctype' => array(
+      '#theme' => 'doctype',
     ),
   );
 }
@@ -27,8 +32,11 @@ function catalyst_element_info() {
  */
 function catalyst_theme() {
   return array(
+    'doctype' => array(
+      'render element' => 'page',
+    ),
     'layout' => array(
-      'render element' => 'layout',
+      'render element' => 'page',
     ),
   );
 }

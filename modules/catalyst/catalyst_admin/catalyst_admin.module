@@ -1,0 +1,346 @@
+<?php
+/**
+ * @file
+ * Drupal needs this blank file.
+ */
+function catalyst_admin_init() {
+//dsm(menu_get_item());
+}
+/**
+ * Implements hook_theme_registry_alter().
+ *
+ * @see https://www.commercialprogression.com/post/how-remove-tabledrag-rearranging-multiple-value-field-widgets
+ */
+function catalyst_admin_theme_registry_alter(&$theme_registry) {
+  if (isset($theme_registry['field_multiple_value_form'])) {
+    $theme_registry['field_multiple_value_form']['type'] = 'module';
+    $theme_registry['field_multiple_value_form']['theme path'] = drupal_get_path('module', 'catalyst_admin');
+    $theme_registry['field_multiple_value_form']['function'] = 'multi_widget_remove_tabledrag_theme_field_multiple_value_form';
+  }
+}
+
+/**
+ * Theme function override for multiple-value form widgets.
+ *
+ * @see theme_field_multiple_value_form()
+ */
+function multi_widget_remove_tabledrag_theme_field_multiple_value_form($variables) {
+  $element = $variables['element'];
+  $output = '';
+
+  // The first condition is the override.
+  if (($element['#cardinality'] > 1 || $element['#cardinality'] == FIELD_CARDINALITY_UNLIMITED) && isset($element[0]['#nodrag'])) {
+    $table_id = drupal_html_id($element['#field_name'] . '_values');
+    $required = !empty($element['#required']) ? theme('form_required_marker', $variables) : '';
+
+    $header = array(
+      array(
+        'data' => '<label>' . t('!title !required', array('!title' => $element['#title'], '!required' => $required)) . "</label>",
+        'class' => array('field-label'),
+      ),
+    );
+    $rows = array();
+
+    // Sort items according to weight
+    $items = array();
+    foreach (element_children($element) as $key) {
+      if ($key === 'add_more') {
+        $add_more_button = &$element[$key];
+      }
+      else {
+        $items[] = &$element[$key];
+      }
+    }
+    usort($items, '_field_sort_items_value_helper');
+
+    // Add the items as table rows.
+    foreach ($items as $key => $item) {
+      // We don't want the weight to render.
+      unset($item['_weight']);
+      $cells = array(
+        drupal_render($item),
+      );
+      $rows[] = array(
+        'data' => $cells,
+      );
+    }
+
+    $output = '<div class="form-item">';
+    $output .= theme('table', array(
+      'header' => $header,
+      'rows' => $rows,
+      'attributes' => array(
+        'id' => $table_id,
+        'class' => array('field-multiple-table'),
+      ),
+    ));
+    $output .= $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '';
+    $output .= '<div class="clearfix">' . drupal_render($add_more_button) . '</div>';
+    $output .= '</div>';
+  }
+  elseif ($element['#cardinality'] > 1 || $element['#cardinality'] == FIELD_CARDINALITY_UNLIMITED) {
+    $table_id = drupal_html_id($element['#field_name'] . '_values');
+    $order_class = $element['#field_name'] . '-delta-order';
+    $required = !empty($element['#required']) ? theme('form_required_marker', $variables) : '';
+
+    $header = array(
+      array(
+        'data' => '<label>' . t('!title !required', array('!title' => $element['#title'], '!required' => $required)) . "</label>",
+        'colspan' => 2,
+        'class' => array('field-label'),
+      ),
+      t('Order'),
+    );
+    $rows = array();
+
+    // Sort items according to '_weight' (needed when the form comes back after
+    // preview or failed validation).
+    $items = array();
+    foreach (element_children($element) as $key) {
+      if ($key === 'add_more') {
+        $add_more_button = &$element[$key];
+      }
+      else {
+        $items[] = &$element[$key];
+      }
+    }
+    usort($items, '_field_sort_items_value_helper');
+
+    // Add the items as table rows.
+    foreach ($items as $key => $item) {
+      $item['_weight']['#attributes']['class'] = array($order_class);
+      $delta_element = drupal_render($item['_weight']);
+      $cells = array(
+        array(
+          'data' => '',
+          'class' => array('field-multiple-drag'),
+        ),
+        drupal_render($item),
+        array(
+          'data' => $delta_element,
+          'class' => array('delta-order'),
+        ),
+      );
+      $rows[] = array(
+        'data' => $cells,
+        'class' => array('draggable'),
+      );
+    }
+
+    $output = '<div class="form-item">';
+    $output .= theme('table', array(
+      'header' => $header,
+      'rows' => $rows,
+      'attributes' => array(
+        'id' => $table_id,
+        'class' => array('field-multiple-table'),
+      ),
+    ));
+    $output .= $element['#description'] ? '<div class="description">' . $element['#description'] . '</div>' : '';
+    $output .= '<div class="clearfix">' . drupal_render($add_more_button) . '</div>';
+    $output .= '</div>';
+
+    drupal_add_tabledrag($table_id, 'order', 'sibling', $order_class);
+  }
+  else {
+    foreach (element_children($element) as $key) {
+      $output .= drupal_render($element[$key]);
+    }
+  }
+
+  return $output;
+}
+
+/**
+ * Implements hook_form_alter().
+ */
+function catalyst_admin_form_alter(&$form, &$form_state, $form_id) {
+  if (strpos($form_id, 'views_form_') === 0 && isset($form['output'])) {
+    $form['#after_build'][] = 'catalyst_admin_views_form_after_build';
+  }
+}
+
+/**
+ * Form after build callback for vbo forms.
+ *
+ * @see catalyst_admin_form_alter().
+ */
+function catalyst_admin_views_form_after_build($form, &$form_state) {
+  // Move view output to appear above vbo actions
+  $form['output']['#weight'] = -100;
+  $view = $form_state['build_info']['args'][0];
+  // Hide vbo when view has no results
+  if (isset($form['select']) && empty($view->result)) {
+    $form['select']['#access'] = FALSE;
+  }
+  return $form;
+}
+
+/**
+ *
+ * @param $links array
+ *   Contains one or more links expecting the following:
+ *   - title: The translated link text
+ *   - path: The path the link should link to
+ *   - destination: (optional) the destination to append to the link query
+ *     string
+ *   - access: (optional) can be a string for a single permission or an
+ *     array containing multiple permissions.
+ *
+ * @return
+ *   When the user has access to one or more links (or no permissions are
+ *   defined), a unorder list of links classed "action-links" is returned.
+ */
+function catalyst_admin_action_links(array $links) {
+  $return = array();
+  foreach ($links AS $class => $link) {
+    if (isset($link['access'])) {
+      foreach ((array)$link['access'] AS $permission) {
+        if (!user_access($permission)) {
+          continue(2);
+        }
+      }
+    }
+    $return[$class] = array(
+      'title' => $link['title'],
+      'href' => $link['path'],
+    );
+    if (!empty($link['destination'])) {
+      $return[$class]['query']['destination'] = $link['destination'];
+    }
+  }
+  if ($return) {
+    return theme('links', array(
+      'links' => $return,
+      'attributes' => array('class' => 'action-links'),
+    ));
+  }
+}
+
+function catalyst_admin_eck_title_callback($action, $bundle, $entity) {
+  return t('@action @bundle: @title', array(
+    '@action' => ucfirst($action),
+    '@bundle' => $bundle,
+    '@title' => $entity->title,
+  ));
+}
+
+function catalyst_admin_alter_eck_entity_menu(&$items, $bundle, $prefix = 'admin/structure', $view = TRUE) {
+  $prefix .= '/' . $bundle;
+  // Duplicate entity add menu item
+  $items[$prefix .'/add'] = $items['admin/structure/entity-type/catalyst/' . $bundle . '/add'];
+
+  // This happens to work because we're trying to find the number of the
+  // %eckentity argument which is added right after the suffix
+  // Otherwise 1 would need to be subtracted
+  $arg_num = count(explode('/', $prefix));
+
+  foreach (array('edit', 'delete') AS $action) {
+    $items[$prefix . '/%eckentity/' . $action] = array_merge(
+      $items['catalyst/' . $bundle . '/%eckentity/' . $action],
+      array(
+        'access arguments' => array($action, 'catalyst', $bundle, $arg_num),
+        'page arguments' => array('catalyst', $bundle, $arg_num),
+      )
+    );
+    // Remove frontend edit/delete
+    unset($items['catalyst/' . $bundle . '/%eckentity/' . $action]);
+  }
+  // Move delete to the end
+  $items[$prefix . '/%eckentity/delete']['weight'] = 100;
+
+  if ($view) {
+    // Replace the view menu item
+    $items[$prefix . '/%eckentity'] = array_merge(
+      $items['catalyst/' . $bundle . '/%eckentity'],
+      array(
+        'title callback' => 'node_page_title',
+        'title arguments' => array($arg_num),
+        'access arguments' => array('view', 'catalyst', $bundle, $arg_num),
+        'page arguments' => array('catalyst', $bundle, $arg_num),
+      )
+    );
+    // Replace the view menu item tab
+    $items[$prefix . '/%eckentity/view'] = $items['catalyst/' . $bundle . '/%eckentity/view'];
+  }
+  else {
+    $items[$prefix . '/%eckentity'] = array_merge(
+      $items['catalyst/' . $bundle . '/%eckentity'],
+      $items[$prefix . '/%eckentity/edit'],
+      array(
+        'title callback' => 'node_page_title',
+        'title arguments' => array($arg_num),
+        'type' => MENU_NORMAL_ITEM,
+      )
+    );
+    $items[$prefix . '/%eckentity/edit'] = array(
+      'title' => 'Edit',
+    ) + $items['catalyst/' . $bundle . '/%eckentity/view'];
+  }
+
+  // Remove frontend view and tab menu items
+  unset(
+    $items['catalyst/' . $bundle . '/%eckentity'],
+    $items['catalyst/' . $bundle . '/%eckentity/view']
+  );
+}
+
+function catalyst_admin_eck_url_outbound($bundle, &$path, &$options, $original_path, $prefix = 'admin/structure') {
+  $m = array();
+  if (preg_match('/catalyst\/' . $bundle . '\/([0-9]+)(.*)/i', $path, $m)) {
+    $path = $prefix . '/' . $bundle . '/' . $m[1] . $m[2];
+  }
+}
+
+
+function catalyst_admin_eck_entity_link($bundle, $id, $text, $action = 'edit', $prefix = 'admin/structure', $options = array()) {
+  if (eck__entity_menu_access($action, 'catalyst', $bundle, $id)) {
+    return l($text, $prefix . '/' . $bundle . '/' . $id . '/' .$action, $options);
+  }
+}
+
+/**
+ *
+ * @param $view
+ *   The view object.
+ * @param $plural_text
+ *   The plural version of the bundle. Eg. doctypes, layouts, etc.
+ * @param $create_options array
+ *   An of array of options for an optional create link when no items
+ *   have been created yet including:
+ *     - path: Path to the create form for the bundle
+ *     - bundle: The singlular text of the bundle. Eg. doctype, layout, etc.
+ *     - access: (optional) Create access permission for the bundle
+ *     - text: (optional) Override the default text for th create link.
+ *     - destination: (optional)a destination path for the create link.
+ *     - options: (optional) an array of additional options to pass to the link
+ */
+function catalyst_admin_views_no_results($view, $bundle_plural, $options = array()) {
+  // Check for exposed input
+  if (empty($view->exposed_input)) {
+    // No exposed input, no items exist
+    $output = t('No @bundle_plural have been created yet.', array(
+      '@bundle_plural' => $bundle_plural,
+    ));
+    if (isset($options['path']) && $options['bundle']) {
+      $options += array(
+        'text' => t('Create a @bundle &raquo', array('@bundle' => $options['bundle'])),
+        'access' => 'eck add ' . $options['bundle'] . ' layout entities',
+        'options' => array('html' => TRUE),
+      );
+      if (user_access($options['access'])) {
+        if (!empty($options['destination'])) {
+          $options['options']['query'] = array('destination' => $options['destination']);
+        }
+        $output .= ' '. l($options['text'], $options['path'], $options['options']);
+      }
+    }
+  }
+  else {
+    $output =  t('No @bundle_plural were found that match your current search filters.', array(
+      '@bundle_plural' => $bundle_plural,
+    ));
+  }
+  return $output;
+}
+

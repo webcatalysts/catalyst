@@ -1,0 +1,85 @@
+<?php
+
+/**
+ * Implements hook_field_schema().
+ */
+function catalyst_block_field_schema($field) {
+  if (strpos($field['type'], 'block_placement') === 0) {
+    $schema = array(
+      'columns' => array(
+        'block_id' => array(
+          'description' => 'The id of the block to place',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'layout_id' => array(
+          'description' => 'The id of the target layout',
+          'type' => 'int',
+          'unsigned' => TRUE,
+          'not null' => TRUE,
+        ),
+        'region' => array(
+          'description' => 'The machine name of the layout region',
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+        ),
+        'weight' => array(
+          'description' => 'The block weight with the region',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+        ),
+        'visibility' => array(
+          'description' => 'Flag to indicate how to determine block context (0 = Show on all pages except listed pages, 1 = Show only on listed pages, 2 = Use custom PHP code to determine visibility)',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+          'size' => 'tiny',
+        ),
+        'pages' => array(
+          'description' => 'Varies based on visibility',
+          'type' => 'text',
+          'not null' => TRUE,
+        ),
+        'cache' => array(
+          'description' => 'Flag whether this block is cachable',
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 1,
+          'size' => 'tiny',
+        ),
+      ),
+      'indexes' => array(),
+      'unique keys' => array(),
+    );
+
+    switch ($field['type']) {
+      case 'block_placement_block':
+        unset($schema['columns']['block_id']);
+        $schema['indexes'] = array(
+          'layout_id' => array('layout_id'),
+          'region' => array('region'),
+        );
+        break;
+      case 'block_placement_layout':
+        unset($schema['columns']['layout_id']);
+        $schema['indexes'] = array(
+          'block_id' => array('block_id'),
+          'region' => array('region'),
+        );
+        break;
+      case 'block_placement_layout_field':
+        unset($schema['columns']['layout_id']);
+        unset($schema['columns']['visibility']);
+        unset($schema['columns']['pages']);
+        $schema['indexes'] = array(
+          'block_id' => array('block_id'),
+          'region' => array('region'),
+        );
+        break;
+    }
+    return $schema;
+  }
+}

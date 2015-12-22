@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalyst Menu feature.
+ */
+
+include_once 'catalyst_menu.features.inc';

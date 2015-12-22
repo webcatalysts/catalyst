@@ -13,42 +13,66 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'access administration pages'.
   $permissions['access administration pages'] = array(
     'name' => 'access administration pages',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+    ),
     'module' => 'system',
   );
 
   // Exported permission: 'access content'.
   $permissions['access content'] = array(
     'name' => 'access content',
-    'roles' => array(),
+    'roles' => array(
+      'anonymous user' => 'anonymous user',
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'access content overview'.
   $permissions['access content overview'] = array(
     'name' => 'access content overview',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+    ),
     'module' => 'node',
   );
 
   // Exported permission: 'access site in maintenance mode'.
   $permissions['access site in maintenance mode'] = array(
     'name' => 'access site in maintenance mode',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
     'module' => 'system',
   );
 
   // Exported permission: 'access site reports'.
   $permissions['access site reports'] = array(
     'name' => 'access site reports',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+    ),
     'module' => 'system',
   );
 
   // Exported permission: 'access user profiles'.
   $permissions['access user profiles'] = array(
     'name' => 'access user profiles',
-    'roles' => array(),
+    'roles' => array(
+      'uadmin' => 'uadmin',
+    ),
     'module' => 'user',
   );
 
@@ -146,14 +170,22 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'administer users'.
   $permissions['administer users'] = array(
     'name' => 'administer users',
-    'roles' => array(),
+    'roles' => array(
+      'uadmin' => 'uadmin',
+    ),
     'module' => 'user',
   );
 
   // Exported permission: 'block IP addresses'.
   $permissions['block IP addresses'] = array(
     'name' => 'block IP addresses',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+      'uadmin' => 'uadmin',
+    ),
     'module' => 'system',
   );
 
@@ -181,7 +213,12 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'create url aliases'.
   $permissions['create url aliases'] = array(
     'name' => 'create url aliases',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+    ),
     'module' => 'path',
   );
 
@@ -195,7 +232,9 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'eck add bundles'.
   $permissions['eck add bundles'] = array(
     'name' => 'eck add bundles',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
@@ -209,21 +248,27 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'eck add entities'.
   $permissions['eck add entities'] = array(
     'name' => 'eck add entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck add entity types'.
   $permissions['eck add entity types'] = array(
     'name' => 'eck add entity types',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck administer bundles'.
   $permissions['eck administer bundles'] = array(
     'name' => 'eck administer bundles',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
@@ -237,21 +282,27 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'eck administer entities'.
   $permissions['eck administer entities'] = array(
     'name' => 'eck administer entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck administer entity types'.
   $permissions['eck administer entity types'] = array(
     'name' => 'eck administer entity types',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck delete bundles'.
   $permissions['eck delete bundles'] = array(
     'name' => 'eck delete bundles',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
@@ -265,21 +316,27 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'eck delete entities'.
   $permissions['eck delete entities'] = array(
     'name' => 'eck delete entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck delete entity types'.
   $permissions['eck delete entity types'] = array(
     'name' => 'eck delete entity types',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck edit bundles'.
   $permissions['eck edit bundles'] = array(
     'name' => 'eck edit bundles',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
@@ -293,56 +350,78 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'eck edit entities'.
   $permissions['eck edit entities'] = array(
     'name' => 'eck edit entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck edit entity types'.
   $permissions['eck edit entity types'] = array(
     'name' => 'eck edit entity types',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck list bundles'.
   $permissions['eck list bundles'] = array(
     'name' => 'eck list bundles',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck list catalyst bundles'.
   $permissions['eck list catalyst bundles'] = array(
     'name' => 'eck list catalyst bundles',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck list entities'.
   $permissions['eck list entities'] = array(
     'name' => 'eck list entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck list entity types'.
   $permissions['eck list entity types'] = array(
     'name' => 'eck list entity types',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck view catalyst bundles'.
   $permissions['eck view catalyst bundles'] = array(
     'name' => 'eck view catalyst bundles',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'themer' => 'themer',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck view entities'.
   $permissions['eck view entities'] = array(
     'name' => 'eck view entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
@@ -433,7 +512,9 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'view own unpublished content'.
   $permissions['view own unpublished content'] = array(
     'name' => 'view own unpublished content',
-    'roles' => array(),
+    'roles' => array(
+      'authenticated user' => 'authenticated user',
+    ),
     'module' => 'node',
   );
 
@@ -447,7 +528,13 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'view the administration theme'.
   $permissions['view the administration theme'] = array(
     'name' => 'view the administration theme',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+      'editor' => 'editor',
+      'themer' => 'themer',
+      'uadmin' => 'uadmin',
+    ),
     'module' => 'system',
   );
 

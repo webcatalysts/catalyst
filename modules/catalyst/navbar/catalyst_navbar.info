@@ -1,0 +1,4 @@
+name = Catalyst Navbar
+description = Integration with the Navbar module
+core = 7.x
+dependencies[] = navbar

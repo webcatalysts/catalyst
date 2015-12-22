@@ -13,42 +13,59 @@ function catalyst_schema_user_default_permissions() {
   // Exported permission: 'eck add catalyst schema entities'.
   $permissions['eck add catalyst schema entities'] = array(
     'name' => 'eck add catalyst schema entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck administer catalyst schema entities'.
   $permissions['eck administer catalyst schema entities'] = array(
     'name' => 'eck administer catalyst schema entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck delete catalyst schema entities'.
   $permissions['eck delete catalyst schema entities'] = array(
     'name' => 'eck delete catalyst schema entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck edit catalyst schema entities'.
   $permissions['eck edit catalyst schema entities'] = array(
     'name' => 'eck edit catalyst schema entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck list catalyst schema entities'.
   $permissions['eck list catalyst schema entities'] = array(
     'name' => 'eck list catalyst schema entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+    ),
     'module' => 'eck',
   );
 
   // Exported permission: 'eck view catalyst schema entities'.
   $permissions['eck view catalyst schema entities'] = array(
     'name' => 'eck view catalyst schema entities',
-    'roles' => array(),
+    'roles' => array(
+      'admin' => 'admin',
+      'builder' => 'builder',
+    ),
     'module' => 'eck',
   );
 

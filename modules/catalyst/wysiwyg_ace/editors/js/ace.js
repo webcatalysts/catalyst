@@ -5,17 +5,17 @@ function aceID(fieldId) {
 }
 
 Drupal.wysiwyg.editor.attach.ace = function(context, params, settings) {
-  ace.require('ace/ext/language_tools');
-  ace.require('ace/ext/elastic_tabstops_lite');
-
   var $textarea = $('#' + params.field);
   $textarea.parent().prepend('<pre id="' + aceID(params.field) + '"></pre>');
   $textarea.hide();
 
   var editor = ace.edit(aceID(params.field));
 
+  settings.fontsize = 12;
+  editor.setFontSize(settings.fontsize + 'px');
   editor.setValue($textarea.val());
   editor.gotoLine(0,0);
+  // This is causing throwing a warning with php mode
   editor.getSession().setMode('ace/mode/' + settings.mode);
 
   editor.setTheme('ace/theme/' + settings.theme);
@@ -62,16 +62,20 @@ Drupal.wysiwyg.editor.attach.ace = function(context, params, settings) {
   // - Elastic tabstops (error);
 
   var $container = $(editor.renderer.getContainerElement());
-  $container.css('height', '300px');
+  var height = 300; 
+  var rows;
+  // Base the editor height on the rows of the textarea
+  if (rows = $textarea.attr('rows')) {
+    height = Math.round(parseInt(rows) * (settings.fontsize*1.4));
+  }
+  $container.css('height', height + 'px');
   $container.css('width', '100%');
 
   if (settings.resizable) {
     $container.addClass('resizable');
     var staticOffset = null;
     function startDrag(e) {
-      console.log('drag start');
       staticOffset = $container.height() - e.pageY;
-      console.log('offset:'+ staticOffset);
       $container.css('opacity', 0.25);
       $(document).mousemove(performDrag).mouseup(endDrag);
     }
@@ -89,25 +93,59 @@ Drupal.wysiwyg.editor.attach.ace = function(context, params, settings) {
 
     var grippie = $('<div class="aceresize-grippie"></div>').mousedown(startDrag);
     grippie.insertAfter($container);
+
   }
   editor.resize();
   // AJAX submit support
   $textarea.removeClass('wysiwyg-processed');
-  console.log('ace complete:' + params.field);
+return;
+  var $wrapper; 
+  var $toolbar;
+  $container.once('ace-setup', function () {
+    $container.wrap('<div class="ace-wrapper"></div>');
+    $container.parent().prepend($('<div class="ace-toolbar"></div>'));
+  });
+
+  $wrapper = $container.parent();
+  $toolbar = $wrapper.find('.ace-toolbar');
+  function escapeFullScreen(e) {
+    if (e.keyCode == 27) {
+      $wrapper.unwrap();
+      $(document).unbind('keyup', escapeFullScreen);
+      editor.resize();
+    }
+  }
+  $toolbar.append('<a class="aceplugin-full-screen">' + Drupal.t('Full screen') + '</a>')
+    .click(function () {
+      console.log('click');
+      if ($wrapper.parent().hasClass('ace-full-screen')) {
+        $wrapper.unwrap();
+        $(document).unbind('keyup', escapeFullScreen);
+        editor.resize();
+      }
+      else {
+        $wrapper.wrap('<div class="ace-full-screen"></div>');
+        editor.resize();
+        $(document).bind('keyup', escapeFullScreen);
+      }
+  });
+
+
 }
+
 Drupal.wysiwyg.editor.detach.ace = function (context, params, trigger) {
-  ace.edit(aceID(params.field)).renderer.destroy();
-  ace.edit(aceID(params.field)).destroy();
-  $('#' + aceID(params.field)).parent().find('.aceresize-grippie').remove();
-  $('#' + aceID(params.field)).remove();
-  $('#' + params.field).show();
+  if ($('#' + aceID(params.field), context).length) {
+    ace.edit(aceID(params.field)).renderer.destroy();
+    ace.edit(aceID(params.field)).destroy();
+    $('#' + aceID(params.field)).parent().find('.aceresize-grippie').remove();
+    $('#' + aceID(params.field)).remove();
+    $('#' + params.field).show();
+  }
 }
 Drupal.wysiwyg.editor.instance.ace = {
   insert: function (content) {
-alert('insert');
   },
   setContent: function (content) {
-alert('setContent');
     ace.edit(aceID(this.field)).getSession().setValue(content);
   },
   getContent: function () {
