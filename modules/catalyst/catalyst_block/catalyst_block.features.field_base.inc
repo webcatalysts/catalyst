@@ -44,8 +44,8 @@ function catalyst_block_field_default_field_bases() {
     'locked' => 0,
     'module' => 'machine',
     'settings' => array(
-      'machine_max_length' => 255,
-      'unique_values_per' => 'entity',
+      'max_length' => 255,
+      'unique_per' => 'field',
     ),
     'translatable' => 0,
     'type' => 'machine',

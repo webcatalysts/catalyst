@@ -311,37 +311,6 @@ text/html|text/html',
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_doctype_machine'.
-  $field_instances['catalyst-doctype-field_doctype_machine'] = array(
-    'bundle' => 'doctype',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 8,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field_doctype_machine',
-    'label' => 'Machine name',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'machine',
-      'settings' => array(
-        'machine_size' => 128,
-      ),
-      'type' => 'machine_from_title_widget',
-      'weight' => 17,
-    ),
-  );
-
   // Exported field_instance: 'catalyst-doctype-field_doctype_ondeselect'.
   $field_instances['catalyst-doctype-field_doctype_ondeselect'] = array(
     'bundle' => 'doctype',
@@ -496,7 +465,6 @@ text/html|text/html',
   t('Custom javascript that is executed when this doctype is deselected on the layout form.');
   t('Enable Drupal processing');
   t('HTTP Content-Type');
-  t('Machine name');
   t('On DeSelect');
   t('On Select');
   t('Preprocessing');

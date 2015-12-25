@@ -1002,7 +1002,6 @@ function catalyst_layout_field_default_field_instances() {
   // Exported field_instance: 'catalyst-layout-field_layout_regions'.
   $field_instances['catalyst-layout-field_layout_regions'] = array(
     'bundle' => 'layout',
-    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -1010,7 +1009,7 @@ function catalyst_layout_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 16,
+        'weight' => 24,
       ),
     ),
     'entity_type' => 'catalyst',
@@ -1021,14 +1020,18 @@ function catalyst_layout_field_default_field_instances() {
       'user_register_form' => FALSE,
     ),
     'widget' => array(
-      'active' => 0,
+      'active' => 1,
       'module' => 'machine',
       'settings' => array(
-        'machine_size' => 128,
-        'text_size' => 128,
+        'editable' => 1,
+        'field_size' => 60,
+        'machine_field_label' => 'Region key',
+        'machine_replace_pattern' => '[^a-z0-9_]+',
+        'machine_replace_with' => '_',
+        'text_field_label' => 'Region text',
       ),
       'type' => 'machine_with_text_widget',
-      'weight' => 7,
+      'weight' => 25,
     ),
   );
 

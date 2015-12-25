@@ -8,55 +8,53 @@
  * Implement hook_field_schema().
  */
 function machine_field_schema($field) {
-  if (in_array($field['type'], array('machine', 'machine_with_text'))) {
-    $schema = array(
-      'columns' => array(
-        'machine' => array(
-          'type' => 'varchar',
-          'length' => $field['settings']['machine_max_length'],
-          'not null' => TRUE,
-        ),
-      ),
-      'indexes' => array(
-        'machine' => array('machine'),
-      ),
-      'unique keys' => array(
-        // Unique key by entity id
-      ),
-    );
-
-
-    switch ($field['settings']['unique_values_per']) {
-      case 'entity':
-        $schema['unique keys']['unique_entity'] = array('entity_type', 'bundle', 'entity_id', 'machine');
-        break;
-      case 'bundle':
-        $schema['unique keys']['unique_bundle'] = array('entity_type', 'bundle', 'machine');
-        break;
-      case 'entity_type':
-        $schema['unique keys']['unique_entity_type'] = array('entity_type', 'machine');
-        break;
-      case 'field':
-        $schema['unique keys']['unique_machine'] = array('machine');
-        break;
-    }
-
-    if ($field['type'] == 'machine_with_text') {
-      $schema['columns']['text'] = array(
+  $schema = array(
+    'columns' => array(
+      'machine' => array(
         'type' => 'varchar',
-        'length' => $field['settings']['text_max_length'],
-      );
+        'length' => $field['settings']['max_length'],
+        'not null' => TRUE,
+      ),
+    ),
+    'indexes' => array(
+      'machine' => array('machine'),
+    ),
+    'unique keys' => array(
+      // Unique keys determined by $field['settings']['unique_per']
+    ),
+  );
 
-      // Modify the unique key if the "unique text" options was selected
-      if ($field['settings']['unique_text']) {
-        list($unique_key) = array_keys($schema['unique keys']);
-        $unique_key_val = $schema['unique keys'][$unique_key];
-        unset($schema['unique keys']);
-        array_push($unique_key_val, 'text');
-        $schema['unique keys'][$unique_key . '_text'] = $unique_key_val;
-      }
-    }
-    return $schema;
+  // Set a unique key based on the unique_per setting
+  switch ($field['settings']['unique_per']) {
+    case 'entity':
+      $schema['unique keys']['unique_entity'] = array('entity_type', 'bundle', 'entity_id', 'machine');
+      break;
+    case 'bundle':
+      $schema['unique keys']['unique_bundle'] = array('entity_type', 'bundle', 'machine');
+      break;
+    case 'entity_type':
+      $schema['unique keys']['unique_entity_type'] = array('entity_type', 'machine');
+      break;
+    case 'field':
+      $schema['unique keys']['unique_machine'] = array('machine');
+      break;
   }
-}
 
+  if ($field['type'] == 'machine_with_text') {
+    // Add the text column for machine_with_text fields
+    $schema['columns']['text'] = array(
+      'type' => 'varchar',
+      'length' => $field['settings']['max_length'],
+      'not null' => TRUE,
+    );
+    // Modify the unique key if the "unique text" options was selected
+    if ($field['settings']['unique_text']) {
+      list($unique_key) = array_keys($schema['unique keys']);
+      $unique_key_val = $schema['unique keys'][$unique_key];
+      unset($schema['unique keys']);
+      array_push($unique_key_val, 'text');
+      $schema['unique keys'][$unique_key . '_text'] = $unique_key_val;
+    }
+  }
+  return $schema;
+}

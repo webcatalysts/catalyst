@@ -17,7 +17,7 @@ define('CATALYST_MEDIA_GROUP_OTHER', 404);
 function catalyst_media_url_outbound_alter(&$path, &$options, $original_path) {
   catalyst_admin_eck_url_outbound('stylesheet', $path, $options, $original_path);
   catalyst_admin_eck_url_outbound('javascript', $path, $options, $original_path);
-  catalyst_admin_eck_url_outbound('file', $path, $options, $original_path);
+  catalyst_admin_eck_url_outbound('file', $path, $options, $original_path, 'admin/content');
 }
 
 /**
@@ -26,7 +26,22 @@ function catalyst_media_url_outbound_alter(&$path, &$options, $original_path) {
 function catalyst_media_menu_alter(&$items) {
   catalyst_admin_alter_eck_entity_menu($items, 'stylesheet', 'admin/structure', FALSE);
   catalyst_admin_alter_eck_entity_menu($items, 'javascript', 'admin/structure', FALSE);
-  catalyst_admin_alter_eck_entity_menu($items, 'file', 'admin/structure', FALSE);
+  catalyst_admin_alter_eck_entity_menu($items, 'file', 'admin/content', FALSE);
+
+  $items['admin/content/file']['type'] = MENU_LOCAL_TASK | MENU_NORMAL_ITEM;
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function catalyst_media_module_implements_alter(&$implementations, $hook) {
+  // Run catalyst_media_menu_alter() after views_menu_alter() to allow
+  // modifying menu items provided by views.
+  if ($hook == 'menu_alter') {
+    $group = $implementations['catalyst_media'];
+    unset($implementations['catalyst_media']);
+    $implementations['catalyst_media'] = $group;
+  }
 }
 
 /**
@@ -40,7 +55,7 @@ function catalyst_media_filepath($machine_name) {
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'catalyst')
     ->entityCondition('bundle', 'file')
-    ->fieldCondition('field_file_machine', 'machine', $machine_name, '=')
+    ->fieldCondition('field_media_machine', 'machine', $machine_name, '=')
     ->addTag(__FUNCTION__);
   $result = $query->execute();
   if (isset($result['catalyst'])) {
@@ -49,7 +64,10 @@ function catalyst_media_filepath($machine_name) {
     $file = entity_metadata_wrapper('catalyst', $file);
     switch ($file->field_media_type->value()) {
       case 'local':
+      case 'remote':
         return url($file->field_media_path->value());
+      case 'custom':
+        return file_create_url($file->field_media_file->value()['uri']);
     }
   }
 }

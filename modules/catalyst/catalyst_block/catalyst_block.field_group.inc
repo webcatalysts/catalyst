@@ -52,8 +52,8 @@ function catalyst_block_field_group_info() {
     'weight' => '4',
     'children' => array(
       0 => 'field_block_content',
-      1 => 'field_block_machine',
-      2 => 'title',
+      1 => 'title',
+      2 => 'field_block_machine',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

@@ -23,6 +23,13 @@ function catalyst_admin_user_default_permissions() {
     'module' => 'navbar',
   );
 
+  // Exported permission: 'administer shortcut per role'.
+  $permissions['administer shortcut per role'] = array(
+    'name' => 'administer shortcut per role',
+    'roles' => array(),
+    'module' => 'shortcutperrole',
+  );
+
   // Exported permission: 'administer shortcuts'.
   $permissions['administer shortcuts'] = array(
     'name' => 'administer shortcuts',

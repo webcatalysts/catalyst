@@ -10,28 +10,6 @@
 function catalyst_media_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_file_machine'.
-  $field_bases['field_file_machine'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_file_machine',
-    'indexes' => array(
-      'machine' => array(
-        0 => 'machine',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'machine',
-    'settings' => array(
-      'machine_max_length' => 255,
-      'unique_values_per' => 'entity',
-    ),
-    'translatable' => 0,
-    'type' => 'machine',
-  );
-
   // Exported field_base: 'field_javascript_defer'.
   $field_bases['field_javascript_defer'] = array(
     'active' => 1,
@@ -55,35 +33,6 @@ function catalyst_media_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_boolean',
-  );
-
-  // Exported field_base: 'field_javascript_machine'.
-  $field_bases['field_javascript_machine'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_javascript_machine',
-    'indexes' => array(
-      'machine' => array(
-        0 => 'machine',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'safeword',
-    'settings' => array(
-      'allow_machine_changes' => 0,
-      'complete_path_label' => 'Complete path',
-      'machine_description' => 'Unique machine name for the Javascript',
-      'machine_label' => 'Machine name',
-      'max_length' => 255,
-      'replace_pattern' => '(--|<[^<>]+>|[^/a-z0-9-])+',
-      'replace_value' => '-',
-      'show_complete_path' => 0,
-      'unique' => 1,
-    ),
-    'translatable' => 0,
-    'type' => 'safeword_title',
   );
 
   // Exported field_base: 'field_javascript_scope'.
@@ -153,6 +102,28 @@ function catalyst_media_field_default_field_bases() {
     'type' => 'file',
   );
 
+  // Exported field_base: 'field_media_machine'.
+  $field_bases['field_media_machine'] = array(
+    'active' => 1,
+    'cardinality' => 1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_media_machine',
+    'indexes' => array(
+      'machine' => array(
+        0 => 'machine',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'machine',
+    'settings' => array(
+      'max_length' => 128,
+      'unique_per' => 'bundle',
+    ),
+    'translatable' => 0,
+    'type' => 'machine',
+  );
+
   // Exported field_base: 'field_media_path'.
   $field_bases['field_media_path'] = array(
     'active' => 1,
@@ -198,28 +169,6 @@ function catalyst_media_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
-  );
-
-  // Exported field_base: 'field_stylesheet_machine'.
-  $field_bases['field_stylesheet_machine'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_stylesheet_machine',
-    'indexes' => array(
-      'machine' => array(
-        0 => 'machine',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'machine',
-    'settings' => array(
-      'machine_max_length' => 255,
-      'unique_values_per' => 'entity',
-    ),
-    'translatable' => 0,
-    'type' => 'machine',
   );
 
   // Exported field_base: 'field_stylesheet_media'.
