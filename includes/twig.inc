@@ -5,7 +5,9 @@
  */
 
 function catalyst_twig_render($template, $variables = array(), $key = NULL) {
-  require_once DRUPAL_ROOT . '/profiles/catalyst/libraries/twig/lib/Twig/Autoloader.php';
+  $path = libraries_get_path('twig');
+  require_once $path . '/lib/Twig/Autoloader.php';
+
   Twig_Autoloader::register();
   if (empty($key)) {
     $key = 'index.html';

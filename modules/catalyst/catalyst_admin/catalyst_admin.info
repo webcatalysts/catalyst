@@ -9,6 +9,7 @@ dependencies[] = ctools
 dependencies[] = features
 dependencies[] = menu
 dependencies[] = navbar
+dependencies[] = responsive_preview
 dependencies[] = shortcut
 dependencies[] = shortcutperrole
 dependencies[] = strongarm

@@ -113,3 +113,19 @@ projects[views_bulk_operations][version] = "3.3"
 projects[views_bulk_operations][type] = "module"
 projects[views_bulk_operations][subdir] = "contrib"
 
+; Libraries
+
+libraries[twig][download][type] = "get"
+libraries[twig][download][url] = "https://github.com/twigphp/Twig/archive/v1.23.1.zip"
+
+libraries[ace][download][type] = "get"
+libraries[ace][download][url] = "https://github.com/ajaxorg/ace-builds/archive/v1.2.2.zip"
+
+libraries[modernizr][download][type] = "get"
+libraries[modernizr][download][url] = "https://github.com/Modernizr/Modernizr/archive/v2.7.1.zip"
+
+libraries[backbone][download][type] = "get"
+libraries[backbone][download][url] = "https://github.com/jashkenas/backbone/archive/1.1.0.zip"
+
+libraries[underscore][download][type] = "get"
+libraries[underscore][download][url] = "https://github.com/jashkenas/underscore/archive/1.5.2.zip"

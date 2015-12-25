@@ -2,3 +2,14 @@ name = Catalyst
 description = The Catalyst CMS hybrid for Drupal
 version = 0.1
 core = 7.x
+
+dependencies[] = catalyst_core
+dependencies[] = catalyst_admin
+dependencies[] = catalyst_doctype
+dependencies[] = catalyst_media
+dependencies[] = catalyst_layout
+dependencies[] = catalyst_block
+dependencies[] = catalyst_menu
+dependencies[] = catalyst_page
+
+php = 5.4

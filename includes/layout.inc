@@ -7,7 +7,12 @@
 function catalyst_layout_initialize() {
   global $catalyst_layout;
   if (!isset($catalyst_layout)) {
-    catalyst_set_layout(variable_get('catalyst_layout_default', 163));
+    if ($default = variable_get('catalyst_layout_default', FALSE)) {
+      catalyst_set_layout($default);
+    }
+    else {
+      catalyst_set_layout(2);
+    }
   }
 }
 

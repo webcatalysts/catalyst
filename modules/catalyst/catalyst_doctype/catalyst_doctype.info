@@ -3,6 +3,7 @@ description = Provides the doctype entity and related functionality for Catalyst
 core = 7.x
 package = Catalyst
 version = 7.x-0.2
+dependencies[] = catalyst_admin
 dependencies[] = ctools
 dependencies[] = eck
 dependencies[] = features
