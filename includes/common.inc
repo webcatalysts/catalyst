@@ -155,12 +155,11 @@ function catalyst_add_css($stylesheet, $group = CATALYST_MEDIA_GROUP_OTHER) {
     'media' => $stylesheet->field_stylesheet_media->value(),
   );
 
-  $options['basename'] = $stylesheet->field_media_machine->value()['machine'];
+  $options['basename'] = $stylesheet->field_media_machine->machine->value();
   switch ($stylesheet->field_media_type->value()) {
     case 'custom':
-      $data = $stylesheet->field_media_content->value()['value'];
+      $data = $stylesheet->field_media_content->value->value();
       $options['type'] = 'inline';
-      //$options['basename'] = $stylesheet->field_media_machine->value()['machine'];
       break;
     case 'local':
       $data = $stylesheet->field_media_path->value();
@@ -219,7 +218,7 @@ function catalyst_add_js($javascript, $group = CATALYST_MEDIA_GROUP_OTHER) {
 
   switch ($javascript->field_media_type->value()) {
     case 'custom':
-      $data = $javascript->field_media_content->value()['value'];
+      $data = $javascript->field_media_content->value->value();
       $options['type'] = 'inline';
       break;
     case 'local':
