@@ -418,10 +418,9 @@ function catalyst_layout_field_default_field_bases() {
     'locked' => 0,
     'module' => 'machine',
     'settings' => array(
-      'machine_max_length' => 255,
-      'text_max_length' => 255,
-      'unique_text' => FALSE,
-      'unique_values_per' => 'entity',
+      'max_length' => 32,
+      'unique_per' => 'entity',
+      'unique_text' => 1,
     ),
     'translatable' => 0,
     'type' => 'machine_with_text',

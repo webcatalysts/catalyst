@@ -11,17 +11,57 @@ define('CATALYST_BLOCK_VISIBILITY_PHP', 3);
 include_once 'catalyst_block.features.inc';
 
 /**
+ * Implements hook_inline_entity_form_entity_form_alter().
+ */
+function catalyst_block_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
+  // Hide bulky (and unncessary?) groups/fields when the block form is an
+  // entity form. Eg. node/add/cpage
+  if ($entity_form['#entity_type'] == 'catalyst' && isset($entity_form['field_block_content'])) {
+    $hide_groups = array('group_block_placement', 'group_block_js', 'group_block_css', 'group_block_files');
+    foreach ($hide_groups AS $group) {
+      if (isset($entity_form['#groups'][$group])) {
+        foreach ($entity_form['#groups'][$group]->children AS $field) {
+          hide($entity_form[$field]);
+        }
+        unset($entity_form['#groups'][$group]);
+        unset($entity_form['#fieldgroups'][$group]);
+      }
+    }
+    foreach ($entity_form['#group_children'] AS $field => $group) {
+      if (in_array($group, $hide_groups)) {
+        unset($entity_form['#group_children'][$field]);
+      }
+    }
+  }
+}
+
+/**
  * Implements hook_url_outbound_alter().
  */
 function catalyst_block_url_outbound_alter(&$path, &$options, $original_path) {
-  catalyst_admin_eck_url_outbound('block', $path, $options, $original_path);
+  catalyst_admin_eck_url_outbound('block', $path, $options, $original_path, 'admin/content');
 }
 
 /**
  * Implements hook_menu_alter().
  */
 function catalyst_block_menu_alter(&$items) {
-  catalyst_admin_alter_eck_entity_menu($items, 'block', 'admin/structure', FALSE);
+  catalyst_admin_alter_eck_entity_menu($items, 'block', 'admin/content', FALSE);
+
+  $items['admin/content/block']['type'] = MENU_LOCAL_TASK | MENU_NORMAL_ITEM;
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function catalyst_block_module_implements_alter(&$implementations, $hook) {
+  // Run catalyst_block_menu_alter() after views_menu_alter() so menu items
+  // provided by views can be altered.
+  if ($hook == 'menu_alter') {
+    $group = $implementations['catalyst_block'];
+    unset($implementations['catalyst_block']);
+    $implementations['catalyst_block'] = $group;
+  }
 }
 
 /**
@@ -102,10 +142,13 @@ function catalyst_block_theme() {
  * Implements hook_page_build().
  */
 function catalyst_block_page_build(&$page) {
-  $page['region'] = array();
-  if ($regions = catalyst_layout_system_regions()) {
-    foreach ($regions AS $region) {
-      $page['region'][$region] = catalyst_blocks_by_region($region);
+  global $theme;
+  if ($theme == 'notheme') {
+    $page['region'] = array();
+    if ($regions = catalyst_layout_system_regions()) {
+      foreach ($regions AS $region) {
+        $page['region'][$region] = catalyst_blocks_by_region($region);
+      }
     }
   }
 }

@@ -1,8 +1,10 @@
 <?php
 /**
  * @file
- * Drupal needs this blank file.
+ * Code for the Catalyst Admin feature.
  */
+
+include_once 'catalyst_admin.features.inc';
 function catalyst_admin_init() {
 //dsm(menu_get_item());
 }

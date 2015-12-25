@@ -99,11 +99,15 @@ function block_placement_layout_field_widget_form_process($form, &$form_state, $
       '#has_garbage_value' => TRUE,
     );
 
-    $layout_id = $layout_field['#default_value'][0];
+    $layout_id = NULL;
     if (!empty($form_state['input'][$layout_field_name])) {
       $layout_id = $form_state['input'][$layout_field_name][$lang];
     }
-    if ($layout_id) {
+    elseif (isset($layout_field['#default_value'][0])) {
+      $layout_id = $layout_field['#default_value'][0];
+    }
+
+    if ($layout_id && $layout_id != '_none') {
       $form['#block_placement']['has_layout'] = $layout_id;
       $form['#block_placement']['layout_id'] = $layout_id;
 

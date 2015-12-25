@@ -43,7 +43,7 @@ function catalyst_media_views_default_views() {
     'php_2' => 'php_2',
     'title_1' => 'title_1',
     'field_media_type' => 'field_media_type',
-    'field_stylesheet_media' => 'field_stylesheet_media',
+    'field_media_machine' => 'field_media_machine',
     'created' => 'created',
     'changed' => 'changed',
     'php' => 'php',
@@ -90,7 +90,7 @@ function catalyst_media_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_stylesheet_media' => array(
+    'field_media_machine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -138,8 +138,8 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['header']['php']['php_output'] = '<?php print catalyst_admin_action_links(array(
   \'file-add\' => array(
     \'title\' => t(\'Create new file\'),
-    \'path\' => \'admin/structure/file/add\',
-    \'destination\' => \'admin/structure/file\',
+    \'path\' => \'admin/content/file/add\',
+    \'destination\' => \'admin/content/file\',
     \'access\' => \'eck add catalyst file entities\',
   ),
 )); ?>';
@@ -160,8 +160,8 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['empty']['php']['empty'] = TRUE;
   $handler->display->display_options['empty']['php']['php_output'] = '<?php print catalyst_admin_views_no_results($view, \'file\', array(
   \'bundle\' => \'file\',
-  \'path\' => \'admin/structure/file/add\',
-  \'destination\' => \'admin/structure/file\',
+  \'path\' => \'admin/content/file/add\',
+  \'destination\' => \'admin/content/file\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -219,8 +219,8 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['fields']['php_2']['label'] = 'Title Link';
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php_2']['php_value'] = 'return catalyst_admin_eck_entity_link(\'file\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/structure\', array(
-  \'query\' => array(\'destination\' => \'admin/structure/file\'),
+  $handler->display->display_options['fields']['php_2']['php_value'] = 'return catalyst_admin_eck_entity_link(\'file\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/content\', array(
+  \'query\' => array(\'destination\' => \'admin/content/file\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -236,6 +236,10 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['fields']['field_media_type']['id'] = 'field_media_type';
   $handler->display->display_options['fields']['field_media_type']['table'] = 'field_data_field_media_type';
   $handler->display->display_options['fields']['field_media_type']['field'] = 'field_media_type';
+  /* Field: catalyst: Machine name */
+  $handler->display->display_options['fields']['field_media_machine']['id'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['table'] = 'field_data_field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['field'] = 'field_media_machine';
   /* Field: Catalyst: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';
@@ -259,8 +263,8 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['fields']['php']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'return catalyst_admin_eck_entity_link(
-  \'file\', $row->id, t(\'edit\'), \'edit\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/file\'))
+  \'file\', $row->id, t(\'edit\'), \'edit\', \'admin/content\',
+  array(\'query\' => array(\'destination\' => \'admin/content/file\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -273,8 +277,8 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['fields']['php_1']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'return catalyst_admin_eck_entity_link(
-  \'file\', $row->id, t(\'delete\'), \'delete\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/file\'))
+  \'file\', $row->id, t(\'delete\'), \'delete\', \'admin/content\',
+  array(\'query\' => array(\'destination\' => \'admin/content/file\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -335,16 +339,16 @@ function catalyst_media_views_default_views() {
 
   /* Display: Admin */
   $handler = $view->new_display('page', 'Admin', 'cms_admin');
-  $handler->display->display_options['path'] = 'admin/structure/file/list';
+  $handler->display->display_options['path'] = 'admin/content/file/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['type'] = 'tab';
   $handler->display->display_options['tab_options']['title'] = 'Files';
   $handler->display->display_options['tab_options']['description'] = 'Add and manage media files';
-  $handler->display->display_options['tab_options']['weight'] = '0';
+  $handler->display->display_options['tab_options']['weight'] = '2';
   $handler->display->display_options['tab_options']['name'] = 'management';
   $export['catalyst_file_admin'] = $view;
 
@@ -380,6 +384,7 @@ function catalyst_media_views_default_views() {
     'title' => 'title',
     'php_2' => 'php_2',
     'title_1' => 'title_1',
+    'field_javascript_machine' => 'field_javascript_machine',
     'field_media_type' => 'field_media_type',
     'field_javascript_scope' => 'field_javascript_scope',
     'created' => 'created',
@@ -415,6 +420,13 @@ function catalyst_media_views_default_views() {
       'empty_column' => 0,
     ),
     'title_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_javascript_machine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -661,7 +673,7 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['filters']['field_javascript_scope_value']['field'] = 'field_javascript_scope_value';
   $handler->display->display_options['filters']['field_javascript_scope_value']['exposed'] = TRUE;
   $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['operator_id'] = 'field_javascript_scope_value_op';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['label'] = 'Scope (field_javascript_scope)';
+  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['label'] = 'Scope';
   $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['operator'] = 'field_javascript_scope_value_op';
   $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['identifier'] = 'field_javascript_scope_value';
   $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['remember'] = TRUE;

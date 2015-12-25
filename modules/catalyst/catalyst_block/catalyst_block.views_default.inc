@@ -42,6 +42,7 @@ function catalyst_block_views_default_views() {
     'title' => 'title',
     'php_2' => 'php_2',
     'title_1' => 'title_1',
+    'field_block_machine' => 'field_block_machine',
     'created' => 'created',
     'changed' => 'changed',
     'php' => 'php',
@@ -74,6 +75,13 @@ function catalyst_block_views_default_views() {
       'empty_column' => 0,
     ),
     'title_1' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field_block_machine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -114,8 +122,8 @@ function catalyst_block_views_default_views() {
   $handler->display->display_options['header']['php']['php_output'] = '<?php print catalyst_admin_action_links(array(
   \'block-add\' => array(
     \'title\' => t(\'Create new block\'),
-    \'path\' => \'admin/structure/block/add\',
-    \'destination\' => \'admin/structure/block\',
+    \'path\' => \'admin/content/block/add\',
+    \'destination\' => \'admin/content/block\',
     \'access\' => \'eck add catalyst block entities\',
   ),
 )); ?>';
@@ -136,8 +144,8 @@ function catalyst_block_views_default_views() {
   $handler->display->display_options['empty']['php']['empty'] = TRUE;
   $handler->display->display_options['empty']['php']['php_output'] = '<?php print catalyst_admin_views_no_results($view, \'blocks\', array(
   \'bundle\' => \'block\',
-  \'path\' => \'admin/structure/block/add\',
-  \'destination\' => \'admin/structure/block\',
+  \'path\' => \'admin/content/block/add\',
+  \'destination\' => \'admin/content/block\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -193,8 +201,8 @@ function catalyst_block_views_default_views() {
   $handler->display->display_options['fields']['php_2']['label'] = 'Title Link';
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php_2']['php_value'] = 'return catalyst_admin_eck_entity_link(\'block\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/structure\', array(
-  \'query\' => array(\'destination\' => \'admin/structure/block\'),
+  $handler->display->display_options['fields']['php_2']['php_value'] = 'return catalyst_admin_eck_entity_link(\'block\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/content\', array(
+  \'query\' => array(\'destination\' => \'admin/content/block\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -206,6 +214,10 @@ function catalyst_block_views_default_views() {
   $handler->display->display_options['fields']['title_1']['label'] = 'Layout';
   $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title_1']['alter']['text'] = '[php_2]';
+  /* Field: catalyst: Machine name */
+  $handler->display->display_options['fields']['field_block_machine']['id'] = 'field_block_machine';
+  $handler->display->display_options['fields']['field_block_machine']['table'] = 'field_data_field_block_machine';
+  $handler->display->display_options['fields']['field_block_machine']['field'] = 'field_block_machine';
   /* Field: Catalyst: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';
@@ -229,8 +241,8 @@ function catalyst_block_views_default_views() {
   $handler->display->display_options['fields']['php']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'return catalyst_admin_eck_entity_link(
-  \'block\', $row->id, t(\'edit\'), \'edit\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/block\'))
+  \'block\', $row->id, t(\'edit\'), \'edit\', \'admin/content\',
+  array(\'query\' => array(\'destination\' => \'admin/content/block\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -243,8 +255,8 @@ function catalyst_block_views_default_views() {
   $handler->display->display_options['fields']['php_1']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'return catalyst_admin_eck_entity_link(
-  \'block\', $row->id, t(\'delete\'), \'delete\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/block\'))
+  \'block\', $row->id, t(\'delete\'), \'delete\', \'admin/content\',
+  array(\'query\' => array(\'destination\' => \'admin/content/block\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -276,16 +288,16 @@ function catalyst_block_views_default_views() {
 
   /* Display: Admin */
   $handler = $view->new_display('page', 'Admin', 'cms_admin');
-  $handler->display->display_options['path'] = 'admin/structure/block/list';
+  $handler->display->display_options['path'] = 'admin/content/block/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['type'] = 'tab';
   $handler->display->display_options['tab_options']['title'] = 'Blocks';
   $handler->display->display_options['tab_options']['description'] = 'Create and manage block content';
-  $handler->display->display_options['tab_options']['weight'] = '0';
+  $handler->display->display_options['tab_options']['weight'] = '1';
   $handler->display->display_options['tab_options']['name'] = 'management';
   $export['catalyst_block_admin'] = $view;
 

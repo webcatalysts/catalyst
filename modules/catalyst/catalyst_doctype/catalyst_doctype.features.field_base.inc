@@ -96,28 +96,6 @@ function catalyst_doctype_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_doctype_machine'.
-  $field_bases['field_doctype_machine'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_doctype_machine',
-    'indexes' => array(
-      'machine' => array(
-        0 => 'machine',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'machine',
-    'settings' => array(
-      'machine_max_length' => 255,
-      'unique_values_per' => 'entity',
-    ),
-    'translatable' => 0,
-    'type' => 'machine',
-  );
-
   // Exported field_base: 'field_doctype_ondeselect'.
   $field_bases['field_doctype_ondeselect'] = array(
     'active' => 1,

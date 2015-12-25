@@ -155,12 +155,12 @@ function catalyst_add_css($stylesheet, $group = CATALYST_MEDIA_GROUP_OTHER) {
     'media' => $stylesheet->field_stylesheet_media->value(),
   );
 
-  $options['basename'] = $stylesheet->field_stylesheet_machine->value()['machine'];
+  $options['basename'] = $stylesheet->field_media_machine->value()['machine'];
   switch ($stylesheet->field_media_type->value()) {
     case 'custom':
       $data = $stylesheet->field_media_content->value()['value'];
       $options['type'] = 'inline';
-      //$options['basename'] = $stylesheet->field_stylesheet_machine->value()['machine'];
+      //$options['basename'] = $stylesheet->field_media_machine->value()['machine'];
       break;
     case 'local':
       $data = $stylesheet->field_media_path->value();

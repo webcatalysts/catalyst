@@ -8,32 +8,31 @@
  * Implements hook_field_info().
  */
 function machine_field_info() {
-  $shared_settings = array(
-    'machine_max_length' => 255,
-    'unique_values_per' => 'entity',
+  $default_settings = array(
+    'max_length' => 255,
+    'unique_per' => '',
   );
   return array(
     'machine' => array(
       'label' => t('Machine'),
       'description' => t('Machine name value only (can be derrived from title)'),
-      'settings' => $shared_settings,
       'instance settings' => array(),
       'default_widget' => 'machine_default_widget',
-      'default_formatter' => 'machine_default_formatter',
+      'default_formatter' => 'machine_default',
       'property_type' => 'machine',
       'property_callbacks' => array('machine_property_info'),
+      'settings' => $default_settings,
     ),
     'machine_with_text' => array(
       'label' => t('Machine with Text'),
       'description' => t('Machine name and text value'),
       'default_widget' => 'machine_with_text_widget',
-      'default_formatter' => 'machine_with_text_formatter',
+      'default_formatter' => 'machine_with_text_machine',
       'property_type' => 'machine',
       'property_callbacks' => array('machine_property_info'),
-      'settings' => $shared_settings += array(
-        'text_max_length' => 255,
-        'unique_text' => FALSE,
-      ),
+      'settings' => array(
+        'unique_text' => 0,
+      ) + $default_settings,
     ),
   );
 }
@@ -42,13 +41,18 @@ function machine_field_info() {
  * Implements hook_field_widget_info().
  */
 function machine_field_widget_info() {
+  $default_settings = array(
+    'field_size' => 60,
+    'machine_field_label' => 'Machine name',
+    'machine_replace_pattern' => '[^a-z0-9_]+',
+    'machine_replace_with' => '_',
+    'editable' => FALSE,
+  );
   return array(
     'machine_default_widget' => array(
       'label' => t('Machine'),
       'field types' => array('machine'),
-      'settings' => array(
-        'machine_size' => 128,
-      ),
+      'settings' => $default_settings,
       'behaviors' => array(
         'default value' => FIELD_BEHAVIOR_NONE,
       ),
@@ -56,9 +60,7 @@ function machine_field_widget_info() {
     'machine_from_title_widget' => array(
       'label' => t('Machine from title'),
       'field types' => array('machine'),
-      'settings' => array(
-        'machine_size' => 128,
-      ),
+      'settings' => $default_settings,
       'behaviors' => array(
         'default value' => FIELD_BEHAVIOR_NONE,
       ),
@@ -67,9 +69,8 @@ function machine_field_widget_info() {
       'label' => t('Machine with text'),
       'field types' => array('machine_with_text'),
       'settings' => array(
-        'machine_size' => 128,
-        'text_size' => 128,
-      ),
+        'text_field_label' => 'text',
+      ) + $default_settings,
       'behaviors' => array(
         'default value' => FIELD_BEHAVIOR_NONE,
       ),
@@ -81,18 +82,15 @@ function machine_field_widget_info() {
  * Implements hook_field_widget_form().
  */
 function machine_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
-  form_load_include($form_state, 'inc', 'machine', 'widgets/common');
+  form_load_include($form_state, 'inc', 'machine', 'includes/widgets');
   switch ($instance['widget']['type']) {
     case 'machine_default_widget':
-      form_load_include($form_state, 'inc', 'machine', 'widgets/default');
       $callback = 'machine_default_widget';
       break;
     case 'machine_from_title_widget':
-      form_load_include($form_state, 'inc', 'machine', 'widgets/from_title');
       $callback = 'machine_from_title_widget';
       break;
     case 'machine_with_text_widget':
-      form_load_include($form_state, 'inc', 'machine', 'widgets/with_text');
       $callback = 'machine_with_text_widget';
       break;
   }
@@ -107,7 +105,191 @@ function machine_field_is_empty($item, $field) {
     case 'machine':
       return empty($item['machine']);
     case 'machine_with_text':
-      return empty($item['machine']) || empty($item['text']);
+      return empty($item['machine']) && empty($item['text']);
+  }
+}
+
+/**
+ * Implements hook_field_validate().
+ */
+function machine_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  // Validation is complex so it is better organized in an include file
+  module_load_include('inc', 'machine', 'includes/validate');
+  _machine_field_validate_unique($entity_type, $entity, $field, $instance, $langcode, $items, $errors);
+}
+
+/**
+ * Implements hook_field_widget_error().
+ *
+ * Allow error messages to be more explicit between text and machine fields.
+ */
+function machine_field_widget_error($element, $error, $form, $form_state) {
+  if (!empty($error['error_field'])) {
+    $element = $element[$error['error_field']];
+  }
+  form_error($element, $error['message']);
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function machine_field_formatter_info() {
+  return array(
+    'machine_default' => array(
+      'label' => t('Default'),
+      'field types' => array('machine', 'machine_with_text'),
+    ),
+    'machine_with_text_machine' => array(
+      'label' => t('Machine name wrapped in an acronym tag'),
+      'field types' => array('machine_with_text'),
+    ),
+    'machine_text' => array(
+      'label' => t('Text (human readable version)'),
+      'field types' => array('machine_with_text'),
+    ),
+    'machine_both' => array(
+      'label' => t('Both (machine and text)'),
+      'field types' => array('machine_with_text'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function machine_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    // Default machine only
+    case 'machine_default':
+      foreach ($items as $delta => $item) {
+        $element[$delta]['#markup'] = filter_xss($item['machine']);
+      }
+      break;
+    // Text only
+    case 'machine_text':
+      foreach ($items as $delta => $item) {
+        $element[$delta]['#markup'] = filter_xss($item['text']);
+      }
+      break;
+    // Machine wrapped in acronym with text as title attribute
+    case 'machine_with_text_machine':
+      foreach ($items as $delta => $item) {
+        $element[$delta]['#markup'] = '<acronym title="' . filter_xss($item['text']) . '">' . filter_xss($item['machine']) . '</acronym>';
+      }
+      break;
+    // Output both the text and machine eg. "Text (machine)"
+    case 'machine_both':
+      foreach ($items as $delta => $item) {
+        $element[$delta]['#markup'] = format_string("!text (!machine)", array('!text' => filter_xss($item['text']), '!machine' => filter_xss($item['machine'])));
+      }
+      break;
+  }
+
+  return $element;
+}
+
+/**
+ * Implements hook_field_settings_form().
+ */
+function machine_field_settings_form($field, $instance, $has_data) {
+  $settings = $field['settings'];
+  $field_type = $field['type'];
+  $widget_type = $instance['widget']['type'];
+
+  $form['max_length'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Maximum length'),
+    '#default_value' => $settings['max_length'],
+    '#description' => t('The maximum number of characters allowed for the machine name (max 255).'),
+    '#size' => 10,
+    '#required' => TRUE,
+    '#disabled' => $has_data,
+  );
+  $form['unique_per'] = array(
+    '#type' => 'select',
+    '#title' => t('Unique values'),
+    '#options' => array(
+      '' => t('Not required'),
+      'entity' => t('Per entity'),
+      'entity_type' => t('Per entity type'),
+      'bundle' => t('Per bundle'),
+      'field' => t('For all entities'),
+    ),
+    '#default_value' => $settings['unique_per'],
+    '#disabled' => $has_data,
+  );
+
+  if ($widget_type == 'machine_with_text_widget') {
+    $form['unique_text'] = array(
+      '#type' => 'checkbox',
+      '#title' => t('Also require unique text'),
+      '#default_value' => $field['settings']['unique_text'],
+      '#disabled' => $has_data,
+    );
+  }
+  elseif ($widget_type == 'machine_from_title_widget') {
+    unset($form['unique_per']['#options']['entity']);
+  }
+
+  return $form;
+}
+
+/**
+ * Implements hook_field_widget_settings_form().
+ */
+function machine_field_widget_settings_form($field, $instance) {
+  $settings = $instance['widget']['settings'];
+  $form['machine_field_label'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Machine label'),
+    '#default_value' => $settings['machine_field_label'],
+  );
+  if ($instance['widget']['type'] == 'machine_with_text_widget') {
+    $form['text_field_label'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Text field label'),
+      '#default_value' => $settings['text_field_label'],
+    );
+  }
+  $form['field_size'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Field size'),
+    '#size' => 10,
+    '#default_value' => $settings['field_size'],
+  );
+  $form['machine_replace_pattern'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Replacement pattern'),
+    '#default_value' => $settings['machine_replace_pattern'],
+  );
+  $form['machine_replace_with'] = array(
+    '#type' => 'textfield',
+    '#title' => t('Replace with'),
+    '#default_value' => $settings['machine_replace_with'],
+  );
+  $form['editable'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Disallow machine name changes'),
+    '#default_value' => $settings['editable'],
+  );
+  return $form;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function machine_form_field_ui_field_edit_form_alter(&$form, &$form_state) {
+  if ($form['#instance']['widget']['type'] == 'machine_from_title_widget') {
+    // Force single cardinatlity when using the machien_from_title_widget
+    $form['field']['cardinality'] = array(
+      '#type' => 'value',
+      '#value' => 1
+    );
+    // If cardinality is the only field option, hide the fieldset.
+    if (count(element_children($form['field'])) <= 1) {
+      $form['field']['#access'] = FALSE;
+    }
   }
 }
 
@@ -137,3 +319,10 @@ function machine_property_info(&$info, $entity_type, $field, $instance, $field_t
   );
 }
 
+/**
+ * The #machine_name element used by machine fields requires an "exists"
+ * backback but we implement our own validation.
+ */
+function machine_dummy_exists() {
+  return FALSE;
+}

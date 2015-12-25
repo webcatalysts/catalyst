@@ -10,37 +10,6 @@
 function catalyst_media_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'catalyst-file-field_file_machine'.
-  $field_instances['catalyst-file-field_file_machine'] = array(
-    'bundle' => 'file',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field_file_machine',
-    'label' => 'Machine name',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'machine',
-      'settings' => array(
-        'machine_size' => 128,
-      ),
-      'type' => 'machine_from_title_widget',
-      'weight' => 1,
-    ),
-  );
-
   // Exported field_instance: 'catalyst-file-field_media_file'.
   $field_instances['catalyst-file-field_media_file'] = array(
     'bundle' => 'file',
@@ -74,6 +43,42 @@ function catalyst_media_field_default_field_instances() {
       ),
       'type' => 'file_generic',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'catalyst-file-field_media_machine'.
+  $field_instances['catalyst-file-field_media_machine'] = array(
+    'bundle' => 'file',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'machine',
+        'settings' => array(),
+        'type' => 'machine_default',
+        'weight' => 4,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field_media_machine',
+    'label' => 'Machine name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'machine',
+      'settings' => array(
+        'editable' => 0,
+        'field_size' => 60,
+        'machine_field_label' => 'Machine name',
+        'machine_replace_pattern' => '[^a-z0-9_]+',
+        'machine_replace_with' => '_',
+      ),
+      'type' => 'machine_from_title_widget',
+      'weight' => 1,
     ),
   );
 
@@ -217,38 +222,7 @@ function catalyst_media_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 8,
-    ),
-  );
-
-  // Exported field_instance: 'catalyst-javascript-field_javascript_machine'.
-  $field_instances['catalyst-javascript-field_javascript_machine'] = array(
-    'bundle' => 'javascript',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'safeword',
-        'settings' => array(),
-        'type' => 'safeword_machine_basic',
-        'weight' => 1,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field_javascript_machine',
-    'label' => 'Machine name',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'safeword',
-      'settings' => array(),
-      'type' => 'safeword_machine_name_only',
-      'weight' => 1,
+      'weight' => 6,
     ),
   );
 
@@ -283,7 +257,7 @@ function catalyst_media_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 5,
     ),
   );
 
@@ -359,6 +333,42 @@ function catalyst_media_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-javascript-field_media_machine'.
+  $field_instances['catalyst-javascript-field_media_machine'] = array(
+    'bundle' => 'javascript',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'machine',
+        'settings' => array(),
+        'type' => 'machine_default',
+        'weight' => 9,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field_media_machine',
+    'label' => 'Machine name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'machine',
+      'settings' => array(
+        'editable' => 1,
+        'field_size' => 60,
+        'machine_field_label' => 'Machine name',
+        'machine_replace_pattern' => '[^a-z0-9_]+',
+        'machine_replace_with' => '_',
+      ),
+      'type' => 'machine_from_title_widget',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-javascript-field_media_path'.
   $field_instances['catalyst-javascript-field_media_path'] = array(
     'bundle' => 'javascript',
@@ -427,7 +437,7 @@ function catalyst_media_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 5,
+      'weight' => 4,
     ),
   );
 
@@ -538,6 +548,42 @@ function catalyst_media_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-stylesheet-field_media_machine'.
+  $field_instances['catalyst-stylesheet-field_media_machine'] = array(
+    'bundle' => 'stylesheet',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'machine',
+        'settings' => array(),
+        'type' => 'machine_default',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field_media_machine',
+    'label' => 'Machine name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'machine',
+      'settings' => array(
+        'editable' => 1,
+        'field_size' => 60,
+        'machine_field_label' => 'Machine name',
+        'machine_replace_pattern' => '[^a-z0-9_]+',
+        'machine_replace_with' => '_',
+      ),
+      'type' => 'machine_from_title_widget',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-stylesheet-field_media_path'.
   $field_instances['catalyst-stylesheet-field_media_path'] = array(
     'bundle' => 'stylesheet',
@@ -642,37 +688,6 @@ function catalyst_media_field_default_field_instances() {
       'settings' => array(),
       'type' => 'options_select',
       'weight' => 2,
-    ),
-  );
-
-  // Exported field_instance: 'catalyst-stylesheet-field_stylesheet_machine'.
-  $field_instances['catalyst-stylesheet-field_stylesheet_machine'] = array(
-    'bundle' => 'stylesheet',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field_stylesheet_machine',
-    'label' => 'Machine name',
-    'required' => 1,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 0,
-      'module' => 'machine',
-      'settings' => array(
-        'machine_size' => 128,
-      ),
-      'type' => 'machine_from_title_widget',
-      'weight' => 1,
     ),
   );
 
