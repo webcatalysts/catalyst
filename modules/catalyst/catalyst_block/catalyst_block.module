@@ -83,8 +83,8 @@ function catalyst_block_entity_view_alter(&$build, $type) {
  */
 function catalyst_block_preprocess_block_content(&$variables) {
   $block = $variables['block'];
-  if ($preprocess_php = $block->field_block_preprocess->value->value()) {
-    catalyst_eval($preprocess_php, $variables);
+  if ($preprocess_php = $block->field_block_preprocess->value()) {
+    catalyst_eval($preprocess_php['value'], $variables);
   }
 }
 

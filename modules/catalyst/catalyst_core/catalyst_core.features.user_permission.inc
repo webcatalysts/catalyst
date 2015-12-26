@@ -370,8 +370,6 @@ function catalyst_core_user_default_permissions() {
     'name' => 'eck list bundles',
     'roles' => array(
       'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
     ),
     'module' => 'eck',
   );
@@ -379,9 +377,7 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'eck list catalyst bundles'.
   $permissions['eck list catalyst bundles'] = array(
     'name' => 'eck list catalyst bundles',
-    'roles' => array(
-      'admin' => 'admin',
-    ),
+    'roles' => array(),
     'module' => 'eck',
   );
 
@@ -399,8 +395,6 @@ function catalyst_core_user_default_permissions() {
     'name' => 'eck list entity types',
     'roles' => array(
       'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
     ),
     'module' => 'eck',
   );
@@ -408,11 +402,7 @@ function catalyst_core_user_default_permissions() {
   // Exported permission: 'eck view catalyst bundles'.
   $permissions['eck view catalyst bundles'] = array(
     'name' => 'eck view catalyst bundles',
-    'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
-    ),
+    'roles' => array(),
     'module' => 'eck',
   );
 

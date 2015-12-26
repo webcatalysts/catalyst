@@ -15,8 +15,7 @@ function theme_layout($variables) {
 function template_preprocess_doctype(&$variables) {
   $doctype = $variables['page']['#doctype'];
 
-  if ($doctype->field_catalyst_drupal_processing->value()) {
-    $variables['drupal_processing'] = 1;
+  if($variables['drupal_processing'] = $doctype->field_catalyst_drupal_processing->value()) {
     drupal_preprocess_doctype($variables);
   }
 }
@@ -156,8 +155,10 @@ function drupal_preprocess_layout(&$variables) {
 
 function template_process_layout(&$variables) {
   // Render the regions
-  foreach (array_keys($variables['region']) AS $region) {
-    $variables['region'][$region] = render($variables['region'][$region]);
+  if (isset($variables['region'])) {
+    foreach (array_keys($variables['region']) AS $region) {
+      $variables['region'][$region] = render($variables['region'][$region]);
+    }
   }
 
   $variables['content'] = drupal_render($variables['page']['content']);

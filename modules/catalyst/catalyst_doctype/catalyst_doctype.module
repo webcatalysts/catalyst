@@ -63,8 +63,8 @@ function catalyst_doctype_preprocess_doctype(&$variables) {
   }
 
   // Custom Preprocessing defined by the doctype
-  if ($preprocess_php = $doctype->field_doctype_preprocess->value()) {
-    catalyst_eval($preprocess_php['value'], $variables);
+  if ($preprocess_php = $doctype->field_doctype_preprocess->value->value()) {
+    catalyst_eval($preprocess_php, $variables);
   }
 }
 

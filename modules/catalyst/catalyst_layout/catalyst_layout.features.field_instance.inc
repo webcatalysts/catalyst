@@ -90,7 +90,7 @@ function catalyst_layout_field_default_field_instances() {
           'value' => 'media/layout/[catalyst:title]',
         ),
         'redirect' => FALSE,
-        'retroactive_update' => 0,
+        'retroactive_update' => 1,
       ),
       'filefield_paths_enabled' => 1,
       'max_filesize' => '',

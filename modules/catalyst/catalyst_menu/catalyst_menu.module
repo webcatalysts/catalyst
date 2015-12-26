@@ -5,3 +5,20 @@
  */
 
 include_once 'catalyst_menu.features.inc';
+
+function catalyst_menu_build($menu_name, $depth = 0, $expanded = TRUE) {
+  $config = array(
+    'menu_name' => $menu_name,
+    'depth' => $depth,
+    'expanded' => $expanded,
+    // unused
+    'level' => 1,
+    'delta' => NULL,
+    'parent_mlid' => NULL,
+    'sort' => NULL,
+    'follow' => NULL,
+    'title_link' => NULL,
+  );
+  $build = menu_tree_build($config);
+  return render($build['content']);
+}
