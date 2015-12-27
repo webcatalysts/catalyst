@@ -113,6 +113,10 @@ projects[views_bulk_operations][version] = "3.3"
 projects[views_bulk_operations][type] = "module"
 projects[views_bulk_operations][subdir] = "contrib"
 
+projects[wysiwyg][version] = "2.x-dev"
+projects[wysiwyg][type] = "module"
+projects[wysiwyg][subdir] = "contrib"
+
 ; Libraries
 
 libraries[twig][download][type] = "get"
