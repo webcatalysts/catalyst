@@ -12,6 +12,19 @@ define('CATALYST_MEDIA_GROUP_PAGE', 303);
 define('CATALYST_MEDIA_GROUP_OTHER', 404);
 
 /**
+ * Implements hook_entity_view_alter().
+ */
+function catalyst_media_entity_view_alter(&$build, $type) {
+  if (isset($build['field_media_content'])) {
+    if ($template = $build['field_media_content'][0]['#markup']) {
+      theme('media_content', array(
+        'template' => $template,
+      ));
+    }
+  }
+}
+
+/**
  * Implements hook_url_outbound_alter().
  */
 function catalyst_media_url_outbound_alter(&$path, &$options, $original_path) {
