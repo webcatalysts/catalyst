@@ -120,7 +120,7 @@ projects[wysiwyg][subdir] = "contrib"
 ; Libraries
 
 libraries[twig][download][type] = "get"
-libraries[twig][download][url] = "https://github.com/twigphp/Twig/archive/v1.23.1.zip"
+libraries[twig][download][url] = "https://github.com/fabpot/Twig/archive/v1.16.2.zip"
 
 libraries[ace][download][type] = "get"
 libraries[ace][download][url] = "https://github.com/ajaxorg/ace-builds/archive/v1.2.2.zip"
