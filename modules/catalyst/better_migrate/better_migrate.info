@@ -1,9 +1,0 @@
-name = Better Migrate
-description = Extentions to the migrate module
-core = 7.x
-dependencies[] = migrate
-files[] = better_migration.inc
-files[] = destinations/entity.inc
-files[] = destinations/node.inc
-files[] = sources/xml.inc
-files[] = maps/sql.inc

@@ -1,3 +1,0 @@
-name = Lockdown
-description = Custom module used to prevent access to site-building administration pages on production sites.
-core = 7.x
