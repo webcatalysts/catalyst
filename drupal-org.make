@@ -117,10 +117,32 @@ projects[wysiwyg][version] = "2.x-dev"
 projects[wysiwyg][type] = "module"
 projects[wysiwyg][subdir] = "contrib"
 
+; Sandbox Projects
+projects[better_migrate][type] = "module"
+projects[better_migrate][subdir] = "sandbox"
+projects[better_migrate][download][type] = "git"
+projects[better_migrate][download][branch] = "7.x-1.x"
+projects[better_migrate][download][url] = "http://git.drupal.org/sandbox/lee20/2223893.git"
+projects[better_migrate][download][revision] = "eaa011a"
+
+projects[machine][type] = "module"
+projects[machine][subdir] = "sandbox"
+projects[machine][download][type] = "git"
+projects[machine][download][branch] = "7.x-1.x"
+projects[machine][download][url] = "http://git.drupal.org/sandbox/lee20/2642174.git"
+projects[machine][download][revision] = "2935073"
+
+projects[wysiwyg_ace][type] = "module"
+projects[wysiwyg_ace][subdir] = "sandbox"
+projects[wysiwyg_ace][download][type] = "git"
+projects[wysiwyg_ace][download][branch] = "7.x-1.x"
+projects[wysiwyg_ace][download][url] = "http://git.drupal.org/sandbox/lee20/2642232.git"
+projects[wysiwyg_ace][download][revision] = "93ee413"
+
 ; Libraries
 
 libraries[twig][download][type] = "get"
-libraries[twig][download][url] = "https://github.com/fabpot/Twig/archive/v1.16.2.zip"
+libraries[twig][download][url] = "https://github.com/twigphp/Twig/archive/v1.23.1.zip"
 
 libraries[ace][download][type] = "get"
 libraries[ace][download][url] = "https://github.com/ajaxorg/ace-builds/archive/v1.2.2.zip"
