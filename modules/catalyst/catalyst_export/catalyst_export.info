@@ -1,0 +1,4 @@
+name = Catalyst Export
+description = Custom export functionality specifically for integration with Catalyst Import
+core = 7.x
+dependencies[] = views_data_export

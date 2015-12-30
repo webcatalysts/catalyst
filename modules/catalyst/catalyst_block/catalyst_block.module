@@ -357,3 +357,53 @@ function block_placement_property_info(&$info, $entity_type, $field, $instance, 
     );
   }
 }
+
+/**
+ * Implements hook_catalyst_export_groups().
+ */
+function catalyst_block_catalyst_export_groups() {
+  return array(
+    'block' => array(
+      'title' => t('Blocks'),
+      'entity_type' => 'catalyst',
+      'bundle' => 'block',
+      'weight' => -1,
+      'feed_path' => 'admin/content/block/export.xml',
+      'migration' => array(
+        'class_name' => 'CatalystBlockMigration',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_catalyst_export_candidates().
+ */
+function catalyst_block_catalyst_export_candidates($type) {
+  if ($type == 'block') {
+    return entity_load('catalyst', FALSE, array('type' => 'block'));
+  }
+}
+
+/**
+ * Implements hook_catalyst_export_dependencies().
+ */
+function catalyst_block_catalyst_export_dependencies($type, $entity, $group) {
+  $dependencies = array();
+
+  $wrapper = entity_metadata_wrapper($group['entity_type'], $entity);
+
+  // Determine dependencies for entities using block placements
+  $placement_fields = array('field_cpage_blocks', 'field_layout_blocks');
+  foreach ($placement_fields AS $field) {
+    if (isset($wrapper->{$field})) {
+      foreach ($wrapper->{$field} AS $item) {
+        $block = entity_load_single('catalyst', $item->block_id->value());
+        //$dependencies['block'][$item->block_id->value()] = $block;
+        $dependencies['block'][$block->id] = $block;
+      }
+    }
+  }
+
+  return $dependencies;
+}

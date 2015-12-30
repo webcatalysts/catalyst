@@ -92,4 +92,5 @@ features[variable][] = admin_theme
 features[variable][] = node_admin_theme
 features[variable][] = theme_default
 features[wysiwyg][] = php
+files[] = catalyst_core.migrate.inc
 project path = profiles/catalyst/modules/catalyst

@@ -105,3 +105,45 @@ function catalyst_layout_block_placements() {
   global $catalyst_layout;
   return $catalyst_layout->field_layout_blocks->value();
 }
+
+/**
+ * Implements hook_catalyst_export_groups().
+ */
+function catalyst_layout_catalyst_export_groups() {
+  return array(
+    'layout' => array(
+      'title' => t('Layouts'),
+      'entity_type' => 'catalyst',
+      'bundle' => 'layout',
+      'weight' => -5,
+      'feed_path' => 'admin/structure/layout/export.xml',
+      'migration' => array(
+        'class_name' => 'CatalystLayoutMigration',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_catalyst_export_candidates().
+ */
+function catalyst_layout_catalyst_export_candidates($type) {
+  if ($type == 'layout') {
+    return entity_load('catalyst', FALSE, array('type' => 'layout'));
+  }
+}
+
+/**
+ * Implements hook_catalyst_export_dependencies().
+ */
+function catalyst_layout_catalyst_export_dependencies($type, $entity, $group) {
+  $dependencies = array();
+
+  // Determine dependencies for entities that rely on layouts
+  if (isset($entity->field_cpage_layout)) {
+    $wrapper = entity_metadata_wrapper($group['entity_type'], $entity);
+    $layout = $wrapper->field_cpage_layout;
+    $dependencies['layout'][$layout->getIdentifier()] = $layout->value();
+  }
+  return $dependencies;
+}

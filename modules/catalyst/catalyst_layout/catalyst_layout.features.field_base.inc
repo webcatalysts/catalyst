@@ -45,32 +45,6 @@ function catalyst_layout_field_default_field_bases() {
     'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_drupal_css'.
-  $field_bases['field_drupal_css'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_drupal_css',
-    'indexes' => array(
-      'value' => array(
-        0 => 'value',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'list',
-    'settings' => array(
-      'allowed_values' => array(
-        -100 => 'Enable system stylesheets',
-        0 => 'Enable module stylesheets',
-        100 => 'Enable theme stylesheets',
-      ),
-      'allowed_values_function' => '',
-    ),
-    'translatable' => 0,
-    'type' => 'list_integer',
-  );
-
   // Exported field_base: 'field_layout_blocks'.
   $field_bases['field_layout_blocks'] = array(
     'active' => 1,
@@ -189,6 +163,32 @@ function catalyst_layout_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field_layout_drupal_css'.
+  $field_bases['field_layout_drupal_css'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_layout_drupal_css',
+    'indexes' => array(
+      'value' => array(
+        0 => 'value',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'list',
+    'settings' => array(
+      'allowed_values' => array(
+        -100 => 'Enable system stylesheets',
+        0 => 'Enable module stylesheets',
+        100 => 'Enable theme stylesheets',
+      ),
+      'allowed_values_function' => '',
+    ),
+    'translatable' => 0,
+    'type' => 'list_integer',
   );
 
   // Exported field_base: 'field_layout_drupal_js'.

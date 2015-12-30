@@ -32,6 +32,28 @@ function catalyst_media_field_default_field_instances() {
       'description_field' => 0,
       'file_directory' => 'media',
       'file_extensions' => 'txt doc xls pdf csv jpg jpeg gif png',
+      'filefield_paths' => array(
+        'active_updating' => 1,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 1,
+            'slashes' => 0,
+            'transliterate' => 1,
+          ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
+        ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 1,
+            'slashes' => 1,
+            'transliterate' => 1,
+          ),
+          'value' => 'media/file/[catalyst:title]',
+        ),
+        'redirect' => FALSE,
+        'retroactive_update' => 1,
+      ),
+      'filefield_paths_enabled' => 1,
       'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
