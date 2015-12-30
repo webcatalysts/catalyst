@@ -326,3 +326,43 @@ function machine_property_info(&$info, $entity_type, $field, $instance, $field_t
 function machine_dummy_exists() {
   return FALSE;
 }
+
+/**
+ * Help function for looking up machine entity id.
+ */
+function machine_lookup($field_name, $value, $entity_type = NULL, $bundle = NULL) {
+  $query = new EntityFieldQuery;
+  $query->fieldCondition($field_name, 'machine', $value, '=');
+
+  if ($entity_type) {
+    $query->entityCondition('entity_type', $entity_type);
+  }
+  if ($bundle) {
+    $query->entityCondition('bundle', $bundle);
+  }
+
+  if ($result = $query->execute()) {
+    return $result;
+  }
+  return FALSE;
+}
+
+function machine_lookup_single($field_name, $value, $entity_type = NULL, $bundle = NULL) {
+  if ($result = machine_lookup($field_name, $value, $entity_type, $bundle)) {
+    if (!$entity_type) {
+      $result_keys = array_keys($result);
+      $entity_type = $result_keys[0];
+    }
+
+
+    if (!$entity_type || !$bundle) {
+      $result = array_pop($result[$entity_type]);
+      return $result + array(
+        'entity_type' => $entity_type,
+      );
+    }
+
+    $result_ids = array_keys($result[$entity_type]);
+    return $result_ids[0];
+  }
+}

@@ -236,6 +236,109 @@ function catalyst_doctype_views_default_views() {
   $handler->display->display_options['tab_options']['description'] = 'Create and manage doctypes that are available to layouts.';
   $handler->display->display_options['tab_options']['weight'] = '0';
   $handler->display->display_options['tab_options']['name'] = 'management';
+
+  /* Display: Data export */
+  $handler = $view->new_display('views_data_export', 'Data export', 'export_xml');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xml';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['transform'] = 1;
+  $handler->display->display_options['style_options']['root_node'] = 'doctypes';
+  $handler->display->display_options['style_options']['item_node'] = 'doctype';
+  $handler->display->display_options['style_options']['no_entity_encode'] = array(
+    'field_doctype_content' => 'field_doctype_content',
+    'field_doctype_preprocess' => 'field_doctype_preprocess',
+    'field_doctype_onselect' => 'field_doctype_onselect',
+    'field_doctype_ondeselect' => 'field_doctype_ondeselect',
+  );
+  $handler->display->display_options['style_options']['cdata_wrapper'] = array(
+    'field_doctype_content' => 'field_doctype_content',
+    'field_doctype_preprocess' => 'field_doctype_preprocess',
+    'field_doctype_onselect' => 'field_doctype_onselect',
+    'field_doctype_ondeselect' => 'field_doctype_ondeselect',
+  );
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Catalyst: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['label'] = 'id';
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: Catalyst: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'title';
+  /* Field: catalyst: HTTP Content-Type */
+  $handler->display->display_options['fields']['field_doctype_content_type']['id'] = 'field_doctype_content_type';
+  $handler->display->display_options['fields']['field_doctype_content_type']['table'] = 'field_data_field_doctype_content_type';
+  $handler->display->display_options['fields']['field_doctype_content_type']['field'] = 'field_doctype_content_type';
+  $handler->display->display_options['fields']['field_doctype_content_type']['label'] = 'http_content_type';
+  /* Field: catalyst: Character Set */
+  $handler->display->display_options['fields']['field_doctype_charset']['id'] = 'field_doctype_charset';
+  $handler->display->display_options['fields']['field_doctype_charset']['table'] = 'field_data_field_doctype_charset';
+  $handler->display->display_options['fields']['field_doctype_charset']['field'] = 'field_doctype_charset';
+  $handler->display->display_options['fields']['field_doctype_charset']['label'] = 'charset';
+  /* Field: catalyst: Enable Drupal processing */
+  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['id'] = 'field_catalyst_drupal_processing';
+  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['table'] = 'field_data_field_catalyst_drupal_processing';
+  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['field'] = 'field_catalyst_drupal_processing';
+  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['label'] = 'drupal_processing';
+  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['type'] = 'list_key';
+  /* Field: catalyst: Content */
+  $handler->display->display_options['fields']['field_doctype_content']['id'] = 'field_doctype_content';
+  $handler->display->display_options['fields']['field_doctype_content']['table'] = 'field_data_field_doctype_content';
+  $handler->display->display_options['fields']['field_doctype_content']['field'] = 'field_doctype_content';
+  $handler->display->display_options['fields']['field_doctype_content']['label'] = 'content';
+  /* Field: catalyst: Preprocessing */
+  $handler->display->display_options['fields']['field_doctype_preprocess']['id'] = 'field_doctype_preprocess';
+  $handler->display->display_options['fields']['field_doctype_preprocess']['table'] = 'field_data_field_doctype_preprocess';
+  $handler->display->display_options['fields']['field_doctype_preprocess']['field'] = 'field_doctype_preprocess';
+  $handler->display->display_options['fields']['field_doctype_preprocess']['label'] = 'preprocess_php';
+  /* Field: catalyst: On Select */
+  $handler->display->display_options['fields']['field_doctype_onselect']['id'] = 'field_doctype_onselect';
+  $handler->display->display_options['fields']['field_doctype_onselect']['table'] = 'field_data_field_doctype_onselect';
+  $handler->display->display_options['fields']['field_doctype_onselect']['field'] = 'field_doctype_onselect';
+  $handler->display->display_options['fields']['field_doctype_onselect']['label'] = 'onselect';
+  /* Field: catalyst: On DeSelect */
+  $handler->display->display_options['fields']['field_doctype_ondeselect']['id'] = 'field_doctype_ondeselect';
+  $handler->display->display_options['fields']['field_doctype_ondeselect']['table'] = 'field_data_field_doctype_ondeselect';
+  $handler->display->display_options['fields']['field_doctype_ondeselect']['field'] = 'field_doctype_ondeselect';
+  $handler->display->display_options['fields']['field_doctype_ondeselect']['label'] = 'ondeselect';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: IDs */
+  $handler->display->display_options['arguments']['id']['id'] = 'id';
+  $handler->display->display_options['arguments']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['arguments']['id']['field'] = 'id';
+  $handler->display->display_options['arguments']['id']['ui_name'] = 'IDs';
+  $handler->display->display_options['arguments']['id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['id']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['id']['default_argument_options']['code'] = 'return isset($_REQUEST[\'ids\']) ? $_REQUEST[\'ids\'] : NULL;';
+  $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['id']['validate']['fail'] = 'ignore';
+  $handler->display->display_options['arguments']['id']['break_phrase'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Catalyst: catalyst type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'doctype' => 'doctype',
+  );
+  $handler->display->display_options['path'] = 'admin/structure/doctype/export.xml';
+  $handler->display->display_options['displays'] = array(
+    'cms_admin' => 'cms_admin',
+    'default' => 0,
+    'eck_admin' => 0,
+  );
   $export['catalyst_doctype_admin'] = $view;
 
   return $export;

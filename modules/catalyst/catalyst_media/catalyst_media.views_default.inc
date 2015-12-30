@@ -26,7 +26,7 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['use_ajax'] = TRUE;
   $handler->display->display_options['use_more_always'] = FALSE;
   $handler->display->display_options['access']['type'] = 'perm';
-  $handler->display->display_options['access']['perm'] = 'eck list catalyst stylesheet entities';
+  $handler->display->display_options['access']['perm'] = 'eck list catalyst file entities';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
   $handler->display->display_options['exposed_form']['type'] = 'basic';
@@ -350,6 +350,84 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['tab_options']['description'] = 'Add and manage media files';
   $handler->display->display_options['tab_options']['weight'] = '2';
   $handler->display->display_options['tab_options']['name'] = 'management';
+
+  /* Display: Export */
+  $handler = $view->new_display('views_data_export', 'Export', 'export_xml');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xml';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['transform'] = 1;
+  $handler->display->display_options['style_options']['root_node'] = 'files';
+  $handler->display->display_options['style_options']['item_node'] = 'file';
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Catalyst: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['label'] = 'id';
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: catalyst: Machine name */
+  $handler->display->display_options['fields']['field_media_machine']['id'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['table'] = 'field_data_field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['field'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['label'] = 'machine_name';
+  /* Field: Catalyst: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'title';
+  /* Field: catalyst: Type */
+  $handler->display->display_options['fields']['field_media_type']['id'] = 'field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['table'] = 'field_data_field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['field'] = 'field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['label'] = 'media_type';
+  $handler->display->display_options['fields']['field_media_type']['type'] = 'list_key';
+  /* Field: catalyst: Path */
+  $handler->display->display_options['fields']['field_media_path']['id'] = 'field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['table'] = 'field_data_field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['field'] = 'field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['label'] = 'media_path';
+  /* Field: catalyst: File */
+  $handler->display->display_options['fields']['field_media_file']['id'] = 'field_media_file';
+  $handler->display->display_options['fields']['field_media_file']['table'] = 'field_data_field_media_file';
+  $handler->display->display_options['fields']['field_media_file']['field'] = 'field_media_file';
+  $handler->display->display_options['fields']['field_media_file']['label'] = 'file_path';
+  $handler->display->display_options['fields']['field_media_file']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_media_file']['type'] = 'catalyst_file_import_path';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: IDs */
+  $handler->display->display_options['arguments']['id']['id'] = 'id';
+  $handler->display->display_options['arguments']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['arguments']['id']['field'] = 'id';
+  $handler->display->display_options['arguments']['id']['ui_name'] = 'IDs';
+  $handler->display->display_options['arguments']['id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['id']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['id']['default_argument_options']['code'] = 'return isset($_REQUEST[\'ids\']) ? $_REQUEST[\'ids\'] : NULL;';
+  $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['id']['validate']['fail'] = 'ignore';
+  $handler->display->display_options['arguments']['id']['break_phrase'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Catalyst: catalyst type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'file' => 'file',
+  );
+  $handler->display->display_options['path'] = 'admin/content/file/export.xml';
+  $handler->display->display_options['displays'] = array(
+    'cms_admin' => 'cms_admin',
+    'default' => 0,
+    'eck_admin' => 0,
+  );
   $export['catalyst_file_admin'] = $view;
 
   $view = new view();
@@ -717,6 +795,101 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['tab_options']['description'] = 'Create and manage javascripts';
   $handler->display->display_options['tab_options']['weight'] = '0';
   $handler->display->display_options['tab_options']['name'] = 'management';
+
+  /* Display: Export */
+  $handler = $view->new_display('views_data_export', 'Export', 'export_xml');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xml';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['transform'] = 1;
+  $handler->display->display_options['style_options']['root_node'] = 'javascripts';
+  $handler->display->display_options['style_options']['item_node'] = 'javascript';
+  $handler->display->display_options['style_options']['no_entity_encode'] = array(
+    'field_media_content' => 'field_media_content',
+  );
+  $handler->display->display_options['style_options']['cdata_wrapper'] = array(
+    'field_media_content' => 'field_media_content',
+  );
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Catalyst: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['label'] = 'id';
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: catalyst: Machine name */
+  $handler->display->display_options['fields']['field_media_machine']['id'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['table'] = 'field_data_field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['field'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['label'] = 'machine_name';
+  /* Field: Catalyst: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'title';
+  /* Field: catalyst: Type */
+  $handler->display->display_options['fields']['field_media_type']['id'] = 'field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['table'] = 'field_data_field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['field'] = 'field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['label'] = 'media_type';
+  $handler->display->display_options['fields']['field_media_type']['type'] = 'list_key';
+  /* Field: catalyst: Path */
+  $handler->display->display_options['fields']['field_media_path']['id'] = 'field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['table'] = 'field_data_field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['field'] = 'field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['label'] = 'media_path';
+  /* Field: catalyst: Scope */
+  $handler->display->display_options['fields']['field_javascript_scope']['id'] = 'field_javascript_scope';
+  $handler->display->display_options['fields']['field_javascript_scope']['table'] = 'field_data_field_javascript_scope';
+  $handler->display->display_options['fields']['field_javascript_scope']['field'] = 'field_javascript_scope';
+  $handler->display->display_options['fields']['field_javascript_scope']['label'] = 'scope';
+  $handler->display->display_options['fields']['field_javascript_scope']['type'] = 'list_key';
+  /* Field: catalyst: Defer */
+  $handler->display->display_options['fields']['field_javascript_defer']['id'] = 'field_javascript_defer';
+  $handler->display->display_options['fields']['field_javascript_defer']['table'] = 'field_data_field_javascript_defer';
+  $handler->display->display_options['fields']['field_javascript_defer']['field'] = 'field_javascript_defer';
+  $handler->display->display_options['fields']['field_javascript_defer']['label'] = 'defer';
+  $handler->display->display_options['fields']['field_javascript_defer']['type'] = 'list_key';
+  /* Field: catalyst: Content */
+  $handler->display->display_options['fields']['field_media_content']['id'] = 'field_media_content';
+  $handler->display->display_options['fields']['field_media_content']['table'] = 'field_data_field_media_content';
+  $handler->display->display_options['fields']['field_media_content']['field'] = 'field_media_content';
+  $handler->display->display_options['fields']['field_media_content']['label'] = 'content';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: IDs */
+  $handler->display->display_options['arguments']['id']['id'] = 'id';
+  $handler->display->display_options['arguments']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['arguments']['id']['field'] = 'id';
+  $handler->display->display_options['arguments']['id']['ui_name'] = 'IDs';
+  $handler->display->display_options['arguments']['id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['id']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['id']['default_argument_options']['code'] = 'return isset($_REQUEST[\'ids\']) ? $_REQUEST[\'ids\'] : NULL;';
+  $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['id']['validate']['fail'] = 'ignore';
+  $handler->display->display_options['arguments']['id']['break_phrase'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Catalyst: catalyst type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'javascript' => 'javascript',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['path'] = 'admin/structure/javascript/export.xml';
+  $handler->display->display_options['displays'] = array(
+    'cms_admin' => 'cms_admin',
+    'default' => 0,
+    'eck_admin' => 0,
+  );
   $export['catalyst_javascript_admin'] = $view;
 
   $view = new view();
@@ -1076,6 +1249,115 @@ function catalyst_media_views_default_views() {
   $handler->display->display_options['tab_options']['description'] = 'Create and manage stylesheets';
   $handler->display->display_options['tab_options']['weight'] = '0';
   $handler->display->display_options['tab_options']['name'] = 'management';
+
+  /* Display: Export */
+  $handler = $view->new_display('views_data_export', 'Export', 'export_xml');
+  $handler->display->display_options['pager']['type'] = 'none';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['style_plugin'] = 'views_data_export_xml';
+  $handler->display->display_options['style_options']['provide_file'] = 0;
+  $handler->display->display_options['style_options']['parent_sort'] = 0;
+  $handler->display->display_options['style_options']['transform'] = 1;
+  $handler->display->display_options['style_options']['root_node'] = 'stylesheets';
+  $handler->display->display_options['style_options']['item_node'] = 'stylesheet';
+  $handler->display->display_options['style_options']['no_entity_encode'] = array(
+    'field_media_content' => 'field_media_content',
+  );
+  $handler->display->display_options['style_options']['cdata_wrapper'] = array(
+    'field_media_content' => 'field_media_content',
+  );
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  $handler->display->display_options['defaults']['empty'] = FALSE;
+  $handler->display->display_options['defaults']['fields'] = FALSE;
+  /* Field: Catalyst: Id */
+  $handler->display->display_options['fields']['id']['id'] = 'id';
+  $handler->display->display_options['fields']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['id']['field'] = 'id';
+  $handler->display->display_options['fields']['id']['label'] = 'id';
+  $handler->display->display_options['fields']['id']['separator'] = '';
+  /* Field: catalyst: Machine name */
+  $handler->display->display_options['fields']['field_media_machine']['id'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['table'] = 'field_data_field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['field'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field_media_machine']['label'] = 'machine_name';
+  /* Field: Catalyst: Title */
+  $handler->display->display_options['fields']['title']['id'] = 'title';
+  $handler->display->display_options['fields']['title']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['title']['field'] = 'title';
+  $handler->display->display_options['fields']['title']['label'] = 'title';
+  /* Field: catalyst: Type */
+  $handler->display->display_options['fields']['field_media_type']['id'] = 'field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['table'] = 'field_data_field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['field'] = 'field_media_type';
+  $handler->display->display_options['fields']['field_media_type']['label'] = 'media_type';
+  $handler->display->display_options['fields']['field_media_type']['type'] = 'list_key';
+  /* Field: catalyst: Path */
+  $handler->display->display_options['fields']['field_media_path']['id'] = 'field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['table'] = 'field_data_field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['field'] = 'field_media_path';
+  $handler->display->display_options['fields']['field_media_path']['label'] = 'media_path';
+  /* Field: catalyst: Media */
+  $handler->display->display_options['fields']['field_stylesheet_media']['id'] = 'field_stylesheet_media';
+  $handler->display->display_options['fields']['field_stylesheet_media']['table'] = 'field_data_field_stylesheet_media';
+  $handler->display->display_options['fields']['field_stylesheet_media']['field'] = 'field_stylesheet_media';
+  $handler->display->display_options['fields']['field_stylesheet_media']['label'] = 'media';
+  $handler->display->display_options['fields']['field_stylesheet_media']['type'] = 'list_key';
+  /* Field: catalyst: Content */
+  $handler->display->display_options['fields']['field_media_content']['id'] = 'field_media_content';
+  $handler->display->display_options['fields']['field_media_content']['table'] = 'field_data_field_media_content';
+  $handler->display->display_options['fields']['field_media_content']['field'] = 'field_media_content';
+  $handler->display->display_options['fields']['field_media_content']['label'] = 'content';
+  /* Field: Field: Custom Files */
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['id'] = 'field_catalyst_custom_files';
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['table'] = 'field_data_field_catalyst_custom_files';
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['field'] = 'field_catalyst_custom_files';
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['label'] = 'files_custom';
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['type'] = 'catalyst_file_import_path';
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_catalyst_custom_files']['separator'] = '|';
+  /* Field: Field: Shared Files */
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['id'] = 'field_catalyst_shared_files';
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['table'] = 'field_data_field_catalyst_shared_files';
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['field'] = 'field_catalyst_shared_files';
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['label'] = 'files_shared';
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['type'] = 'entityreference_entity_id';
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['settings'] = array(
+    'link' => 0,
+  );
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['delta_offset'] = '0';
+  $handler->display->display_options['fields']['field_catalyst_shared_files']['separator'] = ',';
+  $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: IDs */
+  $handler->display->display_options['arguments']['id']['id'] = 'id';
+  $handler->display->display_options['arguments']['id']['table'] = 'eck_catalyst';
+  $handler->display->display_options['arguments']['id']['field'] = 'id';
+  $handler->display->display_options['arguments']['id']['ui_name'] = 'IDs';
+  $handler->display->display_options['arguments']['id']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['id']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['id']['default_argument_options']['code'] = 'return isset($_REQUEST[\'ids\']) ? $_REQUEST[\'ids\'] : NULL;';
+  $handler->display->display_options['arguments']['id']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['id']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['id']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['id']['specify_validation'] = TRUE;
+  $handler->display->display_options['arguments']['id']['validate']['fail'] = 'ignore';
+  $handler->display->display_options['arguments']['id']['break_phrase'] = TRUE;
+  $handler->display->display_options['defaults']['filter_groups'] = FALSE;
+  $handler->display->display_options['defaults']['filters'] = FALSE;
+  /* Filter criterion: Catalyst: catalyst type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['value'] = array(
+    'stylesheet' => 'stylesheet',
+  );
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['path'] = 'admin/structure/stylesheet/export.xml';
+  $handler->display->display_options['displays'] = array(
+    'cms_admin' => 'cms_admin',
+    'default' => 0,
+    'eck_admin' => 0,
+  );
   $export['catalyst_stylesheet_admin'] = $view;
 
   return $export;

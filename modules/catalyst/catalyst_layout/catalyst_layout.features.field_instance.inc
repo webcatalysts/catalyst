@@ -184,36 +184,6 @@ function catalyst_layout_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-layout-field_drupal_css'.
-  $field_instances['catalyst-layout-field_drupal_css'] = array(
-    'bundle' => 'layout',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field_drupal_css',
-    'label' => 'Drupal Stylesheets',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_buttons',
-      'weight' => 20,
-    ),
-  );
-
   // Exported field_instance: 'catalyst-layout-field_layout_blocks'.
   $field_instances['catalyst-layout-field_layout_blocks'] = array(
     'bundle' => 'layout',
@@ -465,6 +435,37 @@ function catalyst_layout_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-layout-field_layout_drupal_css'.
+  $field_instances['catalyst-layout-field_layout_drupal_css'] = array(
+    'bundle' => 'layout',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 25,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field_layout_drupal_css',
+    'label' => 'Drupal Stylesheets',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_buttons',
+      'weight' => 21,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-layout-field_layout_drupal_js'.
   $field_instances['catalyst-layout-field_layout_drupal_js'] = array(
     'bundle' => 'layout',
@@ -491,7 +492,7 @@ function catalyst_layout_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_buttons',
-      'weight' => 21,
+      'weight' => 22,
     ),
   );
 
@@ -774,19 +775,39 @@ function catalyst_layout_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'plain_text' => 'plain_text',
+          'cpage_html' => 0,
+          'css' => 0,
+          'js' => 'js',
+          'layout_html' => 0,
+          'php' => 0,
+          'plain_text' => 0,
         ),
-        'allowed_formats_toggle' => 0,
+        'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'cpage_html' => array(
+              'weight' => 0,
+            ),
+            'css' => array(
+              'weight' => -9,
+            ),
+            'js' => array(
+              'weight' => -8,
+            ),
+            'layout_html' => array(
+              'weight' => 0,
+            ),
+            'php' => array(
+              'weight' => -5,
+            ),
             'plain_text' => array(
               'weight' => 10,
             ),
           ),
         ),
       ),
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(
@@ -827,19 +848,39 @@ function catalyst_layout_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'plain_text' => 'plain_text',
+          'cpage_html' => 0,
+          'css' => 0,
+          'js' => 'js',
+          'layout_html' => 0,
+          'php' => 0,
+          'plain_text' => 0,
         ),
-        'allowed_formats_toggle' => 0,
+        'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'cpage_html' => array(
+              'weight' => 0,
+            ),
+            'css' => array(
+              'weight' => -9,
+            ),
+            'js' => array(
+              'weight' => -8,
+            ),
+            'layout_html' => array(
+              'weight' => 0,
+            ),
+            'php' => array(
+              'weight' => -5,
+            ),
             'plain_text' => array(
               'weight' => 10,
             ),
           ),
         ),
       ),
-      'text_processing' => 0,
+      'text_processing' => 1,
       'user_register_form' => FALSE,
     ),
     'widget' => array(

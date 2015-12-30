@@ -1,0 +1,58 @@
+<?php
+
+/**
+ * @file
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function catalyst_export_menu() {
+  return array(
+    'admin/structure/catalyst-export' => array(
+      'title' => 'Catalyst Export',
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('catalyst_export_form'),
+      'access arguments' => array('use catalyst export'),
+      'type' => MENU_NORMAL_ITEM,
+      'file' => 'catalyst_export.pages.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_permissions().
+ */
+function catalyst_export_permissions() {
+  return array(
+    'use catalyst export' => array(
+      'title' => t('Use Catalyst Export'),
+      'description' => t('Export catalyst entities and nodes.'),
+    ),
+  );
+}
+
+function catalyst_export_theme() {
+  return array(
+    'catalyst_export_form' => array(
+      'template' => 'catalyst-export-form',
+      'render element' => 'form',
+    ),
+  );
+}
+
+/**
+ * Implements hook_exit().
+ *
+ * Handle cleanup for catalyst export generations.
+ */
+function catalyst_export_exit() {
+  if ($cleanup = &drupal_static('catalyst_export_cleanup')) {
+    foreach ($cleanup['unlink'] AS $file_uri) {
+      drupal_unlink($file_uri);
+    }
+    foreach ($cleanup['rmdir'] AS $dir_uri) {
+      drupal_rmdir($dir_uri);
+    }
+  }
+}

@@ -113,3 +113,29 @@ function theme_cpage_content($variables) {
   return catalyst_twig_render($variables['template'], $variables, 'cpage_content');
 }
 
+/**
+ * Implements hook_catalyst_export_groups().
+ */
+function catalyst_page_catalyst_export_groups() {
+  return array(
+    'cpage' => array(
+      'title' => t('Pages'),
+      'entity_type' => 'node',
+      'bundle' => 'cpage',
+      'weight' => -3,
+      'feed_path' => 'admin/content/cpage/export.xml',
+      'migration' => array(
+        'class_name' => 'CatalystPageMigration',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_catalyst_export_candidates().
+ */
+function catalyst_page_catalyst_export_candidates($type) {
+  if ($type == 'cpage') {
+    return entity_load('node', FALSE, array('type' => 'cpage'));
+  }
+}

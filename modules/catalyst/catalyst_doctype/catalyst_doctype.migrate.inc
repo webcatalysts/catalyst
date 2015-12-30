@@ -4,66 +4,28 @@
  * @file
  */
 
-/**
- * Implements hook_migrate_api().
- */
-function catalyst_doctype_migrate_api() {
-  return array(
-    'api' => 2,
-    'migrations' => array(
-      'DoctypesInstall' => array(
-        'class_name' => 'CatalystDoctypesMigration',
-        'group_name' => 'catalyst_install',
-        'data_directory' => 'profiles/catalyst/install-data',
-        'xml_filename' => 'doctypes-install.xml',
-        'item_xpath' => '/doctypes/doctype',
-        'item_xpath_id' => 'machine_name',
-        'map_id_key' => 'machine_name',
-        'description' => t('Generic doctypes imported on installation'),
-      ),
-    ),
-  );
-}
-
-class CatalystDoctypesMigration extends BetterMigration {
-  use BetterMigrationSourceXML;
-  use BetterMigrationDestinationEntity;
-  use BetterMigrationMapSQLString;
-
-  protected $entityType = 'catalyst';
+class CatalystDoctypeMigration extends CatalystEntityMigration {
   protected $entityBundle = 'doctype';
-
   protected function sourceFields() {
     return array(
-      'machine_name' => t('The unique identifier for the doctype'),
-      'handle' => t('Doctype Title'),
-      'header' => t('Doctype Header'),
-      'footer' => t('Doctype Footer'),
-      'onselect' => t('Doctype OnSelect'),
-      'ondeselect' => t('Doctype OnDeselect'),
-    );
+      'content' => t('Content'),
+      'charset' => t('Character set'),
+      'http_content_type' => t('Content type'),
+      'drupal_processing' => t('Drupal processing enabled'),
+      'preprocess_php' => t('Preprocessing PHP'),
+      'onselect' => t('OnSelect'),
+      'ondeselect' => t('OnDeselect'),
+    ) + parent::sourceFields();
   }
-
-  public function prepareRow($row) {
-  }
-
   protected function mapFields() {
-    $this->addFieldMapping('field_doctype_handle:machine', 'machine_name');
-    $this->addFieldMapping('title', 'handle');
-    $this->addFieldMapping('field_doctype_header', 'header')
-      ->callbacks('html_entity_decode');
-    $this->addFieldMapping('field_doctype_footer', 'footer')
-      ->callbacks('html_entity_decode');
-    $this->addFieldMapping('field_doctype_onselect', 'onselect');
-    $this->addFieldMapping('field_doctype_ondeselect', 'ondeselect');
-    $this->addFieldMapping('type')->defaultValue($this->entityBundle);
-    $this->addFieldMapping('language')->defaultValue(LANGUAGE_NONE);
-    $this->addUnmigratedDestinations(array(
-      'id',
-      'path',
-      'field_doctype_handle',
-      'created',
-      'changed',
-    ));
+    parent::mapFields();
+    $this->addFieldMapping('field_doctype_charset', 'charset');
+    $this->addFieldMapping('field_doctype_content_type', 'http_content_type');
+    $this->addFieldMapping('field_catalyst_drupal_processing', 'drupal_processing');
+    // Formatted field mappings
+    $this->addFormattedFieldMapping('field_doctype_content', 'content', 'layout_html');
+    $this->addFormattedFieldMapping('field_doctype_preprocess', 'preprocess_php', 'php');
+    $this->addFormattedFieldMapping('field_doctype_onselect', 'onselect', 'javascript');
+    $this->addFormattedFieldMapping('field_doctype_ondeselect', 'ondeselect', 'javascript');
   }
 }

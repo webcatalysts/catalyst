@@ -23,12 +23,12 @@ function catalyst_layout_field_group_info() {
     'label' => 'Advanced',
     'weight' => '9',
     'children' => array(
-      0 => 'field_layout_preprocess',
-      1 => 'field_layout_page_title_pattern',
-      2 => 'field_layout_debug',
-      3 => 'field_layout_html_head',
-      4 => 'group_layout_form_alter',
-      5 => 'group_layout_drupal',
+      0 => 'field_layout_debug',
+      1 => 'field_layout_html_head',
+      2 => 'field_layout_page_title_pattern',
+      3 => 'field_layout_preprocess',
+      4 => 'group_layout_drupal',
+      5 => 'group_layout_form_alter',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -57,8 +57,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Blocks',
     'weight' => '8',
     'children' => array(
-      0 => 'field_layout_blocks',
-      1 => 'field_catalyst_blocks_add',
+      0 => 'field_catalyst_blocks_add',
+      1 => 'field_layout_blocks',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -117,8 +117,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Stylesheets',
     'weight' => '4',
     'children' => array(
-      0 => 'field_layout_includes_css',
-      1 => 'field_layout_css',
+      0 => 'field_layout_css',
+      1 => 'field_layout_includes_css',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -147,10 +147,11 @@ function catalyst_layout_field_group_info() {
     'label' => 'Drupal options',
     'weight' => '6',
     'children' => array(
-      0 => 'field_layout_drupal_js',
+      0 => 'field_catalyst_drupal_processing',
       1 => 'field_drupal_css',
-      2 => 'field_layout_show_messages',
-      3 => 'field_catalyst_drupal_processing',
+      2 => 'field_layout_drupal_js',
+      3 => 'field_layout_show_messages',
+      4 => 'field_layout_drupal_css',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -206,8 +207,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Page form customizations',
     'weight' => '7',
     'children' => array(
-      0 => 'field_layout_onselect',
-      1 => 'field_layout_ondeselect',
+      0 => 'field_layout_ondeselect',
+      1 => 'field_layout_onselect',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -293,13 +294,13 @@ function catalyst_layout_field_group_info() {
     'label' => 'Tabs',
     'weight' => '3',
     'children' => array(
-      0 => 'group_layout_js',
-      1 => 'group_layout_css',
-      2 => 'group_layout_advanced',
-      3 => 'group_layout_content',
-      4 => 'group_layout_regions',
-      5 => 'group_layout_blocks',
-      6 => 'group_layout_files',
+      0 => 'group_layout_advanced',
+      1 => 'group_layout_blocks',
+      2 => 'group_layout_content',
+      3 => 'group_layout_css',
+      4 => 'group_layout_files',
+      5 => 'group_layout_js',
+      6 => 'group_layout_regions',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

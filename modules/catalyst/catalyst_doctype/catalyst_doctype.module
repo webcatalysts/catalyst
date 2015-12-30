@@ -82,3 +82,49 @@ function catalyst_doctype_get_template(Entity $doctype) {
   $build = eck__entity__view('catalyst', 'doctype', $doctype);
   return render($build);
 }
+
+/**
+ * Implements hook_catalyst_export_groups().
+ */
+function catalyst_doctype_catalyst_export_groups() {
+  return array(
+    'doctype' => array(
+      'title' => t('Document types'),
+      'entity_type' => 'catalyst',
+      'bundle' => 'doctype',
+      'weight' => -10,
+      'feed_path' => 'admin/structure/doctype/export.xml',
+      'feed_id_separator' => '+',
+      'feed_id_parameter' => 'ids',
+      'migration' => array(
+        'class_name' => 'CatalystDoctypeMigration',
+        'item_xpath' => '/doctypes/doctype',
+        'item_xpath_id' => 'id',
+        'map_id_key' => 'id',
+      ),
+    ),
+  );
+}
+
+/**
+ * Implements hook_catalyst_export_candidates().
+ */
+function catalyst_doctype_catalyst_export_candidates($type) {
+  if ($type == 'doctype') {
+    return entity_load('catalyst', FALSE, array('type' => 'doctype'));
+  }
+}
+
+/**
+ * Implements hook_catalyst_export_dependencies().
+ */
+function catalyst_doctype_catalyst_export_dependencies($type, $entity, $group) {
+  $dependencies = array();
+  // Determine dependencies for items that rely on doctypes
+  if (isset($entity->field_layout_doctype)) {
+    $wrapper = entity_metadata_wrapper($group['entity_type'], $entity);
+    $doctype = $wrapper->field_layout_doctype;
+    $dependencies['doctype'][$doctype->getIdentifier()] = $doctype->value();
+  }
+  return $dependencies;
+}

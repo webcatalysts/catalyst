@@ -16,6 +16,15 @@ abstract class BetterMigration extends Migration {
     return $this->dataDirectory;
   }
 
+  protected function getDependency($key) {
+    if (!empty($this->arguments['dependencies'])) {
+      return $this->arguments['dependencies'][$key];
+    }
+    if (isset($this->dependencies[$key])) {
+      return $this->dependencies[$key];
+    }
+  }
+
   /**
    * Define our migration group using a constant so that it can be change in
    * inheriting classes without defining a constructor method.
@@ -47,6 +56,10 @@ abstract class BetterMigration extends Migration {
     // constructor
     if (!empty($this->description)) {
       $this->description = t($this->description);
+    }
+
+    if (!empty($arguments['dependencies'])) {
+      $this->dependencies = $arguments['dependencies'];
     }
 
     // Initialize our source, destination, and map using methods so that
