@@ -8,6 +8,7 @@ dependencies[] = ctools
 dependencies[] = eck
 dependencies[] = eck
 dependencies[] = entity
+dependencies[] = entity_token
 dependencies[] = features
 dependencies[] = field_group
 dependencies[] = filter

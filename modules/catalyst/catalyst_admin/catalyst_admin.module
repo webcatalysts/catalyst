@@ -5,9 +5,7 @@
  */
 
 include_once 'catalyst_admin.features.inc';
-function catalyst_admin_init() {
-//dsm(menu_get_item());
-}
+
 /**
  * Implements hook_theme_registry_alter().
  *

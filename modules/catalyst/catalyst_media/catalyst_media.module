@@ -116,7 +116,8 @@ function catalyst_media_filepath($machine_name) {
       case 'remote':
         return url($file->field_media_path->value());
       case 'custom':
-        return file_create_url($file->field_media_file->value()['uri']);
+        $url = parse_url($file->field_media_file->file->url->value());
+        return $url['path'];
     }
   }
 }

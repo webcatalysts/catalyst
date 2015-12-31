@@ -51,9 +51,7 @@ function catalyst_page_delivery_callback_alter(&$delivery_callback) {
     return;
   }
 
-  global $theme, $catalyst_layout;
-  catalyst_layout_initialize();
-  drupal_theme_initialize();
+  global $theme;
   // Might need to allow subthemes here for hybrid integrations
   if ($theme == 'notheme' && !path_is_admin($_GET['q'])) {
     $delivery_callback = 'catalyst_deliver_html_page';

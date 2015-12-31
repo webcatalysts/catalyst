@@ -50,5 +50,6 @@ features[user_permission][] = eck list catalyst doctype entities
 features[user_permission][] = eck view catalyst doctype entities
 features[variable][] = field_bundle_settings_catalyst__doctype
 features[views_view][] = catalyst_doctype_admin
+files[] = includes/template.inc
 files[] = catalyst_doctype.migrate.inc
 project path = profiles/catalyst/modules/catalyst

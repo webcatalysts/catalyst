@@ -322,3 +322,13 @@ function catalyst_eval($code, &$variables) {
   ob_end_clean();
   return $output;
 }
+
+/**
+ * Workaround for this issue with entity_metadata_wrapper:
+ * https://www.drupal.org/node/1596594
+ */
+function entity_valval(EntityStructureWrapper $data) {
+  if ($data->value()) {
+    return $data->value->value();
+  }
+}

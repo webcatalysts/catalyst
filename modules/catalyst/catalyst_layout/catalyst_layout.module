@@ -27,10 +27,8 @@ function catalyst_layout_menu_alter(&$items) {
 function catalyst_layout_page_build(&$page) {
   global $theme;
   if ($theme == 'notheme' && !isset($page['#layout'])) {
-    global $catalyst_layout;
-    catalyst_layout_initialize();
-    $page['#layout'] = $catalyst_layout;
-    $page['#doctype'] = entity_metadata_wrapper('catalyst', $catalyst_layout->field_layout_doctype->value());
+    $page['#layout'] = catalyst_get_layout();
+    $page['#doctype'] = catalyst_get_doctype();
   }
 }
 
@@ -40,10 +38,7 @@ function catalyst_layout_page_build(&$page) {
 function catalyst_preprocess_layout(&$variables) {
   $layout = $variables['page']['#layout'];
 
-  // Inject the template for later rendering by twig
-  $variables['template'] = catalyst_layout_get_template($layout->value());
-
-  if ($add_html_head = $layout->field_layout_html_head->value()['value']) {
+  if ($add_html_head = $layout->getHTMLHead()) {
     drupal_add_html_head(
       array(
         '#type' => 'markup',
@@ -54,7 +49,7 @@ function catalyst_preprocess_layout(&$variables) {
   }
 
   // Preprocessing defined by the layout
-  if ($preprocess_php = $layout->field_layout_preprocess->value()['value']) {
+  if ($preprocess_php = $layout->getPreprocessPHP()) {
     catalyst_eval($preprocess_php, $variables);
   }
 }
@@ -65,7 +60,7 @@ function catalyst_preprocess_layout(&$variables) {
 function catalyst_preprocess_doctype(&$variables) {
   $layout = $variables['page']['#layout'];
   // Customize the page title based on the layouts pattern
-  if ($page_title_pattern = $layout->field_layout_page_title_pattern->value()) {
+  if ($page_title_pattern = $layout->getPageTitlePattern()) {
     module_load_include('inc', 'catalyst', 'includes/twig');
     $variables['head_title'] = catalyst_twig_render(
       $page_title_pattern,
@@ -88,14 +83,9 @@ function catalyst_layout_get_template(Entity $layout) {
 
 function catalyst_layout_system_regions($layout = NULL) {
   if ($layout === NULL) {
-    global $catalyst_layout;
-    $layout = $catalyst_layout;
+    $layout = catalyst_get_layout();
   }
-  $return = array();
-  foreach ($layout->field_layout_regions->value() AS $region) {
-    $return[] = $region['machine'];
-  }
-  return $return;
+  return $layout->getRegions();
 }
 
 /**

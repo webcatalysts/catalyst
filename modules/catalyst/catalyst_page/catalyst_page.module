@@ -92,12 +92,11 @@ function catalyst_page_preprocess_cpage_content(&$variables) {
   $node = $variables['page'];
 
   // Custom processing defined by the page
-  if ($preprocess_php = $node->field_cpage_preprocess->value()['value']) {
+  if ($preprocess_php = entity_valval($node->field_cpage_preprocess)) {
     catalyst_eval($preprocess_php, $variables);
   }
-
   // Custom HTML head defined by the page
-  if ($custom_html_head = $node->field_cpage_head->value()['value']) {
+  if ($custom_html_head = entity_valval($node->field_cpage_head)) {
     drupal_add_html_head(
       array(
         '#type' => 'markup',

@@ -21,6 +21,17 @@ function catalyst_doctype_menu_alter(&$items) {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function catalyst_doctype_form_alter(&$form, &$form_state, $form_id) {
+  // Set the default value for the doctype content
+  if (isset($form['field_doctype_content']) && isset($form['#entity']->is_new)) {
+    $lang = $form['field_doctype_content']['#language'];
+    $form['field_doctype_content'][$lang][0]['#after_build'][] = 'field_doctype_content_set_default_value';
+  }
+}
+
+/**
  * Implements hook_menu().
  */
 function catalyst_doctype_menu() {
@@ -55,15 +66,15 @@ function catalyst_doctype_preprocess_doctype(&$variables) {
   $doctype = $variables['page']['#doctype'];
 
   if (!isset($variables['http_content_type'])) {
-    $variables['http_content_type'] = $doctype->field_doctype_content_type->value();
+    $variables['http_content_type'] = $doctype->getContentType();
   }
 
   if (!isset($variables['http_charset'])) {
-    $variables['http_charset'] = $doctype->field_doctype_charset->value();
+    $variables['http_charset'] = $doctype->getCharset();
   }
 
   // Custom Preprocessing defined by the doctype
-  if ($preprocess_php = $doctype->field_doctype_preprocess->value->value()) {
+  if ($preprocess_php = $doctype->getPreprocessPHP()) {
     catalyst_eval($preprocess_php, $variables);
   }
 }
@@ -127,4 +138,34 @@ function catalyst_doctype_catalyst_export_dependencies($type, $entity, $group) {
     $dependencies['doctype'][$doctype->getIdentifier()] = $doctype->value();
   }
   return $dependencies;
+}
+
+/**
+ * After build callback for setting the doctype content default value.
+ *
+ * @see catalyst_doctype_form_alter().
+ */
+function field_doctype_content_set_default_value($element) {
+  if (empty($element['#value'])) {
+    $element['#value'] = field_doctype_content_default_value();
+  }
+  return $element;
+}
+
+function field_doctype_content_default_value() {
+  return implode("\n", array(
+    '<html>',
+    '  <head>',
+    '    {{ head }}',
+    '    <title>{{ head_title }}</title>',
+    '    {{ styles }}',
+    '    {{ scripts }}',
+    '  </head>',
+    '  <body>',
+    '    {{ page_top }}',
+    '    {{ page }}',
+    '    {{ page_bottom }}',
+    '  </body>',
+    '</html>',
+  ));
 }

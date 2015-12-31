@@ -113,6 +113,14 @@ projects[views_bulk_operations][version] = "3.3"
 projects[views_bulk_operations][type] = "module"
 projects[views_bulk_operations][subdir] = "contrib"
 
+projects[views_data_export][version] = "3.0-beta9"
+projects[views_data_export][type] = "module"
+projects[views_data_export][subdir] = "contrib"
+
+projects[views_php][version] = "1.0-alpha3"
+projects[views_php][type] = "module"
+projects[views_php][subdir] = "contrib"
+
 projects[wysiwyg][version] = "2.x-dev"
 projects[wysiwyg][type] = "module"
 projects[wysiwyg][subdir] = "contrib"

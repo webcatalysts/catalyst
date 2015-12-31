@@ -2,20 +2,19 @@
 
 
 function theme_doctype($variables) {
-  require_once DRUPAL_ROOT . '/profiles/catalyst/includes/twig.inc';
+  $doctype = $variables['page']['#doctype'];
   $variables['page'] = $variables['page']['#children'];
-  return catalyst_twig_render($variables['template'], $variables, 'doctype');
+  return $doctype->renderTemplate($variables);
 }
 
 function theme_layout($variables) {
-  require_once DRUPAL_ROOT . '/profiles/catalyst/includes/twig.inc';
-  return catalyst_twig_render($variables['template'], $variables, 'layout');
+  return $variables['page']['#layout']->renderTemplate($variables);
 }
 
 function template_preprocess_doctype(&$variables) {
   $doctype = $variables['page']['#doctype'];
 
-  if($variables['drupal_processing'] = $doctype->field_catalyst_drupal_processing->value()) {
+  if($variables['drupal_processing'] = $doctype->getDrupalProcessingEnabled()) {
     drupal_preprocess_doctype($variables);
   }
 }
@@ -90,8 +89,6 @@ function template_process_doctype(&$variables) {
   $variables['head'] = drupal_get_html_head();
   $variables['styles'] = catalyst_get_css();
   $variables['scripts'] = catalyst_get_js();
-
-  $variables['template'] = catalyst_doctype_get_template($variables['page']['#doctype']->value());
 }
 
 function drupal_process_doctype(&$variables) {
@@ -107,13 +104,13 @@ function drupal_process_doctype(&$variables) {
 function template_preprocess_layout(&$variables) {
   $layout = $variables['page']['#layout'];
 
-  $variables['drupal_processing'] = $layout->field_catalyst_drupal_processing->value();
-  $variables['debug'] = $layout->field_layout_debug->value();
-  $variables['show_messages'] = $layout->field_layout_show_messages->value();
+  $variables['drupal_processing'] = $layout->getDrupalProcessingEnabled();
+  $variables['debug'] = $layout->getDebuggingEnabled();
+  $variables['show_messages'] = $layout->getShowMessages();
 
   $variables['title'] = drupal_get_title();
 
-  foreach ($regions = catalyst_layout_system_regions($layout) AS $region) {
+  foreach ($layout->getRegions() AS $region) {
     $variables['region'][$region] = catalyst_blocks_by_region($region);
   }
 
