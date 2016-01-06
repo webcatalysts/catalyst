@@ -152,21 +152,21 @@ function catalyst_render_page($page) {
 function catalyst_add_css($stylesheet, $group = CATALYST_MEDIA_GROUP_OTHER) {
   $options = array(
     'group' => $group,
-    'media' => $stylesheet->field_stylesheet_media->value(),
+    'media' => $stylesheet->field__media_stylesheet_media->value(),
   );
 
-  $options['basename'] = $stylesheet->field_media_machine->machine->value();
-  switch ($stylesheet->field_media_type->value()) {
+  $options['basename'] = $stylesheet->field__machine->machine->value();
+  switch ($stylesheet->field__media_type->value()) {
     case 'custom':
-      $data = $stylesheet->field_media_content->value->value();
+      $data = $stylesheet->field__body->value->value();
       $options['type'] = 'inline';
       break;
     case 'local':
-      $data = $stylesheet->field_media_path->value();
+      $data = $stylesheet->field__media_path->value();
       $options['type'] = 'file';
       break;
     case 'remote':
-      $data = $stylesheet->field_media_path->value();
+      $data = $stylesheet->field__media_path->value();
       $options['type'] = 'external';
       break;
   }
@@ -212,21 +212,21 @@ function catalyst_add_js($javascript, $group = CATALYST_MEDIA_GROUP_OTHER) {
   $options = array(
     'group' => $group,
     'requires_jquery' => FALSE,
-    'scope' => $javascript->field_javascript_scope->value(),
-    'defer' => $javascript->field_javascript_defer->value(),
+    'scope' => $javascript->field__media_javascript_scope->value(),
+    'defer' => $javascript->field__media_javascript_defer->value(),
   );
 
-  switch ($javascript->field_media_type->value()) {
+  switch ($javascript->field__media_type->value()) {
     case 'custom':
-      $data = $javascript->field_media_content->value->value();
+      $data = $javascript->field__body->value->value();
       $options['type'] = 'inline';
       break;
     case 'local':
-      $data = $javascript->field_media_path->value();
+      $data = $javascript->field__media_path->value();
       $options['type'] = 'file';
       break;
     case 'remote':
-      $data = $javascript->field_media_path->value();
+      $data = $javascript->field__media_path->value();
       $options['type'] = 'external';
       break;
   }
@@ -280,7 +280,7 @@ function catalyst_load_blocks() {
   foreach ($block_info AS $placement) {
     $placement = (object)$placement;
     if ($block = entity_load_single('catalyst', $placement->block_id)) {
-      $machine = $block->field_block_machine[$block->language][0]['machine'];
+      $machine = $block->field__machine[$block->language][0]['machine'];
       $blocks[$placement->region][$machine] = array(
         'content' => entity_view('catalyst', array($block)),
         '#weight' => $placement->weight,

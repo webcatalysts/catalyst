@@ -11,8 +11,8 @@ function catalyst_doctype_field_default_field_instances() {
   $field_instances = array();
 
   // Exported field_instance:
-  // 'catalyst-doctype-field_catalyst_drupal_processing'.
-  $field_instances['catalyst-doctype-field_catalyst_drupal_processing'] = array(
+  // 'catalyst-doctype-field__drupal_processing'.
+  $field_instances['catalyst-doctype-field__drupal_processing'] = array(
     'bundle' => 'doctype',
     'default_value' => array(
       0 => array(
@@ -30,7 +30,7 @@ function catalyst_doctype_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_drupal_processing',
+    'field_name' => 'field__drupal_processing',
     'label' => 'Enable Drupal processing',
     'required' => 0,
     'settings' => array(
@@ -47,8 +47,8 @@ function catalyst_doctype_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_catalyst_form_help'.
-  $field_instances['catalyst-doctype-field_catalyst_form_help'] = array(
+  // Exported field_instance: 'catalyst-doctype-field__admin_notes'.
+  $field_instances['catalyst-doctype-field__admin_notes'] = array(
     'bundle' => 'doctype',
     'default_value' => NULL,
     'deleted' => 0,
@@ -62,7 +62,7 @@ function catalyst_doctype_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_form_help',
+    'field_name' => 'field__admin_notes',
     'label' => 'Help/Instructions',
     'required' => 0,
     'settings' => array(
@@ -118,8 +118,8 @@ function catalyst_doctype_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_doctype_charset'.
-  $field_instances['catalyst-doctype-field_doctype_charset'] = array(
+  // Exported field_instance: 'catalyst-doctype-field__doctype_charset'.
+  $field_instances['catalyst-doctype-field__doctype_charset'] = array(
     'bundle' => 'doctype',
     'default_value' => array(
       0 => array(
@@ -137,7 +137,7 @@ function catalyst_doctype_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_doctype_charset',
+    'field_name' => 'field__doctype_charset',
     'label' => 'Character Set',
     'required' => 1,
     'settings' => array(
@@ -209,8 +209,8 @@ function catalyst_doctype_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_doctype_content'.
-  $field_instances['catalyst-doctype-field_doctype_content'] = array(
+  // Exported field_instance: 'catalyst-doctype-field__body'.
+  $field_instances['catalyst-doctype-field__body'] = array(
     'bundle' => 'doctype',
     'default_value' => NULL,
     'deleted' => 0,
@@ -225,7 +225,7 @@ function catalyst_doctype_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_doctype_content',
+    'field_name' => 'field__body',
     'label' => 'Content',
     'required' => 0,
     'settings' => array(
@@ -289,8 +289,8 @@ function catalyst_doctype_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_doctype_content_type'.
-  $field_instances['catalyst-doctype-field_doctype_content_type'] = array(
+  // Exported field_instance: 'catalyst-doctype-field__doctype_content_type'.
+  $field_instances['catalyst-doctype-field__doctype_content_type'] = array(
     'bundle' => 'doctype',
     'default_value' => array(
       0 => array(
@@ -308,7 +308,7 @@ function catalyst_doctype_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_doctype_content_type',
+    'field_name' => 'field__doctype_content_type',
     'label' => 'HTTP Content-Type',
     'required' => 1,
     'settings' => array(
@@ -382,8 +382,8 @@ text/html|text/html',
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_doctype_ondeselect'.
-  $field_instances['catalyst-doctype-field_doctype_ondeselect'] = array(
+  // Exported field_instance: 'catalyst-doctype-field__ondeselect'.
+  $field_instances['catalyst-doctype-field__ondeselect'] = array(
     'bundle' => 'doctype',
     'default_value' => NULL,
     'deleted' => 0,
@@ -397,7 +397,7 @@ text/html|text/html',
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_doctype_ondeselect',
+    'field_name' => 'field__ondeselect',
     'label' => 'On DeSelect',
     'required' => 0,
     'settings' => array(
@@ -449,8 +449,8 @@ text/html|text/html',
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_doctype_onselect'.
-  $field_instances['catalyst-doctype-field_doctype_onselect'] = array(
+  // Exported field_instance: 'catalyst-doctype-field__onselect'.
+  $field_instances['catalyst-doctype-field__onselect'] = array(
     'bundle' => 'doctype',
     'default_value' => NULL,
     'deleted' => 0,
@@ -464,7 +464,7 @@ text/html|text/html',
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_doctype_onselect',
+    'field_name' => 'field__onselect',
     'label' => 'On Select',
     'required' => 0,
     'settings' => array(
@@ -516,8 +516,8 @@ text/html|text/html',
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field_doctype_preprocess'.
-  $field_instances['catalyst-doctype-field_doctype_preprocess'] = array(
+  // Exported field_instance: 'catalyst-doctype-field__preprocess'.
+  $field_instances['catalyst-doctype-field__preprocess'] = array(
     'bundle' => 'doctype',
     'default_value' => NULL,
     'deleted' => 0,
@@ -531,7 +531,7 @@ text/html|text/html',
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_doctype_preprocess',
+    'field_name' => 'field__preprocess',
     'label' => 'Preprocessing',
     'required' => 0,
     'settings' => array(

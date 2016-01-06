@@ -274,16 +274,16 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['style_options']['root_node'] = 'doctypes';
   $handler->display->display_options['style_options']['item_node'] = 'doctype';
   $handler->display->display_options['style_options']['no_entity_encode'] = array(
-    'field_doctype_content' => 'field_doctype_content',
-    'field_doctype_preprocess' => 'field_doctype_preprocess',
-    'field_doctype_onselect' => 'field_doctype_onselect',
-    'field_doctype_ondeselect' => 'field_doctype_ondeselect',
+    'field__body' => 'field__body',
+    'field__preprocess' => 'field__preprocess',
+    'field__onselect' => 'field__onselect',
+    'field__ondeselect' => 'field__ondeselect',
   );
   $handler->display->display_options['style_options']['cdata_wrapper'] = array(
-    'field_doctype_content' => 'field_doctype_content',
-    'field_doctype_preprocess' => 'field_doctype_preprocess',
-    'field_doctype_onselect' => 'field_doctype_onselect',
-    'field_doctype_ondeselect' => 'field_doctype_ondeselect',
+    'field__body' => 'field__body',
+    'field__preprocess' => 'field__preprocess',
+    'field__onselect' => 'field__onselect',
+    'field__ondeselect' => 'field__ondeselect',
   );
   $handler->display->display_options['defaults']['header'] = FALSE;
   $handler->display->display_options['defaults']['empty'] = FALSE;
@@ -300,41 +300,41 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['title']['field'] = 'title';
   $handler->display->display_options['fields']['title']['label'] = 'title';
   /* Field: catalyst: HTTP Content-Type */
-  $handler->display->display_options['fields']['field_doctype_content_type']['id'] = 'field_doctype_content_type';
-  $handler->display->display_options['fields']['field_doctype_content_type']['table'] = 'field_data_field_doctype_content_type';
-  $handler->display->display_options['fields']['field_doctype_content_type']['field'] = 'field_doctype_content_type';
-  $handler->display->display_options['fields']['field_doctype_content_type']['label'] = 'http_content_type';
+  $handler->display->display_options['fields']['field__doctype_content_type']['id'] = 'field__doctype_content_type';
+  $handler->display->display_options['fields']['field__doctype_content_type']['table'] = 'field_data_field__doctype_content_type';
+  $handler->display->display_options['fields']['field__doctype_content_type']['field'] = 'field__doctype_content_type';
+  $handler->display->display_options['fields']['field__doctype_content_type']['label'] = 'http_content_type';
   /* Field: catalyst: Character Set */
-  $handler->display->display_options['fields']['field_doctype_charset']['id'] = 'field_doctype_charset';
-  $handler->display->display_options['fields']['field_doctype_charset']['table'] = 'field_data_field_doctype_charset';
-  $handler->display->display_options['fields']['field_doctype_charset']['field'] = 'field_doctype_charset';
-  $handler->display->display_options['fields']['field_doctype_charset']['label'] = 'charset';
+  $handler->display->display_options['fields']['field__doctype_charset']['id'] = 'field__doctype_charset';
+  $handler->display->display_options['fields']['field__doctype_charset']['table'] = 'field_data_field__doctype_charset';
+  $handler->display->display_options['fields']['field__doctype_charset']['field'] = 'field__doctype_charset';
+  $handler->display->display_options['fields']['field__doctype_charset']['label'] = 'charset';
   /* Field: catalyst: Enable Drupal processing */
-  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['id'] = 'field_catalyst_drupal_processing';
-  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['table'] = 'field_data_field_catalyst_drupal_processing';
-  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['field'] = 'field_catalyst_drupal_processing';
-  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['label'] = 'drupal_processing';
-  $handler->display->display_options['fields']['field_catalyst_drupal_processing']['type'] = 'list_key';
+  $handler->display->display_options['fields']['field__drupal_processing']['id'] = 'field__drupal_processing';
+  $handler->display->display_options['fields']['field__drupal_processing']['table'] = 'field_data_field__drupal_processing';
+  $handler->display->display_options['fields']['field__drupal_processing']['field'] = 'field__drupal_processing';
+  $handler->display->display_options['fields']['field__drupal_processing']['label'] = 'drupal_processing';
+  $handler->display->display_options['fields']['field__drupal_processing']['type'] = 'list_key';
   /* Field: catalyst: Content */
-  $handler->display->display_options['fields']['field_doctype_content']['id'] = 'field_doctype_content';
-  $handler->display->display_options['fields']['field_doctype_content']['table'] = 'field_data_field_doctype_content';
-  $handler->display->display_options['fields']['field_doctype_content']['field'] = 'field_doctype_content';
-  $handler->display->display_options['fields']['field_doctype_content']['label'] = 'content';
+  $handler->display->display_options['fields']['field__body']['id'] = 'field__body';
+  $handler->display->display_options['fields']['field__body']['table'] = 'field_data_field__body';
+  $handler->display->display_options['fields']['field__body']['field'] = 'field__body';
+  $handler->display->display_options['fields']['field__body']['label'] = 'content';
   /* Field: catalyst: Preprocessing */
-  $handler->display->display_options['fields']['field_doctype_preprocess']['id'] = 'field_doctype_preprocess';
-  $handler->display->display_options['fields']['field_doctype_preprocess']['table'] = 'field_data_field_doctype_preprocess';
-  $handler->display->display_options['fields']['field_doctype_preprocess']['field'] = 'field_doctype_preprocess';
-  $handler->display->display_options['fields']['field_doctype_preprocess']['label'] = 'preprocess_php';
+  $handler->display->display_options['fields']['field__preprocess']['id'] = 'field__preprocess';
+  $handler->display->display_options['fields']['field__preprocess']['table'] = 'field_data_field__preprocess';
+  $handler->display->display_options['fields']['field__preprocess']['field'] = 'field__preprocess';
+  $handler->display->display_options['fields']['field__preprocess']['label'] = 'preprocess_php';
   /* Field: catalyst: On Select */
-  $handler->display->display_options['fields']['field_doctype_onselect']['id'] = 'field_doctype_onselect';
-  $handler->display->display_options['fields']['field_doctype_onselect']['table'] = 'field_data_field_doctype_onselect';
-  $handler->display->display_options['fields']['field_doctype_onselect']['field'] = 'field_doctype_onselect';
-  $handler->display->display_options['fields']['field_doctype_onselect']['label'] = 'onselect';
+  $handler->display->display_options['fields']['field__onselect']['id'] = 'field__onselect';
+  $handler->display->display_options['fields']['field__onselect']['table'] = 'field_data_field__onselect';
+  $handler->display->display_options['fields']['field__onselect']['field'] = 'field__onselect';
+  $handler->display->display_options['fields']['field__onselect']['label'] = 'onselect';
   /* Field: catalyst: On DeSelect */
-  $handler->display->display_options['fields']['field_doctype_ondeselect']['id'] = 'field_doctype_ondeselect';
-  $handler->display->display_options['fields']['field_doctype_ondeselect']['table'] = 'field_data_field_doctype_ondeselect';
-  $handler->display->display_options['fields']['field_doctype_ondeselect']['field'] = 'field_doctype_ondeselect';
-  $handler->display->display_options['fields']['field_doctype_ondeselect']['label'] = 'ondeselect';
+  $handler->display->display_options['fields']['field__ondeselect']['id'] = 'field__ondeselect';
+  $handler->display->display_options['fields']['field__ondeselect']['table'] = 'field_data_field__ondeselect';
+  $handler->display->display_options['fields']['field__ondeselect']['field'] = 'field__ondeselect';
+  $handler->display->display_options['fields']['field__ondeselect']['label'] = 'ondeselect';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   /* Contextual filter: IDs */
   $handler->display->display_options['arguments']['id']['id'] = 'id';

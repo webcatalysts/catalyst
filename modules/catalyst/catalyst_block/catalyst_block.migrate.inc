@@ -6,8 +6,8 @@
 
 class CatalystBlockMigration extends CatalystEntityMigration {
   protected $entityBundle = 'block';
-  protected $machineField = 'field_block_machine';
-  protected $machineKey = 'field_block_machine';
+  protected $machineField = 'field__machine';
+  protected $machineKey = 'field__machine';
   protected $sourceIDField = 'id';
 
   protected function sourceFields() {
@@ -29,20 +29,20 @@ class CatalystBlockMigration extends CatalystEntityMigration {
 
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field_block_machine', 'machine_name');
+    $this->addFieldMapping('field__machine', 'machine_name');
     // Block placements
-    $this->addFieldMapping('field_block_placements', 'block_placements');
-    $this->addReferenceFieldMapping('field_block_placements:layout_id', 'block_placement_layout_ids', 'layout');
+    $this->addFieldMapping('field__blockplacements__block', 'block_placements');
+    $this->addReferenceFieldMapping('field__blockplacements__block:layout_id', 'block_placement_layout_ids', 'layout');
     // Reference field mapping
-    $this->addReferenceFieldMapping('field_catalyst_includes_css', 'css_includes', 'stylesheet');
-    $this->addReferenceFieldMapping('field_catalyst_includes_js', 'js_includes', 'javascript');
-    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file');
+    $this->addReferenceFieldMapping('field__media_stylesheets', 'css_includes', 'stylesheet');
+    $this->addReferenceFieldMapping('field__media_javascripts', 'js_includes', 'javascript');
+    $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     // Mappings for formatted fields
-    $this->addFormattedFieldMapping('field_block_content', 'content', 'cpage_html');
-    $this->addFormattedFieldMapping('field_block_preprocess', 'preprocess_php', 'php');
-    $this->addFormattedFieldMapping('field_catalyst_custom_css', 'css_custom', 'css');
-    $this->addFormattedFieldMapping('field_catalyst_custom_js', 'js_custom', 'js');
+    $this->addFormattedFieldMapping('field__body', 'content', 'cpage_html');
+    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'php');
+    $this->addFormattedFieldMapping('field__css', 'css_custom', 'css');
+    $this->addFormattedFieldMapping('field__js', 'js_custom', 'js');
     // File field mapping
-    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom');
+    $this->addFileFieldMapping('field__files', 'files_custom');
   }
 }

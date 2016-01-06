@@ -27,9 +27,9 @@ function catalyst_doctype_menu_alter(&$items) {
  */
 function catalyst_doctype_form_alter(&$form, &$form_state, $form_id) {
   // Set the default value for the doctype content
-  if (isset($form['field_doctype_content']) && isset($form['#entity']->is_new)) {
-    $lang = $form['field_doctype_content']['#language'];
-    $form['field_doctype_content'][$lang][0]['#after_build'][] = 'field_doctype_content_set_default_value';
+  if (isset($form['field__body']) && isset($form['#entity']->is_new)) {
+    $lang = $form['field__body']['#language'];
+    $form['field__body'][$lang][0]['#after_build'][] = 'field__body_set_default_value';
   }
 }
 
@@ -101,14 +101,14 @@ function catalyst_doctype_get_template(Entity $doctype) {
  *
  * @see catalyst_doctype_form_alter().
  */
-function field_doctype_content_set_default_value($element) {
+function field__body_set_default_value($element) {
   if (empty($element['#value'])) {
-    $element['#value'] = field_doctype_content_default_value();
+    $element['#value'] = field__body_default_value();
   }
   return $element;
 }
 
-function field_doctype_content_default_value() {
+function field__body_default_value() {
   return implode("\n", array(
     '<html>',
     '  <head>',

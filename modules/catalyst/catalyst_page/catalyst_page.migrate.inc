@@ -27,22 +27,22 @@ class CatalystPageMigration extends CatalystNodeMigration {
   protected function mapFields() {
     parent::mapFields();
     // Block Placements
-    $this->addFieldMapping('field_cpage_blocks', 'block_placements');
-    $this->addReferenceFieldMapping('field_cpage_blocks:block_id', 'block_placement_block_ids', 'block');
+    $this->addFieldMapping('field__blockplacements__layfield', 'block_placements');
+    $this->addReferenceFieldMapping('field__blockplacements__layfield:block_id', 'block_placement_block_ids', 'block');
     // File field mapping
-    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom');
+    $this->addFileFieldMapping('field__files', 'files_custom');
     // Reference field mappings
-    $this->addReferenceFieldMapping('field_cpage_layout', 'layout', 'layout');
-    $this->addReferenceFieldMapping('field_cpage_includes_css', 'css_includes', 'stylesheet');
-    $this->addReferenceFieldMapping('field_cpage_includes_js', 'js_includes', 'javascript');
-    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file');
-    $this->addReferenceFieldMapping('field_cpage_blocks_add', 'blocks_ref', 'block');
+    $this->addReferenceFieldMapping('field__layout', 'layout', 'layout');
+    $this->addReferenceFieldMapping('field__media_stylesheets__page', 'css_includes', 'stylesheet');
+    $this->addReferenceFieldMapping('field__media_javascripts__page', 'js_includes', 'javascript');
+    $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
+    $this->addReferenceFieldMapping('field__blocks_related', 'blocks_ref', 'block');
     // Formmatted field mappings
-    $this->addFormattedFieldMapping('field_cpage_content', 'content', 'cpage_html');
-    $this->addFormattedFieldMapping('field_cpage_custom_css', 'css_custom', 'css');
-    $this->addFormattedFieldMapping('field_cpage_custom_js', 'js_custom', 'js');
-    $this->addFormattedFieldMapping('field_cpage_head', 'html_head', 'cpage_html');
-    $this->addFormattedFieldMapping('field_cpage_preprocess', 'preprocess_php', 'php');
+    $this->addFormattedFieldMapping('field__body', 'content', 'cpage_html');
+    $this->addFormattedFieldMapping('field__css__page', 'css_custom', 'css');
+    $this->addFormattedFieldMapping('field__js__page', 'js_custom', 'js');
+    $this->addFormattedFieldMapping('field__html_head', 'html_head', 'cpage_html');
+    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'php');
     // Unmapped destinations
     $this->addUnmigratedDestinations(array(
       'promote', 'sticky',

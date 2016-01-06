@@ -7,7 +7,7 @@
  */
 function block_placement_layout_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
   // Spoof configurable settings
-  $instance['settings']['layout_field_name'] = 'field_cpage_layout';
+  $instance['settings']['layout_field_name'] = 'field__layout';
 
   if (!isset($form['#block_placement'])) {
     $form['#block_placement'] = array(

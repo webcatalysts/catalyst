@@ -23,7 +23,7 @@ function catalyst_block_field_group_info() {
     'label' => 'Advanced Settings',
     'weight' => '9',
     'children' => array(
-      0 => 'field_block_preprocess',
+      0 => 'field__preprocess',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -51,9 +51,9 @@ function catalyst_block_field_group_info() {
     'label' => 'Block basics',
     'weight' => '4',
     'children' => array(
-      0 => 'field_block_content',
+      0 => 'field__body',
       1 => 'title',
-      2 => 'field_block_machine',
+      2 => 'field__machine',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -81,8 +81,8 @@ function catalyst_block_field_group_info() {
     'label' => 'Cascading Stylesheets',
     'weight' => '5',
     'children' => array(
-      0 => 'field_catalyst_includes_css',
-      1 => 'field_catalyst_custom_css',
+      0 => 'field__media_stylesheets',
+      1 => 'field__css',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -110,8 +110,8 @@ function catalyst_block_field_group_info() {
     'label' => 'Media/Files',
     'weight' => '7',
     'children' => array(
-      0 => 'field_catalyst_custom_files',
-      1 => 'field_catalyst_shared_files',
+      0 => 'field__files',
+      1 => 'field__media_files',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -139,8 +139,8 @@ function catalyst_block_field_group_info() {
     'label' => 'Javascripts',
     'weight' => '6',
     'children' => array(
-      0 => 'field_catalyst_includes_js',
-      1 => 'field_catalyst_custom_js',
+      0 => 'field__media_javascripts',
+      1 => 'field__js',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -168,7 +168,7 @@ function catalyst_block_field_group_info() {
     'label' => 'Block Placement',
     'weight' => '8',
     'children' => array(
-      0 => 'field_block_placements',
+      0 => 'field__blockplacements__block',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

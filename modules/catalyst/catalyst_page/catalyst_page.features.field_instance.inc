@@ -10,8 +10,8 @@
 function catalyst_page_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-cpage-field_catalyst_custom_files'.
-  $field_instances['node-cpage-field_catalyst_custom_files'] = array(
+  // Exported field_instance: 'node-cpage-field__files'.
+  $field_instances['node-cpage-field__files'] = array(
     'bundle' => 'cpage',
     'deleted' => 0,
     'description' => '',
@@ -24,7 +24,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_catalyst_custom_files',
+    'field_name' => 'field__files',
     'label' => 'Custom Files',
     'required' => 0,
     'settings' => array(
@@ -67,8 +67,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_catalyst_shared_files'.
-  $field_instances['node-cpage-field_catalyst_shared_files'] = array(
+  // Exported field_instance: 'node-cpage-field__media_files'.
+  $field_instances['node-cpage-field__media_files'] = array(
     'bundle' => 'cpage',
     'deleted' => 0,
     'description' => '',
@@ -81,7 +81,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_catalyst_shared_files',
+    'field_name' => 'field__media_files',
     'label' => 'Shared Files',
     'required' => 0,
     'settings' => array(
@@ -107,8 +107,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_blocks'.
-  $field_instances['node-cpage-field_cpage_blocks'] = array(
+  // Exported field_instance: 'node-cpage-field__blockplacements__layfield'.
+  $field_instances['node-cpage-field__blockplacements__layfield'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -122,7 +122,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_blocks',
+    'field_name' => 'field__blockplacements__layfield',
     'label' => 'Blocks',
     'required' => 0,
     'settings' => array(
@@ -137,8 +137,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_blocks_add'.
-  $field_instances['node-cpage-field_cpage_blocks_add'] = array(
+  // Exported field_instance: 'node-cpage-field__blocks_related'.
+  $field_instances['node-cpage-field__blocks_related'] = array(
     'bundle' => 'cpage',
     'deleted' => 0,
     'description' => '',
@@ -151,7 +151,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_blocks_add',
+    'field_name' => 'field__blocks_related',
     'label' => 'Add Blocks',
     'required' => 0,
     'settings' => array(
@@ -177,8 +177,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_content'.
-  $field_instances['node-cpage-field_cpage_content'] = array(
+  // Exported field_instance: 'node-cpage-field__body'.
+  $field_instances['node-cpage-field__body'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -193,7 +193,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_content',
+    'field_name' => 'field__body',
     'label' => 'Content',
     'required' => 1,
     'settings' => array(
@@ -257,8 +257,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_custom_css'.
-  $field_instances['node-cpage-field_cpage_custom_css'] = array(
+  // Exported field_instance: 'node-cpage-field__css__page'.
+  $field_instances['node-cpage-field__css__page'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -272,7 +272,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_custom_css',
+    'field_name' => 'field__css__page',
     'label' => 'Custom CSS',
     'required' => 0,
     'settings' => array(
@@ -336,8 +336,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_custom_js'.
-  $field_instances['node-cpage-field_cpage_custom_js'] = array(
+  // Exported field_instance: 'node-cpage-field__js__page'.
+  $field_instances['node-cpage-field__js__page'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -351,7 +351,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_custom_js',
+    'field_name' => 'field__js__page',
     'label' => 'Custom Javascript',
     'required' => 0,
     'settings' => array(
@@ -415,8 +415,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_head'.
-  $field_instances['node-cpage-field_cpage_head'] = array(
+  // Exported field_instance: 'node-cpage-field__html_head'.
+  $field_instances['node-cpage-field__html_head'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -430,7 +430,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_head',
+    'field_name' => 'field__html_head',
     'label' => 'Custom Head',
     'required' => 0,
     'settings' => array(
@@ -494,8 +494,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_includes_css'.
-  $field_instances['node-cpage-field_cpage_includes_css'] = array(
+  // Exported field_instance: 'node-cpage-field__media_stylesheets__page'.
+  $field_instances['node-cpage-field__media_stylesheets__page'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -509,7 +509,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_includes_css',
+    'field_name' => 'field__media_stylesheets__page',
     'label' => 'Stylesheet Includes',
     'required' => 0,
     'settings' => array(
@@ -535,8 +535,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_includes_js'.
-  $field_instances['node-cpage-field_cpage_includes_js'] = array(
+  // Exported field_instance: 'node-cpage-field__media_javascripts__page'.
+  $field_instances['node-cpage-field__media_javascripts__page'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -550,7 +550,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_includes_js',
+    'field_name' => 'field__media_javascripts__page',
     'label' => 'Javascript Includes',
     'required' => 0,
     'settings' => array(
@@ -576,8 +576,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_layout'.
-  $field_instances['node-cpage-field_cpage_layout'] = array(
+  // Exported field_instance: 'node-cpage-field__layout'.
+  $field_instances['node-cpage-field__layout'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -591,7 +591,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_layout',
+    'field_name' => 'field__layout',
     'label' => 'Layout',
     'required' => 1,
     'settings' => array(
@@ -606,8 +606,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field_cpage_preprocess'.
-  $field_instances['node-cpage-field_cpage_preprocess'] = array(
+  // Exported field_instance: 'node-cpage-field__preprocess'.
+  $field_instances['node-cpage-field__preprocess'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -621,7 +621,7 @@ function catalyst_page_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field_cpage_preprocess',
+    'field_name' => 'field__preprocess',
     'label' => 'Preprocessing',
     'required' => 0,
     'settings' => array(

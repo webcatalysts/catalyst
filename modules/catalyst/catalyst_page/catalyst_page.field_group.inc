@@ -23,8 +23,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Advanced Settings',
     'weight' => '13',
     'children' => array(
-      0 => 'field_cpage_head',
-      1 => 'field_cpage_preprocess',
+      0 => 'field__html_head',
+      1 => 'field__preprocess',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -52,8 +52,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Blocks',
     'weight' => '12',
     'children' => array(
-      0 => 'field_cpage_blocks',
-      1 => 'field_cpage_blocks_add',
+      0 => 'field__blockplacements__layfield',
+      1 => 'field__blocks_related',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -81,8 +81,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Page content',
     'weight' => '8',
     'children' => array(
-      0 => 'field_cpage_content',
-      1 => 'field_cpage_layout',
+      0 => 'field__body',
+      1 => 'field__layout',
       2 => 'title',
     ),
     'format_type' => 'htab',
@@ -111,8 +111,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Cascading Style Sheets',
     'weight' => '9',
     'children' => array(
-      0 => 'field_cpage_includes_css',
-      1 => 'field_cpage_custom_css',
+      0 => 'field__media_stylesheets__page',
+      1 => 'field__css__page',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -140,8 +140,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Media/Files',
     'weight' => '11',
     'children' => array(
-      0 => 'field_catalyst_shared_files',
-      1 => 'field_catalyst_custom_files',
+      0 => 'field__media_files',
+      1 => 'field__files',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -169,8 +169,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Javascript',
     'weight' => '10',
     'children' => array(
-      0 => 'field_cpage_includes_js',
-      1 => 'field_cpage_custom_js',
+      0 => 'field__media_javascripts__page',
+      1 => 'field__js__page',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

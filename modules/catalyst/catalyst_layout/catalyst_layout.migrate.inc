@@ -34,33 +34,33 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
   }
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field_catalyst_drupal_processing', 'drupal_processing');
-    $this->addFieldMapping('field_layout_drupal_css', 'drupal_css_options'); //->separator(',');
-    $this->addFieldMapping('field_layout_drupal_js', 'drupal_js_options'); //->separator(',');
-    $this->addFieldMapping('field_layout_page_title_pattern', 'page_title_pattern');
-    $this->addFieldMapping('field_layout_show_messages', 'show_messages');
-    $this->addFieldMapping('field_layout_debug', 'debug');
+    $this->addFieldMapping('field__drupal_processing', 'drupal_processing');
+    $this->addFieldMapping('field__layout_drupal_css', 'drupal_css_options'); //->separator(',');
+    $this->addFieldMapping('field__layout_drupal_js', 'drupal_js_options'); //->separator(',');
+    $this->addFieldMapping('field__layout_page_title_pattern', 'page_title_pattern');
+    $this->addFieldMapping('field__layout_show_messages', 'show_messages');
+    $this->addFieldMapping('field__debug', 'debug');
     // Regions
-    $this->addFieldMapping('field_layout_regions', 'regions');
-    $this->addFieldMapping('field_layout_regions:text', NULL);
+    $this->addFieldMapping('field__layout_regions', 'regions');
+    $this->addFieldMapping('field__layout_regions:text', NULL);
     // Block placements
-    $this->addFieldMapping('field_layout_blocks', 'block_placements');
-    $this->addReferenceFieldMapping('field_layout_blocks:block_id', 'block_placement_block_ids', 'block');
+    $this->addFieldMapping('field__blockplacements__layout', 'block_placements');
+    $this->addReferenceFieldMapping('field__blockplacements__layout:block_id', 'block_placement_block_ids', 'block');
     // File field mappings
-    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom');
+    $this->addFileFieldMapping('field__files', 'files_custom');
     // Reference field mappings
-    $this->addReferenceFieldMapping('field_layout_doctype', 'doctype', 'doctype');
-    $this->addReferenceFieldMapping('field_catalyst_blocks_add', 'blocks_reference', 'block');
-    $this->addReferenceFieldMapping('field_layout_includes_css', 'css_includes', 'stylesheet');
-    $this->addReferenceFieldMapping('field_layout_includes_js', 'js_includes', 'javascript');
-    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file');
+    $this->addReferenceFieldMapping('field__doctype', 'doctype', 'doctype');
+    $this->addReferenceFieldMapping('field__blocks_related', 'blocks_reference', 'block');
+    $this->addReferenceFieldMapping('field__media_stylesheets__layout', 'css_includes', 'stylesheet');
+    $this->addReferenceFieldMapping('field__media_javascripts__layout', 'js_includes', 'javascript');
+    $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     // Formatted field mappings
-    $this->addFormattedFieldMapping('field_layout_content', 'content', 'layout_html');
-    $this->addFormattedFieldMapping('field_layout_css', 'css_custom', 'css');
-    $this->addFormattedFieldMapping('field_layout_js', 'js_custom', 'js');
-    $this->addFormattedFieldMapping('field_layout_html_head', 'html_head', 'cpage_html');
-    $this->addFormattedFieldMapping('field_layout_preprocess', 'preprocess_php', 'php');
-    $this->addFormattedFieldMapping('field_layout_onselect', 'onselect', 'js');
-    $this->addFormattedFieldMapping('field_layout_ondeselect', 'ondeselect', 'js');
+    $this->addFormattedFieldMapping('field__body', 'content', 'layout_html');
+    $this->addFormattedFieldMapping('field__css__layout', 'css_custom', 'css');
+    $this->addFormattedFieldMapping('field__js__layout', 'js_custom', 'js');
+    $this->addFormattedFieldMapping('field__html_head', 'html_head', 'cpage_html');
+    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'php');
+    $this->addFormattedFieldMapping('field__onselect', 'onselect', 'js');
+    $this->addFormattedFieldMapping('field__ondeselect', 'ondeselect', 'js');
   }
 }

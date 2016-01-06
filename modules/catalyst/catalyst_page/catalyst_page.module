@@ -24,8 +24,8 @@ function catalyst_page_theme() {
  */
 function catalyst_page_block_placements() {
   $node = menu_get_object();
-  if (!empty($node->field_cpage_blocks)) {
-    return $node->field_cpage_blocks[$node->language];
+  if (!empty($node->field__blockplacements__layfield)) {
+    return $node->field__blockplacements__layfield[$node->language];
   }
 }
 
@@ -44,10 +44,10 @@ function catalyst_page_form_cpage_node_form_alter(&$form, &$form_state) {
     $layouts = entity_load('catalyst', array_keys($result['catalyst']));
     foreach ($layouts AS $id => $_layout) {
       $layout = entity_metadata_wrapper('catalyst', $_layout);
-      if ($onselect = $layout->field_layout_onselect->value()) {
+      if ($onselect = $layout->field__onselect->value()) {
         $callbacks['onselect'][$id] = $onselect;
       }
-      if ($ondeselect = $layout->field_layout_ondeselect->value()) {
+      if ($ondeselect = $layout->field__ondeselect->value()) {
         $callbacks['ondeselect'][$id] = $ondeselect;
       }
     }
@@ -68,7 +68,7 @@ function catalyst_page_form_cpage_node_form_alter(&$form, &$form_state) {
 function catalyst_page_node_view($node, $view_mode, $langcode) {
   $wrapper = entity_metadata_wrapper('node', $node);
   if ($wrapper->getBundle() == 'cpage' && $view_mode == 'full') {
-    if ($layout = $wrapper->field_cpage_layout->value()) {
+    if ($layout = $wrapper->field__layout->value()) {
       catalyst_set_layout($layout);
     }
   }
@@ -78,9 +78,9 @@ function catalyst_page_node_view($node, $view_mode, $langcode) {
  * Implements hook_node_view_alter().
  */
 function catalyst_page_node_view_alter(&$build) {
-  if (isset($build['field_cpage_content'])) {
-    if ($template = $build['field_cpage_content'][0]['#markup']) {
-      $build['field_cpage_content'][0]['#markup'] = theme('cpage_content', array(
+  if (isset($build['field__body'])) {
+    if ($template = $build['field__body'][0]['#markup']) {
+      $build['field__body'][0]['#markup'] = theme('cpage_content', array(
         'template' => new CatalystNodePage($build['#node']),
       ));
     }

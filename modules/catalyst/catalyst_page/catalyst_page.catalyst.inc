@@ -82,7 +82,7 @@ function catalyst_page_catalyst_prepare_export($export, $group, $exports) {
   $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
   $block_placements = array();
   $block_placement_block_ids = array();
-  foreach ($wrapper->field_cpage_blocks->value() AS $placement) {
+  foreach ($wrapper->field__blockplacements__layfield->value() AS $placement) {
     if (catalyst_export_exists($placement['block_id'], 'block', $exports)) {
       $block_placement_block_ids[] = $placement['block_id'];
       unset($placement['block_id']);
@@ -99,21 +99,21 @@ function catalyst_page_catalyst_prepare_export($export, $group, $exports) {
     'block_placements' => $block_placements,
     'block_placement_block_ids' => $block_placement_block_ids,
     'layout' => catalyst_export_helper_filter_references(
-      $wrapper->field_cpage_layout, 'layout', $exports),
+      $wrapper->field__layout, 'layout', $exports),
     'css_includes' => catalyst_export_helper_filter_references(
-      $wrapper->field_cpage_includes_css, 'stylesheet', $exports),
+      $wrapper->field__media_stylesheets__page, 'stylesheet', $exports),
     'js_includes' => catalyst_export_helper_filter_references(
-      $wrapper->field_cpage_includes_js, 'javascript', $exports),
+      $wrapper->field__media_javascripts__page, 'javascript', $exports),
     'files_shared' => catalyst_export_helper_filter_references(
-      $wrapper->field_catalyst_shared_files, 'file', $exports),
+      $wrapper->field__media_files, 'file', $exports),
     'files_custom' => catalyst_export_helper_files(
-      $wrapper->field_catalyst_custom_files, $wrapper->getIdentifier()),
+      $wrapper->field__files, $wrapper->getIdentifier()),
     'blocks_ref' => catalyst_export_helper_filter_references(
-      $wrapper->field_cpage_blocks_add, 'block', $exports),
-    'content' => entity_valval($wrapper->field_cpage_content),
-    'css_custom' => entity_valval($wrapper->field_cpage_custom_css),
-    'js_custom' => entity_valval($wrapper->field_cpage_custom_js),
-    'html_head' => entity_valval($wrapper->field_cpage_head),
-    'preprocess_php' => entity_valval($wrapper->field_cpage_preprocess),
+      $wrapper->field__blocks_related, 'block', $exports),
+    'content' => entity_valval($wrapper->field__body),
+    'css_custom' => entity_valval($wrapper->field__css__page),
+    'js_custom' => entity_valval($wrapper->field__js__page),
+    'html_head' => entity_valval($wrapper->field__html_head),
+    'preprocess_php' => entity_valval($wrapper->field__preprocess),
   );
 }

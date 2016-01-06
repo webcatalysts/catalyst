@@ -15,8 +15,8 @@ define('CATALYST_MEDIA_GROUP_OTHER', 404);
  * Implements hook_entity_view_alter().
  */
 function catalyst_media_entity_view_alter(&$build, $type) {
-  if (isset($build['field_media_content'])) {
-    if ($template = $build['field_media_content'][0]['#markup']) {
+  if (isset($build['field__body'])) {
+    if ($template = $build['field__body'][0]['#markup']) {
       theme('media_content', array(
         'template' => $template,
       ));
@@ -71,8 +71,8 @@ function catalyst_media_catalyst_twig_render_alter(&$twig, &$extensions, &$varia
 
 function catalyst_media_customfilepath($basename, $format = 'path') {
   $entity = drupal_static('twig_render_entity_wrapper', FALSE);
-  if ($entity && $entity->field_catalyst_custom_files) {
-    foreach ($entity->field_catalyst_custom_files->value() AS $file) {
+  if ($entity && $entity->field__files) {
+    foreach ($entity->field__files->value() AS $file) {
       if ($file['filename'] == $basename) {
         $url = file_create_url($file['uri']);
         if ($format == 'url') {
@@ -93,23 +93,23 @@ function catalyst_media_filepath($machine_name, $format = 'path') {
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'catalyst')
     ->entityCondition('bundle', 'file')
-    ->fieldCondition('field_media_machine', 'machine', $machine_name, '=')
+    ->fieldCondition('field__machine', 'machine', $machine_name, '=')
     ->addTag(__FUNCTION__);
   $result = $query->execute();
   if (isset($result['catalyst'])) {
     $results = entity_load('catalyst', array_keys($result['catalyst']));
     $file = array_pop($results);
     $file = entity_metadata_wrapper('catalyst', $file);
-    switch ($file->field_media_type->value()) {
+    switch ($file->field__media_type->value()) {
       case 'local':
       case 'remote':
-        return url($file->field_media_path->value());
+        return url($file->field__media_path->value());
       case 'custom':
         if ($format == 'url') {
-          return $file->field_media_file->file->url->value();
+          return $file->field__media_file->file->url->value();
         }
         else {
-          $url = parse_url($file->field_media_file->file->url->value());
+          $url = parse_url($file->field__media_file->file->url->value());
           return $url['path'];
         }
     }
@@ -125,7 +125,7 @@ function catalyst_media_fileurl($machine_name) {
  * Implements hook_form_alter().
  */
 function catalyst_media_form_alter(&$form, &$form_state, $form_id) {
-  if (isset($form['field_media_type'], $form['field_media_path'])) {
+  if (isset($form['field__media_type'], $form['field__media_path'])) {
     $form['#attached']['js'][] = drupal_get_path('module', 'catalyst_media') . '/catalyst_media.admin.js';
     $form['#after_build'][] = 'catalyst_media_admin_form_after_build';
   }
@@ -140,14 +140,14 @@ function catalyst_media_inline_entity_form_entity_form_alter(&$entity_form, &$fo
 
 function catalyst_media_admin_form_after_build($form, &$form_state) {
   $ids = array(
-    'type' => $form['field_media_type']['#id'],
-    'path' => $form['field_media_path']['#id'],
+    'type' => $form['field__media_type']['#id'],
+    'path' => $form['field__media_path']['#id'],
   );
-  if (isset($form['field_media_content'])) {
-    $ids['custom'] = $form['field_media_content']['#id'];
+  if (isset($form['field__body'])) {
+    $ids['custom'] = $form['field__body']['#id'];
   }
-  elseif (isset($form['field_media_file'])) {
-    $ids['custom'] = $form['field_media_file']['#id'];
+  elseif (isset($form['field__media_file'])) {
+    $ids['custom'] = $form['field__media_file']['#id'];
   }
   $form['#attached']['js'][] = array(
     'data' => array('catalystMediaAdmin' => array('ids' => $ids)),
@@ -162,14 +162,14 @@ function catalyst_media_admin_form_after_build($form, &$form_state) {
 function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
   $collection = array(
     'css' => array(
-      'field_layout_includes_css' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field_cpage_includes_css' => CATALYST_MEDIA_GROUP_PAGE,
-      'field_catalyst_includes_css' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__media_stylesheets__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field__media_stylesheets__page' => CATALYST_MEDIA_GROUP_PAGE,
+      'field__media_stylesheets' => CATALYST_MEDIA_GROUP_OTHER,
     ),
     'js' => array(
-      'field_layout_includes_js' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field_cpage_includes_js' => CATALYST_MEDIA_GROUP_PAGE,
-      'field_catalyst_includes_js' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__media_javascripts__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field__media_javascripts__page' => CATALYST_MEDIA_GROUP_PAGE,
+      'field__media_javascripts' => CATALYST_MEDIA_GROUP_OTHER,
     ),
   );
 
@@ -189,14 +189,14 @@ function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
   // Process custom fields
   $collection = array(
     'css' => array(
-      'field_layout_css' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field_cpage_custom_css' => CATALYST_MEDIA_GROUP_PAGE,
-      'field_catalyst_custom_css' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__css__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field__css__page' => CATALYST_MEDIA_GROUP_PAGE,
+      'field__css' => CATALYST_MEDIA_GROUP_OTHER,
     ),
     'js' => array(
-      'field_layout_js' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field_cpage_custom_js' => CATALYST_MEDIA_GROUP_PAGE,
-      'field_catalyst_custom_js' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__js__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
+      'field__js__page' => CATALYST_MEDIA_GROUP_PAGE,
+      'field__js' => CATALYST_MEDIA_GROUP_OTHER,
     ),
   );
   foreach ($collection AS $type => $fields) {

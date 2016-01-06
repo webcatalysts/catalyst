@@ -56,13 +56,13 @@ function catalyst_media_catalyst_export_dependencies($export, $group) {
     $dependencies = array();
     $fields = array(
       // field => type
-      'field_catalyst_includes_css' => 'stylesheet',
-      'field_cpage_includes_css' => 'stylesheet',
-      'field_layout_includes_css' => 'stylesheet',
-      'field_catalyst_includes_js' => 'javascript',
-      'field_cpage_includes_js' => 'javascript',
-      'field_layout_includes_js' => 'javascript',
-      'field_catalyst_shared_files' => 'file',
+      'field__media_stylesheets' => 'stylesheet',
+      'field__media_stylesheets__page' => 'stylesheet',
+      'field__media_stylesheets__layout' => 'stylesheet',
+      'field__media_javascripts' => 'javascript',
+      'field__media_javascripts__page' => 'javascript',
+      'field__media_javascripts__layout' => 'javascript',
+      'field__media_files' => 'file',
     );
     $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
     foreach ($fields AS $field => $_type) {
@@ -86,27 +86,27 @@ function catalyst_media_catalyst_prepare_export($export, $group, $exports) {
     'title' => $wrapper->label(),
     'created' => $wrapper->created->value(),
     'changed' => $wrapper->changed->value(),
-    'machine_name' => $wrapper->field_media_machine->machine->value(),
-    'media_type' => $wrapper->field_media_type->value(),
-    'media_path' => $wrapper->field_media_path->value(),
+    'machine_name' => $wrapper->field__machine->machine->value(),
+    'media_type' => $wrapper->field__media_type->value(),
+    'media_path' => $wrapper->field__media_path->value(),
   );
   if (in_array($group['type'], array('stylesheet', 'javascript'))) {
-    $export['content'] = entity_valval($wrapper->field_media_content);
+    $export['content'] = entity_valval($wrapper->field__body);
   }
   switch ($group['type']) {
     case 'stylesheet':
       $export['files_custom'] = catalyst_export_helper_files(
-        $wrapper->field_catalyst_custom_files, $wrapper->getIdentifier());
+        $wrapper->field__files, $wrapper->getIdentifier());
       $export['files_shared'] = catalyst_export_helper_filter_references(
-        $wrapper->field_catalyst_shared_files, 'file', $exports);
+        $wrapper->field__media_files, 'file', $exports);
       break;
     case 'javascript':
-      $export['defer'] = $wrapper->field_javascript_defer->value();
-      $export['scope'] = $wrapper->field_javascript_scope->value();
+      $export['defer'] = $wrapper->field__media_javascript_defer->value();
+      $export['scope'] = $wrapper->field__media_javascript_scope->value();
       break;
     case 'file':
       $export['file_path'] = catalyst_export_helper_files(
-        $wrapper->field_media_file, $wrapper->getIdentifier());
+        $wrapper->field__media_file, $wrapper->getIdentifier());
       break;
   }
   return (object)$export;

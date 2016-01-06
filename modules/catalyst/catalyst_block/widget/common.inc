@@ -16,8 +16,8 @@ function block_placement_widget_region_options($layout, $langcode = LANGUAGE_NON
     if (!is_object($layout)) {
       $layout = entity_load_single('catalyst', $layout);
     }
-    if ($layout->field_layout_regions) {
-      foreach ($layout->field_layout_regions[$langcode] AS $region) {
+    if ($layout->field__layout_regions) {
+      foreach ($layout->field__layout_regions[$langcode] AS $region) {
         $options[$region['machine']] = $region['text'];
       }
     }

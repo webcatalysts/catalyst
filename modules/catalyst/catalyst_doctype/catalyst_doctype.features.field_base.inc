@@ -10,38 +10,48 @@
 function catalyst_doctype_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_catalyst_drupal_processing'.
-  $field_bases['field_catalyst_drupal_processing'] = array(
+  // Exported field_base: 'field__doctype'.
+  $field_bases['field__doctype'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_catalyst_drupal_processing',
+    'field_name' => 'field__doctype',
     'indexes' => array(
-      'value' => array(
-        0 => 'value',
+      'target_id' => array(
+        0 => 'target_id',
       ),
     ),
     'locked' => 0,
-    'module' => 'list',
+    'module' => 'entityreference',
     'settings' => array(
-      'allowed_values' => array(
-        0 => '',
-        1 => '',
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'doctype' => 'doctype',
+        ),
       ),
-      'allowed_values_function' => '',
+      'target_type' => 'catalyst',
     ),
     'translatable' => 0,
-    'type' => 'list_boolean',
+    'type' => 'entityreference',
   );
 
-  // Exported field_base: 'field_doctype_charset'.
-  $field_bases['field_doctype_charset'] = array(
+  // Exported field_base: 'field__doctype_charset'.
+  $field_bases['field__doctype_charset'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_doctype_charset',
+    'field_name' => 'field__doctype_charset',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -56,32 +66,13 @@ function catalyst_doctype_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_doctype_content'.
-  $field_bases['field_doctype_content'] = array(
+  // Exported field_base: 'field__doctype_content_type'.
+  $field_bases['field__doctype_content_type'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_doctype_content',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
-  );
-
-  // Exported field_base: 'field_doctype_content_type'.
-  $field_bases['field_doctype_content_type'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_doctype_content_type',
+    'field_name' => 'field__doctype_content_type',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -94,63 +85,6 @@ function catalyst_doctype_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'text',
-  );
-
-  // Exported field_base: 'field_doctype_ondeselect'.
-  $field_bases['field_doctype_ondeselect'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_doctype_ondeselect',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
-  );
-
-  // Exported field_base: 'field_doctype_onselect'.
-  $field_bases['field_doctype_onselect'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_doctype_onselect',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
-  );
-
-  // Exported field_base: 'field_doctype_preprocess'.
-  $field_bases['field_doctype_preprocess'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_doctype_preprocess',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
   );
 
   return $field_bases;

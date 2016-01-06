@@ -23,9 +23,9 @@ function catalyst_template_field_group_info() {
     'label' => 'Advanced',
     'weight' => '16',
     'children' => array(
-      0 => 'field_catalyst_html_head',
-      1 => 'field_catalyst_preprocess_php',
-      2 => 'field_catalyst_enable_debugging',
+      0 => 'field__html_head',
+      1 => 'field__preprocess',
+      2 => 'field__debug',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -53,8 +53,8 @@ function catalyst_template_field_group_info() {
     'label' => 'Blocks',
     'weight' => '15',
     'children' => array(
-      0 => 'field_catalyst_blocks_lf',
-      1 => 'field_catalyst_blocks_add',
+      0 => 'field__blockplacements__layfield',
+      1 => 'field__blocks_related',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -81,8 +81,8 @@ function catalyst_template_field_group_info() {
     'label' => 'Stylesheets',
     'weight' => '12',
     'children' => array(
-      0 => 'field_catalyst_includes_css',
-      1 => 'field_catalyst_custom_css',
+      0 => 'field__media_stylesheets',
+      1 => 'field__css',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -110,8 +110,8 @@ function catalyst_template_field_group_info() {
     'label' => 'Media/Files',
     'weight' => '14',
     'children' => array(
-      0 => 'field_catalyst_custom_files',
-      1 => 'field_catalyst_shared_files',
+      0 => 'field__files',
+      1 => 'field__media_files',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -138,8 +138,8 @@ function catalyst_template_field_group_info() {
     'label' => 'Javascript',
     'weight' => '13',
     'children' => array(
-      0 => 'field_catalyst_includes_js',
-      1 => 'field_catalyst_custom_js',
+      0 => 'field__media_javascripts',
+      1 => 'field__js',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

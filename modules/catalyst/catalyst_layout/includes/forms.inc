@@ -99,8 +99,8 @@ function catalyst_default_layout_options() {
   if ($layouts = catalyst_load('layout')) {
     foreach ($layouts AS $layout) {
       $wrapper = entity_metadata_wrapper('catalyst', $layout);
-      if ($doctype = $wrapper->field_layout_doctype) {
-        if ($doctype->field_doctype_content_type->value() == 'text/html') {
+      if ($doctype = $wrapper->field__doctype) {
+        if ($doctype->field__doctype_content_type->value() == 'text/html') {
           $options[$wrapper->getIdentifier()] = $wrapper->label();
         }
       }

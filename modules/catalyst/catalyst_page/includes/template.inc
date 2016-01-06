@@ -9,15 +9,15 @@ class CatalystNodePage extends CatalystNodeTemplate {
 
   const ENTITY_TYPE = 'node';
   public function getTemplate() {
-    return entity_valval($this->wrapper->field_cpage_content);
+    return entity_valval($this->wrapper->field__body);
   }
   public function getHTMLHead() {
-    return entity_valval($this->wrapper->field_cpage_head);
+    return entity_valval($this->wrapper->field__html_head);
   }
   public function getDefaultTemplate() {
     return "";
   }
   public function getPreprocessPHP() {
-    return entity_valval($this->wrapper->field_cpage_preprocess);
+    return entity_valval($this->wrapper->field__preprocess);
   }
 }

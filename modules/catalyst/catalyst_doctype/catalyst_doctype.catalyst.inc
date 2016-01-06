@@ -39,9 +39,9 @@ function catalyst_doctype_catalyst_export_dependencies($export, $group) {
   if (isset($group['entity_type'])) {
     $dependencies = array();
     // Determine dependencies for items that rely on doctypes
-    if (isset($export->field_layout_doctype)) {
+    if (isset($export->field__doctype)) {
       $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
-      $doctype = $wrapper->field_layout_doctype;
+      $doctype = $wrapper->field__doctype;
       catalyst_add_export($dependencies, 'doctype', $doctype->getIdentifier());
     }
     return $dependencies;
@@ -58,12 +58,12 @@ function catalyst_doctype_catalyst_prepare_export($export, $group, $exports) {
     'title' => $wrapper->title->value(),
     'created' => $wrapper->created->value(),
     'changed' => $wrapper->changed->value(),
-    'content' => entity_valval($wrapper->field_doctype_content),
-    'charset' => $wrapper->field_doctype_charset->value(),
-    'http_content_type' => $wrapper->field_doctype_content_type->value(),
-    'drupal_processing' => $wrapper->field_catalyst_drupal_processing->value(),
-    'preprocess_php' => entity_valval($wrapper->field_doctype_preprocess),
-    'onselect' => entity_valval($wrapper->field_doctype_onselect),
-    'ondeselect' => entity_valval($wrapper->field_doctype_ondeselect),
+    'content' => entity_valval($wrapper->field__body),
+    'charset' => $wrapper->field__doctype_charset->value(),
+    'http_content_type' => $wrapper->field__doctype_content_type->value(),
+    'drupal_processing' => $wrapper->field__drupal_processing->value(),
+    'preprocess_php' => entity_valval($wrapper->field__preprocess),
+    'onselect' => entity_valval($wrapper->field__onselect),
+    'ondeselect' => entity_valval($wrapper->field__ondeselect),
   );
 }

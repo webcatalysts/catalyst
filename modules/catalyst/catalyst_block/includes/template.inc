@@ -11,14 +11,14 @@ class CatalystBlockTemplate extends CatalystEntityTemplate {
     return NULL;
   }
   protected function retrieveTemplate() {
-    return $this->wrapper->field_block_content->value->value();
+    return $this->wrapper->field__body->value->value();
   }
 
   public function getHTMLHead() {
     return NULL;
   }
   public function getPreprocessPHP() {
-    return entity_valval($this->wrapper->field_block_preprocess);
+    return entity_valval($this->wrapper->field__preprocess);
   }
 }
 

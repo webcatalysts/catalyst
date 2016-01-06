@@ -10,13 +10,83 @@
 function catalyst_media_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_javascript_defer'.
-  $field_bases['field_javascript_defer'] = array(
+  // Exported field_base: 'field__media_stylesheets'.
+  $field_bases['field__media_stylesheets'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__media_stylesheets',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'stylesheet' => 'stylesheet',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field__media_javascripts'.
+  $field_bases['field__media_javascripts'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__media_javascripts',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'javascript' => 'javascript',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field__media_javascript_defer'.
+  $field_bases['field__media_javascript_defer'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_javascript_defer',
+    'field_name' => 'field__media_javascript_defer',
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -35,13 +105,13 @@ function catalyst_media_field_default_field_bases() {
     'type' => 'list_boolean',
   );
 
-  // Exported field_base: 'field_javascript_scope'.
-  $field_bases['field_javascript_scope'] = array(
+  // Exported field_base: 'field__media_javascript_scope'.
+  $field_bases['field__media_javascript_scope'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_javascript_scope',
+    'field_name' => 'field__media_javascript_scope',
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -60,32 +130,13 @@ function catalyst_media_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_media_content'.
-  $field_bases['field_media_content'] = array(
+  // Exported field_base: 'field__media_file'.
+  $field_bases['field__media_file'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_media_content',
-    'indexes' => array(
-      'format' => array(
-        0 => 'format',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'text',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'text_long',
-  );
-
-  // Exported field_base: 'field_media_file'.
-  $field_bases['field_media_file'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_media_file',
+    'field_name' => 'field__media_file',
     'indexes' => array(
       'fid' => array(
         0 => 'fid',
@@ -102,35 +153,13 @@ function catalyst_media_field_default_field_bases() {
     'type' => 'file',
   );
 
-  // Exported field_base: 'field_media_machine'.
-  $field_bases['field_media_machine'] = array(
+  // Exported field_base: 'field__media_path'.
+  $field_bases['field__media_path'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_media_machine',
-    'indexes' => array(
-      'machine' => array(
-        0 => 'machine',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'machine',
-    'settings' => array(
-      'max_length' => 128,
-      'unique_per' => 'bundle',
-    ),
-    'translatable' => 0,
-    'type' => 'machine',
-  );
-
-  // Exported field_base: 'field_media_path'.
-  $field_bases['field_media_path'] = array(
-    'active' => 1,
-    'cardinality' => 1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field_media_path',
+    'field_name' => 'field__media_path',
     'indexes' => array(
       'format' => array(
         0 => 'format',
@@ -145,13 +174,13 @@ function catalyst_media_field_default_field_bases() {
     'type' => 'text',
   );
 
-  // Exported field_base: 'field_media_type'.
-  $field_bases['field_media_type'] = array(
+  // Exported field_base: 'field__media_type'.
+  $field_bases['field__media_type'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_media_type',
+    'field_name' => 'field__media_type',
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -171,13 +200,13 @@ function catalyst_media_field_default_field_bases() {
     'type' => 'list_text',
   );
 
-  // Exported field_base: 'field_stylesheet_media'.
-  $field_bases['field_stylesheet_media'] = array(
+  // Exported field_base: 'field__media_stylesheet_media'.
+  $field_bases['field__media_stylesheet_media'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_stylesheet_media',
+    'field_name' => 'field__media_stylesheet_media',
     'indexes' => array(
       'value' => array(
         0 => 'value',
@@ -195,6 +224,181 @@ function catalyst_media_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'list_text',
+  );
+
+  // Exported field_base: 'field__media_stylesheets__layout'.
+  $field_bases['field__media_stylesheets__layout'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__media_stylesheets__layout',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'stylesheet' => 'stylesheet',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field__media_javascripts__layout'.
+  $field_bases['field__media_javascripts__layout'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__media_javascripts__layout',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'javascript' => 'javascript',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field__media_files'.
+  $field_bases['field__media_files'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__media_files',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'file' => 'file',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field__media_stylesheets__page'.
+  $field_bases['field__media_stylesheets__page'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__media_stylesheets__page',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'stylesheet' => 'stylesheet',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
+  );
+
+  // Exported field_base: 'field__media_javascripts__page'.
+  $field_bases['field__media_javascripts__page'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__media_javascripts__page',
+    'indexes' => array(
+      'target_id' => array(
+        0 => 'target_id',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'entityreference',
+    'settings' => array(
+      'handler' => 'base',
+      'handler_settings' => array(
+        'behaviors' => array(
+          'views-select-list' => array(
+            'status' => 1,
+          ),
+        ),
+        'sort' => array(
+          'type' => 'none',
+        ),
+        'target_bundles' => array(
+          'javascript' => 'javascript',
+        ),
+      ),
+      'target_type' => 'catalyst',
+    ),
+    'translatable' => 0,
+    'type' => 'entityreference',
   );
 
   return $field_bases;

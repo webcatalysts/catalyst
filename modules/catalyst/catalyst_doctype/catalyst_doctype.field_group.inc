@@ -23,7 +23,7 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Advanced Settings',
     'weight' => '20',
     'children' => array(
-      0 => 'field_doctype_preprocess',
+      0 => 'field__preprocess',
       1 => 'group_doctype_help',
       2 => 'group_doctype_drupal',
       3 => 'group_doctype_form_alter',
@@ -54,9 +54,9 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Basics',
     'weight' => '15',
     'children' => array(
-      0 => 'field_doctype_charset',
-      1 => 'field_doctype_content',
-      2 => 'field_doctype_content_type',
+      0 => 'field__doctype_charset',
+      1 => 'field__body',
+      2 => 'field__doctype_content_type',
       3 => 'title',
     ),
     'format_type' => 'htab',
@@ -85,7 +85,7 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Drupal options',
     'weight' => '25',
     'children' => array(
-      0 => 'field_catalyst_drupal_processing',
+      0 => 'field__drupal_processing',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -113,8 +113,8 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Form customizations',
     'weight' => '26',
     'children' => array(
-      0 => 'field_doctype_ondeselect',
-      1 => 'field_doctype_onselect',
+      0 => 'field__ondeselect',
+      1 => 'field__onselect',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -142,7 +142,7 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Custom Help/Instructions',
     'weight' => '27',
     'children' => array(
-      0 => 'field_catalyst_form_help',
+      0 => 'field__admin_notes',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(

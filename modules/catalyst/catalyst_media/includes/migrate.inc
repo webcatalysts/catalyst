@@ -10,7 +10,7 @@
 abstract class CatalystMediaMigration extends CatalystEntityMigration {
   use CatalystEntityMachineNamePrepare;
 
-  protected $machineField = 'field_media_machine';
+  protected $machineField = 'field__machine';
   protected $machineKey = 'machine_name';
 
   protected function sourceFields() {
@@ -23,9 +23,9 @@ abstract class CatalystMediaMigration extends CatalystEntityMigration {
 
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field_media_machine', 'machine_name');
-    $this->addFieldMapping('field_media_type', 'media_type');
-    $this->addFieldMapping('field_media_path', 'media_path');
+    $this->addFieldMapping('field__machine', 'machine_name');
+    $this->addFieldMapping('field__media_type', 'media_type');
+    $this->addFieldMapping('field__media_path', 'media_path');
   }
 }
 
@@ -41,10 +41,10 @@ class CatalystMediaStylesheetMigration extends CatalystMediaMigration {
   }
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field_stylesheet_media', 'media');
-    $this->addFormattedFieldMapping('field_media_content', 'content', 'css');
-    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file');
-    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom');
+    $this->addFieldMapping('field__media_stylesheet_media', 'media');
+    $this->addFormattedFieldMapping('field__body', 'content', 'css');
+    $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
+    $this->addFileFieldMapping('field__files', 'files_custom');
   }
 }
 
@@ -59,9 +59,9 @@ class CatalystMediaJavascriptMigration extends CatalystMediaMigration {
   }
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field_javascript_defer', 'defer');
-    $this->addFieldMapping('field_javascript_scope', 'scope');
-    $this->addFormattedFieldMapping('field_media_content', 'content', 'js');
+    $this->addFieldMapping('field__media_javascript_defer', 'defer');
+    $this->addFieldMapping('field__media_javascript_scope', 'scope');
+    $this->addFormattedFieldMapping('field__body', 'content', 'js');
   }
 }
 
@@ -74,6 +74,6 @@ class CatalystMediaFileMigration extends CatalystMediaMigration {
   }
   protected function mapFields() {
     parent::mapFields();
-    $this->addFileFieldMapping('field_media_file', 'file_path');
+    $this->addFileFieldMapping('field__media_file', 'file_path');
   }
 }

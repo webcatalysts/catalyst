@@ -10,13 +10,13 @@
 function catalyst_template_field_default_field_bases() {
   $field_bases = array();
 
-  // Exported field_base: 'field_template_bundle'.
-  $field_bases['field_template_bundle'] = array(
+  // Exported field_base: 'field__template_bundle'.
+  $field_bases['field__template_bundle'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_template_bundle',
+    'field_name' => 'field__template_bundle',
     'indexes' => array(
       'machine' => array(
         0 => 'machine',
@@ -32,13 +32,13 @@ function catalyst_template_field_default_field_bases() {
     'type' => 'machine',
   );
 
-  // Exported field_base: 'field_template_entity_type'.
-  $field_bases['field_template_entity_type'] = array(
+  // Exported field_base: 'field__template_entity_type'.
+  $field_bases['field__template_entity_type'] = array(
     'active' => 1,
     'cardinality' => 1,
     'deleted' => 0,
     'entity_types' => array(),
-    'field_name' => 'field_template_entity_type',
+    'field_name' => 'field__template_entity_type',
     'indexes' => array(
       'machine' => array(
         0 => 'machine',

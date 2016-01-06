@@ -182,13 +182,13 @@ print catalyst_admin_views_no_results($view, \'layout\', array(
       'settings' => array(
         'show_all_tokens' => 1,
         'display_values' => array(
-          'layout::field_layout_drupal_js' => 'layout::field_layout_drupal_js',
-          'layout::field_drupal_css' => 'layout::field_drupal_css',
-          'layout::field_layout_drupal_processing' => 'layout::field_layout_drupal_processing',
-          'layout::field_enable_debugging' => 'layout::field_enable_debugging',
-          'layout::field_layout_page_title_pattern' => 'layout::field_layout_page_title_pattern',
-          'layout::field_layout_show_messages' => 'layout::field_layout_show_messages',
-          'layout::field_layout_doctype' => 'layout::field_layout_doctype',
+          'layout::field__layout_drupal_js' => 'layout::field__layout_drupal_js',
+          'layout::field__layout_drupal_css' => 'layout::field__layout_drupal_css',
+          'layout::field__drupal_processing' => 'layout::field__drupal_processing',
+          'layout::field__debug' => 'layout::field__debug',
+          'layout::field__layout_page_title_pattern' => 'layout::field__layout_page_title_pattern',
+          'layout::field__layout_show_messages' => 'layout::field__layout_show_messages',
+          'layout::field__doctype' => 'layout::field__doctype',
         ),
       ),
     ),
@@ -276,17 +276,17 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['filters']['type']['value'] = array(
     'layout' => 'layout',
   );
-  /* Filter criterion: catalyst: Doctype (field_layout_doctype) */
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['id'] = 'field_layout_doctype_target_id';
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['table'] = 'field_data_field_layout_doctype';
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['field'] = 'field_layout_doctype_target_id';
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['expose']['operator_id'] = 'field_layout_doctype_target_id_op';
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['expose']['label'] = 'Doctype';
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['expose']['operator'] = 'field_layout_doctype_target_id_op';
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['expose']['identifier'] = 'field_layout_doctype_target_id';
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_layout_doctype_target_id']['expose']['remember_roles'] = array(
+  /* Filter criterion: catalyst: Doctype (field__doctype) */
+  $handler->display->display_options['filters']['field__doctype_target_id']['id'] = 'field__doctype_target_id';
+  $handler->display->display_options['filters']['field__doctype_target_id']['table'] = 'field_data_field__doctype';
+  $handler->display->display_options['filters']['field__doctype_target_id']['field'] = 'field__doctype_target_id';
+  $handler->display->display_options['filters']['field__doctype_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__doctype_target_id']['expose']['operator_id'] = 'field__doctype_target_id_op';
+  $handler->display->display_options['filters']['field__doctype_target_id']['expose']['label'] = 'Doctype';
+  $handler->display->display_options['filters']['field__doctype_target_id']['expose']['operator'] = 'field__doctype_target_id_op';
+  $handler->display->display_options['filters']['field__doctype_target_id']['expose']['identifier'] = 'field__doctype_target_id';
+  $handler->display->display_options['filters']['field__doctype_target_id']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__doctype_target_id']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     6 => 0,

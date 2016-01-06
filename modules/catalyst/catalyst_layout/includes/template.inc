@@ -16,7 +16,7 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
   public function getDoctype() {
     $doctype = FALSE;
     if ($this->has_entity) {
-      $doctype = $this->wrapper->field_layout_doctype->value();
+      $doctype = $this->wrapper->field__doctype->value();
     }
     return new CatalystEntityDoctype($doctype);
   }
@@ -24,7 +24,7 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
   public function getRegions() {
     $regions = array();
     if ($this->has_entity) {
-      foreach ($this->wrapper->field_layout_regions->value() AS $region) {
+      foreach ($this->wrapper->field__layout_regions->value() AS $region) {
         $regions[] = $region['machine'];
       }
     }
@@ -33,42 +33,42 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
 
   public function getHTMLHead() {
     if ($this->has_entity) {
-      return entity_valval($this->wrapper->field_layout_html_head);
+      return entity_valval($this->wrapper->field__html_head);
     }
     return NULL;
   }
 
   public function getPreprocessPHP() {
     if ($this->has_entity) {
-      return entity_valval($this->wrapper->field_layout_preprocess);
+      return entity_valval($this->wrapper->field__preprocess);
     }
     return NULL;
   }
 
   public function getDebuggingEnabled() {
     if ($this->has_entity) {
-      return $this->wrapper->field_layout_debug->value();
+      return $this->wrapper->field__debug->value();
     }
     return FALSE;
   }
 
   public function getShowMessages() {
     if ($this->has_entity) {
-      return $this->wrapper->field_layout_show_messages->value();
+      return $this->wrapper->field__layout_show_messages->value();
     }
     return FALSE;
   }
 
   public function getPageTitlePattern() {
     if ($this->has_entity) {
-      return $this->wrapper->field_layout_page_title_pattern->value();
+      return $this->wrapper->field__layout_page_title_pattern->value();
     }
     return '{{ title }}';
   }
 
   public function getBlockPlacements() {
     if ($this->has_entity) {
-      return $this->wrapper->field_layout_blocks->value();
+      return $this->wrapper->field__blockplacements__layout->value();
     }
     return array();
   }

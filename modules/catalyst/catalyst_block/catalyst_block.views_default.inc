@@ -42,7 +42,7 @@ function catalyst_block_views_default_views() {
     'title' => 'title',
     'php_2' => 'php_2',
     'title_1' => 'title_1',
-    'field_block_machine' => 'field_block_machine',
+    'field__machine' => 'field__machine',
     'created' => 'created',
     'changed' => 'changed',
     'php' => 'php',
@@ -81,7 +81,7 @@ function catalyst_block_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_block_machine' => array(
+    'field__machine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -170,23 +170,6 @@ print catalyst_admin_views_no_results($view, \'blocks\', array(
       'override_label' => 1,
       'label' => 'Delete block',
     ),
-    'action::views_bulk_operations_modify_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'settings' => array(
-        'show_all_tokens' => 1,
-        'display_values' => array(
-          'layout::field_layout_drupal_js' => 'layout::field_layout_drupal_js',
-          'layout::field_drupal_css' => 'layout::field_drupal_css',
-          'layout::field_layout_page_title_pattern' => 'layout::field_layout_page_title_pattern',
-          'layout::field_layout_show_messages' => 'layout::field_layout_show_messages',
-          'layout::field_layout_doctype' => 'layout::field_layout_doctype',
-        ),
-      ),
-    ),
   );
   /* Field: Catalyst: Id */
   $handler->display->display_options['fields']['id']['id'] = 'id';
@@ -220,9 +203,9 @@ return catalyst_admin_eck_entity_link(\'block\', $row->id, filter_xss_admin($row
   $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title_1']['alter']['text'] = '[php_2]';
   /* Field: catalyst: Machine name */
-  $handler->display->display_options['fields']['field_block_machine']['id'] = 'field_block_machine';
-  $handler->display->display_options['fields']['field_block_machine']['table'] = 'field_data_field_block_machine';
-  $handler->display->display_options['fields']['field_block_machine']['field'] = 'field_block_machine';
+  $handler->display->display_options['fields']['field__machine']['id'] = 'field__machine';
+  $handler->display->display_options['fields']['field__machine']['table'] = 'field_data_field__machine';
+  $handler->display->display_options['fields']['field__machine']['field'] = 'field__machine';
   /* Field: Catalyst: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';

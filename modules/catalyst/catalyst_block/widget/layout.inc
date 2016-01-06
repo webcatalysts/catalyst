@@ -9,7 +9,7 @@
  * Base form handler for the block placement layout widget.
  */
 function block_placement_layout_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
-  $instance['settings']['regions_field_name'] = 'field_layout_regions';
+  $instance['settings']['regions_field_name'] = 'field__layout_regions';
 
   $form['#block_placement'] = array(
     'widget_field_name' => $instance['field_name'],

@@ -23,11 +23,11 @@ function catalyst_media_field_group_info() {
     'label' => 'Stylesheet content',
     'weight' => '2',
     'children' => array(
-      0 => 'field_media_content',
-      1 => 'field_media_machine',
-      2 => 'field_media_path',
-      3 => 'field_media_type',
-      4 => 'field_stylesheet_media',
+      0 => 'field__body',
+      1 => 'field__machine',
+      2 => 'field__media_path',
+      3 => 'field__media_type',
+      4 => 'field__media_stylesheet_media',
       5 => 'title',
     ),
     'format_type' => 'htab',
@@ -56,8 +56,8 @@ function catalyst_media_field_group_info() {
     'label' => 'Media/Files',
     'weight' => '3',
     'children' => array(
-      0 => 'field_catalyst_custom_files',
-      1 => 'field_catalyst_shared_files',
+      0 => 'field__files',
+      1 => 'field__media_files',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

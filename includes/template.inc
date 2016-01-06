@@ -72,7 +72,7 @@ abstract class CatalystEntityTemplate implements CatalystTemplateInterface {
 
   public function getDrupalProcessingEnabled() {
     if ($this->has_entity) {
-      return $this->wrapper->field_catalyst_drupal_processing->value();
+      return $this->wrapper->field__drupal_processing->value();
     }
     return FALSE;
   }
@@ -136,6 +136,6 @@ trait CatalystLayoutDefaultTwigTemplate {
 trait CatalystDoctypeDefaultTwigTemplate {
   use CatalystTwigTemplateRenderer;
   protected function getDefaultTemplate() {
-    return field_doctype_content_default_value();
+    return field__body_default_value();
   }
 }

@@ -23,10 +23,10 @@ function catalyst_layout_field_group_info() {
     'label' => 'Advanced',
     'weight' => '9',
     'children' => array(
-      0 => 'field_layout_debug',
-      1 => 'field_layout_html_head',
-      2 => 'field_layout_page_title_pattern',
-      3 => 'field_layout_preprocess',
+      0 => 'field__debug',
+      1 => 'field__html_head',
+      2 => 'field__layout_page_title_pattern',
+      3 => 'field__preprocess',
       4 => 'group_layout_drupal',
       5 => 'group_layout_form_alter',
     ),
@@ -57,8 +57,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Blocks',
     'weight' => '8',
     'children' => array(
-      0 => 'field_catalyst_blocks_add',
-      1 => 'field_layout_blocks',
+      0 => 'field__blocks_related',
+      1 => 'field__blockplacements__layout',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -86,8 +86,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Layout Basics',
     'weight' => '3',
     'children' => array(
-      0 => 'field_layout_content',
-      1 => 'field_layout_doctype',
+      0 => 'field__body',
+      1 => 'field__doctype',
       2 => 'title',
     ),
     'format_type' => 'htab',
@@ -117,8 +117,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Stylesheets',
     'weight' => '4',
     'children' => array(
-      0 => 'field_layout_css',
-      1 => 'field_layout_includes_css',
+      0 => 'field__css__layout',
+      1 => 'field__media_stylesheets__layout',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -147,11 +147,10 @@ function catalyst_layout_field_group_info() {
     'label' => 'Drupal options',
     'weight' => '6',
     'children' => array(
-      0 => 'field_catalyst_drupal_processing',
-      1 => 'field_drupal_css',
-      2 => 'field_layout_drupal_js',
-      3 => 'field_layout_show_messages',
-      4 => 'field_layout_drupal_css',
+      0 => 'field__drupal_processing',
+      1 => 'field__layout_show_messages',
+      2 => 'field__layout_drupal_js',
+      3 => 'field__layout_drupal_css',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -178,8 +177,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Media/Files',
     'weight' => '6',
     'children' => array(
-      0 => 'field_catalyst_custom_files',
-      1 => 'field_catalyst_shared_files',
+      0 => 'field__files',
+      1 => 'field__media_files',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -207,8 +206,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Page form customizations',
     'weight' => '7',
     'children' => array(
-      0 => 'field_layout_ondeselect',
-      1 => 'field_layout_onselect',
+      0 => 'field__ondeselect',
+      1 => 'field__onselect',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -236,8 +235,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Javascript',
     'weight' => '5',
     'children' => array(
-      0 => 'field_layout_includes_js',
-      1 => 'field_layout_js',
+      0 => 'field__media_javascripts__layout',
+      1 => 'field__js__layout',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -266,7 +265,7 @@ function catalyst_layout_field_group_info() {
     'label' => 'Regions',
     'weight' => '7',
     'children' => array(
-      0 => 'field_layout_regions',
+      0 => 'field__layout_regions',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

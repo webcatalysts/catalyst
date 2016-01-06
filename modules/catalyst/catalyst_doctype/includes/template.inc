@@ -13,21 +13,21 @@ class CatalystEntityDoctype extends CatalystEntityTemplate implements CatalystDo
 
   public function getContentType() {
     if ($this->has_entity) {
-      return $this->wrapper->field_doctype_content_type->value();
+      return $this->wrapper->field__doctype_content_type->value();
     }
     return 'text/html';
   }
 
   public function getCharset() {
     if ($this->has_entity) {
-      return $this->wrapper->field_doctype_charset->value();
+      return $this->wrapper->field__doctype_charset->value();
     }
     return 'utf-8';
   }
 
   public function getPreprocessPHP() {
     if ($this->has_entity) {
-      return entity_valval($this->wrapper->field_doctype_preprocess);
+      return entity_valval($this->wrapper->field__preprocess);
     }
   }
 }

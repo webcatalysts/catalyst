@@ -42,13 +42,13 @@ function catalyst_media_views_default_views() {
     'title' => 'title',
     'php_2' => 'php_2',
     'title_1' => 'title_1',
-    'field_media_type' => 'field_media_type',
-    'field_media_machine' => 'field_media_machine',
+    'field__media_type' => 'field__media_type',
+    'field__machine' => 'field__machine',
     'created' => 'created',
     'changed' => 'changed',
     'php' => 'php',
     'php_1' => 'php',
-    'field_media_path' => 'php',
+    'field__media_path' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -83,14 +83,14 @@ function catalyst_media_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_media_type' => array(
+    'field__media_type' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_media_machine' => array(
+    'field__machine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -121,7 +121,7 @@ function catalyst_media_views_default_views() {
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_media_path' => array(
+    'field__media_path' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -186,25 +186,6 @@ print catalyst_admin_views_no_results($view, \'file\', array(
       'override_label' => 1,
       'label' => 'Delete layout',
     ),
-    'action::views_bulk_operations_modify_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'settings' => array(
-        'show_all_tokens' => 1,
-        'display_values' => array(
-          'layout::field_layout_drupal_js' => 'layout::field_layout_drupal_js',
-          'layout::field_drupal_css' => 'layout::field_drupal_css',
-          'layout::field_layout_drupal_processing' => 'layout::field_layout_drupal_processing',
-          'layout::field_enable_debugging' => 'layout::field_enable_debugging',
-          'layout::field_layout_page_title_pattern' => 'layout::field_layout_page_title_pattern',
-          'layout::field_layout_show_messages' => 'layout::field_layout_show_messages',
-          'layout::field_layout_doctype' => 'layout::field_layout_doctype',
-        ),
-      ),
-    ),
   );
   /* Field: Catalyst: Id */
   $handler->display->display_options['fields']['id']['id'] = 'id';
@@ -238,13 +219,13 @@ return catalyst_admin_eck_entity_link(\'file\', $row->id, filter_xss_admin($row-
   $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title_1']['alter']['text'] = '[php_2]';
   /* Field: catalyst: Type */
-  $handler->display->display_options['fields']['field_media_type']['id'] = 'field_media_type';
-  $handler->display->display_options['fields']['field_media_type']['table'] = 'field_data_field_media_type';
-  $handler->display->display_options['fields']['field_media_type']['field'] = 'field_media_type';
+  $handler->display->display_options['fields']['field__media_type']['id'] = 'field__media_type';
+  $handler->display->display_options['fields']['field__media_type']['table'] = 'field_data_field__media_type';
+  $handler->display->display_options['fields']['field__media_type']['field'] = 'field__media_type';
   /* Field: catalyst: Machine name */
-  $handler->display->display_options['fields']['field_media_machine']['id'] = 'field_media_machine';
-  $handler->display->display_options['fields']['field_media_machine']['table'] = 'field_data_field_media_machine';
-  $handler->display->display_options['fields']['field_media_machine']['field'] = 'field_media_machine';
+  $handler->display->display_options['fields']['field__machine']['id'] = 'field__machine';
+  $handler->display->display_options['fields']['field__machine']['table'] = 'field_data_field__machine';
+  $handler->display->display_options['fields']['field__machine']['field'] = 'field__machine';
   /* Field: Catalyst: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';
@@ -291,15 +272,15 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: catalyst: Path */
-  $handler->display->display_options['fields']['field_media_path']['id'] = 'field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['table'] = 'field_data_field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['field'] = 'field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['label'] = 'View';
-  $handler->display->display_options['fields']['field_media_path']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_media_path']['alter']['text'] = 'view';
-  $handler->display->display_options['fields']['field_media_path']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_media_path']['alter']['path'] = '[field_media_path]';
-  $handler->display->display_options['fields']['field_media_path']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['field__media_path']['id'] = 'field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['table'] = 'field_data_field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['field'] = 'field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['label'] = 'View';
+  $handler->display->display_options['fields']['field__media_path']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field__media_path']['alter']['text'] = 'view';
+  $handler->display->display_options['fields']['field__media_path']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field__media_path']['alter']['path'] = '[field__media_path]';
+  $handler->display->display_options['fields']['field__media_path']['alter']['target'] = '_blank';
   /* Filter criterion: Catalyst: catalyst type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
@@ -307,17 +288,17 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['filters']['type']['value'] = array(
     'file' => 'file',
   );
-  /* Filter criterion: catalyst: Type (field_media_type) */
-  $handler->display->display_options['filters']['field_media_type_value']['id'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['table'] = 'field_data_field_media_type';
-  $handler->display->display_options['filters']['field_media_type_value']['field'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['operator_id'] = 'field_media_type_value_op';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['label'] = 'Type';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['operator'] = 'field_media_type_value_op';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['identifier'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: catalyst: Type (field__media_type) */
+  $handler->display->display_options['filters']['field__media_type_value']['id'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['table'] = 'field_data_field__media_type';
+  $handler->display->display_options['filters']['field__media_type_value']['field'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['operator_id'] = 'field__media_type_value_op';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['operator'] = 'field__media_type_value_op';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['identifier'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     6 => 0,
@@ -391,14 +372,14 @@ return catalyst_admin_eck_entity_link(
     'title' => 'title',
     'php_2' => 'php_2',
     'title_1' => 'title_1',
-    'field_javascript_machine' => 'field_javascript_machine',
-    'field_media_type' => 'field_media_type',
-    'field_javascript_scope' => 'field_javascript_scope',
+    'field__machine' => 'field__machine',
+    'field__media_type' => 'field__media_type',
+    'field__media_javascript_scope' => 'field__media_javascript_scope',
     'created' => 'created',
     'changed' => 'changed',
     'php' => 'php',
     'php_1' => 'php',
-    'field_media_path' => 'php',
+    'field__media_path' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -433,21 +414,21 @@ return catalyst_admin_eck_entity_link(
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_javascript_machine' => array(
+    'field__machine' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_media_type' => array(
+    'field__media_type' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_javascript_scope' => array(
+    'field__media_javascript_scope' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -478,7 +459,7 @@ return catalyst_admin_eck_entity_link(
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_media_path' => array(
+    'field__media_path' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -543,23 +524,6 @@ print catalyst_admin_views_no_results($view, \'javascripts\', array(
       'override_label' => 1,
       'label' => 'Delete javascript',
     ),
-    'action::views_bulk_operations_modify_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'settings' => array(
-        'show_all_tokens' => 1,
-        'display_values' => array(
-          'layout::field_layout_drupal_js' => 'layout::field_layout_drupal_js',
-          'layout::field_drupal_css' => 'layout::field_drupal_css',
-          'layout::field_layout_page_title_pattern' => 'layout::field_layout_page_title_pattern',
-          'layout::field_layout_show_messages' => 'layout::field_layout_show_messages',
-          'layout::field_layout_doctype' => 'layout::field_layout_doctype',
-        ),
-      ),
-    ),
   );
   /* Field: Catalyst: Id */
   $handler->display->display_options['fields']['id']['id'] = 'id';
@@ -593,13 +557,13 @@ return catalyst_admin_eck_entity_link(\'javascript\', $row->id, filter_xss_admin
   $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title_1']['alter']['text'] = '[php_2]';
   /* Field: catalyst: Type */
-  $handler->display->display_options['fields']['field_media_type']['id'] = 'field_media_type';
-  $handler->display->display_options['fields']['field_media_type']['table'] = 'field_data_field_media_type';
-  $handler->display->display_options['fields']['field_media_type']['field'] = 'field_media_type';
+  $handler->display->display_options['fields']['field__media_type']['id'] = 'field__media_type';
+  $handler->display->display_options['fields']['field__media_type']['table'] = 'field_data_field__media_type';
+  $handler->display->display_options['fields']['field__media_type']['field'] = 'field__media_type';
   /* Field: catalyst: Scope */
-  $handler->display->display_options['fields']['field_javascript_scope']['id'] = 'field_javascript_scope';
-  $handler->display->display_options['fields']['field_javascript_scope']['table'] = 'field_data_field_javascript_scope';
-  $handler->display->display_options['fields']['field_javascript_scope']['field'] = 'field_javascript_scope';
+  $handler->display->display_options['fields']['field__media_javascript_scope']['id'] = 'field__media_javascript_scope';
+  $handler->display->display_options['fields']['field__media_javascript_scope']['table'] = 'field_data_field__media_javascript_scope';
+  $handler->display->display_options['fields']['field__media_javascript_scope']['field'] = 'field__media_javascript_scope';
   /* Field: Catalyst: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';
@@ -646,15 +610,15 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: catalyst: Path */
-  $handler->display->display_options['fields']['field_media_path']['id'] = 'field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['table'] = 'field_data_field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['field'] = 'field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['label'] = 'View';
-  $handler->display->display_options['fields']['field_media_path']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_media_path']['alter']['text'] = 'view';
-  $handler->display->display_options['fields']['field_media_path']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_media_path']['alter']['path'] = '[field_media_path]';
-  $handler->display->display_options['fields']['field_media_path']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['field__media_path']['id'] = 'field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['table'] = 'field_data_field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['field'] = 'field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['label'] = 'View';
+  $handler->display->display_options['fields']['field__media_path']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field__media_path']['alter']['text'] = 'view';
+  $handler->display->display_options['fields']['field__media_path']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field__media_path']['alter']['path'] = '[field__media_path]';
+  $handler->display->display_options['fields']['field__media_path']['alter']['target'] = '_blank';
   /* Filter criterion: Catalyst: catalyst type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
@@ -662,17 +626,17 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['filters']['type']['value'] = array(
     'javascript' => 'javascript',
   );
-  /* Filter criterion: catalyst: Type (field_media_type) */
-  $handler->display->display_options['filters']['field_media_type_value']['id'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['table'] = 'field_data_field_media_type';
-  $handler->display->display_options['filters']['field_media_type_value']['field'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['operator_id'] = 'field_media_type_value_op';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['label'] = 'Type';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['operator'] = 'field_media_type_value_op';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['identifier'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: catalyst: Type (field__media_type) */
+  $handler->display->display_options['filters']['field__media_type_value']['id'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['table'] = 'field_data_field__media_type';
+  $handler->display->display_options['filters']['field__media_type_value']['field'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['operator_id'] = 'field__media_type_value_op';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['operator'] = 'field__media_type_value_op';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['identifier'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     6 => 0,
@@ -681,17 +645,17 @@ return catalyst_admin_eck_entity_link(
     7 => 0,
     3 => 0,
   );
-  /* Filter criterion: catalyst: Scope (field_javascript_scope) */
-  $handler->display->display_options['filters']['field_javascript_scope_value']['id'] = 'field_javascript_scope_value';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['table'] = 'field_data_field_javascript_scope';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['field'] = 'field_javascript_scope_value';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['operator_id'] = 'field_javascript_scope_value_op';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['label'] = 'Scope';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['operator'] = 'field_javascript_scope_value_op';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['identifier'] = 'field_javascript_scope_value';
-  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_javascript_scope_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: catalyst: Scope (field__media_javascript_scope) */
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['id'] = 'field__media_javascript_scope_value';
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['table'] = 'field_data_field__media_javascript_scope';
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['field'] = 'field__media_javascript_scope_value';
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['expose']['operator_id'] = 'field__media_javascript_scope_value_op';
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['expose']['label'] = 'Scope';
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['expose']['operator'] = 'field__media_javascript_scope_value_op';
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['expose']['identifier'] = 'field__media_javascript_scope_value';
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__media_javascript_scope_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     6 => 0,
@@ -765,13 +729,13 @@ return catalyst_admin_eck_entity_link(
     'title' => 'title',
     'php_2' => 'php_2',
     'title_1' => 'title_1',
-    'field_media_type' => 'field_media_type',
-    'field_stylesheet_media' => 'field_stylesheet_media',
+    'field__media_type' => 'field__media_type',
+    'field__media_stylesheet_media' => 'field__media_stylesheet_media',
     'created' => 'created',
     'changed' => 'changed',
     'php' => 'php',
     'php_1' => 'php',
-    'field_media_path' => 'php',
+    'field__media_path' => 'php',
   );
   $handler->display->display_options['style_options']['default'] = 'changed';
   $handler->display->display_options['style_options']['info'] = array(
@@ -806,14 +770,14 @@ return catalyst_admin_eck_entity_link(
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_media_type' => array(
+    'field__media_type' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_stylesheet_media' => array(
+    'field__media_stylesheet_media' => array(
       'sortable' => 1,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -844,7 +808,7 @@ return catalyst_admin_eck_entity_link(
       'separator' => '',
       'empty_column' => 0,
     ),
-    'field_media_path' => array(
+    'field__media_path' => array(
       'sortable' => 0,
       'default_sort_order' => 'asc',
       'align' => '',
@@ -909,23 +873,6 @@ print catalyst_admin_views_no_results($view, \'stylesheets\', array(
       'override_label' => 1,
       'label' => 'Delete stylesheet',
     ),
-    'action::views_bulk_operations_modify_action' => array(
-      'selected' => 1,
-      'postpone_processing' => 0,
-      'skip_confirmation' => 0,
-      'override_label' => 0,
-      'label' => '',
-      'settings' => array(
-        'show_all_tokens' => 1,
-        'display_values' => array(
-          'layout::field_layout_drupal_js' => 'layout::field_layout_drupal_js',
-          'layout::field_drupal_css' => 'layout::field_drupal_css',
-          'layout::field_layout_page_title_pattern' => 'layout::field_layout_page_title_pattern',
-          'layout::field_layout_show_messages' => 'layout::field_layout_show_messages',
-          'layout::field_layout_doctype' => 'layout::field_layout_doctype',
-        ),
-      ),
-    ),
   );
   /* Field: Catalyst: Id */
   $handler->display->display_options['fields']['id']['id'] = 'id';
@@ -959,13 +906,13 @@ return catalyst_admin_eck_entity_link(\'stylesheet\', $row->id, filter_xss_admin
   $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title_1']['alter']['text'] = '[php_2]';
   /* Field: catalyst: Type */
-  $handler->display->display_options['fields']['field_media_type']['id'] = 'field_media_type';
-  $handler->display->display_options['fields']['field_media_type']['table'] = 'field_data_field_media_type';
-  $handler->display->display_options['fields']['field_media_type']['field'] = 'field_media_type';
+  $handler->display->display_options['fields']['field__media_type']['id'] = 'field__media_type';
+  $handler->display->display_options['fields']['field__media_type']['table'] = 'field_data_field__media_type';
+  $handler->display->display_options['fields']['field__media_type']['field'] = 'field__media_type';
   /* Field: catalyst: Media */
-  $handler->display->display_options['fields']['field_stylesheet_media']['id'] = 'field_stylesheet_media';
-  $handler->display->display_options['fields']['field_stylesheet_media']['table'] = 'field_data_field_stylesheet_media';
-  $handler->display->display_options['fields']['field_stylesheet_media']['field'] = 'field_stylesheet_media';
+  $handler->display->display_options['fields']['field__media_stylesheet_media']['id'] = 'field__media_stylesheet_media';
+  $handler->display->display_options['fields']['field__media_stylesheet_media']['table'] = 'field_data_field__media_stylesheet_media';
+  $handler->display->display_options['fields']['field__media_stylesheet_media']['field'] = 'field__media_stylesheet_media';
   /* Field: Catalyst: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';
@@ -1012,15 +959,15 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
   $handler->display->display_options['fields']['php_1']['php_click_sortable'] = '';
   /* Field: catalyst: Path */
-  $handler->display->display_options['fields']['field_media_path']['id'] = 'field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['table'] = 'field_data_field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['field'] = 'field_media_path';
-  $handler->display->display_options['fields']['field_media_path']['label'] = 'View';
-  $handler->display->display_options['fields']['field_media_path']['alter']['alter_text'] = TRUE;
-  $handler->display->display_options['fields']['field_media_path']['alter']['text'] = 'view';
-  $handler->display->display_options['fields']['field_media_path']['alter']['make_link'] = TRUE;
-  $handler->display->display_options['fields']['field_media_path']['alter']['path'] = '[field_media_path]';
-  $handler->display->display_options['fields']['field_media_path']['alter']['target'] = '_blank';
+  $handler->display->display_options['fields']['field__media_path']['id'] = 'field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['table'] = 'field_data_field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['field'] = 'field__media_path';
+  $handler->display->display_options['fields']['field__media_path']['label'] = 'View';
+  $handler->display->display_options['fields']['field__media_path']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['field__media_path']['alter']['text'] = 'view';
+  $handler->display->display_options['fields']['field__media_path']['alter']['make_link'] = TRUE;
+  $handler->display->display_options['fields']['field__media_path']['alter']['path'] = '[field__media_path]';
+  $handler->display->display_options['fields']['field__media_path']['alter']['target'] = '_blank';
   /* Filter criterion: Catalyst: catalyst type */
   $handler->display->display_options['filters']['type']['id'] = 'type';
   $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
@@ -1028,17 +975,17 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['filters']['type']['value'] = array(
     'stylesheet' => 'stylesheet',
   );
-  /* Filter criterion: catalyst: Type (field_media_type) */
-  $handler->display->display_options['filters']['field_media_type_value']['id'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['table'] = 'field_data_field_media_type';
-  $handler->display->display_options['filters']['field_media_type_value']['field'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['operator_id'] = 'field_media_type_value_op';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['label'] = 'Type';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['operator'] = 'field_media_type_value_op';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['identifier'] = 'field_media_type_value';
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_media_type_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: catalyst: Type (field__media_type) */
+  $handler->display->display_options['filters']['field__media_type_value']['id'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['table'] = 'field_data_field__media_type';
+  $handler->display->display_options['filters']['field__media_type_value']['field'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['operator_id'] = 'field__media_type_value_op';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['operator'] = 'field__media_type_value_op';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['identifier'] = 'field__media_type_value';
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__media_type_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     6 => 0,
@@ -1047,17 +994,17 @@ return catalyst_admin_eck_entity_link(
     7 => 0,
     3 => 0,
   );
-  /* Filter criterion: catalyst: Media (field_stylesheet_media) */
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['id'] = 'field_stylesheet_media_value';
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['table'] = 'field_data_field_stylesheet_media';
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['field'] = 'field_stylesheet_media_value';
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['exposed'] = TRUE;
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['expose']['operator_id'] = 'field_stylesheet_media_value_op';
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['expose']['label'] = 'Media';
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['expose']['operator'] = 'field_stylesheet_media_value_op';
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['expose']['identifier'] = 'field_stylesheet_media_value';
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['expose']['remember'] = TRUE;
-  $handler->display->display_options['filters']['field_stylesheet_media_value']['expose']['remember_roles'] = array(
+  /* Filter criterion: catalyst: Media (field__media_stylesheet_media) */
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['id'] = 'field__media_stylesheet_media_value';
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['table'] = 'field_data_field__media_stylesheet_media';
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['field'] = 'field__media_stylesheet_media_value';
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['expose']['operator_id'] = 'field__media_stylesheet_media_value_op';
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['expose']['label'] = 'Media';
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['expose']['operator'] = 'field__media_stylesheet_media_value_op';
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['expose']['identifier'] = 'field__media_stylesheet_media_value';
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__media_stylesheet_media_value']['expose']['remember_roles'] = array(
     2 => '2',
     1 => 0,
     6 => 0,

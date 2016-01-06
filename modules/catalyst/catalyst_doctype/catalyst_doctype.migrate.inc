@@ -19,13 +19,13 @@ class CatalystDoctypeMigration extends CatalystEntityMigration {
   }
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field_doctype_charset', 'charset');
-    $this->addFieldMapping('field_doctype_content_type', 'http_content_type');
-    $this->addFieldMapping('field_catalyst_drupal_processing', 'drupal_processing');
+    $this->addFieldMapping('field__doctype_charset', 'charset');
+    $this->addFieldMapping('field__doctype_content_type', 'http_content_type');
+    $this->addFieldMapping('field__drupal_processing', 'drupal_processing');
     // Formatted field mappings
-    $this->addFormattedFieldMapping('field_doctype_content', 'content', 'layout_html');
-    $this->addFormattedFieldMapping('field_doctype_preprocess', 'preprocess_php', 'php');
-    $this->addFormattedFieldMapping('field_doctype_onselect', 'onselect', 'js');
-    $this->addFormattedFieldMapping('field_doctype_ondeselect', 'ondeselect', 'js');
+    $this->addFormattedFieldMapping('field__body', 'content', 'layout_html');
+    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'php');
+    $this->addFormattedFieldMapping('field__onselect', 'onselect', 'js');
+    $this->addFormattedFieldMapping('field__ondeselect', 'ondeselect', 'js');
   }
 }

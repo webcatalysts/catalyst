@@ -10,8 +10,8 @@
 function catalyst_block_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'catalyst-block-field_block_content'.
-  $field_instances['catalyst-block-field_block_content'] = array(
+  // Exported field_instance: 'catalyst-block-field__body'.
+  $field_instances['catalyst-block-field__body'] = array(
     'bundle' => 'block',
     'default_value' => NULL,
     'deleted' => 0,
@@ -26,7 +26,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_block_content',
+    'field_name' => 'field__body',
     'label' => 'Content',
     'required' => 1,
     'settings' => array(
@@ -90,8 +90,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_block_machine'.
-  $field_instances['catalyst-block-field_block_machine'] = array(
+  // Exported field_instance: 'catalyst-block-field__machine'.
+  $field_instances['catalyst-block-field__machine'] = array(
     'bundle' => 'block',
     'deleted' => 0,
     'description' => '',
@@ -104,7 +104,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_block_machine',
+    'field_name' => 'field__machine',
     'label' => 'Machine name',
     'required' => 1,
     'settings' => array(
@@ -125,8 +125,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_block_placements'.
-  $field_instances['catalyst-block-field_block_placements'] = array(
+  // Exported field_instance: 'catalyst-block-field__blockplacements__block'.
+  $field_instances['catalyst-block-field__blockplacements__block'] = array(
     'bundle' => 'block',
     'default_value' => NULL,
     'deleted' => 0,
@@ -140,7 +140,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_block_placements',
+    'field_name' => 'field__blockplacements__block',
     'label' => 'Placements',
     'required' => 0,
     'settings' => array(
@@ -155,8 +155,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_block_preprocess'.
-  $field_instances['catalyst-block-field_block_preprocess'] = array(
+  // Exported field_instance: 'catalyst-block-field__preprocess'.
+  $field_instances['catalyst-block-field__preprocess'] = array(
     'bundle' => 'block',
     'default_value' => NULL,
     'deleted' => 0,
@@ -170,7 +170,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_block_preprocess',
+    'field_name' => 'field__preprocess',
     'label' => 'Preprocessing',
     'required' => 0,
     'settings' => array(
@@ -234,8 +234,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_catalyst_custom_css'.
-  $field_instances['catalyst-block-field_catalyst_custom_css'] = array(
+  // Exported field_instance: 'catalyst-block-field__css'.
+  $field_instances['catalyst-block-field__css'] = array(
     'bundle' => 'block',
     'default_value' => NULL,
     'deleted' => 0,
@@ -249,7 +249,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_custom_css',
+    'field_name' => 'field__css',
     'label' => 'Custom CSS',
     'required' => 0,
     'settings' => array(
@@ -313,8 +313,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_catalyst_custom_files'.
-  $field_instances['catalyst-block-field_catalyst_custom_files'] = array(
+  // Exported field_instance: 'catalyst-block-field__files'.
+  $field_instances['catalyst-block-field__files'] = array(
     'bundle' => 'block',
     'deleted' => 0,
     'description' => 'Upload files that a specific to this block here.',
@@ -327,7 +327,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_custom_files',
+    'field_name' => 'field__files',
     'label' => 'Custom Files',
     'required' => 0,
     'settings' => array(
@@ -350,7 +350,7 @@ function catalyst_block_field_default_field_instances() {
             'slashes' => 0,
             'transliterate' => 0,
           ),
-          'value' => 'media/block/[field_block_machine]',
+          'value' => 'media/block/[field__machine]',
         ),
         'redirect' => FALSE,
         'retroactive_update' => 0,
@@ -370,8 +370,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_catalyst_custom_js'.
-  $field_instances['catalyst-block-field_catalyst_custom_js'] = array(
+  // Exported field_instance: 'catalyst-block-field__js'.
+  $field_instances['catalyst-block-field__js'] = array(
     'bundle' => 'block',
     'default_value' => NULL,
     'deleted' => 0,
@@ -385,7 +385,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_custom_js',
+    'field_name' => 'field__js',
     'label' => 'Custom Javascript',
     'required' => 0,
     'settings' => array(
@@ -449,8 +449,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_catalyst_includes_css'.
-  $field_instances['catalyst-block-field_catalyst_includes_css'] = array(
+  // Exported field_instance: 'catalyst-block-field__media_stylesheets'.
+  $field_instances['catalyst-block-field__media_stylesheets'] = array(
     'bundle' => 'block',
     'default_value' => NULL,
     'deleted' => 0,
@@ -464,7 +464,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_includes_css',
+    'field_name' => 'field__media_stylesheets',
     'label' => 'Stylesheet Includes',
     'required' => 0,
     'settings' => array(
@@ -490,8 +490,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_catalyst_includes_js'.
-  $field_instances['catalyst-block-field_catalyst_includes_js'] = array(
+  // Exported field_instance: 'catalyst-block-field__media_javascripts'.
+  $field_instances['catalyst-block-field__media_javascripts'] = array(
     'bundle' => 'block',
     'default_value' => NULL,
     'deleted' => 0,
@@ -505,7 +505,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_includes_js',
+    'field_name' => 'field__media_javascripts',
     'label' => 'Javascript Includes',
     'required' => 0,
     'settings' => array(
@@ -531,8 +531,8 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-block-field_catalyst_shared_files'.
-  $field_instances['catalyst-block-field_catalyst_shared_files'] = array(
+  // Exported field_instance: 'catalyst-block-field__media_files'.
+  $field_instances['catalyst-block-field__media_files'] = array(
     'bundle' => 'block',
     'deleted' => 0,
     'description' => 'Existing shared files can be used without adding them here but by adding them here, you\'ll track the usage of each file.',
@@ -545,7 +545,7 @@ function catalyst_block_field_default_field_instances() {
       ),
     ),
     'entity_type' => 'catalyst',
-    'field_name' => 'field_catalyst_shared_files',
+    'field_name' => 'field__media_files',
     'label' => 'Shared Files',
     'required' => 0,
     'settings' => array(

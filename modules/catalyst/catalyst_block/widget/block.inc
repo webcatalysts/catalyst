@@ -80,7 +80,7 @@ function block_placement_block_layout_options() {
     $query = new EntityFieldQuery;
     $query->entityCondition('entity_type', 'catalyst')
       ->entityCondition('bundle', 'layout')
-      ->fieldCondition('field_layout_regions', 'machine', 'NULL', '!=')
+      ->fieldCondition('field__layout_regions', 'machine', 'NULL', '!=')
       ->addTag(__FUNCTION__);
     $result = $query->execute();
     if (isset($result['catalyst'])) {
