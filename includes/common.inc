@@ -61,8 +61,8 @@ function catalyst_deliver_html_page($page_callback_result) {
         }
 
         drupal_set_page_content($return);
-        $page = element_info('page');
-        print drupal_render_page($page);
+        $page = element_info('layout');
+        print catalyst_render_page($page);
         break;
 
       case MENU_ACCESS_DENIED:
@@ -92,7 +92,7 @@ function catalyst_deliver_html_page($page_callback_result) {
           $return = t('You are not authorized to access this page.');
         }
 
-        print drupal_render_page($return);
+        print catalst_render_page($return);
         break;
 
       case MENU_SITE_OFFLINE:
@@ -279,12 +279,13 @@ function catalyst_load_blocks() {
   $blocks = array();
   foreach ($block_info AS $placement) {
     $placement = (object)$placement;
-    $block = entity_load_single('catalyst', $placement->block_id);
-    $machine = $block->field_block_machine[$block->language][0]['machine'];
-    $blocks[$placement->region][$machine] = array(
-      'content' => entity_view('catalyst', array($block)),
-      '#weight' => $placement->weight,
-    );
+    if ($block = entity_load_single('catalyst', $placement->block_id)) {
+      $machine = $block->field_block_machine[$block->language][0]['machine'];
+      $blocks[$placement->region][$machine] = array(
+        'content' => entity_view('catalyst', array($block)),
+        '#weight' => $placement->weight,
+      );
+    }
   }
   return $blocks;
 }

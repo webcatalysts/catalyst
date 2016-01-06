@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Catalyst Template feature.
+ */
+
+include_once 'catalyst_template.features.inc';

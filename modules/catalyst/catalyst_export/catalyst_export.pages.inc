@@ -8,47 +8,55 @@
  * Export selection form.
  */
 function catalyst_export_form($form, &$form_state) {
-  $groups = catalyst_export_get_groups();
+  catalyst_form_load_include($form_state, 'export');
 
+  $form['#export_groups'] = $groups = catalyst_get_export_groups();
+
+  $module_path = drupal_get_path('module', 'catalyst_export');
+  $form['#attached']['library'][] = array('system', 'ui.dialog');
+  $form['#attached']['js'][] = $module_path . '/js/export-form.js';
+  $form['#attached']['css'][] = $module_path . '/css/export-form.css';
+
+  // Exports container
+  $form['exports'] = array(
+    '#tree' => TRUE,
+    '#process' => array('catalyst_export_form_process_exports'),
+    '#prefix' => '<div id="catalyst-export-exports-wrapper">',
+    '#suffix' => '</div>',
+  );
+
+  // Exports AJAX
   $ajax = array(
-    'callback' => 'catalyst_export_form_ajax_callback',
-    'wrapper' => 'catalyst-export-form-wrapper',
+    'callback' => 'catalyst_export_form_exports_ajax',
+    'wrapper' => 'catalyst-export-exports-wrapper',
     'method' => 'replace',
     'effect' => 'fade',
   );
-  //$form['#theme'] = 'catalyst_export_form';
-  $form['#prefix'] = '<div id="catalyst-export-form-wrapper">';
-  $form['#suffix'] = '</div>';
 
-  $form['#process'][] = 'catalyst_export_form_process';
-  $form['#export_groups'] = $groups;
 
-  $exports = array();
+  $candidates = catalyst_load_export_candidates();
 
   foreach ($groups AS $type => $group) {
-    //$group += array();
-
+    // Allow groups to require permission to export
     if (isset($group['permission']) && !user_access($group['permission'])) {
-      // Need permission to call the XML feeds provided by views
-      // May want to set a warning here
       continue;
     }
 
-    $form[$type] = array(
+    $form['exports'][$type] = array(
       '#type' => 'fieldset',
-      '#tree' => TRUE,
       '#title' => $group['title'],
+      '#tree' => TRUE,
+      '#collapsible' => TRUE,
+      'items' => array('#tree' => TRUE),
     );
 
-    $items = module_invoke_all('catalyst_export_candidates', $type, $group);
-    foreach ($items AS $entity) {
-      $wrapper = entity_metadata_wrapper($group['entity_type'], $entity);
-      $entity_id = $wrapper->getIdentifier();
-      $form[$type][$entity_id] = array(
+    foreach ($candidates[$type] AS $item) {
+      $item_id = $item['id'];
+      $form['exports'][$type][$item_id] = array(
         '#type' => 'checkbox',
-        '#title' => t('@label [@id]', array('@label' => $wrapper->label(), '@id' => $entity_id)),
+        '#title' => t('@label [@id]', array('@label' => $item['label'], '@id' => $item_id)),
         '#ajax' => $ajax,
-        '#export_entity' => $entity,
+        '#export' => (object)$item['export'],
       );
     }
   }
@@ -69,46 +77,72 @@ function catalyst_export_form($form, &$form_state) {
       'source' => array('options','export_name'),
     ),
     '#field_suffix' => '.zip',
+    '#editable' => TRUE,
+  );
+
+  // Provide the preview container
+  $form['preview'] = array(
+    '#prefix' => '<div id="catalyst-export-preview-wrapper">',
+    '#suffix' => '</div>',
+    '#type' => 'markup',
+    '#markup' => NULL,
+  );
+
+  // Form actions
+  $form['actions'] = array('#type' => 'actions');
+  // Fallback support for resolving dependencies without javascript
+  $form['actions']['refresh'] = array(
+    '#type' => 'button',
+    '#value' => t('Refresh dependencies'),
+    '#ajax' => $ajax,
+  );
+  $form['actions']['preview'] = array(
+    '#name' => 'op',
+    '#type' => 'button',
+    '#value' => t('Preview'),
+    '#ajax' => array(
+      'callback' => 'catalyst_export_form_preview_ajax',
+      'wrapper' => 'catalyst-export-preview-wrapper',
+    ),
+  );
+  $form['actions']['download'] = array(
+    '#type' => 'submit',
+    '#value' => t('Create Export'),
   );
   return $form;
 }
 
-function catalyst_export_form_ajax_callback($form, $form_state) {
-  return $form;
-}
+function catalyst_export_form_process_exports($element, &$form_state, &$form) {
+  // Processing only necessary if input provided
+  if (!isset($form_state['values']['exports'])) {
+    return $element;
+  }
 
-function catalyst_export_form_process($form, &$form_state) {
-  $exports = array();
+  $groups = $form['#export_groups'];
+
+  // Build list of selected exports and dependencies separately
+  $exports = catalyst_export_form_prepare_selections($form, $form_state);
   $dependencies = array();
+  foreach (array_keys($exports) AS $type) {
+    foreach ($exports[$type] AS $export) {
+      $dependencies = catalyst_merge_exports($dependencies,
+        catalyst_expand_export($export, $groups[$type], $groups));
+    }
+  }
 
-  foreach ($form['#export_groups'] AS $type => $group) {
-    if (isset($form_state['values'][$type]) && $_exports = array_keys(array_filter($form_state['values'][$type]))) {
-      foreach ($_exports AS $id) {
-        $exports[$type][$id] = $form[$type][$id]['#export_entity'];
-        $dependencies = catalyst_export_array_merge($dependencies, catalyst_export_expand_item($type, $exports[$type][$id], $group));
+  foreach (element_children($element) AS $type) {
+    $group = $form['#export_groups'][$type];
+    foreach (element_children($element[$type]) AS $item_id) {
+      if ($item_id == 'attached_files') continue;
+      if (catalyst_export_exists($item_id, $type, $dependencies)) {
+        $element[$type][$item_id]['#default_value'] = 1;
+        $element[$type][$item_id]['#disabled'] = 1;
       }
     }
-  }
-  foreach ($form['#export_groups'] AS $type => $group) {
-    if (!isset($dependencies[$type]) || !is_array($form[$type])) {
-      continue;
-    }
-    foreach (element_children($form[$type]) AS $i) {
-      if (array_key_exists($i, $dependencies[$type])) {
-        $form[$type][$i]['#default_value'] = 1;
-        $form[$type][$i]['#disabled'] = 1;
-      }
-    }
-  }
-  if (isset($dependencies['attached_files'])) {
-    $form['attached_files'] = array(
-      '#type' => 'fieldset',
-      '#title' => t('Attached files'),
-    );
-    $links = array();
-    foreach ($dependencies['attached_files'] AS $type => $items) {
+
+    if (isset($dependencies['attached_files'][$type])) {
       $links = array();
-      foreach ($items AS $id => $files) {
+      foreach ($dependencies['attached_files'][$type] AS $item_id => $files) {
         foreach ($files AS $fid => $file) {
           $links[$fid] = array(
             'href' => file_create_url($file->uri),
@@ -117,148 +151,87 @@ function catalyst_export_form_process($form, &$form_state) {
           );
         }
       }
-      $form['attached_files'][$type] = array(
-        '#prefix' => '<div><strong>' . $groups[$type]['title'] . '</div>',
-        '#type' => 'markup',
+      $element[$type]['attached_files'] = array(
+        '#prefix' => '<div class="catalyst-export-attached-files">' .
+          '<h5>' . t('Attached Files (@num)', array('@num' => count($links))) . '</h5>',
+        '#suffix' => '</div>',
+        '#weight' => 1000,
+        '#collapsible' => FALSE,
         '#markup' => theme('links', array('links' => $links)),
+        '#weight' => 1000,
       );
     }
   }
-
-  $form['actions'] = array(
-    '#type' => 'actions',
-  );
-  $form['actions']['submit'] = array(
-    '#type' => 'submit',
-    '#value' => t('Create Export'),
-  );
-  return $form;
+  return $element;
 }
 
-function catalyst_export_form_submit($form, &$form_state) {
-  $exports = array();
-  foreach ($form['#export_groups'] AS $type => $group) {
-    if (isset($form_state['values'][$type]) && $_exports = array_keys(array_filter($form_state['values'][$type]))) {
-      foreach ($_exports AS $id) {
-        $exports[$type][$id] = $form[$type][$id]['#export_entity'];
-        $exports = catalyst_export_array_merge($exports, catalyst_export_expand_item($type, $exports[$type][$id], $group));
+function catalyst_export_form_preview_ajax($form, $form_state) {
+  $groups = $form['#export_groups'];
+  $export_name = $form_state['values']['export_name'];
+  $selections = catalyst_export_form_prepare_selections($form, $form_state);
+  $data = catalyst_build_export_data($selections, $groups, $export_name);
+  dsm($data);
+  return $form['preview'];
+}
+
+function catalyst_export_form_exports_ajax($form, $form_state) {
+  return $form['exports'];
+}
+
+function catalyst_export_form_prepare_selections($form, $form_state) {
+  $selections = array();
+  foreach ($form_state['values']['exports'] AS $type => $values) {
+    if ($ids = array_keys(array_filter($values))) {
+      foreach ($ids AS $id) {
+        $selections[$type][$id] = $form['exports'][$type][$id]['#export'];
       }
     }
   }
+  return $selections;
+}
 
+function catalyst_export_form_submit($form, &$form_state) {
+  //$groups = catalyst_export_get_groups();
+  $groups = $form['#export_groups'];
+  $export_name = $form_state['values']['export_name'];
+  $export_filename = $form_state['values']['export_filename'] . '.zip';
+
+  $selections = catalyst_export_form_prepare_selections($form, $form_state);
+  $build = catalyst_build_export_data($selections, $groups, $export_name);
+
+  // archive to be cleaned up at the end.
   $cleanup = &drupal_static('catalyst_export_cleanup');
   $cleanup['unlink'] = array();
   $cleanup['rmdir'] = array();
 
-  $export_name = $form_state['values']['export_name'];
-  $export_filename = $form_state['values']['export_filename'] . '.zip';
-  $export_hash = md5(microtime());
+  $tmp_archive_uri = drupal_tempnam('temporary://', 'zip_');
+  $tmp_archive = drupal_realpath($tmp_archive_uri);
+  $cleanup['unlink'][] = $tmp_archive_uri;
 
-  $export_dir_uri = file_build_uri('catalyst-export/' . $export_hash);
-  drupal_mkdir($export_dir_uri, NULL, TRUE);
-  $cleanup['rmdir'][] = $export_dir_uri;
-  $export_dir = drupal_realpath($export_dir_uri);
-
-  $export_archive_uri = file_build_uri('catalyst-export/' . $export_hash . '.zip');
-  $export_archive = drupal_realpath($export_archive_uri);
-
-  $groups = catalyst_export_get_groups();
-  $migrate_api = array(
-    'groups' => array(
-      $export_hash => array(
-        'title' => $export_name,
-      ),
-    ),
-  );
-
-  // Create the tmp dir for building the export
-
-  //$archiver = new ArchiverZip($export_archive);
   $archiver = new ZipArchive;
-  if ($archiver->open($export_archive, ZIPARCHIVE::CREATE) !== TRUE) {
-    form_set_error('', 'Failed to create archive: ' . $export_archive);
+  if ($archiver->open($tmp_archive, ZipArchive::OVERWRITE) !== TRUE) {
+    form_set_error('', 'Failed to create archive: ' . $tmp_archive);
     return;
   }
 
-  $cleanup['unlink'][] = $export_archive_uri;
-
-  if (isset($exports['attached_files'])) {
-    $attached_files = $exports['attached_files'];
-    foreach ($attached_files AS $type => $items) {
-      foreach ($items AS $id => $files) {
-        foreach ($files AS $file) {
-          $archiver->addFile(
-            drupal_realpath($file->uri),
-            implode('/', array($type, $id, $file->filename))
-          );
-        }
-      }
+  // Add attached files to the archive
+  if (isset($build['exports']['attached_files'])) {
+    foreach ($build['exports']['attached_files'] AS $file) {
+      $archiver->addFile($file->filepath, $file->localname);
     }
-    unset($exports['attached_files']);
+    unset($build['exports']['attached_files']);
   }
 
-  foreach ($exports AS $type => $items) {
-    $group = $groups[$type] + array(
-      'feed_id_parameter' => 'ids',
-      'feed_id_separator' => '+',
-    );
-
-    if (!isset($group['feed_path'])) {
-      $archiver->close();
-      form_set_error('', 'No feed path for group: ' . $group['title']);
+  foreach ($build['exports'] AS $type => $export_items) {
+    $group = $groups[$type];
+    $group_export_data = call_user_func($group['export callback'], $export_items, $group);
+    if (!$archiver->addFromString($group['export filename'], $group_export_data)) {
+      form_set_error('', 'Failed to add group export data');
       return;
     }
-
-    $ids = array_keys($items);
-    $feed_url = url($group['feed_path'], array(
-      'query' => array(
-        $group['feed_id_parameter'] => implode($group['feed_id_separator'], $ids),
-      ),
-      'absolute' => TRUE,
-    ));
-
-
-    // Pass the cookie onto the request
-    $cookiestring = "";
-    foreach ($_COOKIE as $key => $cookie) {
-      $cookiestring .= $key .'='. urlencode($cookie) .';';
-    }
-
-    $feed_result = drupal_http_request($feed_url, array('headers' => array('Cookie' => $cookiestring)));
-    if (isset($feed_result->error)) {
-      $archiver->close();
-      form_set_error('', t('The %title feed at @url resulted returned the following error: %error', array(
-        '%title' => $group['title'],
-        '@url' => $feed_url,
-        '%error' => $feed_result->error,
-      )));
-      return;
-    }
-
-    $fp = fopen($export_dir . '/' . $type . '.xml', 'w');
-    fwrite($fp, $feed_result->data);
-    fclose($fp);
-    $archiver->addFile(
-      $export_dir . '/' . $type . '.xml',
-      $type. '/' . $type . '.xml'
-    );
-    $cleanup['unlink'][] = $export_dir_uri . '/' . $type . '.xml';
-
-    $migrate_api['migrations'][$type . '_' . $export_hash] = $group['migration'] + array(
-      'group_name' => $export_hash,
-      'xml_filename' => $type . '.xml',
-      'data_directory' => $type,
-      'files_directory' => $type . '/attached-files',
-    );
   }
 
-  // Create the json file
-  $fp = fopen($export_dir . '/migrate_api.json', 'w');
-  fwrite($fp, drupal_json_encode($migrate_api));
-  fclose($fp);
-  $cleanup['unlink'][] = $export_dir_uri . '/migrate_api.json';
-
-  if (!$archiver->addFile($export_dir . '/migrate_api.json', 'migrate_api.json')) {
+  if (!$archiver->addFromString('catalyst.json', drupal_json_encode($build['info']))) {
     form_set_error('', 'Failed to add migrate_api.json');
     return;
   }
@@ -268,82 +241,12 @@ function catalyst_export_form_submit($form, &$form_state) {
     return;
   }
 
-  file_transfer($export_archive_uri, array(
+  file_transfer($tmp_archive_uri, array(
     'Content-Type' => 'application/octet-stream',
    'Content-Disposition' => 'attachment; filename="' . $export_filename . '"',
-   'Content-Length' => filesize($export_archive)));
+   'Content-Length' => filesize($tmp_archive)));
 
   drupal_exit();
-}
-
-function catalyst_export_expand_item($type, $entity, $group) {
-  if ($dependencies = module_invoke_all('catalyst_export_dependencies', $type, $entity, $group)) {
-    $groups = catalyst_export_get_groups();
-    foreach ($dependencies AS $_type => $entities) {
-      foreach ($entities AS $_entity) {
-        $dependencies = catalyst_export_array_merge($dependencies, catalyst_export_expand_item($_type, $_entity, $groups[$_type]));
-      }
-    }
-  }
-
-  // Attach files
-  if ($file_fields = _catalyst_export_file_fields()) {
-    $wrapper = entity_metadata_wrapper($group['entity_type'], $entity);
-    foreach ($file_fields AS $field) {
-      if (isset($wrapper->{$field}) && !empty($entity->{$field})) {
-        $field_value = $wrapper->{$field}->value();
-        if (isset($field_value['fid'])) {
-          $field_value = array($field_value);;
-        }
-        foreach ($field_value AS $file) {
-          // Cast file as an object so it doesn't ever get merged
-          $dependencies['attached_files'][$type][$wrapper->getIdentifier()][$file['fid']] = (object)$file;
-        }
-      }
-    }
-  }
-  return $dependencies;
-}
-
-function catalyst_export_get_groups() {
-  $groups = &drupal_static(__FUNCTION__);
-
-  if (!isset($groups)) {
-    $groups = module_invoke_all('catalyst_export_groups');
-    uasort($groups, 'drupal_sort_weight');
-  }
-  return $groups;
-}
-
-function catalyst_export_array_merge() {
-  $arrays = func_get_args();
-  $result = array();
-  foreach ($arrays AS $array) {
-    foreach ($array AS $key => $value) {
-      if (isset($result[$key]) && is_array($result[$key]) && is_array($value)) {
-        $result[$key] = catalyst_export_array_merge($result[$key], $value);
-      }
-      else {
-        $result[$key] = $value;
-      }
-    }
-  }
-  return $result;
-}
-
-function _catalyst_export_file_fields() {
-  $fields = &drupal_static(__FUNCTION__);
-
-  if (!isset($fields)) {
-    $fields = array();
-    $map = field_info_field_map();
-    foreach ($map AS $field_name => $field) {
-      if ($field['type'] == 'file') {
-        $fields[] = $field_name;
-      }
-    }
-  }
-  return $fields;
 }
 
 function _catalyst_export_dummy_exists() {

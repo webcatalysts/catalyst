@@ -12,42 +12,6 @@ define('CATALYST_MEDIA_GROUP_PAGE', 303);
 define('CATALYST_MEDIA_GROUP_OTHER', 404);
 
 /**
- * Implements hook_field_formatter_info().
- */
-function catalyst_media_field_formatter_info() {
-  return array(
-    'catalyst_file_basename' => array(
-      'label' => t('Catalyst: Basename'),
-      'field types' => array('file'),
-    ),
-    'catalyst_file_import_path' => array(
-      'label' => t('Catalyst: Import path'),
-      'field types' => array('file'),
-    ),
-  );
-}
-
-/**
- * Implements hook_field_formatter_view().
- */
-function catalyst_media_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
-  $element = array();
-  foreach ($items AS $delta => $item) {
-    $basename = drupal_basename($item['uri']);
-    switch ($display['type']) {
-      case 'catalyst_file_basename':
-        $element[$delta] = array('#markup' => $basename);
-        break;
-      case 'catalyst_file_import_path':
-        $wrapper = entity_metadata_wrapper($entity_type, $entity);
-        $element[$delta] = array('#markup' => $wrapper->getIdentifier() . '/' . $basename);
-        break;
-    }
-  }
-  return $element;
-}
-
-/**
  * Implements hook_entity_view_alter().
  */
 function catalyst_media_entity_view_alter(&$build, $type) {
@@ -64,6 +28,7 @@ function catalyst_media_entity_view_alter(&$build, $type) {
  * Implements hook_url_outbound_alter().
  */
 function catalyst_media_url_outbound_alter(&$path, &$options, $original_path) {
+  catalyst_include('eck', 'admin');
   catalyst_admin_eck_url_outbound('stylesheet', $path, $options, $original_path);
   catalyst_admin_eck_url_outbound('javascript', $path, $options, $original_path);
   catalyst_admin_eck_url_outbound('file', $path, $options, $original_path, 'admin/content');
@@ -73,10 +38,11 @@ function catalyst_media_url_outbound_alter(&$path, &$options, $original_path) {
  * Implements hook_menu_alter().
  */
 function catalyst_media_menu_alter(&$items) {
+  catalyst_include('eck', 'admin');
   catalyst_admin_alter_eck_entity_menu($items, 'stylesheet', 'admin/structure', FALSE);
   catalyst_admin_alter_eck_entity_menu($items, 'javascript', 'admin/structure', FALSE);
   catalyst_admin_alter_eck_entity_menu($items, 'file', 'admin/content', FALSE);
-
+  // Allow the files list to appear as a tab and a normal item
   $items['admin/content/file']['type'] = MENU_LOCAL_TASK | MENU_NORMAL_ITEM;
 }
 
@@ -98,9 +64,32 @@ function catalyst_media_module_implements_alter(&$implementations, $hook) {
  */
 function catalyst_media_catalyst_twig_render_alter(&$twig, &$extensions, &$variables, $key = NULL) {
   $extensions['addFunction']['filepath'] = new Twig_SimpleFunction('filepath', 'catalyst_media_filepath');
+  $extensions['addFunction']['fileurl'] = new Twig_SimpleFunction('fileurl', 'catalyst_media_fileurl');
+  $extensions['addFunction']['customfilepath'] = new Twig_SimpleFunction('customfilepath', 'catalyst_media_customfilepath');
+  $extensions['addFunction']['customfileurl'] = new Twig_SimpleFunction('customfileurl', 'catalyst_media_customfileurl');
 }
 
-function catalyst_media_filepath($machine_name) {
+function catalyst_media_customfilepath($basename, $format = 'path') {
+  $entity = drupal_static('twig_render_entity_wrapper', FALSE);
+  if ($entity && $entity->field_catalyst_custom_files) {
+    foreach ($entity->field_catalyst_custom_files->value() AS $file) {
+      if ($file['filename'] == $basename) {
+        $url = file_create_url($file['uri']);
+        if ($format == 'url') {
+          return $url;
+        }
+        $url = parse_url($url);
+        return $url['path'];
+      }
+    }
+  }
+  // log error
+}
+function catalyst_media_customfileurl($basename) {
+  return catalyst_media_customfilepath($basename, 'url');
+}
+
+function catalyst_media_filepath($machine_name, $format = 'path') {
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'catalyst')
     ->entityCondition('bundle', 'file')
@@ -116,13 +105,20 @@ function catalyst_media_filepath($machine_name) {
       case 'remote':
         return url($file->field_media_path->value());
       case 'custom':
-        $url = parse_url($file->field_media_file->file->url->value());
-        return $url['path'];
+        if ($format == 'url') {
+          return $file->field_media_file->file->url->value();
+        }
+        else {
+          $url = parse_url($file->field_media_file->file->url->value());
+          return $url['path'];
+        }
     }
   }
+  // log error
 }
 
-function catalyst_load_single_by_machine($bundle, $machine_name, $field = NULL) {
+function catalyst_media_fileurl($machine_name) {
+  return catalyst_media_filepath($machine_name, 'url');
 }
 
 /**
@@ -178,7 +174,6 @@ function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
   );
 
   $wrapper = entity_metadata_wrapper($type, $entity);
-
   foreach ($collection AS $type => $fields) {
     $callback = 'catalyst_add_' . $type;
     foreach ($fields AS $field => $group) {
@@ -214,74 +209,4 @@ function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
       }
     }
   }
-}
-
-/**
- * Implements hook_catalyst_export_groups().
- */
-function catalyst_media_catalyst_export_groups() {
-  return array(
-    'stylesheet' => array(
-      'title' => t('Stylesheets'),
-      'entity_type' => 'catalyst',
-      'bundle' => 'stylesheet',
-      'feed_path' => 'admin/structure/stylesheet/export.xml',
-      'migration' => array(
-        'class_name' => 'CatalystMediaStylesheetMigration',
-      ),
-    ),
-    'javascript' => array(
-      'title' => t('Javascripts'),
-      'entity_type' => 'catalyst',
-      'bundle' => 'javascript',
-      'feed_path' => 'admin/structure/javascript/export.xml',
-      'migration' => array(
-        'class_name' => 'CatalystMediaJavascriptMigration',
-      ),
-    ),
-    'file' => array(
-      'title' => t('Shared Files'),
-      'entity_type' => 'catalyst',
-      'bundle' => 'file',
-      'feed_path' => 'admin/content/file/export.xml',
-      'migration' => array(
-        'class_name' => 'CatalystMediaFileMigration',
-      ),
-    ),
-  );
-}
-
-/**
- * Implements hook_catalyst_export_candidates().
- */
-function catalyst_media_catalyst_export_candidates($type, $group) {
-  if (in_array($type, array('stylesheet', 'javascript', 'file'))) {
-    return entity_load('catalyst', FALSE, array('type' => $group['bundle']));
-  }
-}
-
-/**
- * Implements hook_catalyst_export_dependencies().
- */
-function catalyst_media_catalyst_export_dependencies($type, $entity, $group) {
-  $dependencies = array();
-  $fields = array(
-    // field => type
-    'field_catalyst_includes_css' => 'stylesheet',
-    'field_cpage_includes_css' => 'stylesheet',
-    'field_layout_includes_css' => 'stylesheet',
-    'field_catalyst_includes_js' => 'javascript',
-    'field_cpage_includes_js' => 'javascript',
-    'field_layout_includes_js' => 'javascript',
-    'field_catalyst_shared_files' => 'file',
-  );
-  $wrapper = entity_metadata_wrapper($group['entity_type'], $entity);
-  foreach ($fields AS $field => $_type) {
-    if (isset($wrapper->{$field})) {
-      foreach ($wrapper->{$field} AS $item) {
-        $dependencies[$_type][$item->getIdentifier()] = $item->value();
-      }
-    }
-  }
-  return $dependencies;
 }

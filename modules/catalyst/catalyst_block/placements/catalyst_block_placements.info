@@ -1,0 +1,4 @@
+name = Catalyst block placements
+description = (Will) Provides the block placement fields for catalyst.
+core = 7.x
+files[] = includes/migrate.inc

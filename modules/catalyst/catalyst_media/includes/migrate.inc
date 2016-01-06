@@ -29,7 +29,7 @@ abstract class CatalystMediaMigration extends CatalystEntityMigration {
   }
 }
 
-class CatalystStylesheetMigration extends CatalystMediaMigration {
+class CatalystMediaStylesheetMigration extends CatalystMediaMigration {
   protected $entityBundle = 'stylesheet';
   protected function sourceFields() {
     return array(
@@ -43,12 +43,12 @@ class CatalystStylesheetMigration extends CatalystMediaMigration {
     parent::mapFields();
     $this->addFieldMapping('field_stylesheet_media', 'media');
     $this->addFormattedFieldMapping('field_media_content', 'content', 'css');
-    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file', ',');
-    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom', '|');
+    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file');
+    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom');
   }
 }
 
-class CatalystJavascriptMigration extends CatalystMediaMigration {
+class CatalystMediaJavascriptMigration extends CatalystMediaMigration {
   protected $entityBundle = 'javascript';
   protected function sourceFields() {
     return array(
@@ -61,11 +61,11 @@ class CatalystJavascriptMigration extends CatalystMediaMigration {
     parent::mapFields();
     $this->addFieldMapping('field_javascript_defer', 'defer');
     $this->addFieldMapping('field_javascript_scope', 'scope');
-    $this->addFormattedFieldMapping('field_media_content', 'content', 'javascript');
+    $this->addFormattedFieldMapping('field_media_content', 'content', 'js');
   }
 }
 
-class CatalystFileMigration extends CatalystMediaMigration {
+class CatalystMediaFileMigration extends CatalystMediaMigration {
   protected $entityBundle = 'file';
   protected function sourceFields() {
     return array(
@@ -74,6 +74,6 @@ class CatalystFileMigration extends CatalystMediaMigration {
   }
   protected function mapFields() {
     parent::mapFields();
-    $this->addFileFieldMapping('field_media_file', 'file_path', FALSE);
+    $this->addFileFieldMapping('field_media_file', 'file_path');
   }
 }

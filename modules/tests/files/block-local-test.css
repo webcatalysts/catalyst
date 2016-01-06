@@ -1,0 +1,6 @@
+.block-local-css-test,
+.block-local-css-test-override {
+  border: 2px dashed red;
+  padding: 4px;
+  margin: 4px;k
+}

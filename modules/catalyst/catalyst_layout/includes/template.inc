@@ -6,6 +6,13 @@
 class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLayoutInterface {
   use CatalystLayoutDefaultTwigTemplate;
 
+  public function getLayoutID() {
+    if ($this->has_entity) {
+      return $this->wrapper->getIdentifier();
+    }
+    return FALSE;
+  }
+
   public function getDoctype() {
     $doctype = FALSE;
     if ($this->has_entity) {
@@ -18,7 +25,7 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
     $regions = array();
     if ($this->has_entity) {
       foreach ($this->wrapper->field_layout_regions->value() AS $region) {
-        $regions[] = $region;
+        $regions[] = $region['machine'];
       }
     }
     return $regions;
@@ -57,5 +64,12 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
       return $this->wrapper->field_layout_page_title_pattern->value();
     }
     return '{{ title }}';
+  }
+
+  public function getBlockPlacements() {
+    if ($this->has_entity) {
+      return $this->wrapper->field_layout_blocks->value();
+    }
+    return array();
   }
 }

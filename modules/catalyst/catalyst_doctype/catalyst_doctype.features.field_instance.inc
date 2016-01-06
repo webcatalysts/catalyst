@@ -47,6 +47,77 @@ function catalyst_doctype_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-doctype-field_catalyst_form_help'.
+  $field_instances['catalyst-doctype-field_catalyst_form_help'] = array(
+    'bundle' => 'doctype',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 13,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field_catalyst_form_help',
+    'label' => 'Help/Instructions',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'cpage_html' => 0,
+          'css' => 0,
+          'html' => 'html',
+          'js' => 0,
+          'layout_html' => 0,
+          'php' => 0,
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'cpage_html' => array(
+              'weight' => 0,
+            ),
+            'css' => array(
+              'weight' => -9,
+            ),
+            'html' => array(
+              'weight' => 0,
+            ),
+            'js' => array(
+              'weight' => -8,
+            ),
+            'layout_html' => array(
+              'weight' => 0,
+            ),
+            'php' => array(
+              'weight' => -5,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 5,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 28,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-doctype-field_doctype_charset'.
   $field_instances['catalyst-doctype-field_doctype_charset'] = array(
     'bundle' => 'doctype',
@@ -521,6 +592,7 @@ text/html|text/html',
   t('Custom javascript that is executed when this doctype is deselected on the layout form.');
   t('Enable Drupal processing');
   t('HTTP Content-Type');
+  t('Help/Instructions');
   t('On DeSelect');
   t('On Select');
   t('Preprocessing');

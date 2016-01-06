@@ -1,0 +1,6 @@
+name = Catalyst Test
+description = Test migrations for catalyst import
+core = 7.x
+dependencies[] = better_migrate
+dependencies[] = migrate
+dependencies[] = migrate_extras

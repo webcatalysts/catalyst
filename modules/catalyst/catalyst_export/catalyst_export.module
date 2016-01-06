@@ -56,3 +56,17 @@ function catalyst_export_exit() {
     }
   }
 }
+
+function catalyst_export_entity_candidates($bundle, $entity_type = 'catalyst') {
+  $candidates = array();
+  $entities = entity_load($entity_type, FALSE, array('type' => $bundle));
+  foreach ($entities AS $entity) {
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    $candidates[] = array(
+      'id' => $wrapper->getIdentifier(),
+      'label' => $wrapper->label(),
+      'export' => $entity,
+    );
+  }
+  return $candidates;
+}

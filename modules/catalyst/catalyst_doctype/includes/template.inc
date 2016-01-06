@@ -27,7 +27,7 @@ class CatalystEntityDoctype extends CatalystEntityTemplate implements CatalystDo
 
   public function getPreprocessPHP() {
     if ($this->has_entity) {
-      return $this->wrapper->field_doctype_preprocess->value();
+      return entity_valval($this->wrapper->field_doctype_preprocess);
     }
   }
 }

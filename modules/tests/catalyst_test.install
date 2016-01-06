@@ -1,0 +1,30 @@
+<?php
+
+/**
+ * @file
+ * Catalyst Test installation hooks and functions.
+ *
+ * Installs/uninstall testing content and assets on enable/disable.
+ */
+
+/**
+ * Implements hook_install().
+ */
+function catalyst_test_install() {
+}
+
+/**
+ * Implements hook_enable().
+ */
+function catalyst_test_enable() {
+  catalyst_include('import');
+  catalyst_import(catalyst_get_path('test') . '/test-data');
+}
+
+/**
+ * Implements hook_disable().
+ */
+function catalyst_test_disable() {
+  catalyst_include('import');
+  catalyst_rollback_import(catalyst_get_path('test') . '/test-data');
+}

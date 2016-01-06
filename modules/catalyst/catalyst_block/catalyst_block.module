@@ -39,6 +39,7 @@ function catalyst_block_inline_entity_form_entity_form_alter(&$entity_form, &$fo
  * Implements hook_url_outbound_alter().
  */
 function catalyst_block_url_outbound_alter(&$path, &$options, $original_path) {
+  catalyst_include('eck', 'admin');
   catalyst_admin_eck_url_outbound('block', $path, $options, $original_path, 'admin/content');
 }
 
@@ -46,8 +47,8 @@ function catalyst_block_url_outbound_alter(&$path, &$options, $original_path) {
  * Implements hook_menu_alter().
  */
 function catalyst_block_menu_alter(&$items) {
+  catalyst_include('eck', 'admin');
   catalyst_admin_alter_eck_entity_menu($items, 'block', 'admin/content', FALSE);
-
   $items['admin/content/block']['type'] = MENU_LOCAL_TASK | MENU_NORMAL_ITEM;
 }
 
@@ -69,22 +70,26 @@ function catalyst_block_module_implements_alter(&$implementations, $hook) {
  */
 function catalyst_block_entity_view_alter(&$build, $type) {
   if (isset($build['field_block_content'])) {
-    if ($template = $build['field_block_content'][0]['#markup']) {
+    if ($build['field_block_content'][0]['#markup']) {
       $build['field_block_content'][0]['#markup'] = theme('block_content', array(
-        'block' => entity_metadata_wrapper('catalyst', $build['#entity']),
-        'template' => $template,
+        'template' => new CatalystBlockTemplate($build['#entity']),
+        'block' => $build['#entity'],
       ));
     }
   }
+}
+
+function template_preprocess_block_content(&$variables) {
+  $variables['title'] = $variables['block']->title;
 }
 
 /**
  * Preprocess block content.
  */
 function catalyst_block_preprocess_block_content(&$variables) {
-  $block = $variables['block'];
-  if ($preprocess_php = $block->field_block_preprocess->value()) {
-    catalyst_eval($preprocess_php['value'], $variables);
+  $template = $variables['template'];
+  if ($preprocess_php = $template->getPreprocessPHP()) {
+    catalyst_eval($preprocess_php, $variables);
   }
 }
 
@@ -92,8 +97,7 @@ function catalyst_block_preprocess_block_content(&$variables) {
  * Theme the block content to render the twig template.
  */
 function theme_block_content($variables) {
-  module_load_include('inc', 'catalyst', 'includes/twig');
-  return catalyst_twig_render($variables['template'], $variables, 'block_content__' . $variables['block']->getIdentifier());
+  return $variables['template']->renderTemplate($variables);
 }
 
 /**
@@ -151,6 +155,31 @@ function catalyst_block_page_build(&$page) {
       }
     }
   }
+}
+
+/**
+ * Implements hook_block_placements().
+ */
+function catalyst_block_block_placements() {
+  $layout = catalyst_get_layout();
+  $placements = array();
+  if ($layout_id = $layout->getLayoutID()) {
+    $query = db_select('field_data_field_block_placements', 't')
+      ->condition('field_block_placements_layout_id', $layout_id, '=');
+    $query->addField('t', 'entity_id', 'block_id');
+    $query->addField('t', 'field_block_placements_weight', 'weight');
+    $query->addField('t', 'field_block_placements_visibility', 'visibility');
+    $query->addField('t', 'field_block_placements_pages', 'pages');
+    $query->addField('t', 'field_block_placements_cache', 'cache');
+    $query->addField('t', 'field_block_placements_region', 'region');
+
+    $result = $query->execute();
+    foreach ($result AS $item) {
+      $item->layout_id = $layout_id;
+      $placements[] = (array)$item;
+    }
+  }
+  return $placements;
 }
 
 /**
@@ -356,54 +385,4 @@ function block_placement_property_info(&$info, $entity_type, $field, $instance, 
       'setter callback' => 'entity_property_verbatim_set',
     );
   }
-}
-
-/**
- * Implements hook_catalyst_export_groups().
- */
-function catalyst_block_catalyst_export_groups() {
-  return array(
-    'block' => array(
-      'title' => t('Blocks'),
-      'entity_type' => 'catalyst',
-      'bundle' => 'block',
-      'weight' => -1,
-      'feed_path' => 'admin/content/block/export.xml',
-      'migration' => array(
-        'class_name' => 'CatalystBlockMigration',
-      ),
-    ),
-  );
-}
-
-/**
- * Implements hook_catalyst_export_candidates().
- */
-function catalyst_block_catalyst_export_candidates($type) {
-  if ($type == 'block') {
-    return entity_load('catalyst', FALSE, array('type' => 'block'));
-  }
-}
-
-/**
- * Implements hook_catalyst_export_dependencies().
- */
-function catalyst_block_catalyst_export_dependencies($type, $entity, $group) {
-  $dependencies = array();
-
-  $wrapper = entity_metadata_wrapper($group['entity_type'], $entity);
-
-  // Determine dependencies for entities using block placements
-  $placement_fields = array('field_cpage_blocks', 'field_layout_blocks');
-  foreach ($placement_fields AS $field) {
-    if (isset($wrapper->{$field})) {
-      foreach ($wrapper->{$field} AS $item) {
-        $block = entity_load_single('catalyst', $item->block_id->value());
-        //$dependencies['block'][$item->block_id->value()] = $block;
-        $dependencies['block'][$block->id] = $block;
-      }
-    }
-  }
-
-  return $dependencies;
 }

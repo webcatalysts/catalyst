@@ -25,7 +25,7 @@ class CatalystDoctypeMigration extends CatalystEntityMigration {
     // Formatted field mappings
     $this->addFormattedFieldMapping('field_doctype_content', 'content', 'layout_html');
     $this->addFormattedFieldMapping('field_doctype_preprocess', 'preprocess_php', 'php');
-    $this->addFormattedFieldMapping('field_doctype_onselect', 'onselect', 'javascript');
-    $this->addFormattedFieldMapping('field_doctype_ondeselect', 'ondeselect', 'javascript');
+    $this->addFormattedFieldMapping('field_doctype_onselect', 'onselect', 'js');
+    $this->addFormattedFieldMapping('field_doctype_ondeselect', 'ondeselect', 'js');
   }
 }

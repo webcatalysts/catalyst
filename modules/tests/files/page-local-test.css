@@ -1,0 +1,6 @@
+.page-local-css-test,
+.page-local-css-test-override {
+  border: 2px dashed green;
+  padding: 4px;
+  margin: 4px;k
+}

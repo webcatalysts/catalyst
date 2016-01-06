@@ -24,8 +24,9 @@ function catalyst_doctype_field_group_info() {
     'weight' => '20',
     'children' => array(
       0 => 'field_doctype_preprocess',
-      1 => 'group_doctype_drupal',
-      2 => 'group_doctype_form_alter',
+      1 => 'group_doctype_help',
+      2 => 'group_doctype_drupal',
+      3 => 'group_doctype_form_alter',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -53,11 +54,10 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Basics',
     'weight' => '15',
     'children' => array(
-      0 => 'field_doctype_content',
-      1 => 'field_doctype_machine',
+      0 => 'field_doctype_charset',
+      1 => 'field_doctype_content',
       2 => 'field_doctype_content_type',
       3 => 'title',
-      4 => 'field_doctype_charset',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -113,8 +113,8 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Form customizations',
     'weight' => '26',
     'children' => array(
-      0 => 'field_doctype_onselect',
-      1 => 'field_doctype_ondeselect',
+      0 => 'field_doctype_ondeselect',
+      1 => 'field_doctype_onselect',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -128,6 +128,34 @@ function catalyst_doctype_field_group_info() {
     ),
   );
   $export['group_doctype_form_alter|catalyst|doctype|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_doctype_help|catalyst|doctype|form';
+  $field_group->group_name = 'group_doctype_help';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'doctype';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_doctype_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '27',
+    'children' => array(
+      0 => 'field_catalyst_form_help',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-doctype-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $export['group_doctype_help|catalyst|doctype|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */

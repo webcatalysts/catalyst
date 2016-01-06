@@ -96,7 +96,9 @@ function catalyst_doctype_views_default_views() {
   $handler->display->display_options['header']['php']['field'] = 'php';
   $handler->display->display_options['header']['php']['label'] = 'Action Links';
   $handler->display->display_options['header']['php']['empty'] = TRUE;
-  $handler->display->display_options['header']['php']['php_output'] = '<?php print catalyst_admin_action_links(array(
+  $handler->display->display_options['header']['php']['php_output'] = '<?php
+catalyst_include(\'views\', \'admin\');
+print catalyst_admin_action_links(array(
   \'doctype-add\' => array(
     \'title\' => t(\'Create new doctype\'),
     \'path\' => \'admin/structure/doctype/add\',
@@ -120,11 +122,13 @@ function catalyst_doctype_views_default_views() {
   $handler->display->display_options['empty']['php']['table'] = 'views';
   $handler->display->display_options['empty']['php']['field'] = 'php';
   $handler->display->display_options['empty']['php']['empty'] = TRUE;
-  $handler->display->display_options['empty']['php']['php_output'] = '<?php if (empty($view->exposed_input)): ?>
-<p><?php print t(\'No doctypes have been created yet.\'); ?></p>
-<?php else: ?>
-<p><?php print t(\'No doctypes were found that match your current search filters.\'); ?></p>
-<?php endif; ?>';
+  $handler->display->display_options['empty']['php']['php_output'] = '<?php
+catalyst_include(\'views\', \'admin\');
+print catalyst_admin_views_no_results($view, \'document types\', array(
+  \'bundle\' => \'doctype\',
+  \'path\' => \'admin/structure/doctype/add\',
+  \'destination\' => \'admin/structure/doctype\',
+)); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
   $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'eck_catalyst';
@@ -154,7 +158,27 @@ function catalyst_doctype_views_default_views() {
   $handler->display->display_options['fields']['title']['id'] = 'title';
   $handler->display->display_options['fields']['title']['table'] = 'eck_catalyst';
   $handler->display->display_options['fields']['title']['field'] = 'title';
-  $handler->display->display_options['fields']['title']['label'] = 'Doctype';
+  $handler->display->display_options['fields']['title']['exclude'] = TRUE;
+  /* Field: Global: PHP */
+  $handler->display->display_options['fields']['php_2']['id'] = 'php_2';
+  $handler->display->display_options['fields']['php_2']['table'] = 'views';
+  $handler->display->display_options['fields']['php_2']['field'] = 'php';
+  $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
+  $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
+  $handler->display->display_options['fields']['php_2']['php_value'] = 'catalyst_include(\'views\', \'admin\');
+return catalyst_admin_eck_entity_link(\'doctype\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/structure\', array(
+  \'query\' => array(\'destination\' => \'admin/structure/doctype\'),
+));';
+  $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
+  $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
+  $handler->display->display_options['fields']['php_2']['php_click_sortable'] = '';
+  /* Field: Catalyst: Title */
+  $handler->display->display_options['fields']['title_1']['id'] = 'title_1';
+  $handler->display->display_options['fields']['title_1']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['title_1']['field'] = 'title';
+  $handler->display->display_options['fields']['title_1']['label'] = 'Document type';
+  $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['title_1']['alter']['text'] = '[php_2]';
   /* Field: Catalyst: Created */
   $handler->display->display_options['fields']['created']['id'] = 'created';
   $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';
@@ -177,7 +201,8 @@ function catalyst_doctype_views_default_views() {
   $handler->display->display_options['fields']['php']['label'] = 'Actions';
   $handler->display->display_options['fields']['php']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php']['php_value'] = 'return catalyst_admin_eck_entity_link(
+  $handler->display->display_options['fields']['php']['php_value'] = 'catalyst_include(\'views\', \'admin\');
+return catalyst_admin_eck_entity_link(
   \'doctype\', $row->id, t(\'edit\'), \'edit\', \'admin/structure\',
   array(\'query\' => array(\'destination\' => \'admin/structure/doctype\'))
 );';
@@ -191,7 +216,8 @@ function catalyst_doctype_views_default_views() {
   $handler->display->display_options['fields']['php_1']['label'] = 'Delete';
   $handler->display->display_options['fields']['php_1']['hide_empty'] = TRUE;
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
-  $handler->display->display_options['fields']['php_1']['php_value'] = 'return catalyst_admin_eck_entity_link(
+  $handler->display->display_options['fields']['php_1']['php_value'] = 'catalyst_include(\'views\', \'admin\');
+return catalyst_admin_eck_entity_link(
   \'doctype\', $row->id, t(\'delete\'), \'delete\', \'admin/structure\',
   array(\'query\' => array(\'destination\' => \'admin/structure/doctype\'))
 );';

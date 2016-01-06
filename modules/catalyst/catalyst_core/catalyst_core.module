@@ -5,3 +5,108 @@
  */
 
 include_once 'catalyst_core.features.inc';
+/**
+ * Get info about catalyst types.
+ */
+function catalyst_get_plugin_info($plugin = NULL, $reset = NULL) {
+  $stored_info = &drupal_static(__FUNCTION__);
+  if ($reset || !isset($stored_info)) {
+    foreach (module_implements('catalyst_plugin_info') AS $module) {
+      foreach (module_invoke($module, 'catalyst_plugin_info') as $type => $info) {
+        $stored_info[$type] = $info + array(
+          'module' => $module,
+          'exportables' => FALSE,
+        );
+      }
+    }
+    drupal_alter('catalyst_plugin_info', $stored_info);
+  }
+  if ($plugin) {
+    return isset($stored_info[$plugin]) ? $stored_info[$plugin] : FALSE;
+  }
+  return $stored_info;
+}
+
+/**
+ * Implements hook_hook_info().
+ */
+function catalyst_core_hook_info() {
+  $group = array('group' => 'catalyst');
+  // Layout hooks
+  $hooks['catalyst_layout_alter'] = $group;
+  // Plugin hooks
+  $hooks['catalyst_plugin_info'] = $group;
+  $hooks['catalyst_plugin_info_alter'] = $group;
+  // Export hooks
+  $hooks['catalyst_export_dependencies'] = $group;
+  $hooks['catalyst_export_candidates'] = $group;
+  $hooks['catalyst_prepare_export'] = $group;
+  // Menu hooks
+  $hooks['catalyst_ignore_menus'] = $group;
+  $hooks['catalyst_ignore_menus_alter'] = $group;
+  // Twig
+  $hooks['catalyst_twig_render_alter'] = $group;
+  // Fields, entities, and node related hooks
+  $hooks['catalyst_node_types'] = $group;
+  $hooks['catalyst_safe_fields'] = $group;
+  return $hooks;
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function catalyst_core_menu_alter(&$menu_items) {
+  $path = 'admin/reports/fields';
+  if (isset($menu_items[$path])) {
+    $menu_items[$path] = array_merge($menu_items[$path], array(
+      'page callback' => 'catalyst_field_ui_clean_field_list',
+      'file path' => catalyst_get_path() . '/includes',
+      'module' => 'catalyst_core',
+      'file' => 'fields.inc',
+    ));
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Make the field ui more usable by removing catalyst fields from not
+ * catalyst entities.
+ *
+ * This does not belong in catalyst_admin as theoretically catalyst_admin
+ * can be disabled/uninstalled.
+ */
+function catalyst_core_form_field_ui_field_overview_form_alter(&$form, &$form_state) {
+  switch (true) {
+    // Skip catalyst entity field ui forms
+    case $form['#entity_type'] == 'catalyst':
+    // Skip catalyst cpage node field ui form
+    case $form['#entity_type'] == 'node' && $form['#bundle'] == 'cpage':
+      return;
+  }
+  // After build callback in catalyst_core/includes/uncommoon.inc
+  catalyst_form_load_include($form_state, 'uncommon');
+  // Make any alterations as late as possible
+  $form['#after_build'][99] = 'catalyst_field_ui_field_overview_form_after_build';
+}
+
+/**
+ * Shortcut function to include common catalyst files.
+ */
+function catalyst_include($name, $module = 'core') {
+  require_once drupal_get_path('module', 'catalyst_' . $module) . '/includes/' . $name . '.inc';
+}
+
+function catalyst_form_load_include(&$form_state, $name, $module = 'core') {
+  return form_load_include($form_state, 'inc', 'catalyst_' . $module, 'includes/'. $name);
+}
+
+function catalyst_get_path($module = 'core') {
+  return drupal_get_path('module', 'catalyst_'. $module);
+}
+
+function catalyst_node_types() {
+  return array_intersect_key(node_type_get_types(),
+    array_flip(array('cpage')));
+  // module_invoke_all('catalyst_node_types')));
+}

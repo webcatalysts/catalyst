@@ -22,4 +22,5 @@ features[user_permission][] = administer navigation menu items
 features[user_permission][] = administer user-menu menu items
 features[variable][] = menu_block_menu_order
 features[variable][] = menu_block_suppress_core
+files[] = catalyst_menu.migrate.inc
 project path = profiles/catalyst/modules/catalyst

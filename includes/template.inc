@@ -14,21 +14,24 @@
 interface CatalystTemplateInterface {
   public function renderTemplate($variables);
   public function getHTMLHead();
-  public function getDrupalProcessingEnabled();
   public function getPreprocessPHP();
 }
 
 interface CatalystLayoutInterface extends CatalystTemplateInterface {
+  public function getLayoutID();
   public function getDoctype();
   public function getRegions();
   public function getDebuggingEnabled();
   public function getShowMessages();
   public function getPageTitlePattern();
+  public function getBlockPlacements();
+  public function getDrupalProcessingEnabled();
 }
 
 interface CatalystDoctypeInterface extends CatalystTemplateInterface {
   public function getContentType();
   public function getCharset();
+  public function getDrupalProcessingEnabled();
 }
 
 abstract class CatalystEntityTemplate implements CatalystTemplateInterface {
@@ -52,7 +55,7 @@ abstract class CatalystEntityTemplate implements CatalystTemplateInterface {
   }
 
   protected function getTemplate() {
-    if (!empty($this->template)) {
+    if ($this->has_entity) {
       return $this->template;
     }
     return $this->getDefaultTemplate();
@@ -86,15 +89,40 @@ abstract class CatalystEntityTemplate implements CatalystTemplateInterface {
   }
 }
 
+abstract class CatalystNodeTemplate implements CatalystTemplateInterface {
+  protected $wrapper;
+
+  public function __construct($node) {
+    $this->wrapper = entity_metadata_wrapper('node', $node);
+  }
+
+  abstract function getTemplate();
+
+  protected function getTemplateName() {
+    return format_string('@node_type:@node_id', array(
+      '@node_type' => $this->wrapper->getBundle(),
+      '@node_id' => $this->wrapper->getIdentifier(),
+    ));
+    return get_class($this);
+  }
+}
+
 trait CatalystTwigTemplateRenderer {
   public function renderTemplate($variables) {
     module_load_include('inc', 'catalyst', 'includes/twig');
 
-    return catalyst_twig_render(
+    $render_wrapper = &drupal_static('twig_render_entity_wrapper', NULL);
+    $render_wrapper = $this->wrapper;
+
+    $return = catalyst_twig_render(
       $this->getTemplate(),
       $variables,
       $this->getTemplateName()
     );
+
+    drupal_static_reset('twig_render_entity_wrapper');
+
+    return $return;
   }
 }
 

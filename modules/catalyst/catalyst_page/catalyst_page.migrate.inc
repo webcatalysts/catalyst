@@ -17,6 +17,7 @@ class CatalystPageMigration extends CatalystNodeMigration {
       'files_custom' => t('Custom Files'),
       'files_shared' => t('Shared Files'),
       'block_placements' => t('Block placements'),
+      'block_placement_block_ids' => t('Block placement block IDs'),
       'blocks_ref' => t('Block references'),
       'html_head' => t('Custom HTML Head'),
       'preprocess_php' => t('Preprocess PHP'),
@@ -25,14 +26,17 @@ class CatalystPageMigration extends CatalystNodeMigration {
 
   protected function mapFields() {
     parent::mapFields();
+    // Block Placements
+    $this->addFieldMapping('field_cpage_blocks', 'block_placements');
+    $this->addReferenceFieldMapping('field_cpage_blocks:block_id', 'block_placement_block_ids', 'block');
     // File field mapping
-    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom', '|');
+    $this->addFileFieldMapping('field_catalyst_custom_files', 'files_custom');
     // Reference field mappings
-    $this->addReferenceFieldMapping('field_cpage_layout', 'layout', 'layout', FALSE);
-    $this->addReferenceFieldMapping('field_cpage_includes_css', 'css_includes', 'stylesheet', ',');
-    $this->addReferenceFieldMapping('field_cpage_includes_js', 'js_includes', 'javascript', ',');
-    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file', ',');
-    $this->addReferenceFieldMapping('field_cpage_blocks_add', 'blocks_ref', 'block', ',');
+    $this->addReferenceFieldMapping('field_cpage_layout', 'layout', 'layout');
+    $this->addReferenceFieldMapping('field_cpage_includes_css', 'css_includes', 'stylesheet');
+    $this->addReferenceFieldMapping('field_cpage_includes_js', 'js_includes', 'javascript');
+    $this->addReferenceFieldMapping('field_catalyst_shared_files', 'files_shared', 'file');
+    $this->addReferenceFieldMapping('field_cpage_blocks_add', 'blocks_ref', 'block');
     // Formmatted field mappings
     $this->addFormattedFieldMapping('field_cpage_content', 'content', 'cpage_html');
     $this->addFormattedFieldMapping('field_cpage_custom_css', 'css_custom', 'css');

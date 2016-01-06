@@ -26,3 +26,123 @@ function catalyst_install() {
   user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content'));
   user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content'));
 }
+
+/**
+ * Implements hook_install_tasks_alter().
+ */
+function catalyst_install_tasks_alter(&$tasks, $install_state) {
+  global $install_state;
+
+  /**
+  // Skip language selection install step and default language to English.
+  $tasks['install_select_locale']['display'] = FALSE;
+  $tasks['install_select_locale']['run'] = INSTALL_TASK_SKIP;
+  $install_state['parameters']['locale'] = 'en';
+   */
+
+  // Override "install_finished" task.
+  $tasks['install_finished']['function'] = 'catalyst_install_finished';
+}
+
+
+/**
+ * Alters the "configure" installation step.
+ *
+ * @see catalyst_form_install_configure_form_alter().
+ */
+function _catalyst_form_install_configure_form_alter(&$form, &$form_state) {
+  // Pre-populate the site name with the server name.
+  $form['site_information']['site_name']['#default_value'] = $_SERVER['SERVER_NAME'];
+  // Remove any non-error messages set by enabled modules.
+  $messages = array('completed', 'status', 'warning');
+  foreach ($messages as $message) {
+    drupal_get_messages($message, TRUE);
+  }
+  // Add 'Catalyst' fieldset and options.
+  $form['catalyst'] = array(
+    '#type' => 'fieldset',
+    '#title' => t('Catalyst'),
+    '#weight' => -5,
+    '#collapsible' => FALSE,
+    '#tree' => FALSE,
+  );
+  // Checkbox to enable Catalyst options.
+  $form['catalyst']['extensions'] = array(
+    '#type' => 'checkboxes',
+    '#title' => 'Enable Extensions',
+    '#description' => 'Optionally install extra features',
+    //'#options' => array('catalyst_demo' => 'Demo Content'),
+    '#options' => array('catalyst_test' => 'Catalyst Tests'),
+    '#weight' => 0,
+  );
+  // Additional submit handlers for Catalyst settings.
+  $form['#submit'][] = 'catalyst_extensions_enable';
+}
+
+/**
+ * Enable requested Catalyst extensions.
+ */
+function catalyst_extensions_enable($form_id, &$form_state) {
+  // Clear & rebuild Features key caches.
+  features_get_info(NULL, NULL, TRUE);
+  features_rebuild();
+
+  // Rebuild all Default Config (cleanup install).
+  //defaultconfig_rebuild_all();
+
+  // Revert all Features (cleanup install).
+  features_revert();
+
+  $values = $form_state['values'];
+  if (isset($values['extensions'])) {
+    foreach ($values['extensions'] as $module) {
+      module_enable(array($module), TRUE);
+    }
+  }
+}
+
+/**
+ * Override of install_finished().
+ */
+function catalyst_install_finished(&$install_state) {
+  // Flush all caches to ensure that any full bootstraps during the installer
+  // do not leave stale cached data, and that any content types or other items
+  // registered by the installation profile are registered correctly.
+  drupal_flush_all_caches();
+
+  $install_profile = drupal_get_profile();
+
+  // Remember the profile which was used.
+  variable_set('install_profile', $install_profile);
+
+  // Installation profiles are always loaded last
+  db_update('system')
+    ->fields(array('weight' => 1000))
+    ->condition('type', 'module')
+    ->condition('name', $install_profile)
+    ->execute();
+
+  // Cache a fully-built schema.
+  drupal_get_schema(NULL, TRUE);
+
+  // Run cron to populate update status tables (if available) so that users
+  // will be warned if they've installed an out of date Drupal version.
+  // Will also trigger indexing of profile-supplied content or feeds.
+  drupal_cron_run();
+
+  // Remove install messages.
+  $messages = array('completed', 'status', 'warning', 'error');
+  foreach ($messages as $message) {
+    drupal_get_messages($message, TRUE);
+  }
+
+  // Finish installation.
+  if (!drupal_is_cli()) {
+    // Redirect UI-based install to the site homepage.
+    drupal_goto(variable_get('site_frontpage', ''));
+  }
+  else {
+    // Display a success message for Drush-based install.
+    drupal_set_message("Catalyst install complete.");
+  }
+}

@@ -1,0 +1,105 @@
+<?php
+
+/**
+ * @file
+ * Catalyst hook implementations for Catalyst Block.
+ */
+
+/**
+ * Implements hook_catalyst_plugin_info().
+ */
+function catalyst_block_catalyst_plugin_info() {
+  return array(
+    'block' => array(
+      'title' => t('Blocks'),
+      'entity_type' => 'catalyst',
+      'bundle' => 'block',
+      'exportables' => TRUE,
+      'migration' => array(
+        'class_name' => 'CatalystBlockMigration',
+      ),
+      'migration sources' => array('layout', 'stylesheet', 'javascript', 'file'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_catalyst_export_candidates().
+ */
+function catalyst_block_catalyst_export_candidates($group) {
+  $args = func_get_args();
+  if ($group['type'] == 'block') {
+    return catalyst_export_entity_candidates($group['type']);
+  }
+}
+
+/**
+ * Implements hook_catalyst_export_dependencies().
+ */
+function catalyst_block_catalyst_export_dependencies($export, $group) {
+  if (isset($group['entity_type'])) {
+    $dependencies = array();
+    $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
+    // These fields need to be consolidated into one
+    $block_refs_fields = array('field_cpage_blocks_add', 'field_catalyst_blocks_add');
+    foreach ($block_refs_fields AS $field) {
+      if (isset($wrapper->{$field})) {
+        foreach ($wrapper->{$field} AS $item) {
+          catalyst_add_export($dependencies, 'block', $item->getIdentifier());
+        }
+      }
+    }
+    // Determine dependencies for entities using block placements
+    $placement_fields = array('field_cpage_blocks', 'field_layout_blocks');
+    foreach ($placement_fields AS $field) {
+      if (isset($wrapper->{$field})) {
+        foreach ($wrapper->{$field} AS $item) {
+          $block_id = $item->block_id->value();
+          if (!isset($dependencies['block'][$block_id])) {
+            catalyst_add_export($dependencies, 'block', $block_id);
+          }
+        }
+      }
+    }
+    return $dependencies;
+  }
+}
+
+/**
+ * Implements hook_catalyst_prepare_export().
+ */
+function catalyst_block_catalyst_prepare_export($export, $group, $exports) {
+  $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
+
+  $block_placements = array();
+  $block_placement_layout_ids = array();
+  foreach ($wrapper->field_block_placements->value() AS $placement) {
+    if (catalyst_export_exists($placement['layout_id'], 'layout', $exports)) {
+      $block_placement_layout_ids[] = $placement['layout_id'];
+      unset($placement['layout_id']);
+      $block_placements[] = $placement;
+    }
+  }
+  return (object) array(
+    'id' => $wrapper->getIdentifier(),
+    'title' => $wrapper->label(),
+    'created' => $wrapper->created->value(),
+    'changed' => $wrapper->changed->value(),
+    'machine_name' => $wrapper->field_block_machine->machine->value(),
+    'content' => entity_valval($wrapper->field_block_content),
+    'css_custom' => entity_valval($wrapper->field_catalyst_custom_css),
+    'js_custom' => entity_valval($wrapper->field_catalyst_custom_js),
+    'preprocess_php' => entity_valval($wrapper->field_block_preprocess),
+    'block_placements' => $block_placements,
+    'block_placement_layout_ids' => $block_placement_layout_ids,
+    'files_custom' => catalyst_export_helper_files(
+      $wrapper->field_catalyst_custom_files, $wrapper->getIdentifier()),
+    // Filter reference items
+    'js_includes' => catalyst_export_helper_filter_references(
+      $wrapper->field_catalyst_includes_js, 'javascript', $exports),
+    'css_includes' => catalyst_export_helper_filter_references(
+      $wrapper->field_catalyst_includes_css, 'stylesheet', $exports),
+    'files_shared' => catalyst_export_helper_filter_references(
+      $wrapper->field_catalyst_shared_files, 'file', $exports),
+  );
+}

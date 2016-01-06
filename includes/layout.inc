@@ -9,15 +9,19 @@
  * Initialize the catalyst layout.
  */
 function catalyst_layout_initialize() {
-  $layout =& drupal_static('catalyst_layout');
-  if (!isset($layout)) {
-    $layout_entity = FALSE;
+  $current_layout =& drupal_static('catalyst_layout');
+  if (!isset($current_layout)) {
+    $resolved_layout = FALSE;
     // Initialize the default layout if one is set
     if ($layout_entity_id = variable_get('catalyst_layout_default', FALSE)) {
-      $layout_entity = entity_load_single('catalyst', $layout_entity_id);
+      $resolved_layout = catalyst_load_single($layout_entity_id);
     }
-    // Initialize the layout with or without a layout entity
-    $layout = new CatalystEntityLayout($layout_entity);
+    // This might not be the right way to implement this as the layout
+    // shouldn't be altered but this gives other modules a chance to call
+    // catalyst_set_layout().
+    drupal_alter('catalyst_layout', $resolved_layout);
+
+    catalyst_set_layout($resolved_layout);
   }
 }
 
@@ -29,6 +33,17 @@ function catalyst_get_layout() {
 function catalyst_set_layout($layout = NULL) {
   $stored_layout =& drupal_static('catalyst_layout');
   if ($layout !== NULL) {
+    // Prevent "changing" the layout to the same layout
+    if (isset($stored_layout)) {
+      switch (true) {
+        // $layout is null, false, or an ID and matches the stored layout
+        case (!$layout || is_int($layout)) && $stored_layout->getLayoutID() == $layout:
+        // $layout is an entity and matches the stored layout.
+        case is_a('Entity', $layout) && $stored_layout->getLayoutID() == $layout->id:
+          return $stored_layout;
+      }
+    }
+
     if (is_int($layout)) {
       $layout = entity_load_single('catalyst', $layout, array('type' => 'layout'));
     }

@@ -92,6 +92,28 @@ function catalyst_block_field_default_field_bases() {
     'type' => 'text_long',
   );
 
+  // Exported field_base: 'field_catalyst_blocks_lf'.
+  $field_bases['field_catalyst_blocks_lf'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field_catalyst_blocks_lf',
+    'indexes' => array(
+      'block_id' => array(
+        0 => 'block_id',
+      ),
+      'region' => array(
+        0 => 'region',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'catalyst_block',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'block_placement_layout_field',
+  );
+
   // Exported field_base: 'field_catalyst_custom_css'.
   $field_bases['field_catalyst_custom_css'] = array(
     'active' => 1,
