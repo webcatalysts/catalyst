@@ -57,6 +57,10 @@ projects[migrate][version] = "2.8"
 projects[migrate][type] = "module"
 projects[migrate][subdir] = "contrib"
 
+; Prevent strict error in Migration::prepareRow()
+; https://www.drupal.org/node/2643468
+projects[migrate][patch][] = "https://www.drupal.org/files/issues/migrate-fix-strict-warning-in-prepareRow-2643468-2-7x2x.patch"
+
 projects[migrate_extras][version] = "2.5"
 projects[migrate_extras][type] = "module"
 projects[migrate_extras][subdir] = "contrib"
@@ -121,6 +125,10 @@ projects[views_php][version] = "1.0-alpha3"
 projects[views_php][type] = "module"
 projects[views_php][subdir] = "contrib"
 
+projects[webform][version] = "4.12"
+projects[webform][type] = "module"
+projects[webform][subdir] = "contrib"
+
 projects[wysiwyg][version] = "2.x-dev"
 projects[wysiwyg][type] = "module"
 projects[wysiwyg][subdir] = "contrib"
@@ -131,14 +139,14 @@ projects[better_migrate][subdir] = "sandbox"
 projects[better_migrate][download][type] = "git"
 projects[better_migrate][download][branch] = "7.x-1.x"
 projects[better_migrate][download][url] = "http://git.drupal.org/sandbox/lee20/2223893.git"
-projects[better_migrate][download][revision] = "eaa011a"
+projects[better_migrate][download][revision] = "24afd01"
 
 projects[machine][type] = "module"
 projects[machine][subdir] = "sandbox"
 projects[machine][download][type] = "git"
 projects[machine][download][branch] = "7.x-1.x"
 projects[machine][download][url] = "http://git.drupal.org/sandbox/lee20/2642174.git"
-projects[machine][download][revision] = "2935073"
+projects[machine][download][revision] = "3f55b5b"
 
 projects[wysiwyg_ace][type] = "module"
 projects[wysiwyg_ace][subdir] = "sandbox"
