@@ -315,12 +315,12 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['field__drupal_processing']['field'] = 'field__drupal_processing';
   $handler->display->display_options['fields']['field__drupal_processing']['label'] = 'drupal_processing';
   $handler->display->display_options['fields']['field__drupal_processing']['type'] = 'list_key';
-  /* Field: catalyst: Content */
+  /* Field: Field: Content */
   $handler->display->display_options['fields']['field__body']['id'] = 'field__body';
   $handler->display->display_options['fields']['field__body']['table'] = 'field_data_field__body';
   $handler->display->display_options['fields']['field__body']['field'] = 'field__body';
   $handler->display->display_options['fields']['field__body']['label'] = 'content';
-  /* Field: catalyst: Preprocessing */
+  /* Field: Field: Preprocessing */
   $handler->display->display_options['fields']['field__preprocess']['id'] = 'field__preprocess';
   $handler->display->display_options['fields']['field__preprocess']['table'] = 'field_data_field__preprocess';
   $handler->display->display_options['fields']['field__preprocess']['field'] = 'field__preprocess';

@@ -1,9 +1,13 @@
 <?php
 
 /**
+ * @file
+ */
+
+/**
  * Implements hook_field_schema().
  */
-function catalyst_block_field_schema($field) {
+function catalyst_field_api_field_schema($field) {
   if (strpos($field['type'], 'block_placement') === 0) {
     $schema = array(
       'columns' => array(

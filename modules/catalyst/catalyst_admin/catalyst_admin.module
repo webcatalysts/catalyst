@@ -53,7 +53,7 @@ function catalyst_admin_theme_registry_alter(&$theme_registry) {
  * Implements hook_form_alter().
  */
 function catalyst_admin_form_alter(&$form, &$form_state, $form_id) {
-  if (isset($form['field_catalyst_form_help'])) {
+  if (isset($form['field__admin_notes'])) {
     if (isset($form['#node'])) {
       $wrapper = entity_metadata_wrapper('node', $form['#node']);
     }
@@ -62,7 +62,7 @@ function catalyst_admin_form_alter(&$form, &$form_state, $form_id) {
     }
     $form['catalyst_form_help'] = array(
       '#type' => 'markup',
-      '#markup' => '<p class="help catalyst-form-help">' . entity_valval($wrapper->field_catalyst_form_help) . '</p>',
+      '#markup' => '<p class="help catalyst-form-help">' . entity_valval($wrapper->field__admin_notes) . '</p>',
       '#weight' => -100000,
     );
   }

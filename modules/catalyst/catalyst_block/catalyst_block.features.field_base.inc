@@ -26,10 +26,54 @@ function catalyst_block_field_default_field_bases() {
       ),
     ),
     'locked' => 0,
-    'module' => 'catalyst_block',
+    'module' => 'catalyst_field_api',
     'settings' => array(),
     'translatable' => 0,
     'type' => 'block_placement_block',
+  );
+
+  // Exported field_base: 'field__blockplacements__layfield'.
+  $field_bases['field__blockplacements__layfield'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__blockplacements__layfield',
+    'indexes' => array(
+      'block_id' => array(
+        0 => 'block_id',
+      ),
+      'region' => array(
+        0 => 'region',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'catalyst_field_api',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'block_placement_layout_field',
+  );
+
+  // Exported field_base: 'field__blockplacements__layout'.
+  $field_bases['field__blockplacements__layout'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field__blockplacements__layout',
+    'indexes' => array(
+      'block_id' => array(
+        0 => 'block_id',
+      ),
+      'region' => array(
+        0 => 'region',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'catalyst_field_api',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'block_placement_layout',
   );
 
   // Exported field_base: 'field__blocks_related'.
@@ -65,50 +109,6 @@ function catalyst_block_field_default_field_bases() {
     ),
     'translatable' => 0,
     'type' => 'entityreference',
-  );
-
-  // Exported field_base: 'field__blockplacements__layout'.
-  $field_bases['field__blockplacements__layout'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field__blockplacements__layout',
-    'indexes' => array(
-      'block_id' => array(
-        0 => 'block_id',
-      ),
-      'region' => array(
-        0 => 'region',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'catalyst_block',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'block_placement_layout',
-  );
-
-  // Exported field_base: 'field__blockplacements__layfield'.
-  $field_bases['field__blockplacements__layfield'] = array(
-    'active' => 1,
-    'cardinality' => -1,
-    'deleted' => 0,
-    'entity_types' => array(),
-    'field_name' => 'field__blockplacements__layfield',
-    'indexes' => array(
-      'block_id' => array(
-        0 => 'block_id',
-      ),
-      'region' => array(
-        0 => 'region',
-      ),
-    ),
-    'locked' => 0,
-    'module' => 'catalyst_block',
-    'settings' => array(),
-    'translatable' => 0,
-    'type' => 'block_placement_layout_field',
   );
 
   return $field_bases;

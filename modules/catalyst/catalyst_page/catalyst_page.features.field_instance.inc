@@ -10,103 +10,6 @@
 function catalyst_page_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance: 'node-cpage-field__files'.
-  $field_instances['node-cpage-field__files'] = array(
-    'bundle' => 'cpage',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field__files',
-    'label' => 'Custom Files',
-    'required' => 0,
-    'settings' => array(
-      'description_field' => 0,
-      'file_directory' => '',
-      'file_extensions' => 'gif jpg jpeg png svg doc docx rtf txt wpd wps cvs dat pps ppt pptx sdf vcf xml m3u m4a mid mp3 wma wav 3gp avi flv swf mov mp4 mpg wmv',
-      'filefield_paths' => array(
-        'active_updating' => 0,
-        'file_name' => array(
-          'options' => array(
-            'pathauto' => 1,
-            'slashes' => 0,
-            'transliterate' => 1,
-          ),
-          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
-        ),
-        'file_path' => array(
-          'options' => array(
-            'pathauto' => 1,
-            'slashes' => 0,
-            'transliterate' => 1,
-          ),
-          'value' => 'media/cpage/[node:title]',
-        ),
-        'redirect' => FALSE,
-        'retroactive_update' => 0,
-      ),
-      'filefield_paths_enabled' => 1,
-      'max_filesize' => '',
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'file',
-      'settings' => array(
-        'progress_indicator' => 'bar',
-      ),
-      'type' => 'file_generic',
-      'weight' => 12,
-    ),
-  );
-
-  // Exported field_instance: 'node-cpage-field__media_files'.
-  $field_instances['node-cpage-field__media_files'] = array(
-    'bundle' => 'cpage',
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 10,
-      ),
-    ),
-    'entity_type' => 'node',
-    'field_name' => 'field__media_files',
-    'label' => 'Shared Files',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'inline_entity_form',
-      'settings' => array(
-        'fields' => array(),
-        'type_settings' => array(
-          'allow_existing' => 1,
-          'allow_new' => 1,
-          'delete_references' => 0,
-          'label_plural' => 'files',
-          'label_singular' => 'file',
-          'match_operator' => 'CONTAINS',
-          'override_labels' => 1,
-        ),
-      ),
-      'type' => 'inline_entity_form',
-      'weight' => 13,
-    ),
-  );
-
   // Exported field_instance: 'node-cpage-field__blockplacements__layfield'.
   $field_instances['node-cpage-field__blockplacements__layfield'] = array(
     'bundle' => 'cpage',
@@ -130,7 +33,7 @@ function catalyst_page_field_default_field_instances() {
     ),
     'widget' => array(
       'active' => 0,
-      'module' => 'catalyst_block',
+      'module' => 'catalyst_field_api',
       'settings' => array(),
       'type' => 'block_placement_layout_field_widget',
       'weight' => 3,
@@ -336,10 +239,9 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field__js__page'.
-  $field_instances['node-cpage-field__js__page'] = array(
+  // Exported field_instance: 'node-cpage-field__files'.
+  $field_instances['node-cpage-field__files'] = array(
     'bundle' => 'cpage',
-    'default_value' => NULL,
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -347,71 +249,50 @@ function catalyst_page_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 13,
+        'weight' => 11,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field__js__page',
-    'label' => 'Custom Javascript',
+    'field_name' => 'field__files',
+    'label' => 'Custom Files',
     'required' => 0,
     'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 'js',
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
-        ),
-        'allowed_formats_toggle' => 1,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'cpage_html' => array(
-              'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => -10,
-            ),
+      'description_field' => 0,
+      'file_directory' => '',
+      'file_extensions' => 'gif jpg jpeg png svg doc docx rtf txt wpd wps cvs dat pps ppt pptx sdf vcf xml m3u m4a mid mp3 wma wav 3gp avi flv swf mov mp4 mpg wmv',
+      'filefield_paths' => array(
+        'active_updating' => 0,
+        'file_name' => array(
+          'options' => array(
+            'pathauto' => 1,
+            'slashes' => 0,
+            'transliterate' => 1,
           ),
+          'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
+        'file_path' => array(
+          'options' => array(
+            'pathauto' => 1,
+            'slashes' => 0,
+            'transliterate' => 1,
+          ),
+          'value' => 'media/cpage/[node:title]',
+        ),
+        'redirect' => FALSE,
+        'retroactive_update' => 0,
       ),
-      'text_processing' => 1,
+      'filefield_paths_enabled' => 1,
+      'max_filesize' => '',
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'text',
+      'module' => 'file',
       'settings' => array(
-        'rows' => 10,
+        'progress_indicator' => 'bar',
       ),
-      'type' => 'text_textarea',
-      'weight' => 16,
+      'type' => 'file_generic',
+      'weight' => 12,
     ),
   );
 
@@ -494,8 +375,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field__media_stylesheets__page'.
-  $field_instances['node-cpage-field__media_stylesheets__page'] = array(
+  // Exported field_instance: 'node-cpage-field__js__page'.
+  $field_instances['node-cpage-field__js__page'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -505,12 +386,120 @@ function catalyst_page_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 7,
+        'weight' => 13,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field__media_stylesheets__page',
-    'label' => 'Stylesheet Includes',
+    'field_name' => 'field__js__page',
+    'label' => 'Custom Javascript',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'cpage_html' => 0,
+          'css' => 0,
+          'full_html' => 0,
+          'html_simple' => 0,
+          'js' => 'js',
+          'layout_html' => 0,
+          'php' => 0,
+          'php_code' => 0,
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'cpage_html' => array(
+              'weight' => 0,
+            ),
+            'css' => array(
+              'weight' => -9,
+            ),
+            'full_html' => array(
+              'weight' => 0,
+            ),
+            'html_simple' => array(
+              'weight' => 0,
+            ),
+            'js' => array(
+              'weight' => -8,
+            ),
+            'layout_html' => array(
+              'weight' => 0,
+            ),
+            'php' => array(
+              'weight' => -5,
+            ),
+            'php_code' => array(
+              'weight' => 11,
+            ),
+            'plain_text' => array(
+              'weight' => -10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 10,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 16,
+    ),
+  );
+
+  // Exported field_instance: 'node-cpage-field__layout'.
+  $field_instances['node-cpage-field__layout'] = array(
+    'bundle' => 'cpage',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 1,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field__layout',
+    'label' => 'Layout',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(),
+      'type' => 'options_select',
+      'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'node-cpage-field__media_files'.
+  $field_instances['node-cpage-field__media_files'] = array(
+    'bundle' => 'cpage',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field__media_files',
+    'label' => 'Shared Files',
     'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
@@ -524,14 +513,14 @@ function catalyst_page_field_default_field_instances() {
           'allow_existing' => 1,
           'allow_new' => 1,
           'delete_references' => 0,
-          'label_plural' => 'stylesheets',
-          'label_singular' => 'stylesheet',
+          'label_plural' => 'files',
+          'label_singular' => 'file',
           'match_operator' => 'CONTAINS',
           'override_labels' => 1,
         ),
       ),
       'type' => 'inline_entity_form',
-      'weight' => 15,
+      'weight' => 13,
     ),
   );
 
@@ -576,8 +565,8 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'node-cpage-field__layout'.
-  $field_instances['node-cpage-field__layout'] = array(
+  // Exported field_instance: 'node-cpage-field__media_stylesheets__page'.
+  $field_instances['node-cpage-field__media_stylesheets__page'] = array(
     'bundle' => 'cpage',
     'default_value' => NULL,
     'deleted' => 0,
@@ -587,22 +576,33 @@ function catalyst_page_field_default_field_instances() {
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',
-        'weight' => 1,
+        'weight' => 7,
       ),
     ),
     'entity_type' => 'node',
-    'field_name' => 'field__layout',
-    'label' => 'Layout',
-    'required' => 1,
+    'field_name' => 'field__media_stylesheets__page',
+    'label' => 'Stylesheet Includes',
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
     'widget' => array(
       'active' => 1,
-      'module' => 'options',
-      'settings' => array(),
-      'type' => 'options_select',
-      'weight' => 3,
+      'module' => 'inline_entity_form',
+      'settings' => array(
+        'fields' => array(),
+        'type_settings' => array(
+          'allow_existing' => 1,
+          'allow_new' => 1,
+          'delete_references' => 0,
+          'label_plural' => 'stylesheets',
+          'label_singular' => 'stylesheet',
+          'match_operator' => 'CONTAINS',
+          'override_labels' => 1,
+        ),
+      ),
+      'type' => 'inline_entity_form',
+      'weight' => 15,
     ),
   );
 

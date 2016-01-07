@@ -10,43 +10,6 @@
 function catalyst_doctype_field_default_field_instances() {
   $field_instances = array();
 
-  // Exported field_instance:
-  // 'catalyst-doctype-field__drupal_processing'.
-  $field_instances['catalyst-doctype-field__drupal_processing'] = array(
-    'bundle' => 'doctype',
-    'default_value' => array(
-      0 => array(
-        'value' => 0,
-      ),
-    ),
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 11,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field__drupal_processing',
-    'label' => 'Enable Drupal processing',
-    'required' => 0,
-    'settings' => array(
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'options',
-      'settings' => array(
-        'display_label' => 1,
-      ),
-      'type' => 'options_onoff',
-      'weight' => 23,
-    ),
-  );
-
   // Exported field_instance: 'catalyst-doctype-field__admin_notes'.
   $field_instances['catalyst-doctype-field__admin_notes'] = array(
     'bundle' => 'doctype',
@@ -115,6 +78,86 @@ function catalyst_doctype_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 28,
+    ),
+  );
+
+  // Exported field_instance: 'catalyst-doctype-field__body'.
+  $field_instances['catalyst-doctype-field__body'] = array(
+    'bundle' => 'doctype',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 7,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__body',
+    'label' => 'Content',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'cpage_html' => 0,
+          'css' => 0,
+          'full_html' => 0,
+          'html_simple' => 0,
+          'js' => 0,
+          'layout_html' => 'layout_html',
+          'php' => 0,
+          'php_code' => 0,
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'cpage_html' => array(
+              'weight' => -7,
+            ),
+            'css' => array(
+              'weight' => -9,
+            ),
+            'full_html' => array(
+              'weight' => 0,
+            ),
+            'html_simple' => array(
+              'weight' => 0,
+            ),
+            'js' => array(
+              'weight' => -8,
+            ),
+            'layout_html' => array(
+              'weight' => -6,
+            ),
+            'php' => array(
+              'weight' => -5,
+            ),
+            'php_code' => array(
+              'weight' => 11,
+            ),
+            'plain_text' => array(
+              'weight' => -10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 20,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 18,
     ),
   );
 
@@ -209,86 +252,6 @@ function catalyst_doctype_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field__body'.
-  $field_instances['catalyst-doctype-field__body'] = array(
-    'bundle' => 'doctype',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => '',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'module' => 'text',
-        'settings' => array(),
-        'type' => 'text_default',
-        'weight' => 7,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field__body',
-    'label' => 'Content',
-    'required' => 0,
-    'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 0,
-          'layout_html' => 'layout_html',
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
-        ),
-        'allowed_formats_toggle' => 1,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'cpage_html' => array(
-              'weight' => -7,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => -6,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => -10,
-            ),
-          ),
-        ),
-      ),
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 20,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 18,
-    ),
-  );
-
   // Exported field_instance: 'catalyst-doctype-field__doctype_content_type'.
   $field_instances['catalyst-doctype-field__doctype_content_type'] = array(
     'bundle' => 'doctype',
@@ -379,6 +342,42 @@ text/html|text/html',
       ),
       'type' => 'select_or_other',
       'weight' => 19,
+    ),
+  );
+
+  // Exported field_instance: 'catalyst-doctype-field__drupal_processing'.
+  $field_instances['catalyst-doctype-field__drupal_processing'] = array(
+    'bundle' => 'doctype',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 11,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__drupal_processing',
+    'label' => 'Enable Drupal processing',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 23,
     ),
   );
 

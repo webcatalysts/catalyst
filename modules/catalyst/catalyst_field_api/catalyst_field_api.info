@@ -1,0 +1,4 @@
+name = Catalyst Field API
+description = Provides the block placement fields and any future custom fields for catalyst.
+core = 7.x
+files[] = includes/migrate.inc
