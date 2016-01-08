@@ -1,4 +1,0 @@
-name = Catalyst Save & Edit
-description = Provides a "Save & Edit" button on all entity forms.
-package = Catalyst
-core = 7.x
