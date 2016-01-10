@@ -7,27 +7,12 @@
 include_once 'catalyst_doctype.features.inc';
 
 /**
- * Implements hook_url_outbound_alter().
+ * Implements hook_form_FORM_ID_alter().
  */
-function catalyst_doctype_url_outbound_alter(&$path, &$options, $original_path) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_eck_url_outbound('doctype', $path, $options, $original_path);
-}
-
-/**
- * Implements hook_menu_alter().
- */
-function catalyst_doctype_menu_alter(&$items) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_alter_eck_entity_menu($items, 'doctype', 'admin/structure', FALSE);
-}
-
-/**
- * Implements hook_form_alter().
- */
-function catalyst_doctype_form_alter(&$form, &$form_state, $form_id) {
+function catalyst_doctype_form_eck__entity__form_alter(&$form, &$form_state, $form_id) {
   // Set the default value for the doctype content
-  if (isset($form['field__body']) && isset($form['#entity']->is_new)) {
+  if (isset($form['field__body']) && catalyst_entity_is_new($form['#entity'])
+    && $form['#entity']->type == 'doctype') {
     $lang = $form['field__body']['#language'];
     $form['field__body'][$lang][0]['#after_build'][] = 'field__body_set_default_value';
   }

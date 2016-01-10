@@ -71,8 +71,12 @@ function _catalyst_form_install_configure_form_alter(&$form, &$form_state) {
     '#type' => 'checkboxes',
     '#title' => 'Enable Extensions',
     '#description' => 'Optionally install extra features',
-    //'#options' => array('catalyst_demo' => 'Demo Content'),
-    '#options' => array('catalyst_test' => 'Catalyst Tests'),
+    '#options' => array(
+//      'catalyst_demo' => 'Demo Content',
+      'catalyst_quickstart' => 'Catalyst Quickstart',
+      'catalyst_devel' => 'Catalyst Developer Kit',
+      'catalyst_test' => 'Catalyst Tests',
+    ),
     '#weight' => 0,
   );
   // Additional submit handlers for Catalyst settings.
@@ -93,9 +97,10 @@ function catalyst_extensions_enable($form_id, &$form_state) {
   // Revert all Features (cleanup install).
   features_revert();
 
-  $values = $form_state['values'];
-  if (isset($values['extensions'])) {
-    foreach ($values['extensions'] as $module) {
+  module_enable(array('catalyst_admin'), TRUE);
+
+  if (isset($form_state['values']['extensions'])) {
+    foreach ($form_state['values']['extensions'] as $module) {
       module_enable(array($module), TRUE);
     }
   }

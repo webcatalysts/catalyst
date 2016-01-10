@@ -2,6 +2,17 @@
 
 /**
  * @file
+ * Integrates the navbar and responsive_preview modules with Catalyst.
+ *
+ * @todo
+ *
+ * Presently, Catalyst is intented to provide a clean workspace where javascript
+ * and css is managed through the system. Navbar requires jQuery and needs
+ * to be self contained so as to avoid collisions with Catalyst.
+ */
+
+/**
+ * @file
  */
 
 function catalyst_navbar_library_alter(&$libraries, $module) {
@@ -32,7 +43,7 @@ function catalyst_alter_library(&$library) {
   $return = array();
   foreach ($library AS $key => $value) {
     $override = array(
-      'group' => -101,
+      'group' => CATALYST_JS_LIBRARY,
     );
     if (is_array($value)) {
       $return[$key] = array_merge($value, $override);
@@ -42,7 +53,4 @@ function catalyst_alter_library(&$library) {
     }
   }
   $library = $return;
-}
-function catalyst_alter_library_css(&$library) {
-
 }

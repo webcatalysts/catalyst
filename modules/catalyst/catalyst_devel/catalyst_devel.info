@@ -1,0 +1,8 @@
+name = Catalyst Developer Kit
+description = Catalyst hides (most) of its internal parts from the system unless you have this module enabled.
+core = 7.x
+dependencies[] = catalyst_admin
+dependencies[] = catalyst_export
+dependencies[] = field_ui
+dependencies[] = views_ui
+dependencies[] = migrate_ui

@@ -34,7 +34,16 @@ interface CatalystDoctypeInterface extends CatalystTemplateInterface {
   public function getDrupalProcessingEnabled();
 }
 
-abstract class CatalystEntityTemplate implements CatalystTemplateInterface {
+abstract class CatalystTemplate implements CatalystTemplateInterface {
+  protected function preRender(&$template, &$variables) {
+    if ($preprocess_php = $this->getPreprocessPHP()) {
+      //catalyst_eval($preprocess_php, $variables);
+    }
+  }
+  protected function postRender(&$template, $variables) {}
+}
+
+abstract class CatalystEntityTemplate extends CatalystTemplate {
   abstract protected function getDefaultTemplate();
 
   const ENTITY_TYPE = 'catalyst';
@@ -89,7 +98,7 @@ abstract class CatalystEntityTemplate implements CatalystTemplateInterface {
   }
 }
 
-abstract class CatalystNodeTemplate implements CatalystTemplateInterface {
+abstract class CatalystNodeTemplate extends CatalystTemplate {
   protected $wrapper;
 
   public function __construct($node) {
@@ -114,11 +123,17 @@ trait CatalystTwigTemplateRenderer {
     $render_wrapper = &drupal_static('twig_render_entity_wrapper', NULL);
     $render_wrapper = $this->wrapper;
 
+    $template = $this->getTemplate();
+
+    $this->preRender($template, $variables);
+
     $return = catalyst_twig_render(
-      $this->getTemplate(),
+      $template,
       $variables,
       $this->getTemplateName()
     );
+
+    $this->postRender($return, $variables);
 
     drupal_static_reset('twig_render_entity_wrapper');
 

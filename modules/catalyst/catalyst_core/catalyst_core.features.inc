@@ -14,6 +14,29 @@ function catalyst_core_ctools_plugin_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_eck_bundle_info().
+ */
+function catalyst_core_eck_bundle_info() {
+  $items = array(
+    'catalyst_package' => array(
+      'machine_name' => 'catalyst_package',
+      'entity_type' => 'catalyst',
+      'name' => 'package',
+      'label' => 'Package',
+      'config' => array(
+        'managed_properties' => array(
+          'title' => 'title',
+          'created' => 0,
+          'changed' => 0,
+          'language' => 0,
+        ),
+      ),
+    ),
+  );
+  return $items;
+}
+
+/**
  * Implements hook_eck_entity_type_info().
  */
 function catalyst_core_eck_entity_type_info() {

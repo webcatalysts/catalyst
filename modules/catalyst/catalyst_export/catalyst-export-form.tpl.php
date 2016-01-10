@@ -1,16 +1,17 @@
 <?php
 
+return drupal_render_children($form);
 $right = render($form['options']);
 $right .= render($form['attached_files']);
 $right .= render($form['actions']);
 $left = drupal_render_children($form);
 ?>
-<table style="width: 100%;">
+<table id="catalyst-export" style="width: 100%;">
 <tr>
-<td style="width: 60%;vertical-align:top;">
-<?php print $left; ?>
+<td class="left" style="width: 60%;vertical-align:top;">
+  <?php print $left; ?>
 </td>
-<td style="width: 40%;vertical-align:top;">
+<td class="right" style="width: 40%;vertical-align:top;">
 <?php print $right; ?>
 </td>
 </table>

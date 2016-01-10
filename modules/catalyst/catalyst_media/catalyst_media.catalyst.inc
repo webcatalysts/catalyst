@@ -21,6 +21,23 @@ function catalyst_media_catalyst_plugin_info() {
         'class_name' => 'CatalystMediaStylesheetMigration',
       ),
       'migration sources' => array('file'),
+      'crud' => array(
+        'admin' => array('path' => 'admin/structure/stylesheet'),
+        'add' => array('path' => 'admin/structure/stylesheet/add'),
+        'edit' => array(
+          'path' => 'admin/structure/stylesheet/%eckentity',
+          'entity_id' => 3,
+        ),
+        'delete' => array(
+          'path' => 'admin/structure/stylesheet/%eckentity/delete',
+          'entity_id' => 3,
+        ),
+        'view' => array(
+          'path' => 'admin/structure/stylesheet/%eckentity/view',
+          'entity_id' => 3,
+          'menu_item' => FALSE,
+        ),
+      ),
     ) + $defaults,
     'javascript' => array(
       'title' => t('Javascripts'),
@@ -28,12 +45,46 @@ function catalyst_media_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystMediaJavascriptMigration',
       ),
+      'crud' => array(
+        'admin' => array('path' => 'admin/structure/javascript'),
+        'add' => array('path' => 'admin/structure/javascript/add'),
+        'edit' => array(
+          'path' => 'admin/structure/javascript/%eckentity',
+          'entity_id' => 3,
+        ),
+        'delete' => array(
+          'path' => 'admin/structure/javascript/%eckentity/delete',
+          'entity_id' => 3,
+        ),
+        'view' => array(
+          'path' => 'admin/structure/javascript/%eckentity/view',
+          'entity_id' => 3,
+          'menu_item' => FALSE,
+        ),
+      ),
     ) + $defaults,
     'file' => array(
       'title' => t('Shared Files'),
       'bundle' => 'file',
       'migration' => array(
         'class_name' => 'CatalystMediaFileMigration',
+      ),
+      'crud' => array(
+        'admin' => array('path' => 'admin/content/file'),
+        'add' => array('path' => 'admin/content/file/add'),
+        'edit' => array(
+          'path' => 'admin/content/file/%eckentity',
+          'entity_id' => 3,
+        ),
+        'delete' => array(
+          'path' => 'admin/content/file/%eckentity/delete',
+          'entity_id' => 3,
+        ),
+        'view' => array(
+          'path' => 'admin/content/file/%eckentity/view',
+          'entity_id' => 3,
+          'menu_item' => FALSE,
+        ),
       ),
     ) + $defaults,
   );
@@ -95,6 +146,7 @@ function catalyst_media_catalyst_prepare_export($export, $group, $exports) {
   }
   switch ($group['type']) {
     case 'stylesheet':
+      $export['media'] = $wrapper->field__media_stylesheet_media->value();
       $export['files_custom'] = catalyst_export_helper_files(
         $wrapper->field__files, $wrapper->getIdentifier());
       $export['files_shared'] = catalyst_export_helper_filter_references(

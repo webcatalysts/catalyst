@@ -19,6 +19,23 @@ function catalyst_block_catalyst_plugin_info() {
         'class_name' => 'CatalystBlockMigration',
       ),
       'migration sources' => array('layout', 'stylesheet', 'javascript', 'file'),
+      'crud' => array(
+        'admin' => array('path' => 'admin/content/block'),
+        'add' => array('path' => 'admin/content/block/add'),
+        'edit' => array(
+          'path' => 'admin/content/block/%eckentity',
+          'entity_id' => 3,
+        ),
+        'delete' => array(
+          'path' => 'admin/content/block/%eckentity/delete',
+          'entity_id' => 3,
+        ),
+        'view' => array(
+          'path' => 'admin/content/block/%eckentity/view',
+          'entity_id' => 3,
+          'menu_item' => FALSE,
+        ),
+      ),
     ),
   );
 }

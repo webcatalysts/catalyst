@@ -10,6 +10,43 @@
 function catalyst_media_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'catalyst-file-field__internal'.
+  $field_instances['catalyst-file-field__internal'] = array(
+    'bundle' => 'file',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 5,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__internal',
+    'label' => 'Internal',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 10,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-file-field__machine'.
   $field_instances['catalyst-file-field__machine'] = array(
     'bundle' => 'file',
@@ -211,6 +248,49 @@ function catalyst_media_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-file-field__package'.
+  $field_instances['catalyst-file-field__package'] = array(
+    'bundle' => 'file',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 6,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__package',
+    'label' => 'Package',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'entityreference_autocreate' => array(
+          'active' => 1,
+          'author' => '',
+          'author_current_user' => 1,
+          'status' => -1,
+        ),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 9,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-javascript-field__body'.
   $field_instances['catalyst-javascript-field__body'] = array(
     'bundle' => 'javascript',
@@ -280,6 +360,43 @@ function catalyst_media_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'catalyst-javascript-field__internal'.
+  $field_instances['catalyst-javascript-field__internal'] = array(
+    'bundle' => 'javascript',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 10,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__internal',
+    'label' => 'Internal',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 12,
     ),
   );
 
@@ -500,6 +617,49 @@ function catalyst_media_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-javascript-field__package'.
+  $field_instances['catalyst-javascript-field__package'] = array(
+    'bundle' => 'javascript',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 11,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__package',
+    'label' => 'Package',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'entityreference_autocreate' => array(
+          'active' => 1,
+          'author' => '',
+          'author_current_user' => 1,
+          'status' => -1,
+        ),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 11,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-stylesheet-field__body'.
   $field_instances['catalyst-stylesheet-field__body'] = array(
     'bundle' => 'stylesheet',
@@ -623,6 +783,43 @@ function catalyst_media_field_default_field_instances() {
       ),
       'type' => 'file_generic',
       'weight' => 3,
+    ),
+  );
+
+  // Exported field_instance: 'catalyst-stylesheet-field__internal'.
+  $field_instances['catalyst-stylesheet-field__internal'] = array(
+    'bundle' => 'stylesheet',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 14,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__internal',
+    'label' => 'Internal',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 10,
     ),
   );
 
@@ -848,14 +1045,59 @@ function catalyst_media_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-stylesheet-field__package'.
+  $field_instances['catalyst-stylesheet-field__package'] = array(
+    'bundle' => 'stylesheet',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 13,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__package',
+    'label' => 'Package',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'entityreference_autocreate' => array(
+          'active' => 1,
+          'author' => '',
+          'author_current_user' => 1,
+          'status' => -1,
+        ),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 9,
+    ),
+  );
+
   // Translatables
   // Included for use with string extractors like potx.
   t('Content');
   t('Custom Files');
   t('Defer');
   t('File');
+  t('Internal');
   t('Machine name');
   t('Media');
+  t('Package');
   t('Path');
   t('Scope');
   t('Shared Files');

@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * catalyst_admin.features.user_permission.inc
+ * catalyst_navbar.features.user_permission.inc
  */
 
 /**
  * Implements hook_user_default_permissions().
  */
-function catalyst_admin_user_default_permissions() {
+function catalyst_navbar_user_default_permissions() {
   $permissions = array();
 
   // Exported permission: 'access navbar'.

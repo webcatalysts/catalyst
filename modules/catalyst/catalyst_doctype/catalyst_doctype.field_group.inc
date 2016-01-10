@@ -24,9 +24,11 @@ function catalyst_doctype_field_group_info() {
     'weight' => '20',
     'children' => array(
       0 => 'field__preprocess',
-      1 => 'group_doctype_help',
-      2 => 'group_doctype_drupal',
-      3 => 'group_doctype_form_alter',
+      1 => 'field__internal',
+      2 => 'field__package',
+      3 => 'group_doctype_drupal',
+      4 => 'group_doctype_form_alter',
+      5 => 'group_doctype_help',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -54,8 +56,8 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Basics',
     'weight' => '15',
     'children' => array(
-      0 => 'field__doctype_charset',
-      1 => 'field__body',
+      0 => 'field__body',
+      1 => 'field__doctype_charset',
       2 => 'field__doctype_content_type',
       3 => 'title',
     ),

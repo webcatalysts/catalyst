@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * catalyst_admin.features.user_role.inc
+ * catalyst_core.features.user_role.inc
  */
 
 /**
  * Implements hook_user_default_roles().
  */
-function catalyst_admin_user_default_roles() {
+function catalyst_core_user_default_roles() {
   $roles = array();
 
   // Exported role: admin.

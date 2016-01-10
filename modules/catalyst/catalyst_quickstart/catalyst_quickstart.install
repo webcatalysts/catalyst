@@ -1,0 +1,194 @@
+<?php
+/**
+ * @file
+ * Install functions for Catalyst quickstart.
+ */
+
+/**
+ * Implements hook_install().
+ *
+ * Enables the following modules if they aren't already present:
+ *  - comment
+ *  - image
+ *  - rdf
+ *  - taxonomy
+ *  - webform
+ *  - wysiwyg
+ *  Adds the filtered_html and full_html input formats.
+ */
+function catalyst_quickstart_install() {
+  module_enable(array(
+    'comment',
+    'image',
+    'rdf',
+    'taxonomy',
+    'wysiwyg',
+    'webform',
+    'catalyst_template',
+  ), TRUE);
+
+  catalyst_quickstart_install_text_formats();
+  catalyst_quickstart_install_wysiwyg_profiles();
+  catalyst_quickstart_install_node_types();
+  catalyst_quickstart_install_vocabularies();
+  catalyst_quickstart_install_field_bases();
+  catalyst_quickstart_install_field_instances();
+
+
+  // Enable user picture support and set the default to a square thumbnail option.
+  variable_set('user_pictures', '1');
+  variable_set('user_picture_dimensions', '1024x1024');
+  variable_set('user_picture_file_size', '800');
+  variable_set('user_picture_style', 'thumbnail');
+
+  // Allow visitor account creation with administrative approval.
+  variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
+
+
+  // Create a default role for site administrators, with all available permissions assigned.
+  $admin_role = new stdClass();
+  $admin_role->name = 'administrator';
+  $admin_role->weight = 2;
+  user_role_save($admin_role);
+  user_role_grant_permissions($admin_role->rid, array_keys(module_invoke_all('permission')));
+  // Set this as the administrator role.
+  variable_set('user_admin_role', $admin_role->rid);
+
+  // Assign user 1 the "administrator" role.
+  db_insert('users_roles')
+    ->fields(array('uid' => 1, 'rid' => $admin_role->rid))
+    ->execute();
+
+  // Create a Home link in the main menu.
+  $item = array(
+    'link_title' => st('Home'),
+    'link_path' => '<front>',
+    'menu_name' => 'main-menu',
+  );
+  menu_link_save($item);
+
+  // Update the menu router information.
+  menu_rebuild();
+}
+
+function catalyst_quickstart_install_text_formats() {
+  catalyst_include('filter', 'quickstart');
+  foreach (catalyst_quickstart_filter_default_formats() AS $format) {
+    $format = (object)$format;
+    filter_format_save($format);
+    if ($format->format == 'filterd_html') {
+      $filtered_html_permission = filter_permission_name($format);
+      user_role_grant_permissions(DRUPAL_ANONYMOUS_RID, array('access content', 'access comments', $filtered_html_permission));
+      user_role_grant_permissions(DRUPAL_AUTHENTICATED_RID, array('access content', 'access comments', 'post comments', 'skip comment approval', $filtered_html_permission));
+    }
+  }
+}
+
+function catalyst_quickstart_install_wysiwyg_profiles() {
+  catalyst_include('wysiwyg', 'quickstart');
+  foreach (catalyst_quickstart_wysiwyg_default_profiles() AS $profile) {
+    db_merge('wysiwyg')
+      ->key(array('format' => $profile['format']))
+      ->fields(array(
+        'editor' => $profile['editor'],
+        'settings' => serialize($profile['settings']),
+      ))
+      ->execute();
+  }
+ // wysiwyg_profile_clear_cache();
+}
+
+function catalyst_quickstart_install_node_types() {
+  // Insert default pre-defined node types into the database. For a complete
+  // list of available node type attributes, refer to the node type API
+  // documentation at: http://api.drupal.org/api/HEAD/function/hook_node_info.
+  $types = array(
+    array(
+      'type' => 'page',
+      'name' => st('Basic page'),
+      'base' => 'node_content',
+      'description' => st("Use <em>basic pages</em> for your static content, such as an 'About us' page."),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+    array(
+      'type' => 'article',
+      'name' => st('Article'),
+      'base' => 'node_content',
+      'description' => st('Use <em>articles</em> for time-sensitive content like news, press releases or blog posts.'),
+      'custom' => 1,
+      'modified' => 1,
+      'locked' => 0,
+    ),
+  );
+
+  foreach ($types as $type) {
+    $type = node_type_set_defaults($type);
+    node_type_save($type);
+  }
+
+  // Insert default pre-defined RDF mapping into the database.
+  $rdf_mappings = array(
+    array(
+      'type' => 'node',
+      'bundle' => 'page',
+      'mapping' => array(
+        'rdftype' => array('foaf:Document'),
+      ),
+    ),
+    array(
+      'type' => 'node',
+      'bundle' => 'article',
+      'mapping' => array(
+        'field_image' => array(
+          'predicates' => array('og:image', 'rdfs:seeAlso'),
+          'type' => 'rel',
+        ),
+        'field_tags' => array(
+          'predicates' => array('dc:subject'),
+          'type' => 'rel',
+        ),
+      ),
+    ),
+  );
+  foreach ($rdf_mappings as $rdf_mapping) {
+    rdf_mapping_save($rdf_mapping);
+  }
+
+  // Default "Basic page" to not be promoted and have comments disabled.
+  variable_set('node_options_page', array('status'));
+  variable_set('comment_page', COMMENT_NODE_HIDDEN);
+
+  // Don't display date and author information for "Basic page" nodes by default.
+  variable_set('node_submitted_page', FALSE);
+}
+
+function catalyst_quickstart_install_vocabularies() {
+  catalyst_include('taxonomy', 'quickstart');
+  foreach (catalyst_quickstart_taxonomy_default_vocabularies() AS $vocabulary) {
+    $vocabulary = (object)$vocabulary;
+    taxonomy_vocabulary_save($vocabulary);
+  }
+}
+
+function catalyst_quickstart_install_field_bases() {
+  catalyst_include('field_base', 'quickstart');
+  foreach (catalyst_quickstart_field_default_field_bases() AS $field) {
+    field_create_field($field);
+  }
+}
+
+function catalyst_quickstart_install_field_instances() {
+  catalyst_include('field_instance', 'quickstart');
+  foreach (catalyst_quickstart_field_default_field_instances() AS $instance) {
+    field_create_instance($instance);
+  }
+}
+
+function catalyst_quickstart_install_user_roles() {
+  catalyst_include('user_role', 'quickstart');
+  foreach (catalyst_quickstart_user_default_roles() AS $role) {
+    user_role_save($role);
+  }
+}

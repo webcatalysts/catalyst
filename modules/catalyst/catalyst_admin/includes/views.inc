@@ -15,6 +15,9 @@ function catalyst_admin_eck_entity_link($bundle, $id, $text, $action = 'edit', $
   if (eck__entity_menu_access($action, 'catalyst', $bundle, $id)) {
     return l($text, $prefix . '/' . $bundle . '/' . $id . '/' .$action, $options);
   }
+  elseif (in_array($action, array('view', 'edit')) && strtolower($text) != $action) {
+    return $text;
+  }
 }
 
 /**
@@ -60,4 +63,47 @@ function catalyst_admin_views_no_results($view, $bundle_plural, $options = array
     ));
   }
   return $output;
+}
+
+
+/**
+ * Provides action links for catalyst admin views.
+ *
+ * @param $links array
+ *   Contains one or more links expecting the following:
+ *   - title: The translated link text
+ *   - path: The path the link should link to
+ *   - destination: (optional) the destination to append to the link query
+ *     string
+ *   - access: (optional) can be a string for a single permission or an
+ *     array containing multiple permissions.
+ *
+ * @return
+ *   When the user has access to one or more links (or no permissions are
+ *   defined), a unorder list of links classed "action-links" is returned.
+ */
+function catalyst_admin_action_links(array $links) {
+  $return = array();
+  foreach ($links AS $class => $link) {
+    if (isset($link['access'])) {
+      foreach ((array)$link['access'] AS $permission) {
+        if (!user_access($permission)) {
+          continue(2);
+        }
+      }
+    }
+    $return[$class] = array(
+      'title' => $link['title'],
+      'href' => $link['path'],
+    );
+    if (!empty($link['destination'])) {
+      $return[$class]['query']['destination'] = $link['destination'];
+    }
+  }
+  if ($return) {
+    return theme('links', array(
+      'links' => $return,
+      'attributes' => array('class' => 'action-links'),
+    ));
+  }
 }

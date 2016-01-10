@@ -17,6 +17,19 @@ function catalyst_export_menu() {
       'type' => MENU_NORMAL_ITEM,
       'file' => 'catalyst_export.pages.inc',
     ),
+    'admin/structure/catalyst-export/export' => array(
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+      'title' => 'Export',
+    ),
+    'admin/structure/catalyst-export/import' => array(
+      'title' => 'Import',
+      'type' => MENU_NORMAL_ITEM | MENU_LOCAL_TASK,
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('catalyst_import_form'),
+      'access arguments' => array('use catalyst export'),
+      'file path' => catalyst_get_path('export') . '/includes',
+      'file' => 'import.inc',
+    ),
   );
 }
 

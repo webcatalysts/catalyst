@@ -24,6 +24,8 @@ function catalyst_block_field_group_info() {
     'weight' => '9',
     'children' => array(
       0 => 'field__preprocess',
+      1 => 'field__package',
+      2 => 'field__internal',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -52,8 +54,8 @@ function catalyst_block_field_group_info() {
     'weight' => '4',
     'children' => array(
       0 => 'field__body',
-      1 => 'title',
-      2 => 'field__machine',
+      1 => 'field__machine',
+      2 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -81,8 +83,8 @@ function catalyst_block_field_group_info() {
     'label' => 'Cascading Stylesheets',
     'weight' => '5',
     'children' => array(
-      0 => 'field__media_stylesheets',
-      1 => 'field__css',
+      0 => 'field__css',
+      1 => 'field__media_stylesheets',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -139,8 +141,8 @@ function catalyst_block_field_group_info() {
     'label' => 'Javascripts',
     'weight' => '6',
     'children' => array(
-      0 => 'field__media_javascripts',
-      1 => 'field__js',
+      0 => 'field__js',
+      1 => 'field__media_javascripts',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -197,11 +199,11 @@ function catalyst_block_field_group_info() {
     'weight' => '0',
     'children' => array(
       0 => 'group_block_advanced',
-      1 => 'group_block_css',
-      2 => 'group_block_js',
-      3 => 'group_block_placement',
-      4 => 'group_block_content',
-      5 => 'group_block_files',
+      1 => 'group_block_content',
+      2 => 'group_block_css',
+      3 => 'group_block_files',
+      4 => 'group_block_js',
+      5 => 'group_block_placement',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

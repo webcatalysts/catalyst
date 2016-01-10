@@ -2,7 +2,19 @@
 
 /**
  * @file
+ * Common functions for Catalyst.
  */
+
+define('CATALYST_CSS_SYSTEM', -101);
+define('CATALYST_CSS_LAYOUT', 101);
+define('CATALYST_CSS_PAGE', 201);
+define('CATALYST_CSS_OTHER', 301);
+
+define('CATALYST_JS_SYSTEM', -201);
+define('CATALYST_JS_LIBRARY', -101);
+define('CATALYST_JS_LAYOUT', 101);
+define('CATALYST_JS_PAGE', 201);
+define('CATALYST_JS_OTHER', 301);
 
 /**
  * Custom delivery callback for Catalyst CMS.
@@ -92,7 +104,7 @@ function catalyst_deliver_html_page($page_callback_result) {
           $return = t('You are not authorized to access this page.');
         }
 
-        print catalst_render_page($return);
+        print catalyst_render_page($return);
         break;
 
       case MENU_SITE_OFFLINE:
@@ -263,7 +275,6 @@ function catalyst_get_js($scope = 'header') {
   $remove_groups = array(JS_DEFAULT, JS_LIBRARY, JS_THEME);
   foreach (array_keys($javascript) AS $i) {
     if ($i == 'settings') continue;
-
     if ($javascript[$i]['scope'] == $scope
       && in_array($javascript[$i]['group'], $remove_groups)) {
       unset($javascript[$i]);

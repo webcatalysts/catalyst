@@ -1,0 +1,38 @@
+<?php
+
+/**
+ * @file
+ * Schema information for Catalyst Export (import).
+ */
+
+/**
+ * Implements hook_schema().
+ */
+function catalyst_export_schemea() {
+  return array(
+    'catalyst_import' => array(
+      'fields' => array(
+        'name' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'description' => 'Links catalyst imports with migrate groups',
+        ),
+        'source_directory' => array(
+          'type' => 'varchar',
+          'length' => 255,
+          'not null' => TRUE,
+          'description' => 'The location of the import files',
+        ),
+        'deregister' => array(
+          'type' => 'int',
+          'not null' => TRUE,
+          'default' => 0,
+          'size' => 'tiny',
+          'description' => 'Flag indicating whether this import should be deregistered once completed.',
+        ),
+      ),
+      'primary key' => array('name'),
+    ),
+  );
+}

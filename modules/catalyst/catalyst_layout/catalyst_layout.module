@@ -8,6 +8,18 @@
 include_once 'catalyst_layout.features.inc';
 
 /**
+ * Implements hook_entity_view().
+ */
+function catalyst_layout_entity_view($entity, $type, $view_mode, $langcode) {
+  if (isset($entity->field__layout)) {
+    $wrapper = entity_metadata_wrapper($type, $entity);
+    if ($layout = $wrapper->field__layout->value()) {
+      catalyst_set_layout($layout);
+    }
+  }
+}
+
+/**
  * Implements hook_menu().
  */
 function catalyst_layout_menu() {
@@ -21,23 +33,6 @@ function catalyst_layout_menu() {
       'access arguments' => array('do cool stuff'),
     ),
   );
-}
-
-/**
- * Implements hook_url_outbound_alter().
- */
-function catalyst_layout_url_outbound_alter(&$path, &$options, $original_path) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_eck_url_outbound('layout', $path, $options, $original_path);
-}
-
-
-/**
- * Implements hook_menu_alter().
- */
-function catalyst_layout_menu_alter(&$items) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_alter_eck_entity_menu($items, 'layout', 'admin/structure', FALSE);
 }
 
 /**

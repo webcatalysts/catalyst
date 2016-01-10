@@ -5,3 +5,55 @@
  */
 
 include_once 'catalyst_template.features.inc';
+
+function catalyst_template_load($entity_type, $bundle) {
+  $loaded = &drupal_static(__FUNCTION__);
+  if (!isset($loaded[$entity_type][$bundle])) {
+    $loaded[$entity_type][$bundle] = _catalyst_template_load($entity_type, $bundle);
+  }
+  return $loaded[$entity_type][$bundle];
+}
+
+function _catalyst_template_load($entity_type, $bundle) {
+  $query = new EntityFieldQuery;
+  $query->entityCondition('entity_type', 'catalyst')
+    ->entityCondition('bundle', 'template')
+    ->fieldCondition('field__template_entity_type', 'machine', $entity_type, '=')
+    ->fieldCondition('field__template_bundle', 'machine', $bundle, '=')
+    ->range(0,1);
+
+  $result = $query->execute();
+  if (isset($result['catalyst'])) {
+    $ids = array_keys($result['catalyst']);
+    return catalyst_load_single($ids[0]);
+  }
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function catalyst_form_eck__entity__form_alter(&$form, &$form_state) {
+  if ($form['#entity_type'] == 'catalyst' && catalyst_entity_is_a('template', $form['#entity'])) {
+    catalyst_form_load_include($form_state, 'admin', 'template');
+    if (catalyst_entity_is_new($form['#entity'])) {
+      $form['#after_build'][] = 'catalyst_template_add_form_after_build';
+    }
+    else {
+      $form['#after_build'][] = 'catalyst_template_form_after_build';
+    }
+  }
+}
+
+/**
+ * Implements hook_entity_view_alter().
+ */
+function catalyst_template_entity_view_alter(&$build, $type) {
+  if ($template = catalyst_template_load($type, $build['#bundle'])) {
+    $build['#template'] = new CatalystTemplateEntity($template);
+    $build['#post_render'][] = 'catalyst_template_render';
+  }
+}
+
+function catalyst_template_render($output, $build) {
+  return $build['#template']->renderTemplate(array('content' => $output));
+}

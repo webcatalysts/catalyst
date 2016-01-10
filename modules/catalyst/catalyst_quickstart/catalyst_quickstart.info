@@ -1,0 +1,4 @@
+name = Catalyst Quickstart
+description = Provides the basic content types included with a standard install with a few enhancements.
+core = 7.x
+package = Catalyst

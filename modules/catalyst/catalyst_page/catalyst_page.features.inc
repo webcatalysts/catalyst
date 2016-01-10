@@ -29,7 +29,7 @@ function catalyst_page_views_api($module = NULL, $api = NULL) {
 function catalyst_page_node_info() {
   $items = array(
     'cpage' => array(
-      'name' => t('Page'),
+      'name' => t('Advanced Page'),
       'base' => 'node_content',
       'description' => t('A catalyst page provides an advanced feature set that facilitates simple to advanced pages.'),
       'has_title' => '1',

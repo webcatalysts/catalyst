@@ -1,0 +1,68 @@
+<?php
+
+/**
+ * @file
+ * Catalyst developer module. Used to expose the internals of Catalyst.
+ */
+
+/**
+ * Implements hook_menu().
+ */
+function catalyst_admin_menu() {
+  $items = array();
+  // Add a "catalyst fields only" report
+  if (module_exists('field_ui')) {
+    $items['admin/reports/fields/catalyst'] = array(
+      'title' => t('Catalyst'),
+      'page callback' => 'catalyst_field_ui_catalyst_field_list',
+      'access arguments' => array('need to define a permission'),
+      'file path' => catalyst_get_path() . '/includes',
+      'file' => 'fields.inc',
+      'type' => MENU_LOCAL_TASK,
+    );
+  }
+  return $items;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ */
+function catalyst_devel_form_features_admin_form_alter(&$form, &$form_state) {
+  $form['package_catalyst']['#access'] = user_access('develop catalyst');
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function catalyst_devel_menu_alter(&$menu_items) {
+  $menu_items['admin/structure/entity-type'] = array_merge(
+    $menu_items['admin/structure/entity-type'], array(
+    'page callback' => 'eck__entity_type__list',
+    'file path' => drupal_get_path('module', 'eck'),
+    'file' => 'eck.entity_type.inc',
+  ));
+
+  foreach (_catalyst_eck__entity_type_paths() AS $path) {
+    catalyst_menu_item_restore($menu_items[$path]);
+  }
+
+  $entity_info = entity_get_info('catalyst');
+  foreach (array_keys($entity_info['bundles']) AS $bundle) {
+    foreach (_catalyst_eck__bundle_paths($bundle) AS $path) {
+      if (isset($menu_items[$path])) {
+        catalyst_menu_item_restore($menu_items[$path]);
+      }
+    }
+  }
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function catalyst_devel_module_implements_alter(&$implementations, $hook) {
+  if ($hook == 'menu_alter') {
+    $group = $implementations['catalyst_devel'];
+    unset($implementations['catalyst_devel']);
+    $implementations['catalyst_devel'] = $group;
+  }
+}

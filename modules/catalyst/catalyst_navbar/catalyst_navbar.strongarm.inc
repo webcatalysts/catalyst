@@ -1,13 +1,13 @@
 <?php
 /**
  * @file
- * catalyst_admin.strongarm.inc
+ * catalyst_navbar.strongarm.inc
  */
 
 /**
  * Implements hook_strongarm().
  */
-function catalyst_admin_strongarm() {
+function catalyst_navbar_strongarm() {
   $export = array();
 
   $strongarm = new stdClass();

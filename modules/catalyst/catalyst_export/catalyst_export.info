@@ -1,4 +1,8 @@
 name = Catalyst Export
 description = Custom export functionality specifically for integration with Catalyst Import
 core = 7.x
-dependencies[] = views_data_export
+dependencies[] = better_migrate
+dependencies[] = catalyst_core
+dependencies[] = migrate
+dependencies[] = migrate_extras
+

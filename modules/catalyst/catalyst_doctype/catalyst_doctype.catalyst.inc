@@ -19,6 +19,23 @@ function catalyst_doctype_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystDoctypeMigration',
       ),
+      'crud' => array(
+        'admin' => array('path' => 'admin/structure/doctype'),
+        'add' => array('path' => 'admin/structure/doctype/add'),
+        'edit' => array(
+          'path' => 'admin/structure/doctype/%eckentity',
+          'entity_id' => 3,
+        ),
+        'delete' => array(
+          'path' => 'admin/structure/doctype/%eckentity/delete',
+          'entity_id' => 3,
+        ),
+        'view' => array(
+          'path' => 'admin/structure/doctype/%eckentity/view',
+          'entity_id' => 3,
+          'menu_item' => FALSE,
+        ),
+      ),
     ),
   );
 }

@@ -25,41 +25,6 @@ function catalyst_media_entity_view_alter(&$build, $type) {
 }
 
 /**
- * Implements hook_url_outbound_alter().
- */
-function catalyst_media_url_outbound_alter(&$path, &$options, $original_path) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_eck_url_outbound('stylesheet', $path, $options, $original_path);
-  catalyst_admin_eck_url_outbound('javascript', $path, $options, $original_path);
-  catalyst_admin_eck_url_outbound('file', $path, $options, $original_path, 'admin/content');
-}
-
-/**
- * Implements hook_menu_alter().
- */
-function catalyst_media_menu_alter(&$items) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_alter_eck_entity_menu($items, 'stylesheet', 'admin/structure', FALSE);
-  catalyst_admin_alter_eck_entity_menu($items, 'javascript', 'admin/structure', FALSE);
-  catalyst_admin_alter_eck_entity_menu($items, 'file', 'admin/content', FALSE);
-  // Allow the files list to appear as a tab and a normal item
-  $items['admin/content/file']['type'] = MENU_LOCAL_TASK | MENU_NORMAL_ITEM;
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function catalyst_media_module_implements_alter(&$implementations, $hook) {
-  // Run catalyst_media_menu_alter() after views_menu_alter() to allow
-  // modifying menu items provided by views.
-  if ($hook == 'menu_alter') {
-    $group = $implementations['catalyst_media'];
-    unset($implementations['catalyst_media']);
-    $implementations['catalyst_media'] = $group;
-  }
-}
-
-/**
  * Implements hook_catalyst_twig_render_alter().
  */
 function catalyst_media_catalyst_twig_render_alter(&$twig, &$extensions, &$variables, $key = NULL) {
@@ -162,17 +127,16 @@ function catalyst_media_admin_form_after_build($form, &$form_state) {
 function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
   $collection = array(
     'css' => array(
-      'field__media_stylesheets__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field__media_stylesheets__page' => CATALYST_MEDIA_GROUP_PAGE,
-      'field__media_stylesheets' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__media_stylesheets__layout' => CATALYST_CSS_LAYOUT,
+      'field__media_stylesheets__page' => CATALYST_CSS_PAGE,
+      'field__media_stylesheets' => CATALYST_CSS_OTHER,
     ),
     'js' => array(
-      'field__media_javascripts__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field__media_javascripts__page' => CATALYST_MEDIA_GROUP_PAGE,
-      'field__media_javascripts' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__media_javascripts__layout' => CATALYST_JS_LAYOUT,
+      'field__media_javascripts__page' => CATALYST_JS_PAGE,
+      'field__media_javascripts' => CATALYST_JS_OTHER,
     ),
   );
-
   $wrapper = entity_metadata_wrapper($type, $entity);
   foreach ($collection AS $type => $fields) {
     $callback = 'catalyst_add_' . $type;
@@ -185,18 +149,18 @@ function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
       }
     }
   }
-
+  // This needs to move to catalyst_core
   // Process custom fields
   $collection = array(
     'css' => array(
-      'field__css__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field__css__page' => CATALYST_MEDIA_GROUP_PAGE,
-      'field__css' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__css__layout' => CATALYST_CSS_LAYOUT,
+      'field__css__page' => CATALYST_CSS_PAGE,
+      'field__css' => CATALYST_CSS_OTHER,
     ),
     'js' => array(
-      'field__js__layout' => CATALYST_MEDIA_GROUP_LAYOUT,
-      'field__js__page' => CATALYST_MEDIA_GROUP_PAGE,
-      'field__js' => CATALYST_MEDIA_GROUP_OTHER,
+      'field__js__layout' => CATALYST_JS_LAYOUT,
+      'field__js__page' => CATALYST_JS_PAGE,
+      'field__js' => CATALYST_JS_OTHER,
     ),
   );
   foreach ($collection AS $type => $fields) {

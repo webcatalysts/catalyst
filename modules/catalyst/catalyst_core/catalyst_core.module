@@ -5,6 +5,26 @@
  */
 
 include_once 'catalyst_core.features.inc';
+
+/**
+ * Implements hook_entity_info().
+ */
+function catalyst_entity_info_alter(&$entity_info) {
+  $entity_info['catalyst']['access callback'] = 'catalyst_entity_access_strict';
+  // Restrict view modes on catalyst entities and add the "template" view
+  // mode for the rendering of (some) templates
+  $entity_info['catalyst']['view modes'] = array(
+    'full' => array(
+      'label' => 'Full',
+      'custom settings' => FALSE,
+    ),
+    'template' => array(
+      'label' => 'Template',
+      'custom settings' => TRUE,
+    ),
+  );
+}
+
 /**
  * Get info about catalyst types.
  */
@@ -65,6 +85,10 @@ function catalyst_core_menu_alter(&$menu_items) {
       'file' => 'fields.inc',
     ));
   }
+  catalyst_include('eck');
+  catalyst_eck__entity_menu_alter($menu_items);
+  catalyst_eck__bundle_menu_alter($menu_items);
+  catalyst_eck__entity_type_menu_alter($menu_items);
 }
 
 /**
@@ -109,4 +133,112 @@ function catalyst_node_types() {
   return array_intersect_key(node_type_get_types(),
     array_flip(array('cpage')));
   // module_invoke_all('catalyst_node_types')));
+}
+
+function catalyst_entity_is_a($bundle, $entity, $entity_type = 'catalyst', $bundle_key = 'type') {
+  switch (true) {
+    // Compare the entity type if one is provided
+    case isset($entity->entity_type) && $entity->entity_type != $entity_type:
+    // Compare the bundle
+    case !isset($entity->{$bundle_key}) || $entity->{$bundle_key} != $bundle:
+      return FALSE;
+  }
+  return TRUE;
+}
+
+function catalyst_entity_is_new($entity) {
+  return isset($entity->is_new) && $entity->is_new;
+}
+
+function catalyst_entity_normalize($entity, $bundle = NULL, $entity_type = 'catalyst', $bundle_key = 'type') {
+  $return = array();
+  $bundle_info = $bundle && $bundle_key ? array($bundle_key => $bundle) : array();
+  $wrapper = entity_metadata_wrapper($entity_type, $entity, $bundle_info);
+  foreach ($wrapper->getPropertyInfo() AS $key => $info) {
+    switch (get_class($wrapper->{$key})) {
+      case 'EntityDrupalWrapper':
+        $return[$key] = catalyst_entity_normalize_drupal($wrapper->{$key}, $info);
+        break;
+      case 'EntityListWrapper':
+        $return[$key] = catalyst_entity_normalize_list($wrapper->{$key}, $info);
+        break;
+      default:
+        $return[$key] = $wrapper->{$key}->value();
+    }
+  }
+  return (object)$return;
+}
+
+function catalyst_entity_normalize_list(EntityListWrapper $wrapper, $info) {
+  $return = array();
+  foreach ($wrapper AS $key => $val) {
+    switch (get_class($val)) {
+      case 'EntityDrupalWrapper':
+        $return[$key] = catalyst_entity_normalize_drupal($val, $info);
+        break;
+      case 'EntityValueWrapper':
+      case 'EntityStructureWrapper':
+        $return[$key] = $wrapper->value();
+        break;
+      default:
+        $return[$key] = $val;
+    }
+  }
+  return $return;
+}
+
+function catalyst_entity_normalize_drupal(EntityDrupalWrapper $wrapper, $info) {
+  if ((!$entity = $wrapper->value()) || empty($entity->type)) {
+    return $entity;
+  }
+  $m = array();
+  if (preg_match('/list\<([a-z0-9_]+)\>/i', $info['type'], $m)) {
+    $entity_type = $m[1];
+  }
+  else $entity_type = $info['type'];
+  return catalyst_entity_normalize($entity, $entity->type, $entity_type);
+}
+
+function catalyst_array_merge(array &$arr1, array $arr2) {
+  $arr1 = array_merge($arr1, $arr2);
+  return $arr1;
+}
+
+/**
+ * @see eck__entity_access().
+ */
+function catalyst_entity_access_strict($op) {
+  if ($op == 'view') {
+    $args = func_get_args();
+    return call_user_func_array('eck__entity_access', $args);
+  }
+  return FALSE;
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Hide Catalyst features from the features admin list.
+ *
+ * Note: Catalyst features will be exposed when catalyst_devel is installed.
+ */
+function catalyst_core_form_features_admin_form_alter(&$form, &$form_state) {
+  $form['package_catalyst']['#access'] = FALSE;
+}
+
+/**
+ *
+ */
+function catalyst_menu_item_disable(&$menu_item) {
+  if ($menu_item['access callback'] !== FALSE) {
+    $menu_item['access callback original'] = $menu_item['access callback'];
+    $menu_item['access callback'] = FALSE;
+  }
+}
+
+function catalyst_menu_item_restore(&$menu_item) {
+  if ($menu_item['access callback'] === FALSE) {
+    $menu_item['access callback'] = $menu_item['access callback original'];
+    unset($menu_item['access callback original']);
+  }
 }

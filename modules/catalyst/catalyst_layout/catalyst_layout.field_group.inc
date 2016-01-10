@@ -27,8 +27,10 @@ function catalyst_layout_field_group_info() {
       1 => 'field__html_head',
       2 => 'field__layout_page_title_pattern',
       3 => 'field__preprocess',
-      4 => 'group_layout_drupal',
-      5 => 'group_layout_form_alter',
+      4 => 'field__internal',
+      5 => 'field__package',
+      6 => 'group_layout_drupal',
+      7 => 'group_layout_form_alter',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -57,8 +59,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Blocks',
     'weight' => '8',
     'children' => array(
-      0 => 'field__blocks_related',
-      1 => 'field__blockplacements__layout',
+      0 => 'field__blockplacements__layout',
+      1 => 'field__blocks_related',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -145,12 +147,12 @@ function catalyst_layout_field_group_info() {
   $field_group->parent_name = 'group_layout_advanced';
   $field_group->data = array(
     'label' => 'Drupal options',
-    'weight' => '6',
+    'weight' => '7',
     'children' => array(
       0 => 'field__drupal_processing',
-      1 => 'field__layout_show_messages',
+      1 => 'field__layout_drupal_css',
       2 => 'field__layout_drupal_js',
-      3 => 'field__layout_drupal_css',
+      3 => 'field__layout_show_messages',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -204,7 +206,7 @@ function catalyst_layout_field_group_info() {
   $field_group->parent_name = 'group_layout_advanced';
   $field_group->data = array(
     'label' => 'Page form customizations',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field__ondeselect',
       1 => 'field__onselect',
@@ -235,8 +237,8 @@ function catalyst_layout_field_group_info() {
     'label' => 'Javascript',
     'weight' => '5',
     'children' => array(
-      0 => 'field__media_javascripts__layout',
-      1 => 'field__js__layout',
+      0 => 'field__js__layout',
+      1 => 'field__media_javascripts__layout',
     ),
     'format_type' => 'htab',
     'format_settings' => array(

@@ -15,6 +15,7 @@ dependencies[] = file
 dependencies[] = filefield_paths
 dependencies[] = filter
 dependencies[] = inline_entity_form
+dependencies[] = pathauto
 dependencies[] = node
 dependencies[] = options
 dependencies[] = override_node_options

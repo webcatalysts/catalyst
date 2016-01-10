@@ -69,7 +69,7 @@ function catalyst_deregister_import($info) {
   // Register any migrations defined via the hook.
   if (isset($info['migrations']) && is_array($info['migrations'])) {
     foreach ($info['migrations'] as $machine_name => $arguments) {
-      if (is_subclass_of($class_name, 'Migration')) {
+      if (is_subclass_of($arguments['class_name'], 'Migration')) {
         Migration::deregisterMigration($machine_name);
       }
       else {

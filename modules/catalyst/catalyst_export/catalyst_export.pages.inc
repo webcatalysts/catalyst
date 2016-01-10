@@ -14,6 +14,7 @@ function catalyst_export_form($form, &$form_state) {
 
   $module_path = drupal_get_path('module', 'catalyst_export');
   $form['#attached']['library'][] = array('system', 'ui.dialog');
+  $form['#attached']['js'][] = $module_path . '/js/jquery.columnizer.js';
   $form['#attached']['js'][] = $module_path . '/js/export-form.js';
   $form['#attached']['css'][] = $module_path . '/css/export-form.css';
 
@@ -48,6 +49,7 @@ function catalyst_export_form($form, &$form_state) {
       '#tree' => TRUE,
       '#collapsible' => TRUE,
       'items' => array('#tree' => TRUE),
+      '#attributes' => array('class' => array('dontsplit')),
     );
 
     foreach ($candidates[$type] AS $item) {

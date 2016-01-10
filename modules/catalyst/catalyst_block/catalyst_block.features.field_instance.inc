@@ -256,6 +256,43 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-block-field__internal'.
+  $field_instances['catalyst-block-field__internal'] = array(
+    'bundle' => 'block',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 13,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__internal',
+    'label' => 'Internal',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 6,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-block-field__js'.
   $field_instances['catalyst-block-field__js'] = array(
     'bundle' => 'block',
@@ -492,6 +529,49 @@ function catalyst_block_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-block-field__package'.
+  $field_instances['catalyst-block-field__package'] = array(
+    'bundle' => 'block',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 12,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__package',
+    'label' => 'Package',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'entityreference_autocreate' => array(
+          'active' => 1,
+          'author' => '',
+          'author_current_user' => 1,
+          'status' => -1,
+        ),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 5,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-block-field__preprocess'.
   $field_instances['catalyst-block-field__preprocess'] = array(
     'bundle' => 'block',
@@ -578,8 +658,10 @@ function catalyst_block_field_default_field_instances() {
   t('Custom Files');
   t('Custom Javascript');
   t('Existing shared files can be used without adding them here but by adding them here, you\'ll track the usage of each file.');
+  t('Internal');
   t('Javascript Includes');
   t('Machine name');
+  t('Package');
   t('Placements');
   t('Preprocessing');
   t('Shared Files');

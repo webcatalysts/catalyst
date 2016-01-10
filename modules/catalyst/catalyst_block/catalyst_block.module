@@ -36,36 +36,6 @@ function catalyst_block_inline_entity_form_entity_form_alter(&$entity_form, &$fo
 }
 
 /**
- * Implements hook_url_outbound_alter().
- */
-function catalyst_block_url_outbound_alter(&$path, &$options, $original_path) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_eck_url_outbound('block', $path, $options, $original_path, 'admin/content');
-}
-
-/**
- * Implements hook_menu_alter().
- */
-function catalyst_block_menu_alter(&$items) {
-  catalyst_include('eck', 'admin');
-  catalyst_admin_alter_eck_entity_menu($items, 'block', 'admin/content', FALSE);
-  $items['admin/content/block']['type'] = MENU_LOCAL_TASK | MENU_NORMAL_ITEM;
-}
-
-/**
- * Implements hook_module_implements_alter().
- */
-function catalyst_block_module_implements_alter(&$implementations, $hook) {
-  // Run catalyst_block_menu_alter() after views_menu_alter() so menu items
-  // provided by views can be altered.
-  if ($hook == 'menu_alter') {
-    $group = $implementations['catalyst_block'];
-    unset($implementations['catalyst_block']);
-    $implementations['catalyst_block'] = $group;
-  }
-}
-
-/**
  * Implements hook_entity_view_alter().
  */
 function catalyst_block_entity_view_alter(&$build, $type) {

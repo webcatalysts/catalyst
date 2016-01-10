@@ -18,6 +18,7 @@ function catalyst_menu_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystMenuMigration',
       ),
+      'weight' => 10,
     ),
     'menu_link' => array(
       'title' => t('Menu Links'),
@@ -26,6 +27,7 @@ function catalyst_menu_catalyst_plugin_info() {
         'class_name' => 'CatalystMenuLinkMigration',
       ),
       'migration sources' => array('cpage'),
+      'weight' => 11,
     ),
   );
 }
@@ -76,7 +78,7 @@ function catalyst_menu_catalyst_export_candidates($group) {
 /**
  * Implements hook_catalyst_export_dependencies().
  */
-function catalyst_menu_catalyst_export_dependencies(&$export, $group) {
+function catalyst_menu_catalyst_export_dependencies($export, $group) {
   $dependencies = array();
   if ($group['type'] == 'menu_link') {
     catalyst_include('menu');
@@ -86,10 +88,7 @@ function catalyst_menu_catalyst_export_dependencies(&$export, $group) {
     }
     // Detect parent menu links
     if ($export->plid) {
-      if (!catalyst_add_export($dependencies, 'menu_link', $export->plid)) {
-        // Reset the menu link's plid if the parent is not a candidate
-        $export->plid = 0;
-      }
+      catalyst_add_export($dependencies, 'menu_link', $export->plid);
     }
   }
   return $dependencies;

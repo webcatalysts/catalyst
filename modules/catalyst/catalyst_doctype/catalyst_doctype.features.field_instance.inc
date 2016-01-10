@@ -381,6 +381,43 @@ text/html|text/html',
     ),
   );
 
+  // Exported field_instance: 'catalyst-doctype-field__internal'.
+  $field_instances['catalyst-doctype-field__internal'] = array(
+    'bundle' => 'doctype',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'list',
+        'settings' => array(),
+        'type' => 'list_default',
+        'weight' => 14,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__internal',
+    'label' => 'Internal',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 29,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-doctype-field__ondeselect'.
   $field_instances['catalyst-doctype-field__ondeselect'] = array(
     'bundle' => 'doctype',
@@ -515,6 +552,49 @@ text/html|text/html',
     ),
   );
 
+  // Exported field_instance: 'catalyst-doctype-field__package'.
+  $field_instances['catalyst-doctype-field__package'] = array(
+    'bundle' => 'doctype',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'entityreference',
+        'settings' => array(
+          'link' => FALSE,
+        ),
+        'type' => 'entityreference_label',
+        'weight' => 15,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__package',
+    'label' => 'Package',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'entityreference_autocreate' => array(
+          'active' => 1,
+          'author' => '',
+          'author_current_user' => 1,
+          'status' => -1,
+        ),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 28,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-doctype-field__preprocess'.
   $field_instances['catalyst-doctype-field__preprocess'] = array(
     'bundle' => 'doctype',
@@ -592,8 +672,10 @@ text/html|text/html',
   t('Enable Drupal processing');
   t('HTTP Content-Type');
   t('Help/Instructions');
+  t('Internal');
   t('On DeSelect');
   t('On Select');
+  t('Package');
   t('Preprocessing');
 
   return $field_instances;

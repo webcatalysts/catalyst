@@ -7,22 +7,32 @@
 include_once 'catalyst_admin.features.inc';
 
 /**
- * Implements hook_menu().
+ * Implements hook_entity_info_alter().
  */
-function catalyst_admin_menu() {
-  $items = array();
-  // Add a "catalyst fields only" report
-  if (module_exists('field_ui')) {
-    $items['admin/reports/fields/catalyst'] = array(
-      'title' => t('Catalyst'),
-      'page callback' => 'catalyst_field_ui_catalyst_field_list',
-      'access arguments' => array('need to define a permission'),
-      'file path' => catalyst_get_path() . '/includes',
-      'file' => 'fields.inc',
-      'type' => MENU_LOCAL_TASK,
-    );
+function catalyst_admin_entity_info_alter(&$entity_info) {
+  catalyst_include('eck', 'admin');
+  catalyst_admin_eck_entity_info_alter($entity_info);
+}
+
+/**
+ * Implements hook_menu_alter().
+ */
+function catalyst_admin_menu_alter(&$menu_items) {
+  catalyst_include('eck', 'admin');
+  catalyst_admin_eck__entity_menu_alter($menu_items);
+}
+
+/**
+ * Implements hook_module_implements_alter().
+ */
+function catalyst_admin_module_implements_alter(&$implementations, $hook) {
+  // Ensure modifications and additions to the menu are done after
+  // views_menu_alter() so menu items provided by views can be altered.
+  if (in_array($hook, array('menu_alter', 'entity_info_alter'))) {
+    $group = $implementations['catalyst_admin'];
+    unset($implementations['catalyst_admin']);
+    $implementations['catalyst_admin'] = $group;
   }
-  return $items;
 }
 
 /**
@@ -68,50 +78,66 @@ function catalyst_admin_form_alter(&$form, &$form_state, $form_id) {
   }
 
   // Alter views bulk operations forms
-  if (strpos($form_id, 'views_form_') === 0 && isset($form['output'])) {
+  if (strpos($form_id, 'views_form_catalyst_') === 0 && isset($form['output'])) {
+    $form['#attached']['css'][] = catalyst_get_path('admin') . '/css/views.css';
     // After build callback in catalyst_admin/includes/uncommon.inc
     catalyst_form_load_include($form_state, 'uncommon', 'admin');
     $form['#after_build'][] = 'catalyst_admin_views_form_after_build';
   }
+  elseif ($form_id == 'views_exposed_form' && strpos($form_state['view']->name, 'catalyst_') === 0) {
+    $form['#attributes']['class'][] = 'container-inline';
+    if (isset($form['secondary'])) {
+      $form['secondary']['#attributes']['class'][] = 'container-inline';
+    }
+  }
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
  *
- * @param $links array
- *   Contains one or more links expecting the following:
- *   - title: The translated link text
- *   - path: The path the link should link to
- *   - destination: (optional) the destination to append to the link query
- *     string
- *   - access: (optional) can be a string for a single permission or an
- *     array containing multiple permissions.
- *
- * @return
- *   When the user has access to one or more links (or no permissions are
- *   defined), a unorder list of links classed "action-links" is returned.
+ * Adds a "Save & Edit" button to eck entity forms.
  */
-function catalyst_admin_action_links(array $links) {
-  $return = array();
-  foreach ($links AS $class => $link) {
-    if (isset($link['access'])) {
-      foreach ((array)$link['access'] AS $permission) {
-        if (!user_access($permission)) {
-          continue(2);
-        }
-      }
-    }
-    $return[$class] = array(
-      'title' => $link['title'],
-      'href' => $link['path'],
-    );
-    if (!empty($link['destination'])) {
-      $return[$class]['query']['destination'] = $link['destination'];
-    }
+function catalyst_admin_form_eck__entity__form_alter(&$form, &$form_state) {
+  catalyst_form_load_include($form_state, 'save_edit', 'admin');
+  catalyst_admin_save_edit_form_alter($form, $form_state);
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Adds a "Save & Edit" button to node forms.
+ */
+function catalyst_admin_form_node_form_alter(&$form, &$form_state) {
+  // Allow the save_edit module to handle node forms when present
+  if (!module_exists('save_edit')) {
+    catalyst_form_load_include($form_state, 'save_edit', 'admin');
+    catalyst_admin_save_edit_form_alter($form, $form_state);
   }
-  if ($return) {
-    return theme('links', array(
-      'links' => $return,
-      'attributes' => array('class' => 'action-links'),
-    ));
+}
+
+
+/**
+ * Included in the module instead of includes/eck.inc as it will be called
+ * on most every page.
+ */
+function catalyst_admin_eck_url_outbound($bundle, &$path, &$options, $original_path, $prefix = 'admin/structure') {
+  $m = array();
+  // Match catalyst/[bundle]/[entity id]
+  if (preg_match('/catalyst\/' . $bundle . '\/([0-9]+)(.*)/i', $path, $m)) {
+    // Alter the path according the provided arguments
+    $path = $prefix . '/' . $bundle . '/' . $m[1] . $m[2];
   }
+}
+
+/**
+ * Override for eck__entity_menu_access() which converts view access to edit
+ * access in order to prevent non-admin access to viewing catalsyt entities
+ * through the menu.
+ */
+function catalyst_admin_eck__entity_menu_access($action) {
+  $args = func_get_args();
+  if ($action == 'view') {
+    $args[0] = 'edit';
+  }
+  return call_user_func_array('eck__entity_menu_access', $args);
 }

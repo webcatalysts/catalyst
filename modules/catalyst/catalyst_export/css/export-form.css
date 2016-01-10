@@ -1,3 +1,6 @@
+#catalyst-export-exports-wrapper fieldset {
+  margin-right: 1em;
+}
 .catalyst-export-attached-files {
   background-color: #f1f1f1;
   padding: 5px 8px;

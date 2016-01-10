@@ -160,11 +160,6 @@ function template_process_layout(&$variables) {
 
   $variables['content'] = drupal_render($variables['page']['content']);
 
-  // Allow debugging
-  if ($variables['debug'] && function_exists('dsm')) {
-    dsm($variables);
-  }
-
   if ($variables['drupal_processing']) {
     drupal_process_layout($variables);
   }

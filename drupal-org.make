@@ -1,6 +1,13 @@
 api = 2
 core = 7.x
 
+projects[better_exposed_filters][version] = "3.2"
+projects[better_exposed_filters][type] = "module"
+projects[better_exposed_filters][subdir] = "contrib"
+; Keep secondary exposed form options collapsed with default input
+; https://www.drupal.org/node/2647600
+projects[better_exposed_filters][patch][] = https://www.drupal.org/files/issues/bef-secondary-default-collapse-2-7x3x.patch
+
 projects[better_formats][version] = "1.0-beta1"
 projects[better_formats][type] = "module"
 projects[better_formats][subdir] = "contrib"
@@ -16,6 +23,9 @@ projects[devel][subdir] = "contrib"
 projects[eck][version] = "2.0-rc8"
 projects[eck][type] = "module"
 projects[eck][subdir] = "contrib"
+; Allow administrative bundle menu items to follow altered admin path
+; https://www.drupal.org/node/2647610
+projects[eck][patch][] = "https://www.drupal.org/files/issues/eck-entity-custom-admin-path-2647610-2-7x2x.patch"
 
 projects[entity][version] = "1.6"
 projects[entity][type] = "module"
@@ -25,11 +35,15 @@ projects[entityreference][version] = "1.1"
 projects[entityreference][type] = "module"
 projects[entityreference][subdir] = "contrib"
 
+projects[entityreference_autocreate][version] = "1.1"
+projects[entityreference_autocreate][type] = "module"
+projects[entityreference_autocreate][subdir] = "contrib"
+
 projects[features][version] = "2.7"
 projects[features][type] = "module"
 projects[features][subdir] = "contrib"
 
-projects[field_group][version] = "1.4"
+projects[field_group][version] = "1.5"
 projects[field_group][type] = "module"
 projects[field_group][subdir] = "contrib"
 
@@ -117,10 +131,6 @@ projects[views_bulk_operations][version] = "3.3"
 projects[views_bulk_operations][type] = "module"
 projects[views_bulk_operations][subdir] = "contrib"
 
-projects[views_data_export][version] = "3.0-beta9"
-projects[views_data_export][type] = "module"
-projects[views_data_export][subdir] = "contrib"
-
 projects[views_php][version] = "1.0-alpha3"
 projects[views_php][type] = "module"
 projects[views_php][subdir] = "contrib"
@@ -171,3 +181,6 @@ libraries[backbone][download][url] = "https://github.com/jashkenas/backbone/arch
 
 libraries[underscore][download][type] = "get"
 libraries[underscore][download][url] = "https://github.com/jashkenas/underscore/archive/1.5.2.zip"
+
+libraries[ckeditor][download][type] = "get"
+libraries[ckeditor][download][url] = "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.5.6/ckeditor_4.5.6_full.zip"

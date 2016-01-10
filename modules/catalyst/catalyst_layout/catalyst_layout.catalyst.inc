@@ -19,6 +19,23 @@ function catalyst_layout_catalyst_plugin_info() {
         'class_name' => 'CatalystLayoutMigration',
       ),
       'migration sources' => array('block', 'doctype', 'stylesheet', 'javascript', 'file'),
+      'crud' => array(
+        'admin' => array('path' => 'admin/structure/layout'),
+        'add' => array('path' => 'admin/structure/layout/add'),
+        'edit' => array(
+          'path' => 'admin/structure/layout/%eckentity',
+          'entity_id' => 3,
+        ),
+        'delete' => array(
+          'path' => 'admin/structure/layout/%eckentity/delete',
+          'entity_id' => 3,
+        ),
+        'view' => array(
+          'path' => 'admin/structure/layout/%eckentity/view',
+          'entity_id' => 3,
+          'menu_item' => FALSE,
+        ),
+      ),
     ),
   );
 }
