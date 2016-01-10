@@ -45,7 +45,6 @@ function catalyst_get_export_groups() {
  */
 function catalyst_build_export_data($exports, $groups, $name = 'Catalyst') {
   $exports = catalyst_expand_exports($exports, $groups);
-  dsm($exports);
   return array(
     'exports' => catalyst_prepare_exports($exports, $groups),
     'info' => catalyst_prepare_exports_info($name, $exports, $groups),
@@ -294,7 +293,6 @@ function catalyst_add_export(&$exports, $type, $id) {
     return TRUE;
   }
   // Trigger error
-  dsm('missing candidate: ' . $type . ':' . $id);
 }
 
 /**
