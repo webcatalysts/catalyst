@@ -1,7 +1,7 @@
 api = 2
 core = 7.x
 
-projects[better_exposed_filters][version] = "3.2"
+projects[better_exposed_filters][version] = "3.x"
 projects[better_exposed_filters][type] = "module"
 projects[better_exposed_filters][subdir] = "contrib"
 ; Keep secondary exposed form options collapsed with default input
