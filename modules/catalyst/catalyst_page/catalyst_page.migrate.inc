@@ -38,11 +38,11 @@ class CatalystPageMigration extends CatalystNodeMigration {
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     $this->addReferenceFieldMapping('field__blocks_related', 'blocks_ref', 'block');
     // Formmatted field mappings
-    $this->addFormattedFieldMapping('field__body', 'content', 'cpage_html');
-    $this->addFormattedFieldMapping('field__css__page', 'css_custom', 'css');
-    $this->addFormattedFieldMapping('field__js__page', 'js_custom', 'js');
-    $this->addFormattedFieldMapping('field__html_head', 'html_head', 'cpage_html');
-    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'php');
+    $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');
+    $this->addFormattedFieldMapping('field__css__page', 'css_custom', 'catalyst_css');
+    $this->addFormattedFieldMapping('field__js__page', 'js_custom', 'catalyst_js');
+    $this->addFormattedFieldMapping('field__html_head', 'html_head', 'catalyst_html');
+    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'catalyst_php');
     // Unmapped destinations
     $this->addUnmigratedDestinations(array(
       'promote', 'sticky',

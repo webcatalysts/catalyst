@@ -26,6 +26,8 @@ interface CatalystLayoutInterface extends CatalystTemplateInterface {
   public function getPageTitlePattern();
   public function getBlockPlacements();
   public function getDrupalProcessingEnabled();
+  public function getDrupalCSSOptions();
+  public function getDrupalJSOptions();
 }
 
 interface CatalystDoctypeInterface extends CatalystTemplateInterface {
@@ -71,11 +73,7 @@ abstract class CatalystEntityTemplate extends CatalystTemplate {
   }
 
   protected function retrieveTemplate() {
-    $build = eck__entity__view(
-      $this->wrapper->type(),
-      $this->wrapper->getBundle(),
-      $this->wrapper->value()
-    );
+    $build = $this->wrapper->view('template');
     return render($build);
   }
 
@@ -117,7 +115,7 @@ abstract class CatalystNodeTemplate extends CatalystTemplate {
 }
 
 trait CatalystTwigTemplateRenderer {
-  public function renderTemplate($variables) {
+  public function renderTemplate($variables = array()) {
     module_load_include('inc', 'catalyst', 'includes/twig');
 
     $render_wrapper = &drupal_static('twig_render_entity_wrapper', NULL);

@@ -18,9 +18,18 @@
  */
 function catalyst_quickstart_install() {
   module_enable(array(
+    'color',
     'comment',
+    'dblog',
+    'help',
     'image',
+    'field_ui',
+    'file',
+    'list',
+    'number',
+    'options',
     'rdf',
+    'search',
     'taxonomy',
     'wysiwyg',
     'webform',

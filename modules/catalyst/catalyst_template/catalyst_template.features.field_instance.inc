@@ -10,6 +10,60 @@
 function catalyst_template_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'catalyst-template-field__admin_notes'.
+  $field_instances['catalyst-template-field__admin_notes'] = array(
+    'bundle' => 'template',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'text',
+        'settings' => array(),
+        'type' => 'text_default',
+        'weight' => 22,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__admin_notes',
+    'label' => 'Help/Instructions',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'catalyst_doc' => 'catalyst_doc',
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 15,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 27,
+    ),
+  );
+
   // Exported field_instance:
   // 'catalyst-template-field__blockplacements__layfield'.
   $field_instances['catalyst-template-field__blockplacements__layfield'] = array(
@@ -115,6 +169,7 @@ function catalyst_template_field_default_field_instances() {
     'default_value' => array(
       0 => array(
         'value' => '{{ content }}',
+        'format' => 'catalyst_html',
       ),
     ),
     'deleted' => 0,
@@ -129,8 +184,9 @@ function catalyst_template_field_default_field_instances() {
       ),
       'template' => array(
         'label' => 'above',
+        'module' => 'text',
         'settings' => array(),
-        'type' => 'hidden',
+        'type' => 'text_default',
         'weight' => 0,
       ),
     ),
@@ -141,42 +197,14 @@ function catalyst_template_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'filtered_html' => 0,
-          'full_html' => 0,
-          'js' => 0,
-          'layout_html' => 'layout_html',
-          'php' => 0,
-          'plain_text' => 0,
+          'catalyst_html' => 'catalyst_html',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_html' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'filtered_html' => array(
-              'weight' => 0,
-            ),
-            'full_html' => array(
-              'weight' => 1,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -188,7 +216,7 @@ function catalyst_template_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 15,
+        'rows' => 25,
       ),
       'type' => 'text_textarea',
       'weight' => 4,
@@ -229,34 +257,14 @@ function catalyst_template_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 'css',
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
-          'plain_text' => 0,
+          'catalyst_css' => 'catalyst_css',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_css' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -283,8 +291,6 @@ function catalyst_template_field_default_field_instances() {
         'value' => 0,
       ),
     ),
-    'default_value_function' => '',
-    'default_value_php' => '',
     'deleted' => 0,
     'description' => '',
     'display' => array(
@@ -430,38 +436,14 @@ function catalyst_template_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'html' => 'html',
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
-          'plain_text' => 0,
+          'catalyst_html' => 'catalyst_html',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_html' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'html' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -563,34 +545,14 @@ function catalyst_template_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'js' => 'js',
-          'layout_html' => 0,
-          'php' => 0,
-          'plain_text' => 0,
+          'catalyst_js' => 'catalyst_js',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_js' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -910,38 +872,14 @@ function catalyst_template_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'html' => 0,
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 'php',
-          'plain_text' => 0,
+          'catalyst_php' => 'catalyst_php',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_php' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'html' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -1068,6 +1006,7 @@ function catalyst_template_field_default_field_instances() {
   t('Custom Javascript');
   t('Enable debugging');
   t('Entity type');
+  t('Help/Instructions');
   t('Internal');
   t('Layout');
   t('Package');

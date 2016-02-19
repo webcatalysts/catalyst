@@ -28,6 +28,7 @@ function catalyst_template_field_group_info() {
       2 => 'field__internal',
       3 => 'field__package',
       4 => 'field__preprocess',
+      5 => 'group_template_help',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -158,6 +159,34 @@ function catalyst_template_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_template_help|catalyst|template|form';
+  $field_group->group_name = 'group_template_help';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'template';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_template_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '21',
+    'children' => array(
+      0 => 'field__admin_notes',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-template-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $export['group_template_help|catalyst|template|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_template_js|catalyst|template|form';
   $field_group->group_name = 'group_template_js';
   $field_group->entity_type = 'catalyst';
@@ -197,12 +226,12 @@ function catalyst_template_field_group_info() {
     'label' => 'Tabs',
     'weight' => '4',
     'children' => array(
-      0 => 'group_template_advanced',
-      1 => 'group_template_blocks',
-      2 => 'group_template_css',
-      3 => 'group_template_files',
-      4 => 'group_template_js',
-      5 => 'group_template_content',
+      0 => 'group_template_content',
+      1 => 'group_template_advanced',
+      2 => 'group_template_blocks',
+      3 => 'group_template_css',
+      4 => 'group_template_files',
+      5 => 'group_template_js',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

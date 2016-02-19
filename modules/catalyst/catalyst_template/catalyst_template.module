@@ -6,20 +6,24 @@
 
 include_once 'catalyst_template.features.inc';
 
-function catalyst_template_load($entity_type, $bundle) {
+function catalyst_template_load($entity_type, $bundle, $load_default = TRUE) {
   $loaded = &drupal_static(__FUNCTION__);
   if (!isset($loaded[$entity_type][$bundle])) {
-    $loaded[$entity_type][$bundle] = _catalyst_template_load($entity_type, $bundle);
+    $loaded[$entity_type][$bundle] = _catalyst_template_load($entity_type, $bundle, $load_default);
   }
   return $loaded[$entity_type][$bundle];
 }
 
-function _catalyst_template_load($entity_type, $bundle) {
+function _catalyst_template_load($entity_type, $bundle, $load_default = TRUE) {
+  if ($entity_type == 'catalyst' || ($entity_type == 'node' && $bundle == 'cpage')) {
+    return FALSE;
+  }
+  $bundles = $load_default ? array($bundle, '__default__') : array($bundle);
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'catalyst')
     ->entityCondition('bundle', 'template')
     ->fieldCondition('field__template_entity_type', 'machine', $entity_type, '=')
-    ->fieldCondition('field__template_bundle', 'machine', $bundle, '=')
+    ->fieldCondition('field__template_bundle', 'machine', $bundles, 'IN')
     ->range(0,1);
 
   $result = $query->execute();
@@ -49,11 +53,22 @@ function catalyst_form_eck__entity__form_alter(&$form, &$form_state) {
  */
 function catalyst_template_entity_view_alter(&$build, $type) {
   if ($template = catalyst_template_load($type, $build['#bundle'])) {
+    $original_element = $build;
+    unset($original_element['#theme']);
+    $build['#element_original'] = $original_element;
     $build['#template'] = new CatalystTemplateEntity($template);
-    $build['#post_render'][] = 'catalyst_template_render';
+    $build['#theme_original'] = $build['#theme'];
+    $build['#theme'] = 'catalyst_template';
   }
 }
 
-function catalyst_template_render($output, $build) {
-  return $build['#template']->renderTemplate(array('content' => $output));
+function catalyst_template_process_node(&$variables) {
+  if (isset($variables['content']['links'])) {
+    $variables['links'] = $variables['content']['links'];
+    unset($variables['content']['links']);
+  }
+  if (isset($variables['content']['comments'])) {
+    $variables['comments'] = $variables['content']['comments'];
+    unset($variables['content']['comments']);
+  }
 }

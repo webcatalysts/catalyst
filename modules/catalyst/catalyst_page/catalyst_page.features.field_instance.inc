@@ -102,46 +102,14 @@ function catalyst_page_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 'cpage_html',
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_html' => 'catalyst_html',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_html' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -181,46 +149,14 @@ function catalyst_page_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 'css',
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_css' => 'catalyst_css',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_css' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => -10,
             ),
           ),
         ),
@@ -317,46 +253,14 @@ function catalyst_page_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 'cpage_html',
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_html' => 'catalyst_html',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_html' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -372,6 +276,42 @@ function catalyst_page_field_default_field_instances() {
       ),
       'type' => 'text_textarea',
       'weight' => 2,
+    ),
+  );
+
+  // Exported field_instance: 'node-cpage-field__internal'.
+  $field_instances['node-cpage-field__internal'] = array(
+    'bundle' => 'cpage',
+    'default_value' => array(
+      0 => array(
+        'value' => 0,
+      ),
+    ),
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 14,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field__internal',
+    'label' => 'Internal',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'options',
+      'settings' => array(
+        'display_label' => 1,
+      ),
+      'type' => 'options_onoff',
+      'weight' => 5,
     ),
   );
 
@@ -396,46 +336,14 @@ function catalyst_page_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 'js',
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_js' => 'catalyst_js',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_js' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => -10,
             ),
           ),
         ),
@@ -606,6 +514,46 @@ function catalyst_page_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'node-cpage-field__package'.
+  $field_instances['node-cpage-field__package'] = array(
+    'bundle' => 'cpage',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 15,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field__package',
+    'label' => 'Package',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'entityreference',
+      'settings' => array(
+        'entityreference_autocreate' => array(
+          'active' => 1,
+          'author' => '',
+          'author_current_user' => 1,
+          'status' => -1,
+        ),
+        'match_operator' => 'CONTAINS',
+        'path' => '',
+        'size' => 60,
+      ),
+      'type' => 'entityreference_autocomplete_tags',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-cpage-field__preprocess'.
   $field_instances['node-cpage-field__preprocess'] = array(
     'bundle' => 'cpage',
@@ -627,38 +575,14 @@ function catalyst_page_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'html_simple' => 0,
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 'php',
-          'plain_text' => 0,
+          'catalyst_php' => 'catalyst_php',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
-              'weight' => -7,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'html_simple' => array(
+            'catalyst_php' => array(
               'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => -6,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'plain_text' => array(
-              'weight' => -10,
             ),
           ),
         ),
@@ -687,8 +611,10 @@ function catalyst_page_field_default_field_instances() {
   t('Custom Head');
   t('Custom Javascript');
   t('Custom markup that will be added the <head> tag of the layout. Allows for metatags, external javascript/stylesheets, etc.');
+  t('Internal');
   t('Javascript Includes');
   t('Layout');
+  t('Package');
   t('Preprocessing');
   t('Shared Files');
   t('Stylesheet Includes');

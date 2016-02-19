@@ -161,16 +161,19 @@ function catalyst_render_page($page) {
   return drupal_render($page);
 }
 
-function catalyst_add_css($stylesheet, $group = CATALYST_MEDIA_GROUP_OTHER) {
+function catalyst_add_css($stylesheet, $group = CATALYST_MEDIA_GROUP_OTHER, $delta = 0) {
   $options = array(
     'group' => $group,
     'media' => $stylesheet->field__media_stylesheet_media->value(),
+    'weight' => ($delta+1) * 0.1,
   );
 
   $options['basename'] = $stylesheet->field__machine->machine->value();
   switch ($stylesheet->field__media_type->value()) {
     case 'custom':
-      $data = $stylesheet->field__body->value->value();
+      module_load_include('inc', 'catalyst', 'includes/twig');
+      $template = new CatalystStylesheetTemplate($stylesheet->value());
+      $data = $template->renderTemplate();
       $options['type'] = 'inline';
       break;
     case 'local':
@@ -262,6 +265,9 @@ function catalyst_add_js($javascript, $group = CATALYST_MEDIA_GROUP_OTHER) {
 function catalyst_get_css() {
   $css = &drupal_static('drupal_add_css', array());
   $remove_groups = array(CSS_SYSTEM, CSS_DEFAULT, CSS_THEME);
+  $layout = catalyst_get_layout();
+  $remove_groups = array_diff($remove_groups, $layout->getDrupalCSSOptions());
+
   foreach (array_keys($css) AS $i) {
     if (in_array($css[$i]['group'], $remove_groups)) {
       unset($css[$i]);
@@ -273,6 +279,9 @@ function catalyst_get_css() {
 function catalyst_get_js($scope = 'header') {
   $javascript = &drupal_static('drupal_add_js', array());
   $remove_groups = array(JS_DEFAULT, JS_LIBRARY, JS_THEME);
+  $layout = catalyst_get_layout();
+  $remove_groups = array_diff($remove_groups, $layout->getDrupalJSOptions());
+
   foreach (array_keys($javascript) AS $i) {
     if ($i == 'settings') continue;
     if ($javascript[$i]['scope'] == $scope

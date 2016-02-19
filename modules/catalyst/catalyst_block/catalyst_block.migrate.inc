@@ -38,10 +38,10 @@ class CatalystBlockMigration extends CatalystEntityMigration {
     $this->addReferenceFieldMapping('field__media_javascripts', 'js_includes', 'javascript');
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     // Mappings for formatted fields
-    $this->addFormattedFieldMapping('field__body', 'content', 'cpage_html');
-    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'php');
-    $this->addFormattedFieldMapping('field__css', 'css_custom', 'css');
-    $this->addFormattedFieldMapping('field__js', 'js_custom', 'js');
+    $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');
+    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'catalyst_php');
+    $this->addFormattedFieldMapping('field__css', 'css_custom', 'catalyst_css');
+    $this->addFormattedFieldMapping('field__js', 'js_custom', 'catalyst_js');
     // File field mapping
     $this->addFileFieldMapping('field__files', 'files_custom');
   }

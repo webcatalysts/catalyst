@@ -24,6 +24,7 @@ function hook_catalyst_info() {
   );
 }
 
+function hook_catalyst_export_alter(object $export, object $original, array $group) {}
 function hook_catalyst_candidates(array $group) {}
 function hook_catalyst_dependencies(object $export, array $group) {}
 function hook_catalyst_prepare_export(object $export, array $group, array $exports) {}

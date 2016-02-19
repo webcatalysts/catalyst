@@ -23,6 +23,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 4,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__blockplacements__block',
@@ -54,6 +60,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 0,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__body',
@@ -62,46 +74,14 @@ function catalyst_block_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 'cpage_html',
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_html' => 'catalyst_html',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_html' => array(
               'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -133,6 +113,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 8,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__css',
@@ -141,46 +127,14 @@ function catalyst_block_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 'js',
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_css' => 'catalyst_css',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
-              'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
+            'catalyst_css' => array(
+              'weight' => -50,
             ),
           ),
         ),
@@ -210,6 +164,12 @@ function catalyst_block_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 1,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'catalyst',
@@ -274,6 +234,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'list_default',
         'weight' => 13,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__internal',
@@ -306,6 +272,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 10,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__js',
@@ -314,46 +286,14 @@ function catalyst_block_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 'js',
-          'layout_html' => 0,
-          'php' => 0,
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_js' => 'catalyst_js',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
-              'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
+            'catalyst_js' => array(
               'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
             ),
           ),
         ),
@@ -383,6 +323,12 @@ function catalyst_block_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 11,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'catalyst',
@@ -418,6 +364,12 @@ function catalyst_block_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 2,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'catalyst',
@@ -460,6 +412,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 9,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__media_javascripts',
@@ -500,6 +458,12 @@ function catalyst_block_field_default_field_instances() {
         'settings' => array(),
         'type' => 'hidden',
         'weight' => 7,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
       ),
     ),
     'entity_type' => 'catalyst',
@@ -545,6 +509,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'entityreference_label',
         'weight' => 12,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__package',
@@ -585,6 +555,12 @@ function catalyst_block_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 6,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__preprocess',
@@ -593,46 +569,14 @@ function catalyst_block_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
-          'full_html' => 0,
-          'html_simple' => 0,
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 'php',
-          'php_code' => 0,
-          'plain_text' => 0,
+          'catalyst_php' => 'catalyst_php',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
-              'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
-            'full_html' => array(
-              'weight' => 0,
-            ),
-            'html_simple' => array(
-              'weight' => 0,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
-            ),
-            'php_code' => array(
-              'weight' => 11,
-            ),
-            'plain_text' => array(
-              'weight' => 10,
+            'catalyst_php' => array(
+              'weight' => -50,
             ),
           ),
         ),

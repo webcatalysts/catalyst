@@ -14,11 +14,11 @@ function catalyst_navbar_user_default_permissions() {
   $permissions['access navbar'] = array(
     'name' => 'access navbar',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
-      'uadmin' => 'uadmin',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
+      'catalyst uadmin' => 'catalyst uadmin',
     ),
     'module' => 'navbar',
   );
@@ -48,7 +48,7 @@ function catalyst_navbar_user_default_permissions() {
   $permissions['switch shortcut sets'] = array(
     'name' => 'switch shortcut sets',
     'roles' => array(
-      'admin' => 'admin',
+      'catalyst admin' => 'catalyst admin',
     ),
     'module' => 'shortcut',
   );

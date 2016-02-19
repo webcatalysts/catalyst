@@ -21,10 +21,10 @@ function catalyst_menu_user_default_permissions() {
   $permissions['administer main-menu menu items'] = array(
     'name' => 'administer main-menu menu items',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'menu_admin_per_menu',
   );
@@ -40,10 +40,10 @@ function catalyst_menu_user_default_permissions() {
   $permissions['administer menu'] = array(
     'name' => 'administer menu',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'menu',
   );
@@ -59,10 +59,10 @@ function catalyst_menu_user_default_permissions() {
   $permissions['administer user-menu menu items'] = array(
     'name' => 'administer user-menu menu items',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'menu_admin_per_menu',
   );

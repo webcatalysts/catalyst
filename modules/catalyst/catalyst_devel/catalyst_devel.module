@@ -32,6 +32,21 @@ function catalyst_devel_form_features_admin_form_alter(&$form, &$form_state) {
 }
 
 /**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * @see catalyst_core_form_filter_admin_overview_alter()
+ */
+function catalyst_devel_form_filter_admin_overview_alter(&$form, &$form_state) {
+  foreach (element_children($form['catalyst_formats']) AS $id) {
+    $form['formats'][$id] = $form['catalyst_formats'][$id];
+  }
+  // Remove catalyst_formats
+  unset($form['catalyst_formats']);
+  // Sort formats
+  uasort($form['formats'], 'element_sort');
+}
+
+/**
  * Implements hook_menu_alter().
  */
 function catalyst_devel_menu_alter(&$menu_items) {

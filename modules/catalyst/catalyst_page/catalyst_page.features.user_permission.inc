@@ -14,10 +14,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['create cpage content'] = array(
     'name' => 'create cpage content',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'node',
   );
@@ -26,10 +26,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['delete any cpage content'] = array(
     'name' => 'delete any cpage content',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'node',
   );
@@ -38,10 +38,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['delete own cpage content'] = array(
     'name' => 'delete own cpage content',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'node',
   );
@@ -50,10 +50,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['edit any cpage content'] = array(
     'name' => 'edit any cpage content',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'node',
   );
@@ -62,10 +62,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['edit own cpage content'] = array(
     'name' => 'edit own cpage content',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'node',
   );
@@ -74,10 +74,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['enter cpage revision log entry'] = array(
     'name' => 'enter cpage revision log entry',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'override_node_options',
   );
@@ -107,10 +107,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['override cpage published option'] = array(
     'name' => 'override cpage published option',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'override_node_options',
   );
@@ -119,10 +119,10 @@ function catalyst_page_user_default_permissions() {
   $permissions['override cpage revision option'] = array(
     'name' => 'override cpage revision option',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'override_node_options',
   );
@@ -132,17 +132,6 @@ function catalyst_page_user_default_permissions() {
     'name' => 'override cpage sticky option',
     'roles' => array(),
     'module' => 'override_node_options',
-  );
-
-  // Exported permission: 'use text format cpage_html'.
-  $permissions['use text format cpage_html'] = array(
-    'name' => 'use text format cpage_html',
-    'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
-    ),
-    'module' => 'filter',
   );
 
   return $permissions;

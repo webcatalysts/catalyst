@@ -39,7 +39,7 @@ function catalyst_set_layout($layout = NULL) {
         // $layout is null, false, or an ID and matches the stored layout
         case (!$layout || is_int($layout)) && $stored_layout->getLayoutID() == $layout:
         // $layout is an entity and matches the stored layout.
-        case is_a('Entity', $layout) && $stored_layout->getLayoutID() == $layout->id:
+        case is_a($layout, 'Entity') && $stored_layout->getLayoutID() == $layout->id:
           return $stored_layout;
       }
     }

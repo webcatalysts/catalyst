@@ -25,12 +25,13 @@ function catalyst_layout_field_group_info() {
     'children' => array(
       0 => 'field__debug',
       1 => 'field__html_head',
-      2 => 'field__layout_page_title_pattern',
-      3 => 'field__preprocess',
-      4 => 'field__internal',
-      5 => 'field__package',
-      6 => 'group_layout_drupal',
-      7 => 'group_layout_form_alter',
+      2 => 'field__internal',
+      3 => 'field__layout_page_title_pattern',
+      4 => 'field__package',
+      5 => 'field__preprocess',
+      6 => 'group_layout_help',
+      7 => 'group_layout_drupal',
+      8 => 'group_layout_form_alter',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -223,6 +224,34 @@ function catalyst_layout_field_group_info() {
     ),
   );
   $export['group_layout_form_alter|catalyst|layout|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_layout_help|catalyst|layout|form';
+  $field_group->group_name = 'group_layout_help';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'layout';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_layout_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '9',
+    'children' => array(
+      0 => 'field__admin_notes',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'classes' => 'group-layout-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $export['group_layout_help|catalyst|layout|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */

@@ -28,6 +28,9 @@ function catalyst_layout_strongarm() {
       'diff_standard' => array(
         'custom_settings' => FALSE,
       ),
+      'template' => array(
+        'custom_settings' => TRUE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -39,6 +42,10 @@ function catalyst_layout_strongarm() {
         'title' => array(
           'default' => array(
             'weight' => '8',
+            'visible' => FALSE,
+          ),
+          'template' => array(
+            'weight' => '0',
             'visible' => FALSE,
           ),
         ),

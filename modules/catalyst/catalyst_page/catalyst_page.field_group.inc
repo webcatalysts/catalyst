@@ -25,6 +25,8 @@ function catalyst_page_field_group_info() {
     'children' => array(
       0 => 'field__html_head',
       1 => 'field__preprocess',
+      2 => 'field__internal',
+      3 => 'field__package',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -111,8 +113,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Cascading Style Sheets',
     'weight' => '9',
     'children' => array(
-      0 => 'field__media_stylesheets__page',
-      1 => 'field__css__page',
+      0 => 'field__css__page',
+      1 => 'field__media_stylesheets__page',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -140,8 +142,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Media/Files',
     'weight' => '11',
     'children' => array(
-      0 => 'field__media_files',
-      1 => 'field__files',
+      0 => 'field__files',
+      1 => 'field__media_files',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -169,8 +171,8 @@ function catalyst_page_field_group_info() {
     'label' => 'Javascript',
     'weight' => '10',
     'children' => array(
-      0 => 'field__media_javascripts__page',
-      1 => 'field__js__page',
+      0 => 'field__js__page',
+      1 => 'field__media_javascripts__page',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -198,12 +200,12 @@ function catalyst_page_field_group_info() {
     'label' => 'Tabs',
     'weight' => '0',
     'children' => array(
-      0 => 'group_cpage_js',
-      1 => 'group_cpage_css',
-      2 => 'group_cpage_advanced',
-      3 => 'group_cpage_blocks',
-      4 => 'group_cpage_content',
-      5 => 'group_cpage_files',
+      0 => 'group_cpage_advanced',
+      1 => 'group_cpage_blocks',
+      2 => 'group_cpage_content',
+      3 => 'group_cpage_css',
+      4 => 'group_cpage_files',
+      5 => 'group_cpage_js',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(

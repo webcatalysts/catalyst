@@ -86,14 +86,16 @@ function catalyst_prepare_exports($unprepared_exports, $groups) {
   // Process the exports by group
   foreach ($unprepared_exports AS $type => $group_exports) {
     $group = $groups[$type];
-    // Prepare export items individually if the group requires it
-    // This allows an entity to be normalized before export/import
-    if ($group['requires prepare']) {
-      foreach ($group_exports AS $id => $export) {
+    foreach ($group_exports AS $id => $export) {
+      // Prepare export items individually if the group requires it
+      // This allows an entity to be normalized before export/import
+      if ($group['requires prepare']) {
         $prepare_callback = $group['prepare callback'];
         // Todo: Ensure function exists, die if it doesn't
         $group_exports[$id] = call_user_func($prepare_callback, $export, $group, $unprepared_exports);
+        // Allow modules to alter each export
       }
+      drupal_alter('catalyst_export', $group_exports[$id], $export, $group, $unprepared_exports);
     }
     $exports[$type] = $group_exports;
   }
@@ -292,13 +294,17 @@ function catalyst_add_export(&$exports, $type, $id) {
     $exports[$type][$id] = $candidates[$type][$id]['export'];
     return TRUE;
   }
-  // Trigger error
+  drupal_set_message(t(
+    'Failed to add export (@type:@id) because it is not in the list of candidates',
+    array('@type' => $type, '@id' => $id)),
+    'warning'
+  );
 }
 
 /**
  * Load export candidates.
  */
-function catalyst_load_export_candidates($reset = FALSE) {
+function &catalyst_load_export_candidates($reset = FALSE) {
   $candidates = &drupal_static(__FUNCTION__);
   if ($reset || !isset($candidates)) {
     $groups = catalyst_get_export_groups();

@@ -41,39 +41,19 @@ function catalyst_quickstart_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
           'filtered_html' => 'filtered_html',
           'full_html' => 'full_html',
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
           'plain_text' => 'plain_text',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
-              'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
             'filtered_html' => array(
               'weight' => 0,
             ),
             'full_html' => array(
               'weight' => 1,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
             ),
             'plain_text' => array(
               'weight' => 10,
@@ -168,39 +148,19 @@ function catalyst_quickstart_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 0,
-          'css' => 0,
           'filtered_html' => 'filtered_html',
           'full_html' => 'full_html',
-          'js' => 0,
-          'layout_html' => 0,
-          'php' => 0,
           'plain_text' => 'plain_text',
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
-              'weight' => 0,
-            ),
-            'css' => array(
-              'weight' => -9,
-            ),
             'filtered_html' => array(
               'weight' => 0,
             ),
             'full_html' => array(
               'weight' => 1,
-            ),
-            'js' => array(
-              'weight' => -8,
-            ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
             ),
             'plain_text' => array(
               'weight' => 10,

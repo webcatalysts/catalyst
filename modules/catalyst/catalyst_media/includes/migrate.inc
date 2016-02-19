@@ -42,7 +42,7 @@ class CatalystMediaStylesheetMigration extends CatalystMediaMigration {
   protected function mapFields() {
     parent::mapFields();
     $this->addFieldMapping('field__media_stylesheet_media', 'media');
-    $this->addFormattedFieldMapping('field__body', 'content', 'css');
+    $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_css');
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     $this->addFileFieldMapping('field__files', 'files_custom');
   }
@@ -61,7 +61,7 @@ class CatalystMediaJavascriptMigration extends CatalystMediaMigration {
     parent::mapFields();
     $this->addFieldMapping('field__media_javascript_defer', 'defer');
     $this->addFieldMapping('field__media_javascript_scope', 'scope');
-    $this->addFormattedFieldMapping('field__body', 'content', 'js');
+    $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_js');
   }
 }
 

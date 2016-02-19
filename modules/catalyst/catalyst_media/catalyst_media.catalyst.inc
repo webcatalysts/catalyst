@@ -163,3 +163,33 @@ function catalyst_media_catalyst_prepare_export($export, $group, $exports) {
   }
   return (object)$export;
 }
+
+/**
+ * Implements hook_catalyst_export_alter().
+ */
+function catalyst_media_catalyst_export_alter(&$export, $original, $group, $exports) {
+  if (isset($group['entity_type'])) {
+    $wrapper = entity_metadata_wrapper($group['entity_type'], $original);
+    $setprops = array(
+      'field__media_stylesheets' => 'stylesheets',
+      'field__media_stylesheets__layout' => 'stylesheets',
+      'field__media_stylesheets__page' => 'stylesheets',
+      'field__media_javascripts' => 'javascripts',
+      'field__media_javascripts__layout' => 'javascripts',
+      'field__media_javascripts__page' => 'javascripts',
+    );
+    foreach ($setprops AS $from => $to) {
+      if (!isset($export->{$to}) && isset($wrapper->{$from})) {
+        switch ($to) {
+          case 'javascripts':
+            $source_migration = 'javascript';
+            break;
+          case 'stylesheets':
+            $source_migration = 'stylesheet';
+            break;
+        }
+        $export->{$to} = catalyst_export_helper_filter_references($wrapper->{$from}, $source_migration, $exports);
+      }
+    }
+  }
+}

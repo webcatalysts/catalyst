@@ -87,7 +87,10 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
           unset($variables[$var]);
         }
       }
-      if ($debug = kpr($variables, !$variables['show_messages'])) {
+      if ($this->getShowMessages()) {
+        dpm($variables);
+      }
+      elseif ($debug = kpr($variables, TRUE)) {
         // This is kludgy. If dpm, kpr, etc is called after this, devel css and js
         // doesn't get included
         $devel_path = drupal_get_path('module', 'devel');
@@ -97,5 +100,19 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
         $template .= '<div id="template-debug">' . $debug . '</div>' . "\n";
       }
     }
+  }
+
+  public function getDrupalCSSOptions() {
+    if ($this->has_entity) {
+      return $this->wrapper->field__layout_drupal_css->value();
+    }
+    return array();
+  }
+
+  public function getDrupalJSOptions() {
+    if ($this->has_entity) {
+      return $this->wrapper->field__layout_drupal_js->value();
+    }
+    return array();
   }
 }

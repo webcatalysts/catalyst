@@ -13,10 +13,56 @@ function catalyst_export_form($form, &$form_state) {
   $form['#export_groups'] = $groups = catalyst_get_export_groups();
 
   $module_path = drupal_get_path('module', 'catalyst_export');
+  $form['#prefix'] = '<div id="catalyst-export-form-wrapper">';
+  $form['#suffix'] = '</div>';
   $form['#attached']['library'][] = array('system', 'ui.dialog');
   $form['#attached']['js'][] = $module_path . '/js/jquery.columnizer.js';
   $form['#attached']['js'][] = $module_path . '/js/export-form.js';
   $form['#attached']['css'][] = $module_path . '/css/export-form.css';
+
+  $internal = 0;
+  $package = 'none';
+
+  if (isset($form_state['values']['filters'])) {
+    $internal = $form_state['values']['filters']['internal'];
+    $package = $form_state['values']['filters']['package'];
+  }
+
+  $filters_ajax = array(
+    'callback' => 'catalyst_export_form_ajax',
+    'method' => 'replace',
+    'wrapper' => 'catalyst-export-form-wrapper',
+  );
+  $form['filters'] = array(
+    '#tree' => TRUE,
+    '#prefix' => '<div id="catalyst-export=filters" class="container-inline">',
+    '#suffix' => '</div>',
+  );
+  $form['filters']['internal'] = array(
+    '#type' => 'select',
+    '#title' => t('Realm'),
+    '#options' => array(
+      'all' => t('All'),
+      0 => t('Site'),
+      1 => t('Internal'),
+    ),
+    '#default_value' => $internal,
+    '#ajax' => $filters_ajax,
+  );
+  $package_options = catalyst_export_package_options($internal);
+  if ($package_options) {
+    $form['filters']['package'] = array(
+      '#type' => 'select',
+      '#title' => t('Package'),
+      '#options' => array(
+        'all' => t('All packages'),
+        'none' => t('No package'),
+      ) + $package_options,
+      '#default_value' => $package,
+      '#ajax' => $filters_ajax,
+    );
+  }
+
 
   // Exports container
   $form['exports'] = array(
@@ -35,9 +81,13 @@ function catalyst_export_form($form, &$form_state) {
   );
 
 
-  $candidates = catalyst_load_export_candidates();
+  $candidates = &catalyst_load_export_candidates();
+  catalyst_export_filter_candidates($candidates, $internal, $package, $groups);
 
   foreach ($groups AS $type => $group) {
+    if (empty($candidates[$type])) {
+      continue;
+    }
     // Allow groups to require permission to export
     if (isset($group['permission']) && !user_access($group['permission'])) {
       continue;
@@ -49,6 +99,7 @@ function catalyst_export_form($form, &$form_state) {
       '#tree' => TRUE,
       '#collapsible' => TRUE,
       'items' => array('#tree' => TRUE),
+      '#description' => isset($group['description']) ? $group['description'] : NULL,
       '#attributes' => array('class' => array('dontsplit')),
     );
 
@@ -176,6 +227,10 @@ function catalyst_export_form_preview_ajax($form, $form_state) {
   return $form['preview'];
 }
 
+function catalyst_export_form_ajax($form, $form_state) {
+  return $form;
+}
+
 function catalyst_export_form_exports_ajax($form, $form_state) {
   return $form['exports'];
 }
@@ -249,6 +304,74 @@ function catalyst_export_form_submit($form, &$form_state) {
    'Content-Length' => filesize($tmp_archive)));
 
   drupal_exit();
+}
+
+function catalyst_export_package_options($internal = 0) {
+  $options = array();
+  $packages = array();
+  if ($internal === FALSE) {
+    //$packages = catalyst_load(FALSE, array('type' => 'package'));
+    $packages = entity_load('catalyst', FALSE, array('type' => 'package'));
+  }
+  else {
+    $query = new EntityFieldQuery;
+    $query->entityCondition('entity_type', 'catalyst')
+      ->entityCondition('bundle', 'package')
+      ->fieldCondition('field__internal', 'value', $internal, '=');
+    $result = $query->execute();
+    if (isset($result['catalyst'])) {
+      $packages = entity_load('catalyst', array_keys($result['catalyst']));
+    }
+  }
+
+  foreach ($packages AS $package) {
+    $options[$package->id] = filter_xss_admin($package->title);
+  }
+  return $options;
+}
+
+function catalyst_export_filter_candidates(&$candidates, $internal, $package, $groups) {
+  if ($internal === 'all' && $package === 'all') {
+    return $candidates;
+  }
+  foreach (array_keys($candidates) AS $type) {
+    $group = $groups[$type];
+    foreach ($candidates[$type] AS $id => $candidate) {
+      if (isset($group['entity_type']) && isset($group['bundle'])) {
+        $wrapper = entity_metadata_wrapper($group['entity_type'], $candidate['export']);
+        switch (true) {
+          case $internal !== 'all' && catalyst_export_filter_candidate_internal($wrapper, $internal):
+          case $package !== 'all' && catalyst_export_filter_candidate_package($wrapper, $package):
+            unset($candidates[$type][$id]);
+        }
+      }
+      elseif (intval($internal) === 1 || !in_array($package, array('all', 'none'))) {
+        unset($candidates[$type][$id]);
+      }
+    }
+  }
+}
+
+function catalyst_export_filter_candidate_package($wrapper, $package) {
+  switch (true) {
+    case $wrapper->getBundle() == 'package':
+      // Filter packages
+      return $package == 'none' || $package != $wrapper->getIdentifier();
+    case $package == 'none':
+      // Filter entities with a package
+      return isset($wrapper->field__package) && $wrapper->field__package->value();
+    default:
+      return !isset($wrapper->field__package) || $wrapper->field__package->getIdentifier() != $package;
+  }
+}
+
+function catalyst_export_filter_candidate_internal($wrapper, $internal) {
+  switch (intval($internal)) {
+    case 0:
+      return isset($wrapper->field__internal) && $wrapper->field__internal->value() != 0;
+    case 1:
+      return !isset($wrapper->field__internal) || $wrapper->field__internal->value() == 0;
+  }
 }
 
 function _catalyst_export_dummy_exists() {

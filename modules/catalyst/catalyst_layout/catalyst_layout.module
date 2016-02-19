@@ -78,10 +78,7 @@ function catalyst_preprocess_doctype(&$variables) {
     module_load_include('inc', 'catalyst', 'includes/twig');
     $variables['head_title'] = catalyst_twig_render(
       $page_title_pattern,
-      array(
-        'site_name' => variable_get('site_name', t('Catalyst')),
-        'title' => drupal_get_title(),
-      ),
+      $variables['head_title_array'],
       'layout_page_title_pattern'
     );
   }

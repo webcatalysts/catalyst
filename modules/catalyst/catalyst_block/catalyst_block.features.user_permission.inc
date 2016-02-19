@@ -14,9 +14,9 @@ function catalyst_block_user_default_permissions() {
   $permissions['eck add catalyst block entities'] = array(
     'name' => 'eck add catalyst block entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -25,7 +25,7 @@ function catalyst_block_user_default_permissions() {
   $permissions['eck administer catalyst block entities'] = array(
     'name' => 'eck administer catalyst block entities',
     'roles' => array(
-      'admin' => 'admin',
+      'catalyst admin' => 'catalyst admin',
     ),
     'module' => 'eck',
   );
@@ -34,9 +34,9 @@ function catalyst_block_user_default_permissions() {
   $permissions['eck delete catalyst block entities'] = array(
     'name' => 'eck delete catalyst block entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -45,9 +45,9 @@ function catalyst_block_user_default_permissions() {
   $permissions['eck edit catalyst block entities'] = array(
     'name' => 'eck edit catalyst block entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -56,9 +56,9 @@ function catalyst_block_user_default_permissions() {
   $permissions['eck list catalyst block entities'] = array(
     'name' => 'eck list catalyst block entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );

@@ -7,6 +7,44 @@
 include_once 'catalyst_core.features.inc';
 
 /**
+ * Implements hook_theme().
+ */
+function catalyst_core_theme() {
+  $include_path = catalyst_get_path() . '/includes';
+  return array(
+    'catalyst_template' => array(
+      'variables' => array(
+        'theme_original' => NULL,
+        'element_original' => NULL,
+        'template' => NULL,
+      ),
+      'path' => $include_path,
+      'file' => 'theme.inc',
+    ),
+  );
+}
+
+/**
+ * Implements hook_action_info().
+ */
+function catalyst_core_action_info() {
+  return array(
+    'catalyst_update_package_action' => array(
+      'type' => 'catalyst',
+      'label' => t('Set or change package'),
+      'configurable' => TRUE,
+      'triggers' => array('any'),
+    ),
+    'node_update_package_action' => array(
+      'type' => 'node',
+      'label' => t('Set or change package'),
+      'configurable' => TRUE,
+      'triggers' => array('any'),
+    ),
+  );
+}
+
+/**
  * Implements hook_entity_info().
  */
 function catalyst_entity_info_alter(&$entity_info) {
@@ -61,6 +99,7 @@ function catalyst_core_hook_info() {
   $hooks['catalyst_export_dependencies'] = $group;
   $hooks['catalyst_export_candidates'] = $group;
   $hooks['catalyst_prepare_export'] = $group;
+  $hooks['catalyst_export_alter'] = $group;
   // Menu hooks
   $hooks['catalyst_ignore_menus'] = $group;
   $hooks['catalyst_ignore_menus_alter'] = $group;
@@ -111,7 +150,30 @@ function catalyst_core_form_field_ui_field_overview_form_alter(&$form, &$form_st
   // After build callback in catalyst_core/includes/uncommoon.inc
   catalyst_form_load_include($form_state, 'uncommon');
   // Make any alterations as late as possible
-  $form['#after_build'][99] = 'catalyst_field_ui_field_overview_form_after_build';
+  $form['#after_build'][] = 'catalyst_field_ui_field_overview_form_after_build';
+}
+
+/**
+ * Implements hook_form_FORM_ID_alter().
+ *
+ * Hide catalyst specific input formats (prefixed with catalyst_).
+ *
+ * These input formats are revealed when catalyst_devel is enabled.
+ */
+function catalyst_core_form_filter_admin_overview_alter(&$form, &$form_state) {
+  // The theme function doesn't check access to the element so hiding the
+  // relevant filters is insufficient. Collect catalyst formats in a separate
+  // element where they will be completely hidden.
+  $form['catalyst_formats'] = array('#access' => FALSE);
+  // Maintain the weight for consistency
+  $weight = 0;
+  foreach (element_children($form['formats']) AS $id) {
+    $form['formats'][$id]['#weight'] = $weight++;
+    if (strpos($id, 'catalyst_') === 0) {
+      $form['catalyst_formats'][$id] = $form['formats'][$id];
+      unset($form['formats'][$id]);
+    }
+  }
 }
 
 /**
@@ -241,4 +303,38 @@ function catalyst_menu_item_restore(&$menu_item) {
     $menu_item['access callback'] = $menu_item['access callback original'];
     unset($menu_item['access callback original']);
   }
+}
+
+function catalyst_update_package_action_form($context) {
+  catalyst_include('actions');
+  $context['entity_type'] = 'catalyst';
+  return catalyst_update_package_form($context);
+}
+function catalyst_update_package_action_submit($form, $form_state) {
+  catalyst_include('actions');
+  return catalyst_update_package_form_submit($form, $form_state);
+}
+function catalyst_update_package_action($entity, $context) {
+  catalyst_include('actions');
+  catalyst_update_package($entity, $context);
+}
+
+function node_update_package_action_form($context) {
+  catalyst_include('actions');
+  $context['entity_type'] = 'node';
+  return catalyst_update_package_form($context);
+}
+function node_update_package_action_submit($form, $form_state) {
+  catalyst_include('actions');
+  return catalyst_update_package_form_submit($form, $form_state);
+}
+function node_update_package_action($entity, $context) {
+  catalyst_include('actions');
+  catalyst_update_package($entity, $context);
+}
+
+function catalyst_render_block($module, $delta = '') {
+  $block = block_load($module, $delta);
+  $build = _block_get_renderable_array(_block_render_blocks(array($block)));
+  return render($build);
 }

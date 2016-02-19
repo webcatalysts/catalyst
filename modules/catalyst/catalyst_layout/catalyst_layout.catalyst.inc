@@ -57,7 +57,7 @@ function catalyst_layout_catalyst_export_dependencies($export, $group) {
     $dependencies = array();
 
     // Determine dependencies for entities that rely on layouts
-    if (isset($export->field__layout)) {
+    if (!empty($export->field__layout)) {
       $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
       $layout = $wrapper->field__layout;
       catalyst_add_export($dependencies, 'layout', $layout->getIdentifier());

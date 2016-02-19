@@ -55,12 +55,12 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
     $this->addReferenceFieldMapping('field__media_javascripts__layout', 'js_includes', 'javascript');
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     // Formatted field mappings
-    $this->addFormattedFieldMapping('field__body', 'content', 'layout_html');
-    $this->addFormattedFieldMapping('field__css__layout', 'css_custom', 'css');
-    $this->addFormattedFieldMapping('field__js__layout', 'js_custom', 'js');
-    $this->addFormattedFieldMapping('field__html_head', 'html_head', 'cpage_html');
-    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'php');
-    $this->addFormattedFieldMapping('field__onselect', 'onselect', 'js');
-    $this->addFormattedFieldMapping('field__ondeselect', 'ondeselect', 'js');
+    $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');
+    $this->addFormattedFieldMapping('field__css__layout', 'css_custom', 'catalyst_css');
+    $this->addFormattedFieldMapping('field__js__layout', 'js_custom', 'catalyst_js');
+    $this->addFormattedFieldMapping('field__html_head', 'html_head', 'catalyst_html');
+    $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'catalyst_php');
+    $this->addFormattedFieldMapping('field__onselect', 'onselect', 'catalyst_js');
+    $this->addFormattedFieldMapping('field__ondeselect', 'ondeselect', 'catalyst_js');
   }
 }

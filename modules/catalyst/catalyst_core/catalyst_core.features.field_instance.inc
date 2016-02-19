@@ -30,6 +30,12 @@ function catalyst_core_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__body',
@@ -38,31 +44,27 @@ function catalyst_core_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
-          'cpage_html' => 'cpage_html',
-          'css' => 'css',
-          'js' => 'js',
-          'layout_html' => 'layout_html',
-          'php' => 'php',
+          'catalyst_html' => 'catalyst_html',
+          'catalyst_css' => 'catalyst_css',
+          'catalyst_js' => 'catalyst_js',
+          'catalyst_php' => 'catalyst_php',
           'plain_text' => 'plain_text',
         ),
         'allowed_formats_toggle' => 0,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
-            'cpage_html' => array(
+            'catalyst_html' => array(
               'weight' => 0,
             ),
-            'css' => array(
-              'weight' => -9,
+            'catalyst_css' => array(
+              'weight' => 1,
             ),
-            'js' => array(
-              'weight' => -8,
+            'catalyst_js' => array(
+              'weight' => 2,
             ),
-            'layout_html' => array(
-              'weight' => 0,
-            ),
-            'php' => array(
-              'weight' => -5,
+            'catalyst_php' => array(
+              'weight' => 3,
             ),
             'plain_text' => array(
               'weight' => 10,
@@ -108,6 +110,12 @@ function catalyst_core_field_default_field_instances() {
         'type' => 'hidden',
         'weight' => 0,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__internal',
@@ -141,6 +149,12 @@ function catalyst_core_field_default_field_instances() {
         'weight' => 1,
       ),
       'teaser' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+      'template' => array(
         'label' => 'above',
         'settings' => array(),
         'type' => 'hidden',

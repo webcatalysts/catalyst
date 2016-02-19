@@ -10,33 +10,33 @@
 function catalyst_core_user_default_roles() {
   $roles = array();
 
-  // Exported role: admin.
-  $roles['admin'] = array(
-    'name' => 'admin',
+  // Exported role: catalyst admin.
+  $roles['catalyst admin'] = array(
+    'name' => 'catalyst admin',
     'weight' => 6,
   );
 
-  // Exported role: builder.
-  $roles['builder'] = array(
-    'name' => 'builder',
+  // Exported role: catalyst builder.
+  $roles['catalyst builder'] = array(
+    'name' => 'catalyst builder',
     'weight' => 4,
   );
 
-  // Exported role: editor.
-  $roles['editor'] = array(
-    'name' => 'editor',
+  // Exported role: catalyst editor.
+  $roles['catalyst editor'] = array(
+    'name' => 'catalyst editor',
     'weight' => 2,
   );
 
-  // Exported role: themer.
-  $roles['themer'] = array(
-    'name' => 'themer',
+  // Exported role: catalyst themer.
+  $roles['catalyst themer'] = array(
+    'name' => 'catalyst themer',
     'weight' => 3,
   );
 
-  // Exported role: uadmin.
-  $roles['uadmin'] = array(
-    'name' => 'uadmin',
+  // Exported role: catalyst uadmin.
+  $roles['catalyst uadmin'] = array(
+    'name' => 'catalyst uadmin',
     'weight' => 5,
   );
 

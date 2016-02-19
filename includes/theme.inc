@@ -14,6 +14,22 @@ function theme_layout($variables) {
 function template_preprocess_doctype(&$variables) {
   $doctype = $variables['page']['#doctype'];
 
+  // Construct page title.
+  if (drupal_get_title()) {
+    $head_title = array(
+      'title' => strip_tags(drupal_get_title()),
+      'name' => check_plain(variable_get('site_name', 'Drupal')),
+    );
+  }
+  else {
+    $head_title = array('name' => check_plain(variable_get('site_name', 'Drupal')));
+    if (variable_get('site_slogan', '')) {
+      $head_title['slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
+    }
+  }
+  $variables['head_title_array'] = $head_title;
+  $variables['head_title'] = implode(' | ', $head_title);
+
   if($variables['drupal_processing'] = $doctype->getDrupalProcessingEnabled()) {
     drupal_preprocess_doctype($variables);
   }
@@ -57,21 +73,6 @@ function drupal_preprocess_doctype(&$variables) {
   $variables['language']          = $GLOBALS['language'];
   $variables['language']->dir     = $GLOBALS['language']->direction ? 'rtl' : 'ltr';
 
-  // Construct page title.
-  if (drupal_get_title()) {
-    $head_title = array(
-      'title' => strip_tags(drupal_get_title()),
-      'name' => check_plain(variable_get('site_name', 'Drupal')),
-    );
-  }
-  else {
-    $head_title = array('name' => check_plain(variable_get('site_name', 'Drupal')));
-    if (variable_get('site_slogan', '')) {
-      $head_title['slogan'] = filter_xss_admin(variable_get('site_slogan', ''));
-    }
-  }
-  $variables['head_title_array'] = $head_title;
-  $variables['head_title'] = implode(' | ', $head_title);
 }
 
 function template_process_doctype(&$variables) {

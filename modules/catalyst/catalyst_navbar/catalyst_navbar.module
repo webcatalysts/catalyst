@@ -1,4 +1,10 @@
 <?php
+/**
+ * @file
+ * Code for the Catalyst Navbar feature.
+ */
+
+include_once 'catalyst_navbar.features.inc';
 
 /**
  * @file
@@ -18,21 +24,30 @@
 function catalyst_navbar_library_alter(&$libraries, $module) {
   global $theme;
   if ($theme == 'notheme' && user_access('access navbar') && in_array($module, array('navbar','responsive_preview'))) {
+    $layout = catalyst_get_layout();
+    $add_css = !in_array(CSS_SYSTEM, $layout->getDrupalCSSOptions());
+    $add_js = !in_array(JS_LIBRARY, $layout->getDrupalJSOptions());
+
+    if (!$add_css && !$add_js) {
+      return;
+    }
+
     if ($module == 'navbar') {
-      drupal_add_css('profiles/catalyst/css/clearfix.css', array('group' => -201));
-      //drupal_add_css('modules/system/system.base.css', array('group' => -201));
-      //drupal_add_js('misc/jquery.js', array('group' => -302));
-      drupal_add_js('profiles/catalyst/js/jquery-1.9.0.min.js', array('group' => -302));
-      //drupal_add_js('profiles/catalyst/js/jquery-1.11.3.min.js', array('group' => -201));
-      drupal_add_js('profiles/catalyst/js/jquery.once-1.2.6.min.js', array('group' => -301));
-      drupal_add_js('misc/drupal.js', array('group' => -201));
+      if ($add_css) {
+        drupal_add_css('profiles/catalyst/css/clearfix.css', array('group' => -201));
+      }
+      if ($add_js) {
+        drupal_add_js('profiles/catalyst/js/jquery-1.9.0.min.js', array('group' => -302));
+        drupal_add_js('profiles/catalyst/js/jquery.once-1.2.6.min.js', array('group' => -301));
+        drupal_add_js('misc/drupal.js', array('group' => -201));
+      }
     }
 
     foreach (array_keys($libraries) AS $i) {
-      if (isset($libraries[$i]['js'])) {
+      if ($add_js && isset($libraries[$i]['js'])) {
         catalyst_alter_library($libraries[$i]['js']);
       }
-      if (isset($libraries[$i]['css'])) {
+      if ($add_css && isset($libraries[$i]['css'])) {
         catalyst_alter_library($libraries[$i]['css']);
       }
     }

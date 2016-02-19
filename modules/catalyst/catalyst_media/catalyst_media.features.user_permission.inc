@@ -14,10 +14,10 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck add catalyst file entities'] = array(
     'name' => 'eck add catalyst file entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -26,9 +26,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck add catalyst javascript entities'] = array(
     'name' => 'eck add catalyst javascript entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -37,9 +37,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck add catalyst stylesheet entities'] = array(
     'name' => 'eck add catalyst stylesheet entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -48,7 +48,7 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck administer catalyst file entities'] = array(
     'name' => 'eck administer catalyst file entities',
     'roles' => array(
-      'admin' => 'admin',
+      'catalyst admin' => 'catalyst admin',
     ),
     'module' => 'eck',
   );
@@ -57,7 +57,7 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck administer catalyst javascript entities'] = array(
     'name' => 'eck administer catalyst javascript entities',
     'roles' => array(
-      'admin' => 'admin',
+      'catalyst admin' => 'catalyst admin',
     ),
     'module' => 'eck',
   );
@@ -66,7 +66,7 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck administer catalyst stylesheet entities'] = array(
     'name' => 'eck administer catalyst stylesheet entities',
     'roles' => array(
-      'admin' => 'admin',
+      'catalyst admin' => 'catalyst admin',
     ),
     'module' => 'eck',
   );
@@ -75,10 +75,10 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck delete catalyst file entities'] = array(
     'name' => 'eck delete catalyst file entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -87,9 +87,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck delete catalyst javascript entities'] = array(
     'name' => 'eck delete catalyst javascript entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -98,9 +98,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck delete catalyst stylesheet entities'] = array(
     'name' => 'eck delete catalyst stylesheet entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -109,10 +109,10 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck edit catalyst file entities'] = array(
     'name' => 'eck edit catalyst file entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -121,9 +121,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck edit catalyst javascript entities'] = array(
     'name' => 'eck edit catalyst javascript entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -132,9 +132,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck edit catalyst stylesheet entities'] = array(
     'name' => 'eck edit catalyst stylesheet entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -143,10 +143,10 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck list catalyst file entities'] = array(
     'name' => 'eck list catalyst file entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'editor' => 'editor',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst editor' => 'catalyst editor',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -155,9 +155,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck list catalyst javascript entities'] = array(
     'name' => 'eck list catalyst javascript entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -166,9 +166,9 @@ function catalyst_media_user_default_permissions() {
   $permissions['eck list catalyst stylesheet entities'] = array(
     'name' => 'eck list catalyst stylesheet entities',
     'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
+      'catalyst admin' => 'catalyst admin',
+      'catalyst builder' => 'catalyst builder',
+      'catalyst themer' => 'catalyst themer',
     ),
     'module' => 'eck',
   );
@@ -201,28 +201,6 @@ function catalyst_media_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'eck',
-  );
-
-  // Exported permission: 'use text format css'.
-  $permissions['use text format css'] = array(
-    'name' => 'use text format css',
-    'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
-    ),
-    'module' => 'filter',
-  );
-
-  // Exported permission: 'use text format js'.
-  $permissions['use text format js'] = array(
-    'name' => 'use text format js',
-    'roles' => array(
-      'admin' => 'admin',
-      'builder' => 'builder',
-      'themer' => 'themer',
-    ),
-    'module' => 'filter',
   );
 
   return $permissions;
