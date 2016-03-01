@@ -59,6 +59,10 @@ projects[libraries][version] = "2.2"
 projects[libraries][type] = "module"
 projects[libraries][subdir] = "contrib"
 
+projects[markdown][version] = "1.2"
+projects[markdown][type] = "module"
+projects[markdown][subdir] = "contrib"
+
 projects[menu_admin_per_menu][version] = "1.1"
 projects[menu_admin_per_menu][type] = "module"
 projects[menu_admin_per_menu][subdir] = "contrib"
@@ -70,10 +74,6 @@ projects[menu_block][subdir] = "contrib"
 projects[migrate][version] = "2.8"
 projects[migrate][type] = "module"
 projects[migrate][subdir] = "contrib"
-
-; Prevent strict error in Migration::prepareRow()
-; https://www.drupal.org/node/2643468
-projects[migrate][patch][] = "https://www.drupal.org/files/issues/migrate-fix-strict-warning-in-prepareRow-2643468-2-7x2x.patch"
 
 projects[migrate_extras][version] = "2.5"
 projects[migrate_extras][type] = "module"
