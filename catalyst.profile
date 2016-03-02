@@ -61,7 +61,8 @@ function catalyst_page_delivery_callback_alter(&$delivery_callback) {
   }
   global $theme;
   // Might need to allow subthemes here for hybrid integrations
-  if ($theme == 'notheme' && !path_is_admin($_GET['q'])) {
+  //if ($theme == 'notheme' && !path_is_admin($_GET['q'])) {
+  if ($theme == 'notheme') {
     $delivery_callback = 'catalyst_deliver_html_page';
   }
 }
