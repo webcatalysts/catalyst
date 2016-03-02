@@ -306,6 +306,48 @@ text/html|text/html',
     ),
   );
 
+  // Exported field_instance: 'catalyst-doctype-field__machine'.
+  $field_instances['catalyst-doctype-field__machine'] = array(
+    'bundle' => 'doctype',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'machine',
+        'settings' => array(),
+        'type' => 'machine_default',
+        'weight' => 16,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__machine',
+    'label' => 'Machine name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'machine',
+      'settings' => array(
+        'editable' => 0,
+        'field_size' => 60,
+        'machine_field_label' => 'Machine name',
+        'machine_replace_pattern' => '[^a-z0-9_]+',
+        'machine_replace_with' => '_',
+      ),
+      'type' => 'machine_from_title_widget',
+      'weight' => 17,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-doctype-field__ondeselect'.
   $field_instances['catalyst-doctype-field__ondeselect'] = array(
     'bundle' => 'doctype',
@@ -522,6 +564,7 @@ text/html|text/html',
   t('HTTP Content-Type');
   t('Help/Instructions');
   t('Internal');
+  t('Machine name');
   t('On DeSelect');
   t('On Select');
   t('Package');

@@ -34,6 +34,7 @@ features[field_instance][] = catalyst-doctype-field__doctype_charset
 features[field_instance][] = catalyst-doctype-field__doctype_content_type
 features[field_instance][] = catalyst-doctype-field__drupal_processing
 features[field_instance][] = catalyst-doctype-field__internal
+features[field_instance][] = catalyst-doctype-field__machine
 features[field_instance][] = catalyst-doctype-field__ondeselect
 features[field_instance][] = catalyst-doctype-field__onselect
 features[field_instance][] = catalyst-doctype-field__package

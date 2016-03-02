@@ -124,7 +124,7 @@ function catalyst_page_field_default_field_instances() {
         'rows' => 20,
       ),
       'type' => 'text_textarea',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -388,7 +388,43 @@ function catalyst_page_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 3,
+      'weight' => 4,
+    ),
+  );
+
+  // Exported field_instance: 'node-cpage-field__machine'.
+  $field_instances['node-cpage-field__machine'] = array(
+    'bundle' => 'cpage',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'machine',
+        'settings' => array(),
+        'type' => 'machine_default',
+        'weight' => 16,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field__machine',
+    'label' => 'Machine name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'machine',
+      'settings' => array(
+        'editable' => 0,
+        'field_size' => 60,
+        'machine_field_label' => 'Machine name',
+        'machine_replace_pattern' => '[^a-z0-9_]+',
+        'machine_replace_with' => '_',
+      ),
+      'type' => 'machine_from_title_widget',
+      'weight' => 2,
     ),
   );
 
@@ -614,6 +650,7 @@ function catalyst_page_field_default_field_instances() {
   t('Internal');
   t('Javascript Includes');
   t('Layout');
+  t('Machine name');
   t('Package');
   t('Preprocessing');
   t('Shared Files');

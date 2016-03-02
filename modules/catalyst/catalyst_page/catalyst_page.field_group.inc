@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function catalyst_page_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -24,9 +24,9 @@ function catalyst_page_field_group_info() {
     'weight' => '13',
     'children' => array(
       0 => 'field__html_head',
-      1 => 'field__preprocess',
-      2 => 'field__internal',
-      3 => 'field__package',
+      1 => 'field__internal',
+      2 => 'field__package',
+      3 => 'field__preprocess',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -39,7 +39,7 @@ function catalyst_page_field_group_info() {
       ),
     ),
   );
-  $export['group_cpage_advanced|node|cpage|form'] = $field_group;
+  $field_groups['group_cpage_advanced|node|cpage|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -68,7 +68,7 @@ function catalyst_page_field_group_info() {
       ),
     ),
   );
-  $export['group_cpage_blocks|node|cpage|form'] = $field_group;
+  $field_groups['group_cpage_blocks|node|cpage|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -86,6 +86,7 @@ function catalyst_page_field_group_info() {
       0 => 'field__body',
       1 => 'field__layout',
       2 => 'title',
+      3 => 'field__machine',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -98,7 +99,7 @@ function catalyst_page_field_group_info() {
       ),
     ),
   );
-  $export['group_cpage_content|node|cpage|form'] = $field_group;
+  $field_groups['group_cpage_content|node|cpage|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -127,7 +128,7 @@ function catalyst_page_field_group_info() {
       ),
     ),
   );
-  $export['group_cpage_css|node|cpage|form'] = $field_group;
+  $field_groups['group_cpage_css|node|cpage|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -156,7 +157,7 @@ function catalyst_page_field_group_info() {
       ),
     ),
   );
-  $export['group_cpage_files|node|cpage|form'] = $field_group;
+  $field_groups['group_cpage_files|node|cpage|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -185,7 +186,7 @@ function catalyst_page_field_group_info() {
       ),
     ),
   );
-  $export['group_cpage_js|node|cpage|form'] = $field_group;
+  $field_groups['group_cpage_js|node|cpage|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -215,7 +216,17 @@ function catalyst_page_field_group_info() {
       ),
     ),
   );
-  $export['group_cpage_tabs|node|cpage|form'] = $field_group;
+  $field_groups['group_cpage_tabs|node|cpage|form'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Advanced Settings');
+  t('Blocks');
+  t('Cascading Style Sheets');
+  t('Javascript');
+  t('Media/Files');
+  t('Page content');
+  t('Tabs');
+
+  return $field_groups;
 }
