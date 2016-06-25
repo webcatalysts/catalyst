@@ -195,6 +195,34 @@ function catalyst_add_css($stylesheet, $group = CATALYST_MEDIA_GROUP_OTHER, $del
   drupal_add_css($data, $options);
 }
 
+function catalyst_add_custom_css($data, $group, $field, $entity_id) {
+  $custom_css = &drupal_static(__FUNCTION__, array());
+
+  $key = $field . ':' . $entity_id;
+  if (!isset($custom_css[$key])) {
+    drupal_add_css($data, array(
+      'type' => 'inline',
+      'media' => 'all',
+      'group' => $group,
+    ));
+    $custom_css[$key] = 1;
+  }
+}
+function catalyst_add_custom_js($data, $group, $field, $entity_id) {
+  $custom_js = &drupal_static(__FUNCTION__, array());
+
+  $key = $field . ':' . $entity_id;
+  if (!isset($custom_js[$key])) {
+    drupal_add_js($data, array(
+      'type' => 'inline',
+      'scope' => 'header',
+      'group' => $group,
+      'weight' => 1,
+    ));
+    $custom_js[$key] = 1;
+  }
+}
+
 function catalyst_add_js($javascript, $group = CATALYST_MEDIA_GROUP_OTHER) {
   $options = array(
     'group' => $group,
