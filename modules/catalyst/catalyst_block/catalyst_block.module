@@ -86,8 +86,7 @@ function catalyst_block_theme() {
  * Implements hook_page_build().
  */
 function catalyst_block_page_build(&$page) {
-  global $theme;
-  if ($theme == 'notheme') {
+  if (catalyst_theme_active()) {
     $page['region'] = array();
     if ($regions = catalyst_layout_system_regions()) {
       foreach ($regions AS $region) {

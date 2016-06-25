@@ -39,8 +39,7 @@ function catalyst_layout_menu() {
  * Implements hook_page_build().
  */
 function catalyst_layout_page_build(&$page) {
-  global $theme;
-  if ($theme == 'notheme' && !isset($page['#layout'])) {
+  if (catalyst_theme_active() && !isset($page['#layout'])) {
     $page['#layout'] = catalyst_get_layout();
     $page['#doctype'] = catalyst_get_doctype();
   }

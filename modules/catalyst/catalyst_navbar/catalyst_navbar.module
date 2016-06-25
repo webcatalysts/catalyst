@@ -22,8 +22,7 @@ include_once 'catalyst_navbar.features.inc';
  */
 
 function catalyst_navbar_library_alter(&$libraries, $module) {
-  global $theme;
-  if ($theme == 'notheme' && user_access('access navbar') && in_array($module, array('navbar','responsive_preview'))) {
+  if (catalyst_theme_active() && user_access('access navbar') && in_array($module, array('navbar','responsive_preview'))) {
     $layout = catalyst_get_layout();
     $add_css = !in_array(CSS_SYSTEM, $layout->getDrupalCSSOptions());
     $add_js = !in_array(JS_LIBRARY, $layout->getDrupalJSOptions());

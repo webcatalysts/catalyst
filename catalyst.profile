@@ -56,13 +56,7 @@ function catalyst_theme() {
  * @see drupal_deliver_page()
  */
 function catalyst_page_delivery_callback_alter(&$delivery_callback) {
-  if ($delivery_callback != 'drupal_deliver_html_page') {
-    return;
-  }
-  global $theme;
-  // Might need to allow subthemes here for hybrid integrations
-  //if ($theme == 'notheme' && !path_is_admin($_GET['q'])) {
-  if ($theme == 'notheme') {
+  if ($delivery_callback == 'drupal_deliver_html_page' && catalyst_theme_active()) {
     $delivery_callback = 'catalyst_deliver_html_page';
   }
 }
@@ -74,4 +68,19 @@ function catalyst_load($bundle, $ids = FALSE, $conditions = array(), $reset = FA
 
 function catalyst_load_single($id) {
   return entity_load_single('catalyst', $id);
+}
+
+function catalyst_theme_active() {
+  global $theme, $base_theme_info;
+  if ($theme == 'notheme') {
+    return TRUE;
+  }
+  if (is_array($base_theme_info)) {
+    foreach ($base_theme_info AS $theme_info) {
+      if ($theme_info->name == 'notheme') {
+        return TRUE;
+      }
+    }
+  }
+  return FALSE;
 }
