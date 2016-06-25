@@ -84,7 +84,6 @@ function template_process_doctype(&$variables) {
   $variables['page_top'] = drupal_render($variables['page']['page_top']);
   $variables['page_bottom'] = drupal_render($variables['page']['page_bottom']);
   $variables['page_bottom'] .= catalyst_get_js('footer');
-  $variables['page_bottom'] .= drupal_get_js('footer');
   $variables['content'] = drupal_render($variables['page']['content']);
 
   $variables['head'] = drupal_get_html_head();
