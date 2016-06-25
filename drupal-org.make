@@ -8,7 +8,7 @@ projects[better_exposed_filters][subdir] = "contrib"
 ; https://www.drupal.org/node/2647600
 projects[better_exposed_filters][patch][] = https://www.drupal.org/files/issues/bef-secondary-default-collapse-2-7x3x.patch
 
-projects[better_formats][version] = "1.0-beta1"
+projects[better_formats][version] = "1.0-beta2"
 projects[better_formats][type] = "module"
 projects[better_formats][subdir] = "contrib"
 
@@ -27,7 +27,7 @@ projects[eck][subdir] = "contrib"
 ; https://www.drupal.org/node/2647610
 projects[eck][patch][] = "https://www.drupal.org/files/issues/eck-entity-custom-admin-path-2647610-2-7x2x.patch"
 
-projects[entity][version] = "1.6"
+projects[entity][version] = "1.7"
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
 
@@ -39,7 +39,7 @@ projects[entityreference_autocreate][version] = "1.1"
 projects[entityreference_autocreate][type] = "module"
 projects[entityreference_autocreate][subdir] = "contrib"
 
-projects[features][version] = "2.7"
+projects[features][version] = "2.10"
 projects[features][type] = "module"
 projects[features][subdir] = "contrib"
 
@@ -51,11 +51,11 @@ projects[filefield_paths][version] = "1.0"
 projects[filefield_paths][type] = "module"
 projects[filefield_paths][subdir] = "contrib"
 
-projects[inline_entity_form][version] = "1.6"
+projects[inline_entity_form][version] = "1.8"
 projects[inline_entity_form][type] = "module"
 projects[inline_entity_form][subdir] = "contrib"
 
-projects[libraries][version] = "2.2"
+projects[libraries][version] = "2.3"
 projects[libraries][type] = "module"
 projects[libraries][subdir] = "contrib"
 
@@ -123,7 +123,7 @@ projects[transliteration][version] = "3.2"
 projects[transliteration][type] = "module"
 projects[transliteration][subdir] = "contrib"
 
-projects[views][version] = "3.13"
+projects[views][version] = "3.14"
 projects[views][type] = "module"
 projects[views][subdir] = "contrib"
 
