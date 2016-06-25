@@ -52,6 +52,9 @@ function catalyst_block_entity_view_alter(&$build, $type) {
 
 function template_preprocess_block_content(&$variables) {
   $variables['title'] = $variables['block']->title;
+  foreach ($variables['block']->template_variables AS $k => $v) {
+      $variables[$k] = $v;
+  }
 }
 
 /**
@@ -153,7 +156,15 @@ function catalyst_block_catalyst_twig_render_alter(&$twig, &$variables, $key = N
   $twig->addFunction(new Twig_SimpleFunction('showblock', 'catalyst_block_showblock'));
 }
 
-function catalyst_block_showblock($machine_name) {
+/**
+ * Twig funciton hanlder for "showblock".
+ *
+ * @param string $machine_name
+ *   The machine_name of the desired block.
+ * @param array $variables
+ *   Pass custom variables to the block.
+ */
+function catalyst_block_showblock($machine_name, $variables = array()) {
   $query = new EntityFieldQuery;
   $query->entityCondition('entity_type', 'catalyst')
     ->entityCondition('bundle', 'block')
@@ -162,6 +173,9 @@ function catalyst_block_showblock($machine_name) {
   $result = $query->execute();
   if (isset($result['catalyst'])) {
     $blocks = entity_load('catalyst', array_keys($result['catalyst']));
+    foreach (array_keys($blocks) AS $i) {
+        $blocks[$i]->template_variables = $variables;
+    }
     $build = entity_view('catalyst', $blocks);
     return render($build);
   }
