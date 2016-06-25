@@ -163,7 +163,7 @@ projects[wysiwyg_ace][subdir] = "sandbox"
 projects[wysiwyg_ace][download][type] = "git"
 projects[wysiwyg_ace][download][branch] = "7.x-1.x"
 projects[wysiwyg_ace][download][url] = "http://git.drupal.org/sandbox/lee20/2642232.git"
-projects[wysiwyg_ace][download][revision] = "93ee413"
+projects[wysiwyg_ace][download][revision] = "4c9899b"
 
 ; Libraries
 
