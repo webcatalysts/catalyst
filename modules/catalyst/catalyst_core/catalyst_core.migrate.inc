@@ -49,7 +49,7 @@ abstract class CatalystMigration extends CatalystBaseMigration {
   use BetterMigrateSourceJSON;
   use BetterMigrateMapSQLSimpleInteger;
 
-  public function prepareRow(&$row) {
+  public function prepareRow($row) {
     parent::prepareRow($row);
     $row = (object)json_decode(json_encode($row), true);
     $row->json_decoded = TRUE;

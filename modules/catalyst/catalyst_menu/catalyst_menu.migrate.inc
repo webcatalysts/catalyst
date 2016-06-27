@@ -56,7 +56,7 @@ class CatalystMenuLinkMigration extends CatalystBaseMigration {
     );
   }
 
-  public function prepareRow(&$row) {
+  public function prepareRow($row) {
     // Recursively case options as an array
     $row->options = (array)json_decode(json_encode($row->options), true);
 
