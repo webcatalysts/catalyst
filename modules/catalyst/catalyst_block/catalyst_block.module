@@ -52,8 +52,10 @@ function catalyst_block_entity_view_alter(&$build, $type) {
 
 function template_preprocess_block_content(&$variables) {
   $variables['title'] = $variables['block']->title;
-  foreach ($variables['block']->template_variables AS $k => $v) {
+  if (isset($variables['block']->template_variables)) {
+    foreach ($variables['block']->template_variables AS $k => $v) {
       $variables[$k] = $v;
+    }
   }
 }
 
@@ -174,7 +176,7 @@ function catalyst_block_showblock($machine_name, $variables = array()) {
   if (isset($result['catalyst'])) {
     $blocks = entity_load('catalyst', array_keys($result['catalyst']));
     foreach (array_keys($blocks) AS $i) {
-        $blocks[$i]->template_variables = $variables;
+      $blocks[$i]->template_variables = $variables;
     }
     $build = entity_view('catalyst', $blocks);
     return render($build);
