@@ -725,7 +725,7 @@ function catalyst_media_field_default_field_instances() {
     'settings' => array(
       'description_field' => 0,
       'file_directory' => '',
-      'file_extensions' => 'gif jpg jpeg png svg m3u m4a mid mp3 wma wav 3gp avi flv swf mov mp4 mpg wmv eot ttf woff woff2 otf',
+      'file_extensions' => 'gif jpg jpeg png svg m3u m4a mid mp3 wma wav 3gp avi flv mov mp4 mpg wmv eot ttf woff woff2 otf',
       'filefield_paths' => array(
         'active_updating' => 0,
         'file_name' => array(
