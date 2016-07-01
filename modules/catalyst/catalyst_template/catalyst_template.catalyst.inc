@@ -28,7 +28,7 @@ function catalyst_template_catalyst_plugin_info() {
             'page callback' => 'catalyst_template_admin_list',
             'file path' => catalyst_get_path('template') . '/includes',
             'file' => 'admin.inc',
-            'access callback' => 'user_access',
+            'access callback' => 'eck__multiple_access_check',
           ),
           'parent_menu_item' => array(
             'path' => 'admin/structure/template/list',
