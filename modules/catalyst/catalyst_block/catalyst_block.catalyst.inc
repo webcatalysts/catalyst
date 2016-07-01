@@ -102,7 +102,7 @@ function catalyst_block_catalyst_prepare_export($export, $group, $exports) {
     'title' => $wrapper->label(),
     'created' => $wrapper->created->value(),
     'changed' => $wrapper->changed->value(),
-    'machine_name' => $wrapper->field__machine->machine->value(),
+    'machine' => $wrapper->field__machine->machine->value(),
     'content' => entity_valval($wrapper->field__body),
     'css_custom' => entity_valval($wrapper->field__css),
     'js_custom' => entity_valval($wrapper->field__js),

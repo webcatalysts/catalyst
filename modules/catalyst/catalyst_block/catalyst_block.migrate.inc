@@ -5,14 +5,12 @@
  */
 
 class CatalystBlockMigration extends CatalystEntityMigration {
+  use CatalystEntityMachineNamePrepare;
   protected $entityBundle = 'block';
-  protected $machineField = 'field__machine';
-  protected $machineKey = 'field__machine';
-  protected $sourceIDField = 'id';
 
   protected function sourceFields() {
     return array(
-      'machine_name' => t('Machine name'),
+      'machine' => t('Machine name'),
       'content' => t('Block content'),
       'css_custom' => t('Custom CSS'),
       'css_includes' => t('CSS Includes'),
@@ -29,7 +27,7 @@ class CatalystBlockMigration extends CatalystEntityMigration {
 
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field__machine', 'machine_name');
+    $this->addFieldMapping('field__machine', 'machine');
     // Block placements
     $this->addFieldMapping('field__blockplacements__block', 'block_placements');
     $this->addReferenceFieldMapping('field__blockplacements__block:layout_id', 'block_placement_layout_ids', 'layout');
