@@ -156,7 +156,7 @@ projects[machine][subdir] = "sandbox"
 projects[machine][download][type] = "git"
 projects[machine][download][branch] = "7.x-1.x"
 projects[machine][download][url] = "http://git.drupal.org/sandbox/lee20/2642174.git"
-projects[machine][download][revision] = "3f55b5b"
+projects[machine][download][revision] = "35ed73d"
 
 projects[wysiwyg_ace][type] = "module"
 projects[wysiwyg_ace][subdir] = "sandbox"
