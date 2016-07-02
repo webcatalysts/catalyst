@@ -24,7 +24,7 @@ function catalyst_layout_entity_view($entity, $type, $view_mode, $langcode) {
  */
 function catalyst_layout_menu() {
   return array(
-    'admin/structure/layout/settings' => array(
+    'admin/catalyst/layout/settings' => array(
       'title' => t('Settings'),
       'page callback' => 'catalyst_layout_admin_settings_page',
       'file path' => catalyst_get_path('layout') . '/includes',

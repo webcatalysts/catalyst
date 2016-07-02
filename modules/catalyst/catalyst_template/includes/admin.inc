@@ -26,17 +26,17 @@ function catalyst_template_admin_list() {
       $links = array();
       if ($template = catalyst_template_load($entity_type, $bundle, FALSE)) {
         $links['configure'] = array(
-          'href' =>  'admin/structure/template/' . $template->id . '/edit',
+          'href' =>  'admin/catalyst/template/' . $template->id . '/edit',
           'title' => t('configure'),
         );
         $links['delete'] = array(
-          'href' =>  'admin/structure/template/' . $template->id . '/delete',
+          'href' =>  'admin/catalyst/template/' . $template->id . '/delete',
           'title' => t('delete'),
         );
       }
       else {
         $links['configure'] = array(
-          'href' =>  'admin/structure/template/add/' . $entity_type . '/' . $bundle,
+          'href' =>  'admin/catalyst/template/add/' . $entity_type . '/' . $bundle,
           'title' => t('setup'),
         );
       }
@@ -58,7 +58,7 @@ function catalyst_template_admin_add($entity_type, $bundle) {
 
   // Ensure template doesn't already exist
   if ($template = catalyst_template_load($entity_type, $bundle, FALSE)) {
-    drupal_goto('admin/structure/template/' . $template->id);
+    drupal_goto('admin/catalyst/template/' . $template->id);
   }
 
   $bundle_label = $bundle == '__default__' ? t('Default') : $entity_info['bundles'][$bundle]['label'];

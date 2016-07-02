@@ -19,18 +19,21 @@ function catalyst_core_catalyst_plugin_info() {
         'class name' => 'CatalystPackageMigration',
       ),
       'crud' => array(
-        'admin' => array('path' => 'admin/structure/package'),
-        'add' => array('path' => 'admin/structure/package/add'),
+        'admin' => array(
+          'path' => 'admin/catalyst/package',
+          'menu_item' => array('title' => 'Packages', 'weight' => 50),
+        ),
+        'add' => array('path' => 'admin/catalyst/package/add'),
         'edit' => array(
-          'path' => 'admin/structure/package/%eckentity',
+          'path' => 'admin/catalyst/package/%eckentity',
           'entity_id' => 3,
         ),
         'delete' => array(
-          'path' => 'admin/structure/package/%eckentity/delete',
+          'path' => 'admin/catalyst/package/%eckentity/delete',
           'entity_id' => 3,
         ),
         'view' => array(
-          'path' => 'admin/structure/package/%eckentity/view',
+          'path' => 'admin/catalyst/package/%eckentity/view',
           'entity_id' => 3,
           'menu_item' => FALSE,
         ),

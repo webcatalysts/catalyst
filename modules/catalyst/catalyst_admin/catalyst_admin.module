@@ -15,6 +15,23 @@ function catalyst_admin_entity_info_alter(&$entity_info) {
 }
 
 /**
+ * Implements hook_menu().
+ */
+function catalyst_admin_menu() {
+  return array(
+    'admin/catalyst' => array(
+      'title' => 'Catalyst',
+      'description' => 'Administer layouts, blocks, templates, and more.',
+      'page callback' => 'system_admin_menu_block_page',
+      'access arguments' => array('access administration pages'),
+      'file path' => drupal_get_path('module', 'system'),
+      'file' => 'system.admin.inc',
+      'weight' => -10,
+    ),
+  );
+}
+
+/**
  * Implements hook_menu_alter().
  */
 function catalyst_admin_menu_alter(&$menu_items) {

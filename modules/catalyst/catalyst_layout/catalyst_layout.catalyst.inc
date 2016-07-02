@@ -20,18 +20,26 @@ function catalyst_layout_catalyst_plugin_info() {
       ),
       'migration sources' => array('block', 'doctype', 'stylesheet', 'javascript', 'file'),
       'crud' => array(
-        'admin' => array('path' => 'admin/structure/layout'),
-        'add' => array('path' => 'admin/structure/layout/add'),
+        'admin' => array(
+          'path' => 'admin/catalyst/layout',
+          'menu_item' => array(
+            'title' => 'Layouts',
+            'weight' => 10,
+          ),
+        ),
+        'add' => array(
+          'path' => 'admin/catalyst/layout/add',
+        ),
         'edit' => array(
-          'path' => 'admin/structure/layout/%eckentity',
+          'path' => 'admin/catalyst/layout/%eckentity',
           'entity_id' => 3,
         ),
         'delete' => array(
-          'path' => 'admin/structure/layout/%eckentity/delete',
+          'path' => 'admin/catalyst/layout/%eckentity/delete',
           'entity_id' => 3,
         ),
         'view' => array(
-          'path' => 'admin/structure/layout/%eckentity/view',
+          'path' => 'admin/catalyst/layout/%eckentity/view',
           'entity_id' => 3,
           'menu_item' => FALSE,
         ),

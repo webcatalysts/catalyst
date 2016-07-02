@@ -22,7 +22,7 @@ function catalyst_doctype_form_eck__entity__form_alter(&$form, &$form_state, $fo
  * Implements hook_menu().
  */
 function catalyst_doctype_menu() {
-  $items['admin/structure/doctype/%eckentity/preview'] = array(
+  $items['admin/catalyst/doctype/%eckentity/preview'] = array(
     'title' => 'Preview',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('catalyst_doctype_preview_form', 3),
@@ -41,7 +41,7 @@ function catalyst_doctype_menu() {
  * Implements hook_custom_theme().
  */
 function catalyst_doctype_custom_theme() {
-  if (preg_match('/admin\/structure\/doctype\/[0-9]+\/preview/i', request_path()) && count($_POST)) {
+  if (preg_match('/admin\/catalyst\/doctype\/[0-9]+\/preview/i', request_path()) && count($_POST)) {
     return 'notheme';
   }
 }

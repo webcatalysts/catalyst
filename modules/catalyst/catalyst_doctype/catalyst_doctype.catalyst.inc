@@ -20,18 +20,24 @@ function catalyst_doctype_catalyst_plugin_info() {
         'class_name' => 'CatalystDoctypeMigration',
       ),
       'crud' => array(
-        'admin' => array('path' => 'admin/structure/doctype'),
-        'add' => array('path' => 'admin/structure/doctype/add'),
+        'admin' => array(
+          'path' => 'admin/catalyst/doctype',
+          'menu_item' => array(
+            'title' => 'Document Types',
+            'weight' => 80,
+          ),
+        ),
+        'add' => array('path' => 'admin/catalyst/doctype/add'),
         'edit' => array(
-          'path' => 'admin/structure/doctype/%eckentity',
+          'path' => 'admin/catalyst/doctype/%eckentity',
           'entity_id' => 3,
         ),
         'delete' => array(
-          'path' => 'admin/structure/doctype/%eckentity/delete',
+          'path' => 'admin/catalyst/doctype/%eckentity/delete',
           'entity_id' => 3,
         ),
         'view' => array(
-          'path' => 'admin/structure/doctype/%eckentity/view',
+          'path' => 'admin/catalyst/doctype/%eckentity/view',
           'entity_id' => 3,
           'menu_item' => FALSE,
         ),
