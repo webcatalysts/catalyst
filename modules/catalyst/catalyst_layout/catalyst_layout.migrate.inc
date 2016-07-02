@@ -13,9 +13,9 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
       'regions' => t('Regions'),
       'debug' => t('Debugging enabled'),
       'css_custom' => t('Custom CSS'),
-      'css_includes' => t('Stylesheet includes'),
+      'stylesheets' => t('Stylesheet includes'),
       'js_custom' => t('Custom JS'),
-      'js_includes' => t('Javascript includes'),
+      'javascripts' => t('Javascript includes'),
       'files_custom' => t('Custom files'),
       'files_shared' => t('Shared files'),
       'block_placements' => t('Block placements'),
@@ -51,8 +51,8 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
     // Reference field mappings
     $this->addReferenceFieldMapping('field__doctype', 'doctype', 'doctype');
     $this->addReferenceFieldMapping('field__blocks_related', 'blocks_reference', 'block');
-    $this->addReferenceFieldMapping('field__media_stylesheets__layout', 'css_includes', 'stylesheet');
-    $this->addReferenceFieldMapping('field__media_javascripts__layout', 'js_includes', 'javascript');
+    $this->addReferenceFieldMapping('field__media_stylesheets__layout', 'stylesheets', 'stylesheet');
+    $this->addReferenceFieldMapping('field__media_javascripts__layout', 'javascripts', 'javascript');
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     // Formatted field mappings
     $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');

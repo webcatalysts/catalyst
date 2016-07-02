@@ -80,8 +80,12 @@ function catalyst_core_catalyst_prepare_export($export, $group, $exports) {
 function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
   if (isset($group['entity_type'])) {
     $wrapper = entity_metadata_wrapper($group['entity_type'], $original);
+    if (! isset($export->id)) {
+      $export->id = $wrapper->getIdentifier();
+    }
     $setprops = array(
       'title' => 'title',
+      'created' => 'created',
       'changed' => 'changed',
       'status' => 'status',
       'field__body' => 'content',
@@ -101,6 +105,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       'field__ondeselect' => 'ondeselect',
       'field__package' => 'package',
       'field__preprocess' => 'preprocess_php',
+      'field__admin_notes' => 'admin_notes',
     );
     foreach ($setprops AS $from => $to) {
       if (!isset($export->{$to}) && isset($wrapper->{$from})) {
@@ -113,12 +118,21 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
               $wrapper->{$from}, $wrapper->getIdentifier());
             break;
           case 'machine':
+            if (empty($wrapper->{$from}->value())) {
+              throw new Exception(t('Missing machine name in @entity_type:@bundle:@id @label', array(
+                '@entity_type' => $group['entity_type'],
+                '@bundle' => $wrapper->getBundle(),
+                '@id' => $wrapper->getIdentifier(),
+                '@label' => $wrapper->label(),
+              )));
+            }
             $export->{$to} = $wrapper->{$from}->machine->value();
             break;
           case 'content':
+          case 'js_custom':
           case 'css_custom':
           case 'html_head':
-          case 'js_custuom':
+          case 'admin_notes':
           case 'onselect':
           case 'ondeselect':
           case 'preprocess_php':

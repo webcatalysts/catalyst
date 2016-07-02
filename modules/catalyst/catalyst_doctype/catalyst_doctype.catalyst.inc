@@ -77,16 +77,19 @@ function catalyst_doctype_catalyst_export_dependencies($export, $group) {
 function catalyst_doctype_catalyst_prepare_export($export, $group, $exports) {
   $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
   return (object) array(
-    'id' => $wrapper->getIdentifier(),
-    'title' => $wrapper->title->value(),
-    'created' => $wrapper->created->value(),
-    'changed' => $wrapper->changed->value(),
-    'content' => entity_valval($wrapper->field__body),
     'charset' => $wrapper->field__doctype_charset->value(),
     'http_content_type' => $wrapper->field__doctype_content_type->value(),
-    'drupal_processing' => $wrapper->field__drupal_processing->value(),
-    'preprocess_php' => entity_valval($wrapper->field__preprocess),
-    'onselect' => entity_valval($wrapper->field__onselect),
-    'ondeselect' => entity_valval($wrapper->field__ondeselect),
   );
+}
+
+/**
+ * Implements hook_catalyst_export_alter().
+ */
+function catalyst_doctype_catalyst_export_alter(&$export, $original, $group, $exports) {
+  if (isset($group['entity_type'])) {
+    $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
+    if (!isset($export->doctype) && isset($wrapper->doctype)) {
+      $export->doctype = catalyst_export_helper_filter_references($wrapper->field__doctype, 'doctype', $exports);
+    }
+  }
 }

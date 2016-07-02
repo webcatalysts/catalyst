@@ -288,7 +288,7 @@ function catalyst_export_form_submit($form, &$form_state) {
     }
   }
 
-  if (!$archiver->addFromString('catalyst.json', drupal_json_encode($build['info']))) {
+  if (!$archiver->addFromString('catalyst.json', catalyst_json_encode($build['info']))) {
     form_set_error('', 'Failed to add migrate_api.json');
     return;
   }

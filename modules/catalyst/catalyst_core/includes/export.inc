@@ -217,7 +217,7 @@ function catalyst_json_encode_exports($exports, $group) {
   foreach ($exports AS $export) {
     $json[] = (object)$export;
   }
-  return drupal_json_encode($json);
+  return catalyst_json_encode($json);
 }
 
 function catalyst_export_helper_filter_references($values, $type, $exports) {
@@ -318,4 +318,9 @@ function &catalyst_load_export_candidates($reset = FALSE) {
     }
   }
   return $candidates;
+}
+
+function catalyst_json_encode($var) {
+  //$var = drupal_json_decode(drupal_json_encode($var), TRUE);
+  return json_encode($var, JSON_PRETTY_PRINT);
 }

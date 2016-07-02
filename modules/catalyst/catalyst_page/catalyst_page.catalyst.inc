@@ -79,41 +79,5 @@ function catalyst_page_catalyst_export_dependencies($export, $group) {
  * Implements hook_catalyst_prepare_export().
  */
 function catalyst_page_catalyst_prepare_export($export, $group, $exports) {
-  $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
-  $block_placements = array();
-  $block_placement_block_ids = array();
-  foreach ($wrapper->field__blockplacements__layfield->value() AS $placement) {
-    if (catalyst_export_exists($placement['block_id'], 'block', $exports)) {
-      $block_placement_block_ids[] = $placement['block_id'];
-      unset($placement['block_id']);
-      $block_placements[] = $placement;
-    }
-  }
-  return array(
-    'id' => $wrapper->getIdentifier(),
-    'title' => $wrapper->title->value(),
-    'created' => $wrapper->created->value(),
-    'changed' => $wrapper->changed->value(),
-    'status' => $wrapper->status->value(),
-    // These still need to be filtered by block id and layout id
-    'block_placements' => $block_placements,
-    'block_placement_block_ids' => $block_placement_block_ids,
-    'layout' => catalyst_export_helper_filter_references(
-      $wrapper->field__layout, 'layout', $exports),
-    'css_includes' => catalyst_export_helper_filter_references(
-      $wrapper->field__media_stylesheets__page, 'stylesheet', $exports),
-    'js_includes' => catalyst_export_helper_filter_references(
-      $wrapper->field__media_javascripts__page, 'javascript', $exports),
-    'files_shared' => catalyst_export_helper_filter_references(
-      $wrapper->field__media_files, 'file', $exports),
-    'files_custom' => catalyst_export_helper_files(
-      $wrapper->field__files, $wrapper->getIdentifier()),
-    'blocks_ref' => catalyst_export_helper_filter_references(
-      $wrapper->field__blocks_related, 'block', $exports),
-    'content' => entity_valval($wrapper->field__body),
-    'css_custom' => entity_valval($wrapper->field__css__page),
-    'js_custom' => entity_valval($wrapper->field__js__page),
-    'html_head' => entity_valval($wrapper->field__html_head),
-    'preprocess_php' => entity_valval($wrapper->field__preprocess),
-  );
+  return (object) array();
 }

@@ -13,14 +13,14 @@ class CatalystPageMigration extends CatalystNodeMigration {
       'layout' => t('Layout'),
       'content' => t('Content'),
       'css_custom' => t('Custom CSS'),
-      'css_includes' => t('Stylesheet Includes'),
+      'stylesheets' => t('Stylesheet Includes'),
       'js_custom' => t('Custom JS'),
-      'js_includes' => t('Javascript Includes'),
+      'javascripts' => t('Javascript Includes'),
       'files_custom' => t('Custom Files'),
       'files_shared' => t('Shared Files'),
       'block_placements' => t('Block placements'),
       'block_placement_block_ids' => t('Block placement block IDs'),
-      'blocks_ref' => t('Block references'),
+      'blocks_reference' => t('Block references'),
       'html_head' => t('Custom HTML Head'),
       'preprocess_php' => t('Preprocess PHP'),
     ) + parent::sourceFields();
@@ -35,10 +35,10 @@ class CatalystPageMigration extends CatalystNodeMigration {
     $this->addFileFieldMapping('field__files', 'files_custom');
     // Reference field mappings
     $this->addReferenceFieldMapping('field__layout', 'layout', 'layout');
-    $this->addReferenceFieldMapping('field__media_stylesheets__page', 'css_includes', 'stylesheet');
-    $this->addReferenceFieldMapping('field__media_javascripts__page', 'js_includes', 'javascript');
+    $this->addReferenceFieldMapping('field__media_stylesheets__page', 'stylesheets', 'stylesheet');
+    $this->addReferenceFieldMapping('field__media_javascripts__page', 'javascripts', 'javascript');
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
-    $this->addReferenceFieldMapping('field__blocks_related', 'blocks_ref', 'block');
+    $this->addReferenceFieldMapping('field__blocks_related', 'blocks_reference', 'block');
     // Formmatted field mappings
     $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');
     $this->addFormattedFieldMapping('field__css__page', 'css_custom', 'catalyst_css');
