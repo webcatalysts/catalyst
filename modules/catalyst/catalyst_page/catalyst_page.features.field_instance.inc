@@ -400,9 +400,8 @@ function catalyst_page_field_default_field_instances() {
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'machine',
         'settings' => array(),
-        'type' => 'machine_default',
+        'type' => 'hidden',
         'weight' => 16,
       ),
     ),
