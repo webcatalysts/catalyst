@@ -109,8 +109,8 @@ function catalyst_admin_views_default_views() {
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'blocks\', array(
   \'bundle\' => \'block\',
-  \'path\' => \'admin/content/block/add\',
-  \'destination\' => \'admin/content/block\',
+  \'path\' => \'admin/catalyst/block/add\',
+  \'destination\' => \'admin/catalyst/block\',
 )); ?>';
   /* No results behavior: Global: PHP */
   $handler->display->display_options['empty']['php']['id'] = 'php';
@@ -121,8 +121,8 @@ print catalyst_admin_views_no_results($view, \'blocks\', array(
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'packages\', array(
   \'bundle\' => \'package\',
-  \'path\' => \'admin/structure/package/add\',
-  \'destination\' => \'admin/structure/package\',
+  \'path\' => \'admin/catalyst/package/add\',
+  \'destination\' => \'admin/catalyst/package\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -251,8 +251,8 @@ catalyst_include(\'views\', \'admin\');
 print catalyst_admin_action_links(array(
   \'package-add\' => array(
     \'title\' => t(\'Create new package\'),
-    \'path\' => \'admin/structure/package/add\',
-    \'destination\' => \'admin/structure/package\',
+    \'path\' => \'admin/catalyst/package/add\',
+    \'destination\' => \'admin/catalyst/package\',
     \'access\' => \'eck add catalyst package entities\',
   ),
 )); ?>';
@@ -266,10 +266,10 @@ print catalyst_admin_action_links(array(
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'packages\', array(
   \'bundle\' => \'package\',
-  \'path\' => \'admin/structure/package/add\',
-  \'destination\' => \'admin/structure/package\',
+  \'path\' => \'admin/catalyst/package/add\',
+  \'destination\' => \'admin/catalyst/package\',
 )); ?>';
-  $handler->display->display_options['path'] = 'admin/structure/package/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/package/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['description'] = 'List of packages in the system';
@@ -561,7 +561,7 @@ Off|Site',
     7 => 0,
     3 => 0,
   );
-  $handler->display->display_options['path'] = 'admin/structure/package/organize';
+  $handler->display->display_options['path'] = 'admin/catalyst/package/organize';
   $handler->display->display_options['menu']['type'] = 'tab';
   $handler->display->display_options['menu']['title'] = 'Organize';
   $handler->display->display_options['menu']['description'] = 'Manage package assignment in bulk';
@@ -1009,8 +1009,8 @@ catalyst_include(\'views\', \'admin\');
 print catalyst_admin_action_links(array(
   \'block-add\' => array(
     \'title\' => t(\'Create new block\'),
-    \'path\' => \'admin/content/block/add\',
-    \'destination\' => \'admin/content/block\',
+    \'path\' => \'admin/catalyst/block/add\',
+    \'destination\' => \'admin/catalyst/block\',
     \'access\' => \'eck add catalyst block entities\',
   ),
 )); ?>';
@@ -1033,8 +1033,8 @@ print catalyst_admin_action_links(array(
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'blocks\', array(
   \'bundle\' => \'block\',
-  \'path\' => \'admin/content/block/add\',
-  \'destination\' => \'admin/content/block\',
+  \'path\' => \'admin/catalyst/block/add\',
+  \'destination\' => \'admin/catalyst/block\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -1088,8 +1088,8 @@ print catalyst_admin_views_no_results($view, \'blocks\', array(
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_value'] = 'catalyst_include(\'views\', \'admin\');
-return catalyst_admin_eck_entity_link(\'block\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/content\', array(
-  \'query\' => array(\'destination\' => \'admin/content/block\'),
+return catalyst_admin_eck_entity_link(\'block\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/catalyst\', array(
+  \'query\' => array(\'destination\' => \'admin/catalyst/block\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -1101,7 +1101,7 @@ return catalyst_admin_eck_entity_link(\'block\', $row->id, filter_xss_admin($row
   $handler->display->display_options['fields']['title_1']['label'] = 'Block';
   $handler->display->display_options['fields']['title_1']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['title_1']['alter']['text'] = '[php_2]';
-  /* Field: catalyst: Machine name */
+  /* Field: Field: Machine name */
   $handler->display->display_options['fields']['field__machine']['id'] = 'field__machine';
   $handler->display->display_options['fields']['field__machine']['table'] = 'field_data_field__machine';
   $handler->display->display_options['fields']['field__machine']['field'] = 'field__machine';
@@ -1129,8 +1129,8 @@ return catalyst_admin_eck_entity_link(\'block\', $row->id, filter_xss_admin($row
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'block\', $row->id, t(\'edit\'), \'edit\', \'admin/content\',
-  array(\'query\' => array(\'destination\' => \'admin/content/block\'))
+  \'block\', $row->id, t(\'edit\'), \'edit\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/block\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -1144,8 +1144,8 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'block\', $row->id, t(\'delete\'), \'delete\', \'admin/content\',
-  array(\'query\' => array(\'destination\' => \'admin/content/block\'))
+  \'block\', $row->id, t(\'delete\'), \'delete\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/block\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -1214,7 +1214,7 @@ return catalyst_admin_eck_entity_link(
   /* Display: ECK */
   $handler = $view->new_display('page', 'ECK', 'eck_admin');
   $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['path'] = 'admin/structure/entity-type/catalyst/layout/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/entity-type/catalyst/layout/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['description'] = 'Manage the layouts available to pages.';
@@ -1262,7 +1262,7 @@ return catalyst_admin_eck_entity_link(
     7 => 0,
     3 => 0,
   );
-  /* Filter criterion: catalyst: Machine name (field__machine) */
+  /* Filter criterion: Field: Machine name (field__machine) */
   $handler->display->display_options['filters']['field__machine_machine']['id'] = 'field__machine_machine';
   $handler->display->display_options['filters']['field__machine_machine']['table'] = 'field_data_field__machine';
   $handler->display->display_options['filters']['field__machine_machine']['field'] = 'field__machine_machine';
@@ -1335,13 +1335,13 @@ return catalyst_admin_eck_entity_link(
     2 => array(),
     3 => array(),
   );
-  $handler->display->display_options['path'] = 'admin/content/block/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/block/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['type'] = 'tab';
+  $handler->display->display_options['tab_options']['type'] = 'normal';
   $handler->display->display_options['tab_options']['title'] = 'Blocks';
   $handler->display->display_options['tab_options']['description'] = 'Create and manage block content';
   $handler->display->display_options['tab_options']['weight'] = '1';
@@ -1439,8 +1439,8 @@ catalyst_include(\'views\', \'admin\');
 print catalyst_admin_action_links(array(
   \'doctype-add\' => array(
     \'title\' => t(\'Create new doctype\'),
-    \'path\' => \'admin/structure/doctype/add\',
-    \'destination\' => \'admin/structure/doctype\',
+    \'path\' => \'admin/catalyst/doctype/add\',
+    \'destination\' => \'admin/catalyst/doctype\',
     \'access\' => \'eck add catalyst doctype entities\',
   ),
 )); ?>';
@@ -1464,8 +1464,8 @@ print catalyst_admin_action_links(array(
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'document types\', array(
   \'bundle\' => \'doctype\',
-  \'path\' => \'admin/structure/doctype/add\',
-  \'destination\' => \'admin/structure/doctype\',
+  \'path\' => \'admin/catalyst/doctype/add\',
+  \'destination\' => \'admin/catalyst/doctype\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -1504,8 +1504,8 @@ print catalyst_admin_views_no_results($view, \'document types\', array(
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_value'] = 'catalyst_include(\'views\', \'admin\');
-return catalyst_admin_eck_entity_link(\'doctype\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/structure\', array(
-  \'query\' => array(\'destination\' => \'admin/structure/doctype\'),
+return catalyst_admin_eck_entity_link(\'doctype\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/catalyst\', array(
+  \'query\' => array(\'destination\' => \'admin/catalyst/doctype\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -1541,8 +1541,8 @@ return catalyst_admin_eck_entity_link(\'doctype\', $row->id, filter_xss_admin($r
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'doctype\', $row->id, t(\'edit\'), \'edit\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/doctype\'))
+  \'doctype\', $row->id, t(\'edit\'), \'edit\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/doctype\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -1556,8 +1556,8 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'doctype\', $row->id, t(\'delete\'), \'delete\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/doctype\'))
+  \'doctype\', $row->id, t(\'delete\'), \'delete\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/doctype\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -1573,7 +1573,7 @@ return catalyst_admin_eck_entity_link(
   /* Display: ECK */
   $handler = $view->new_display('page', 'ECK', 'eck_admin');
   $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['path'] = 'admin/structure/entity-type/catalyst/doctype/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/entity-type/catalyst/doctype/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['description'] = 'Manage the doctypes available to layouts.';
@@ -1589,7 +1589,7 @@ return catalyst_admin_eck_entity_link(
 
   /* Display: Admin */
   $handler = $view->new_display('page', 'Admin', 'cms_admin');
-  $handler->display->display_options['path'] = 'admin/structure/doctype/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/doctype/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';
@@ -1732,8 +1732,8 @@ catalyst_include(\'views\', \'admin\');
 print catalyst_admin_action_links(array(
   \'file-add\' => array(
     \'title\' => t(\'Create new file\'),
-    \'path\' => \'admin/content/file/add\',
-    \'destination\' => \'admin/content/file\',
+    \'path\' => \'admin/catalyst/file/add\',
+    \'destination\' => \'admin/catalyst/file\',
     \'access\' => \'eck add catalyst file entities\',
   ),
 )); ?>';
@@ -1756,8 +1756,8 @@ print catalyst_admin_action_links(array(
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'file\', array(
   \'bundle\' => \'file\',
-  \'path\' => \'admin/content/file/add\',
-  \'destination\' => \'admin/content/file\',
+  \'path\' => \'admin/catalyst/file/add\',
+  \'destination\' => \'admin/catalyst/file\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -1797,8 +1797,8 @@ print catalyst_admin_views_no_results($view, \'file\', array(
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_value'] = 'catalyst_include(\'views\', \'admin\');
-return catalyst_admin_eck_entity_link(\'file\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/content\', array(
-  \'query\' => array(\'destination\' => \'admin/content/file\'),
+return catalyst_admin_eck_entity_link(\'file\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/catalyst\', array(
+  \'query\' => array(\'destination\' => \'admin/catalyst/file\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -1814,7 +1814,7 @@ return catalyst_admin_eck_entity_link(\'file\', $row->id, filter_xss_admin($row-
   $handler->display->display_options['fields']['field__media_type']['id'] = 'field__media_type';
   $handler->display->display_options['fields']['field__media_type']['table'] = 'field_data_field__media_type';
   $handler->display->display_options['fields']['field__media_type']['field'] = 'field__media_type';
-  /* Field: catalyst: Machine name */
+  /* Field: Field: Machine name */
   $handler->display->display_options['fields']['field__machine']['id'] = 'field__machine';
   $handler->display->display_options['fields']['field__machine']['table'] = 'field_data_field__machine';
   $handler->display->display_options['fields']['field__machine']['field'] = 'field__machine';
@@ -1842,8 +1842,8 @@ return catalyst_admin_eck_entity_link(\'file\', $row->id, filter_xss_admin($row-
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'file\', $row->id, t(\'edit\'), \'edit\', \'admin/content\',
-  array(\'query\' => array(\'destination\' => \'admin/content/file\'))
+  \'file\', $row->id, t(\'edit\'), \'edit\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/file\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -1857,8 +1857,8 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'file\', $row->id, t(\'delete\'), \'delete\', \'admin/content\',
-  array(\'query\' => array(\'destination\' => \'admin/content/file\'))
+  \'file\', $row->id, t(\'delete\'), \'delete\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/file\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -1903,7 +1903,7 @@ return catalyst_admin_eck_entity_link(
   /* Display: ECK */
   $handler = $view->new_display('page', 'ECK', 'eck_admin');
   $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['path'] = 'admin/structure/entity-type/catalyst/layout/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/entity-type/catalyst/layout/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['description'] = 'Manage the layouts available to pages.';
@@ -1919,13 +1919,13 @@ return catalyst_admin_eck_entity_link(
 
   /* Display: Admin */
   $handler = $view->new_display('page', 'Admin', 'cms_admin');
-  $handler->display->display_options['path'] = 'admin/content/file/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/file/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';
   $handler->display->display_options['menu']['context'] = 0;
   $handler->display->display_options['menu']['context_only_inline'] = 0;
-  $handler->display->display_options['tab_options']['type'] = 'tab';
+  $handler->display->display_options['tab_options']['type'] = 'normal';
   $handler->display->display_options['tab_options']['title'] = 'Files';
   $handler->display->display_options['tab_options']['description'] = 'Add and manage media files';
   $handler->display->display_options['tab_options']['weight'] = '2';
@@ -2070,8 +2070,8 @@ catalyst_include(\'views\', \'admin\');
 print catalyst_admin_action_links(array(
   \'javascript-add\' => array(
     \'title\' => t(\'Create new javascript\'),
-    \'path\' => \'admin/structure/javascript/add\',
-    \'destination\' => \'admin/structure/javascript\',
+    \'path\' => \'admin/catalyst/javascript/add\',
+    \'destination\' => \'admin/catalyst/javascript\',
     \'access\' => \'eck add catalyst javascript entities\',
   ),
 )); ?>';
@@ -2094,8 +2094,8 @@ print catalyst_admin_action_links(array(
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'javascripts\', array(
   \'bundle\' => \'javascript\',
-  \'path\' => \'admin/structure/javascript/add\',
-  \'destination\' => \'admin/structure/javascript\',
+  \'path\' => \'admin/catalyst/javascript/add\',
+  \'destination\' => \'admin/catalyst/javascript\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -2135,8 +2135,8 @@ print catalyst_admin_views_no_results($view, \'javascripts\', array(
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_value'] = 'catalyst_include(\'views\', \'admin\');
-return catalyst_admin_eck_entity_link(\'javascript\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/structure\', array(
-  \'query\' => array(\'destination\' => \'admin/structure/javascript\'),
+return catalyst_admin_eck_entity_link(\'javascript\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/catalyst\', array(
+  \'query\' => array(\'destination\' => \'admin/catalyst/javascript\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -2180,8 +2180,8 @@ return catalyst_admin_eck_entity_link(\'javascript\', $row->id, filter_xss_admin
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'javascript\', $row->id, t(\'edit\'), \'edit\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/javascript\'))
+  \'javascript\', $row->id, t(\'edit\'), \'edit\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/javascript\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -2195,8 +2195,8 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'javascript\', $row->id, t(\'delete\'), \'delete\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/javascript\'))
+  \'javascript\', $row->id, t(\'delete\'), \'delete\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/javascript\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -2260,7 +2260,7 @@ return catalyst_admin_eck_entity_link(
   /* Display: ECK */
   $handler = $view->new_display('page', 'ECK', 'eck_admin');
   $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['path'] = 'admin/structure/entity-type/catalyst/layout/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/entity-type/catalyst/layout/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['description'] = 'Manage the layouts available to pages.';
@@ -2276,7 +2276,7 @@ return catalyst_admin_eck_entity_link(
 
   /* Display: Admin */
   $handler = $view->new_display('page', 'Admin', 'cms_admin');
-  $handler->display->display_options['path'] = 'admin/structure/javascript/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/javascript/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';
@@ -2395,8 +2395,8 @@ catalyst_include(\'views\', \'admin\');
 print catalyst_admin_action_links(array(
   \'doctype-add\' => array(
     \'title\' => t(\'Create new layout\'),
-    \'path\' => \'admin/structure/layout/add\',
-    \'destination\' => \'admin/structure/layout\',
+    \'path\' => \'admin/catalyst/layout/add\',
+    \'destination\' => \'admin/catalyst/layout\',
     \'access\' => \'eck add catalyst layout entities\',
   ),
 )); ?>';
@@ -2430,8 +2430,8 @@ print drupal_render($form);
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'layout\', array(
   \'bundle\' => \'layout\',
-  \'path\' => \'admin/structure/layout/add\',
-  \'destination\' => \'admin/structure/layout\',
+  \'path\' => \'admin/catalyst/layout/add\',
+  \'destination\' => \'admin/catalyst/layout\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -2490,8 +2490,8 @@ print catalyst_admin_views_no_results($view, \'layout\', array(
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_value'] = 'catalyst_include(\'views\', \'admin\');
-return catalyst_admin_eck_entity_link(\'layout\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/structure\', array(
-  \'query\' => array(\'destination\' => \'admin/structure/layout\'),
+return catalyst_admin_eck_entity_link(\'layout\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/catalyst\', array(
+  \'query\' => array(\'destination\' => \'admin/catalyst/layout\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -2527,8 +2527,8 @@ return catalyst_admin_eck_entity_link(\'layout\', $row->id, filter_xss_admin($ro
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'layout\', $row->id, t(\'edit\'), \'edit\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/layout\'))
+  \'layout\', $row->id, t(\'edit\'), \'edit\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/layout\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -2542,8 +2542,8 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'layout\', $row->id, t(\'delete\'), \'delete\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/layout\'))
+  \'layout\', $row->id, t(\'delete\'), \'delete\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/layout\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -2578,7 +2578,7 @@ return catalyst_admin_eck_entity_link(
   /* Display: ECK */
   $handler = $view->new_display('page', 'ECK', 'eck_admin');
   $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['path'] = 'admin/structure/entity-type/catalyst/layout/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/entity-type/catalyst/layout/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['description'] = 'Manage the layouts available to pages.';
@@ -2594,7 +2594,7 @@ return catalyst_admin_eck_entity_link(
 
   /* Display: Admin */
   $handler = $view->new_display('page', 'Admin', 'cms_admin');
-  $handler->display->display_options['path'] = 'admin/structure/layout/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/layout/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';
@@ -2737,8 +2737,8 @@ catalyst_include(\'views\', \'admin\');
 print catalyst_admin_action_links(array(
   \'doctype-add\' => array(
     \'title\' => t(\'Create new stylesheet\'),
-    \'path\' => \'admin/structure/stylesheet/add\',
-    \'destination\' => \'admin/structure/stylesheet\',
+    \'path\' => \'admin/catalyst/stylesheet/add\',
+    \'destination\' => \'admin/catalyst/stylesheet\',
     \'access\' => \'eck add catalyst stylesheet entities\',
   ),
 )); ?>';
@@ -2761,8 +2761,8 @@ print catalyst_admin_action_links(array(
 catalyst_include(\'views\', \'admin\');
 print catalyst_admin_views_no_results($view, \'stylesheets\', array(
   \'bundle\' => \'stylesheet\',
-  \'path\' => \'admin/structure/stylesheet/add\',
-  \'destination\' => \'admin/structure/stylesheet\',
+  \'path\' => \'admin/catalyst/stylesheet/add\',
+  \'destination\' => \'admin/catalyst/stylesheet\',
 )); ?>';
   /* Field: Bulk operations: Catalyst */
   $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
@@ -2802,8 +2802,8 @@ print catalyst_admin_views_no_results($view, \'stylesheets\', array(
   $handler->display->display_options['fields']['php_2']['exclude'] = TRUE;
   $handler->display->display_options['fields']['php_2']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_2']['php_value'] = 'catalyst_include(\'views\', \'admin\');
-return catalyst_admin_eck_entity_link(\'stylesheet\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/structure\', array(
-  \'query\' => array(\'destination\' => \'admin/structure/layout\'),
+return catalyst_admin_eck_entity_link(\'stylesheet\', $row->id, filter_xss_admin($row->title), \'edit\', \'admin/catalyst\', array(
+  \'query\' => array(\'destination\' => \'admin/catalyst/layout\'),
 ));';
   $handler->display->display_options['fields']['php_2']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_2']['use_php_click_sortable'] = '0';
@@ -2847,8 +2847,8 @@ return catalyst_admin_eck_entity_link(\'stylesheet\', $row->id, filter_xss_admin
   $handler->display->display_options['fields']['php']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'stylesheet\', $row->id, t(\'edit\'), \'edit\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/stylesheet\'))
+  \'stylesheet\', $row->id, t(\'edit\'), \'edit\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/stylesheet\'))
 );';
   $handler->display->display_options['fields']['php']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php']['use_php_click_sortable'] = '0';
@@ -2862,8 +2862,8 @@ return catalyst_admin_eck_entity_link(
   $handler->display->display_options['fields']['php_1']['use_php_setup'] = 0;
   $handler->display->display_options['fields']['php_1']['php_value'] = 'catalyst_include(\'views\', \'admin\');
 return catalyst_admin_eck_entity_link(
-  \'stylesheet\', $row->id, t(\'delete\'), \'delete\', \'admin/structure\',
-  array(\'query\' => array(\'destination\' => \'admin/structure/stylesheet\'))
+  \'stylesheet\', $row->id, t(\'delete\'), \'delete\', \'admin/catalyst\',
+  array(\'query\' => array(\'destination\' => \'admin/catalyst/stylesheet\'))
 );';
   $handler->display->display_options['fields']['php_1']['php_output'] = '<?php print $value; ?>';
   $handler->display->display_options['fields']['php_1']['use_php_click_sortable'] = '0';
@@ -2927,7 +2927,7 @@ return catalyst_admin_eck_entity_link(
   /* Display: ECK */
   $handler = $view->new_display('page', 'ECK', 'eck_admin');
   $handler->display->display_options['enabled'] = FALSE;
-  $handler->display->display_options['path'] = 'admin/structure/entity-type/catalyst/layout/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/entity-type/catalyst/layout/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'List';
   $handler->display->display_options['menu']['description'] = 'Manage the layouts available to pages.';
@@ -2943,7 +2943,7 @@ return catalyst_admin_eck_entity_link(
 
   /* Display: Admin */
   $handler = $view->new_display('page', 'Admin', 'cms_admin');
-  $handler->display->display_options['path'] = 'admin/structure/stylesheet/list';
+  $handler->display->display_options['path'] = 'admin/catalyst/stylesheet/list';
   $handler->display->display_options['menu']['type'] = 'default tab';
   $handler->display->display_options['menu']['title'] = 'LIst';
   $handler->display->display_options['menu']['weight'] = '-10';

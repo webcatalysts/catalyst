@@ -24,6 +24,12 @@ function catalyst_core_field_default_field_instances() {
         'type' => 'text_default',
         'weight' => 4,
       ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
     ),
     'entity_type' => 'catalyst',
     'field_name' => 'field__admin_notes',
