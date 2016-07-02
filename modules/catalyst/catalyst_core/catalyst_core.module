@@ -261,9 +261,31 @@ function catalyst_entity_normalize_drupal(EntityDrupalWrapper $wrapper, $info) {
   return catalyst_entity_normalize($entity, $entity->type, $entity_type);
 }
 
-function catalyst_array_merge(array &$arr1, array $arr2) {
-  $arr1 = array_merge($arr1, $arr2);
-  return $arr1;
+/**
+ * Helper function for array_merge().
+ *
+ * Merges all (array) arguments into the first argument which is a reference.
+ *
+ * Usage:
+ * @code
+ * catalyst_array_merge($array1, $array2, $array3);
+ * @endcode
+ *
+ * @param array $result
+ *   The base array of the merge whose reference will be merged into.
+ *
+ * @return array
+ *   Returns the merged result array.
+ */
+function catalyst_array_merge(&$result) {
+  $arrArgs = func_get_args();
+  array_shift($arrArgs);
+  $result = is_null($result) ? array() : (array)$result;
+  while ($array = array_shift($arrArgs)) {
+    $array = is_null($array) ? array() : (array)$array;
+    $result = array_merge($result, $array);
+  }
+  return $result;
 }
 
 /**
