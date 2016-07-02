@@ -95,7 +95,7 @@ function catalyst_block_catalyst_export_alter(&$export, $original, $group, $expo
   if (!isset($group['entity_type'])) {
     return;
   }
-  $wrapper = entity_metaadata_wrapper($group['entity_type'], $original);
+  $wrapper = entity_metadata_wrapper($group['entity_type'], $original);
   if (!isset($export->block_placements)) {
     $placement_fields = array(
       'field__block_placements__block' => 'layout_id',

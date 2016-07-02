@@ -100,7 +100,7 @@ function catalyst_default_layout_options() {
     foreach ($layouts AS $layout) {
       $wrapper = entity_metadata_wrapper('catalyst', $layout);
       if ($doctype = $wrapper->field__doctype) {
-        if ($doctype->field__doctype_content_type->value() == 'text/html') {
+        if (isset($doctype->field__doctype_content_type) && $doctype->field__doctype_content_type->value() == 'text/html') {
           $options[$wrapper->getIdentifier()] = $wrapper->label();
         }
       }

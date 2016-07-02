@@ -87,8 +87,8 @@ function catalyst_doctype_catalyst_prepare_export($export, $group, $exports) {
  */
 function catalyst_doctype_catalyst_export_alter(&$export, $original, $group, $exports) {
   if (isset($group['entity_type'])) {
-    $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
-    if (!isset($export->doctype) && isset($wrapper->doctype)) {
+    $wrapper = entity_metadata_wrapper($group['entity_type'], $original);
+    if (!isset($export->doctype) && isset($wrapper->field__doctype)) {
       $export->doctype = catalyst_export_helper_filter_references($wrapper->field__doctype, 'doctype', $exports);
     }
   }
