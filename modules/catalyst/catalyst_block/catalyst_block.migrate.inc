@@ -11,9 +11,9 @@ class CatalystBlockMigration extends CatalystEntityMigration {
     return array(
       'content' => t('Block content'),
       'css_custom' => t('Custom CSS'),
-      'css_includes' => t('CSS Includes'),
+      'stylesheets' => t('CSS Includes'),
       'js_custom' => t('Custom JS'),
-      'js_includes' => t('JS Includes'),
+      'javascripts' => t('JS Includes'),
       'files_custom' => t('Custom Files'),
       'files_shared' => t('Shared Files'),
       'preprocess_php' => t('Preprocess PHP'),
@@ -29,8 +29,8 @@ class CatalystBlockMigration extends CatalystEntityMigration {
     $this->addFieldMapping('field__blockplacements__block', 'block_placements');
     $this->addReferenceFieldMapping('field__blockplacements__block:layout_id', 'block_placement_layout_ids', 'layout');
     // Reference field mapping
-    $this->addReferenceFieldMapping('field__media_stylesheets', 'css_includes', 'stylesheet');
-    $this->addReferenceFieldMapping('field__media_javascripts', 'js_includes', 'javascript');
+    $this->addReferenceFieldMapping('field__media_stylesheets', 'stylesheets', 'stylesheet');
+    $this->addReferenceFieldMapping('field__media_javascripts', 'javascripts', 'javascript');
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     // Mappings for formatted fields
     $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');
