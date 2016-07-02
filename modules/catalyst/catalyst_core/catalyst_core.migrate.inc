@@ -46,8 +46,13 @@ abstract class CatalystBaseMigration extends BetterMigration {
   }
 }
 abstract class CatalystMigration extends CatalystBaseMigration {
+  use CatalystEntityMachineNamePrepare;
   use BetterMigrateSourceJSON;
   use BetterMigrateMapSQLSimpleInteger;
+
+  protected $machineField = 'field__machine';
+  protected $machineKey = 'machine';
+  protected $sourceIDField = 'id';
 
   public function prepareRow($row) {
     parent::prepareRow($row);
@@ -60,32 +65,21 @@ abstract class CatalystMigration extends CatalystBaseMigration {
     return array(
       'id' => t('ID'),
       'title' => t('Title'),
+      'machine' => t('Machine name'),
     );
   }
 
   protected function mapFields() {
     $this->addFieldMapping('title', 'title');
+    $this->addFieldMapping('field__machine', 'machine');
     $this->addFieldMapping('language')->defaultValue(LANGUAGE_NONE);
     $this->addUnmigratedDestinations(array('created', 'changed'));
   }
 }
 
 abstract class CatalystEntityMigration extends CatalystMigration {
-  use CatalystEntityMachineNamePrepare;
   use BetterMigrationDestinationEntity;
   protected $entityType = 'catalyst';
-  protected $machineField = 'field__machine';
-  protected $machineKey = 'machine';
-  protected $sourceIDField = 'id';
-
-  protected function sourceFields() {
-    return array(
-      'machine' => t('Machine name'),
-    ) + parent::sourceFields();
-  }
-
-  protected function mapFields() {
-    $this->addFieldMapping('title', 'title');
 
   protected function mapFields() {
     parent::mapFields();
@@ -106,25 +100,16 @@ abstract class CatalystEntityMigration extends CatalystMigration {
 }
 
 abstract class CatalystNodeMigration extends CatalystMigration {
-  use CatalystEntityMachineNamePrepare;
   use BetterMigrateSourceJSON;
   use BetterMigrationDestinationNode;
   use BetterMigrateMapSQLSimpleInteger;
-  use CatalystMigrationCommonMappings;
-
-  protected $nodeType = 'cpape';
 
   protected $entityType = 'node';
-  protected $machineField = 'field__machine';
-  protected $machineKey = 'machine';
-  protected $sourceIDField = 'nid';
-
 
   protected function sourceFields() {
     return array(
       'status' => t('Status'),
       'path' => t('Path alias'),
-      'machine' => t('Machine name'),
     ) + parent::sourceFields();
   }
 
