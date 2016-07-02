@@ -28,7 +28,6 @@ function catalyst_core_wysiwyg_default_profiles() {
       'css_path' => '',
       'advanced__active_tab' => 'edit-basic',
     ),
-    'rdf_mapping' => array(),
   );
 
   // Exported profile: catalyst_doc
@@ -40,7 +39,7 @@ function catalyst_core_wysiwyg_default_profiles() {
       'user_choose' => 0,
       'show_toggle' => 0,
       'add_to_summaries' => 1,
-      'theme' => 'idle_fingers',
+      'theme' => 'github',
       'language' => 'en',
       'mode' => 'markdown',
       'keybinding' => '',
@@ -49,7 +48,6 @@ function catalyst_core_wysiwyg_default_profiles() {
       'css_path' => '',
       'advanced__active_tab' => 'edit-basic',
     ),
-    'rdf_mapping' => array(),
   );
 
   // Exported profile: catalyst_html
@@ -70,7 +68,6 @@ function catalyst_core_wysiwyg_default_profiles() {
       'css_path' => '',
       'advanced__active_tab' => 'edit-basic',
     ),
-    'rdf_mapping' => array(),
   );
 
   // Exported profile: catalyst_js
@@ -91,7 +88,6 @@ function catalyst_core_wysiwyg_default_profiles() {
       'css_path' => '',
       'advanced__active_tab' => 'edit-basic',
     ),
-    'rdf_mapping' => array(),
   );
 
   // Exported profile: catalyst_php
@@ -112,7 +108,6 @@ function catalyst_core_wysiwyg_default_profiles() {
       'css_path' => '',
       'advanced__active_tab' => 'edit-basic',
     ),
-    'rdf_mapping' => array(),
   );
 
   return $profiles;

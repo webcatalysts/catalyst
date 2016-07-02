@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function catalyst_media_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -25,18 +25,21 @@ function catalyst_media_field_group_info() {
     'children' => array(
       0 => 'field__internal',
       1 => 'field__package',
+      2 => 'group_file_help',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Advanced',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-file-advanced field-group-fieldset',
         'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-file-advanced field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsed',
     ),
   );
-  $export['group_file_advanced|catalyst|file|form'] = $field_group;
+  $field_groups['group_file_advanced|catalyst|file|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -70,7 +73,7 @@ function catalyst_media_field_group_info() {
       ),
     ),
   );
-  $export['group_file_content|catalyst|stylesheet|form'] = $field_group;
+  $field_groups['group_file_content|catalyst|stylesheet|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -99,7 +102,36 @@ function catalyst_media_field_group_info() {
       ),
     ),
   );
-  $export['group_file_files|catalyst|stylesheet|form'] = $field_group;
+  $field_groups['group_file_files|catalyst|stylesheet|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_file_help|catalyst|file|form';
+  $field_group->group_name = 'group_file_help';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'file';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_file_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '13',
+    'children' => array(
+      0 => 'field__admin_notes',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-file-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_file_help|catalyst|file|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -125,7 +157,7 @@ function catalyst_media_field_group_info() {
       ),
     ),
   );
-  $export['group_file_tabs|catalyst|stylesheet|form'] = $field_group;
+  $field_groups['group_file_tabs|catalyst|stylesheet|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -142,6 +174,7 @@ function catalyst_media_field_group_info() {
     'children' => array(
       0 => 'field__internal',
       1 => 'field__package',
+      2 => 'group_javascript_help',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -154,7 +187,36 @@ function catalyst_media_field_group_info() {
       'formatter' => 'collapsed',
     ),
   );
-  $export['group_javascript_advanced|catalyst|javascript|form'] = $field_group;
+  $field_groups['group_javascript_advanced|catalyst|javascript|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_javascript_help|catalyst|javascript|form';
+  $field_group->group_name = 'group_javascript_help';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'javascript';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_javascript_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '15',
+    'children' => array(
+      0 => 'field__admin_notes',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-javascript-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_javascript_help|catalyst|javascript|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -169,8 +231,9 @@ function catalyst_media_field_group_info() {
     'label' => 'Advanced',
     'weight' => '8',
     'children' => array(
-      0 => 'field__package',
-      1 => 'field__internal',
+      0 => 'field__internal',
+      1 => 'field__package',
+      2 => 'group_stylesheet_help',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -183,7 +246,44 @@ function catalyst_media_field_group_info() {
       'formatter' => 'collapsed',
     ),
   );
-  $export['group_stylesheet_advanced|catalyst|stylesheet|form'] = $field_group;
+  $field_groups['group_stylesheet_advanced|catalyst|stylesheet|form'] = $field_group;
 
-  return $export;
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_stylesheet_help|catalyst|stylesheet|form';
+  $field_group->group_name = 'group_stylesheet_help';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'stylesheet';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_stylesheet_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '13',
+    'children' => array(
+      0 => 'field__admin_notes',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-stylesheet-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_stylesheet_help|catalyst|stylesheet|form'] = $field_group;
+
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Advanced');
+  t('Custom Help/Instructions');
+  t('Media/Files');
+  t('Stylesheet content');
+  t('Tabs');
+
+  return $field_groups;
 }

@@ -27,6 +27,7 @@ function catalyst_page_field_group_info() {
       1 => 'field__internal',
       2 => 'field__package',
       3 => 'field__preprocess',
+      4 => 'group_cpage_help',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -85,8 +86,8 @@ function catalyst_page_field_group_info() {
     'children' => array(
       0 => 'field__body',
       1 => 'field__layout',
-      2 => 'title',
-      3 => 'field__machine',
+      2 => 'field__machine',
+      3 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -162,6 +163,35 @@ function catalyst_page_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_cpage_help|node|cpage|form';
+  $field_group->group_name = 'group_cpage_help';
+  $field_group->entity_type = 'node';
+  $field_group->bundle = 'cpage';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_cpage_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '4',
+    'children' => array(
+      0 => 'field__admin_notes',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-cpage-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_cpage_help|node|cpage|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_cpage_js|node|cpage|form';
   $field_group->group_name = 'group_cpage_js';
   $field_group->entity_type = 'node';
@@ -223,6 +253,7 @@ function catalyst_page_field_group_info() {
   t('Advanced Settings');
   t('Blocks');
   t('Cascading Style Sheets');
+  t('Custom Help/Instructions');
   t('Javascript');
   t('Media/Files');
   t('Page content');

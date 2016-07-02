@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function catalyst_template_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -41,7 +41,7 @@ function catalyst_template_field_group_info() {
       ),
     ),
   );
-  $export['group_template_advanced|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_advanced|catalyst|template|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -69,7 +69,7 @@ function catalyst_template_field_group_info() {
       ),
     ),
   );
-  $export['group_template_blocks|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_blocks|catalyst|template|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -97,7 +97,7 @@ function catalyst_template_field_group_info() {
       ),
     ),
   );
-  $export['group_template_content|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_content|catalyst|template|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -126,7 +126,7 @@ function catalyst_template_field_group_info() {
       ),
     ),
   );
-  $export['group_template_css|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_css|catalyst|template|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -154,7 +154,7 @@ function catalyst_template_field_group_info() {
       ),
     ),
   );
-  $export['group_template_files|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_files|catalyst|template|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -182,7 +182,7 @@ function catalyst_template_field_group_info() {
       'formatter' => 'collapsed',
     ),
   );
-  $export['group_template_help|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_help|catalyst|template|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -211,7 +211,7 @@ function catalyst_template_field_group_info() {
       ),
     ),
   );
-  $export['group_template_js|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_js|catalyst|template|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -241,7 +241,18 @@ function catalyst_template_field_group_info() {
       ),
     ),
   );
-  $export['group_template_tabs|catalyst|template|form'] = $field_group;
+  $field_groups['group_template_tabs|catalyst|template|form'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Advanced');
+  t('Blocks');
+  t('Custom Help/Instructions');
+  t('Javascript');
+  t('Media/Files');
+  t('Stylesheets');
+  t('Tabs');
+  t('Template');
+
+  return $field_groups;
 }

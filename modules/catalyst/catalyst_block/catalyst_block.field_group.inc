@@ -8,7 +8,7 @@
  * Implements hook_field_group_info().
  */
 function catalyst_block_field_group_info() {
-  $export = array();
+  $field_groups = array();
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -23,9 +23,10 @@ function catalyst_block_field_group_info() {
     'label' => 'Advanced Settings',
     'weight' => '9',
     'children' => array(
-      0 => 'field__preprocess',
+      0 => 'field__internal',
       1 => 'field__package',
-      2 => 'field__internal',
+      2 => 'field__preprocess',
+      3 => 'group_block_help',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -38,7 +39,7 @@ function catalyst_block_field_group_info() {
       ),
     ),
   );
-  $export['group_block_advanced|catalyst|block|form'] = $field_group;
+  $field_groups['group_block_advanced|catalyst|block|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -68,7 +69,7 @@ function catalyst_block_field_group_info() {
       ),
     ),
   );
-  $export['group_block_content|catalyst|block|form'] = $field_group;
+  $field_groups['group_block_content|catalyst|block|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -97,7 +98,7 @@ function catalyst_block_field_group_info() {
       ),
     ),
   );
-  $export['group_block_css|catalyst|block|form'] = $field_group;
+  $field_groups['group_block_css|catalyst|block|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -126,7 +127,36 @@ function catalyst_block_field_group_info() {
       ),
     ),
   );
-  $export['group_block_files|catalyst|block|form'] = $field_group;
+  $field_groups['group_block_files|catalyst|block|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_block_help|catalyst|block|form';
+  $field_group->group_name = 'group_block_help';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'block';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_block_advanced';
+  $field_group->data = array(
+    'label' => 'Custom Help/Instructions',
+    'weight' => '5',
+    'children' => array(
+      0 => 'field__admin_notes',
+    ),
+    'format_type' => 'fieldset',
+    'format_settings' => array(
+      'label' => 'Custom Help/Instructions',
+      'instance_settings' => array(
+        'required_fields' => 1,
+        'id' => '',
+        'classes' => 'group-block-help field-group-fieldset',
+        'description' => '',
+      ),
+      'formatter' => 'collapsed',
+    ),
+  );
+  $field_groups['group_block_help|catalyst|block|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -155,7 +185,7 @@ function catalyst_block_field_group_info() {
       ),
     ),
   );
-  $export['group_block_js|catalyst|block|form'] = $field_group;
+  $field_groups['group_block_js|catalyst|block|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -183,7 +213,7 @@ function catalyst_block_field_group_info() {
       ),
     ),
   );
-  $export['group_block_placement|catalyst|block|form'] = $field_group;
+  $field_groups['group_block_placement|catalyst|block|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -213,7 +243,18 @@ function catalyst_block_field_group_info() {
       ),
     ),
   );
-  $export['group_block_tabs|catalyst|block|form'] = $field_group;
+  $field_groups['group_block_tabs|catalyst|block|form'] = $field_group;
 
-  return $export;
+  // Translatables
+  // Included for use with string extractors like potx.
+  t('Advanced Settings');
+  t('Block Placement');
+  t('Block basics');
+  t('Cascading Stylesheets');
+  t('Custom Help/Instructions');
+  t('Javascripts');
+  t('Media/Files');
+  t('Tabs');
+
+  return $field_groups;
 }

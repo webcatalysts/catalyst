@@ -28,6 +28,9 @@ function catalyst_media_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'template' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -63,6 +66,9 @@ function catalyst_media_strongarm() {
         'custom_settings' => FALSE,
       ),
       'token' => array(
+        'custom_settings' => FALSE,
+      ),
+      'template' => array(
         'custom_settings' => FALSE,
       ),
     ),
@@ -102,6 +108,9 @@ function catalyst_media_strongarm() {
       'token' => array(
         'custom_settings' => FALSE,
       ),
+      'template' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
@@ -122,7 +131,7 @@ function catalyst_media_strongarm() {
         'title' => array(
           'default' => array(
             'weight' => '0',
-            'visible' => TRUE,
+            'visible' => FALSE,
           ),
         ),
       ),

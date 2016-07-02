@@ -28,6 +28,9 @@ function catalyst_block_strongarm() {
       'diff_standard' => array(
         'custom_settings' => FALSE,
       ),
+      'template' => array(
+        'custom_settings' => FALSE,
+      ),
     ),
     'extra_fields' => array(
       'form' => array(
