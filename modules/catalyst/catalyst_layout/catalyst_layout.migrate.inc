@@ -19,7 +19,7 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
       'files_custom' => t('Custom files'),
       'files_shared' => t('Shared files'),
       'block_placements' => t('Block placements'),
-      'block_placement_block_ids' => t('Block placement block ids'),
+      'block_placement_ids' => t('Block placement block ids'),
       'blocks_reference' => t('Referenced blocks'),
       'html_head' => t('Custom HTML Head'),
       'page_title_pattern' => t('Page title pattern'),
@@ -45,7 +45,7 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
     $this->addFieldMapping('field__layout_regions:text', NULL);
     // Block placements
     $this->addFieldMapping('field__blockplacements__layout', 'block_placements');
-    $this->addReferenceFieldMapping('field__blockplacements__layout:block_id', 'block_placement_block_ids', 'block');
+    $this->addReferenceFieldMapping('field__blockplacements__layout:block_id', 'block_placement_ids', 'block');
     // File field mappings
     $this->addFileFieldMapping('field__files', 'files_custom');
     // Reference field mappings

@@ -95,28 +95,27 @@ function catalyst_block_catalyst_export_alter(&$export, $original, $group, $expo
   if (!isset($group['entity_type'])) {
     return;
   }
+  if (!isset($export->blocks_reference) && isset($wrapper->field__blocks_related)) {
+    $export->blocks_reference = catalyst_export_helper_filter_references($wrapper->field__blocks_related, 'block', $exports);
+  }
   $wrapper = entity_metadata_wrapper($group['entity_type'], $original);
   if (!isset($export->block_placements)) {
     $placement_fields = array(
-      'field__block_placements__block' => 'layout_id',
-      'field__block_placements__layout' => 'block_id',
-      'field__block_placements__layfield' => 'block_id',
+      'field__blockplacements__block' => 'layout_id',
+      'field__blockplacements__layout' => 'block_id',
+      'field__blockplacements__layfield' => 'block_id',
     );
     foreach ($placement_fields AS $field_name => $id_key) {
       if (isset($wrapper->{$field_name})) {
         $export->block_placements = array();
-        $export->block_placement_block_ids = array();
-        foreach ($wrapper->field__blockplacements__layfield->value() AS $placement) {
+        $export->block_placement_ids = array();
+        foreach ($wrapper->{$field_name}->value() AS $placement) {
           $export->block_placement_ids[] = $placement[$id_key];
           unset($placement[$id_key]);
           $export->block_placements[] = $placement;
         }
         break(1);
       }
-    }
-
-    if (!isset($export->blocks_reference) && isset($wrapper->field__blocks_related)) {
-      $export->blocks_reference = catalyst_export_helper_filter_references($wrapper->field__blocks_related, 'block', $exports);
     }
   }
 }

@@ -19,7 +19,7 @@ class CatalystPageMigration extends CatalystNodeMigration {
       'files_custom' => t('Custom Files'),
       'files_shared' => t('Shared Files'),
       'block_placements' => t('Block placements'),
-      'block_placement_block_ids' => t('Block placement block IDs'),
+      'block_placement_ids' => t('Block placement block IDs'),
       'blocks_reference' => t('Block references'),
       'html_head' => t('Custom HTML Head'),
       'preprocess_php' => t('Preprocess PHP'),
@@ -30,7 +30,7 @@ class CatalystPageMigration extends CatalystNodeMigration {
     parent::mapFields();
     // Block Placements
     $this->addFieldMapping('field__blockplacements__layfield', 'block_placements');
-    $this->addReferenceFieldMapping('field__blockplacements__layfield:block_id', 'block_placement_block_ids', 'block');
+    $this->addReferenceFieldMapping('field__blockplacements__layfield:block_id', 'block_placement_ids', 'block');
     // File field mapping
     $this->addFileFieldMapping('field__files', 'files_custom');
     // Reference field mappings

@@ -18,7 +18,7 @@ class CatalystBlockMigration extends CatalystEntityMigration {
       'files_shared' => t('Shared Files'),
       'preprocess_php' => t('Preprocess PHP'),
       'block_placements' => t('Block placements'),
-      'block_placement_layout_ids' => t('Block placement layout IDs'),
+      'block_placement_ids' => t('Block placement layout IDs'),
     ) + parent::sourceFields();
   }
   //*/
@@ -27,7 +27,7 @@ class CatalystBlockMigration extends CatalystEntityMigration {
     parent::mapFields();
     // Block placements
     $this->addFieldMapping('field__blockplacements__block', 'block_placements');
-    $this->addReferenceFieldMapping('field__blockplacements__block:layout_id', 'block_placement_layout_ids', 'layout');
+    $this->addReferenceFieldMapping('field__blockplacements__block:layout_id', 'block_placement_ids', 'layout');
     // Reference field mapping
     $this->addReferenceFieldMapping('field__media_stylesheets', 'stylesheets', 'stylesheet');
     $this->addReferenceFieldMapping('field__media_javascripts', 'javascripts', 'javascript');
