@@ -8,14 +8,9 @@
  * Provides base migration handling for media entities.
  */
 abstract class CatalystMediaMigration extends CatalystEntityMigration {
-  use CatalystEntityMachineNamePrepare;
-
-  protected $machineField = 'field__machine';
-  protected $machineKey = 'machine_name';
 
   protected function sourceFields() {
     return array(
-      'machine_name' => t('Machine name'),
       'media_type' => t('Media Type'),
       'media_path' => t('Media Path'),
     ) + parent::sourceFields();
@@ -23,7 +18,6 @@ abstract class CatalystMediaMigration extends CatalystEntityMigration {
 
   protected function mapFields() {
     parent::mapFields();
-    $this->addFieldMapping('field__machine', 'machine_name');
     $this->addFieldMapping('field__media_type', 'media_type');
     $this->addFieldMapping('field__media_path', 'media_path');
   }

@@ -137,7 +137,6 @@ function catalyst_media_catalyst_prepare_export($export, $group, $exports) {
     'title' => $wrapper->label(),
     'created' => $wrapper->created->value(),
     'changed' => $wrapper->changed->value(),
-    'machine_name' => $wrapper->field__machine->machine->value(),
     'media_type' => $wrapper->field__media_type->value(),
     'media_path' => $wrapper->field__media_path->value(),
   );

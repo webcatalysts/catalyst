@@ -71,9 +71,21 @@ abstract class CatalystMigration extends CatalystBaseMigration {
 }
 
 abstract class CatalystEntityMigration extends CatalystMigration {
+  use CatalystEntityMachineNamePrepare;
   use BetterMigrationDestinationEntity;
   protected $entityType = 'catalyst';
+  protected $machineField = 'field__machine';
+  protected $machineKey = 'machine';
   protected $sourceIDField = 'id';
+
+  protected function sourceFields() {
+    return array(
+      'machine' => t('Machine name'),
+    ) + parent::sourceFields();
+  }
+
+  protected function mapFields() {
+    $this->addFieldMapping('title', 'title');
 
   protected function mapFields() {
     parent::mapFields();
@@ -94,18 +106,25 @@ abstract class CatalystEntityMigration extends CatalystMigration {
 }
 
 abstract class CatalystNodeMigration extends CatalystMigration {
+  use CatalystEntityMachineNamePrepare;
   use BetterMigrateSourceJSON;
   use BetterMigrationDestinationNode;
   use BetterMigrateMapSQLSimpleInteger;
   use CatalystMigrationCommonMappings;
 
   protected $nodeType = 'cpape';
-  protected $sourceIDField = 'id';
+
+  protected $entityType = 'node';
+  protected $machineField = 'field__machine';
+  protected $machineKey = 'machine';
+  protected $sourceIDField = 'nid';
+
 
   protected function sourceFields() {
     return array(
       'status' => t('Status'),
       'path' => t('Path alias'),
+      'machine' => t('Machine name'),
     ) + parent::sourceFields();
   }
 

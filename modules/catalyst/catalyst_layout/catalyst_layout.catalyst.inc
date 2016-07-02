@@ -83,6 +83,7 @@ function catalyst_layout_catalyst_prepare_export($export, $group, $exports) {
   return (object) array(
     'id' => $wrapper->getIdentifier(),
     'title' => $wrapper->title->value(),
+    'machine' => $wrapper->field__machine->machine->value(),
     'created' => $wrapper->created->value(),
     'changed' => $wrapper->changed->value(),
     'regions' => $wrapper->field__layout_regions->value(),

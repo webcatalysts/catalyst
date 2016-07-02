@@ -13,7 +13,7 @@ class CatalystPackageMigration extends CatalystEntityMigration {
     return array(
       'content' => t('Description'),
       'internal' => t('Internal'),
-      'machine_name' => t('Machine name'),
+      'machine' => t('Machine name'),
     ) + parent::sourceFields();
   }
 

@@ -6,6 +6,8 @@
 
 class CatalystPageMigration extends CatalystNodeMigration {
   protected $nodeType = 'cpage';
+  protected $entityBundle = 'cpage';
+
   protected function sourceFields() {
     return array(
       'layout' => t('Layout'),

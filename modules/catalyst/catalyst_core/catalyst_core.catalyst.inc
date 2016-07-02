@@ -93,7 +93,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       'field__js' => 'js_custom',
       'field__js__layout' => 'js_custom',
       'field__js__page' => 'js_custom',
-      'field__machine' => 'machine_name',
+      'field__machine' => 'machine',
       'field__onselect' => 'onselect',
       'field__ondeselect' => 'ondeselect',
       'field__package' => 'package',
@@ -109,7 +109,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
             $export->{$to} = catalyst_export_helper_files(
               $wrapper->{$from}, $wrapper->getIdentifier());
             break;
-          case 'machine_name':
+          case 'machine':
             $export->{$to} = $wrapper->{$from}->machine->value();
             break;
           case 'content':
