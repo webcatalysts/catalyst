@@ -29,7 +29,7 @@ function catalyst_doctype_strongarm() {
         'custom_settings' => FALSE,
       ),
       'template' => array(
-        'custom_settings' => TRUE,
+        'custom_settings' => FALSE,
       ),
     ),
     'extra_fields' => array(

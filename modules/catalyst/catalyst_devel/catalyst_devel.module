@@ -8,7 +8,7 @@
 /**
  * Implements hook_menu().
  */
-function catalyst_admin_menu() {
+function catalyst_devel_menu() {
   $items = array();
   // Add a "catalyst fields only" report
   if (module_exists('field_ui')) {

@@ -10,6 +10,73 @@
 function catalyst_page_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'node-cpage-field__admin_notes'.
+  $field_instances['node-cpage-field__admin_notes'] = array(
+    'bundle' => 'cpage',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'hidden',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 17,
+      ),
+    ),
+    'entity_type' => 'node',
+    'field_name' => 'field__admin_notes',
+    'label' => 'Help/Instructions',
+    'required' => 0,
+    'settings' => array(
+      'better_formats' => array(
+        'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 'catalyst_doc',
+          'catalyst_html' => 0,
+          'catalyst_js' => 0,
+          'catalyst_php' => 0,
+          'plain_text' => 0,
+        ),
+        'allowed_formats_toggle' => 1,
+        'default_order_toggle' => 0,
+        'default_order_wrapper' => array(
+          'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
+            ),
+          ),
+        ),
+      ),
+      'text_processing' => 1,
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'text',
+      'settings' => array(
+        'rows' => 30,
+      ),
+      'type' => 'text_textarea',
+      'weight' => 4,
+    ),
+  );
+
   // Exported field_instance: 'node-cpage-field__blockplacements__layfield'.
   $field_instances['node-cpage-field__blockplacements__layfield'] = array(
     'bundle' => 'cpage',
@@ -311,7 +378,7 @@ function catalyst_page_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 
@@ -585,7 +652,7 @@ function catalyst_page_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 4,
+      'weight' => 5,
     ),
   );
 
@@ -646,6 +713,7 @@ function catalyst_page_field_default_field_instances() {
   t('Custom Head');
   t('Custom Javascript');
   t('Custom markup that will be added the <head> tag of the layout. Allows for metatags, external javascript/stylesheets, etc.');
+  t('Help/Instructions');
   t('Internal');
   t('Javascript Includes');
   t('Layout');

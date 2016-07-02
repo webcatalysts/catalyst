@@ -22,22 +22,23 @@ function catalyst_template_catalyst_plugin_info() {
       ),
       'crud' => array(
         'admin' => array(
-          'path' => 'admin/structure/template',
+          'path' => 'admin/catalyst/template',
           'menu_item' => array(
             'title' => 'Templates',
             'page callback' => 'catalyst_template_admin_list',
             'file path' => catalyst_get_path('template') . '/includes',
             'file' => 'admin.inc',
             'access callback' => 'eck__multiple_access_check',
+            'weight' => 20,
           ),
           'parent_menu_item' => array(
-            'path' => 'admin/structure/template/list',
+            'path' => 'admin/catalyst/template/list',
             'title' => 'List',
             'weight' => -10,
           ),
         ),
         'add' => array(
-          'path' => 'admin/structure/template/add/%/%',
+          'path' => 'admin/catalyst/template/add/%/%',
           'menu_item' => array(
             'page callback' => 'catalyst_template_admin_add',
             'page arguments' => array(4,5),
@@ -46,15 +47,15 @@ function catalyst_template_catalyst_plugin_info() {
           ),
         ),
         'edit' => array(
-          'path' => 'admin/structure/template/%eckentity',
+          'path' => 'admin/catalyst/template/%eckentity',
           'entity_id' => 3,
         ),
         'delete' => array(
-          'path' => 'admin/structure/template/%eckentity/delete',
+          'path' => 'admin/catalyst/template/%eckentity/delete',
           'entity_id' => 3,
         ),
         'view' => array(
-          'path' => 'admin/structure/template/%eckentity/view',
+          'path' => 'admin/catalyst/template/%eckentity/view',
           'entity_id' => 3,
           'menu_item' => FALSE,
         ),

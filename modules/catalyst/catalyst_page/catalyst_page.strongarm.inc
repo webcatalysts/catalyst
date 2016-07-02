@@ -45,7 +45,7 @@ function catalyst_page_strongarm() {
           'weight' => '1',
         ),
         'path' => array(
-          'weight' => '8',
+          'weight' => '1',
         ),
       ),
       'display' => array(),

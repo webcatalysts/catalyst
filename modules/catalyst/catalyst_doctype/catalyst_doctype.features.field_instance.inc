@@ -37,14 +37,34 @@ function catalyst_doctype_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
           'catalyst_doc' => 'catalyst_doc',
+          'catalyst_html' => 0,
+          'catalyst_js' => 0,
+          'catalyst_php' => 0,
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
             'catalyst_doc' => array(
               'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -56,7 +76,7 @@ function catalyst_doctype_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 28,
@@ -314,9 +334,8 @@ text/html|text/html',
     'display' => array(
       'default' => array(
         'label' => 'above',
-        'module' => 'machine',
         'settings' => array(),
-        'type' => 'machine_default',
+        'type' => 'hidden',
         'weight' => 16,
       ),
       'template' => array(

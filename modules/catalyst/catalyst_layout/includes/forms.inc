@@ -81,7 +81,7 @@ function catalyst_node_default_layout_form($form, &$form_state) {
       '#type' => 'select',
       '#options' => array('' => t('Use the site default')) + $layout_options,
       '#default_value' => $default,
-      '#field_suffix' => l(t('configure'), 'admin/structure/layout/settings/' . $type),
+      '#field_suffix' => l(t('configure'), 'admin/catalyst/layout/settings/' . $type),
     );
   }
   return $form;
