@@ -18,7 +18,9 @@ function catalyst_block_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystBlockMigration',
       ),
-      'migration sources' => array('layout', 'stylesheet', 'javascript', 'file'),
+      'migration sources' => array(
+        'package', 'layout', 'stylesheet', 'javascript', 'file',
+      ),
       'crud' => array(
         'admin' => array(
           'path' => 'admin/catalyst/block',

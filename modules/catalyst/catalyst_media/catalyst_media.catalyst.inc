@@ -20,7 +20,7 @@ function catalyst_media_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystMediaStylesheetMigration',
       ),
-      'migration sources' => array('file'),
+      'migration sources' => array('package', 'file'),
       'crud' => array(
         'admin' => array(
           'path' => 'admin/catalyst/stylesheet',
@@ -51,6 +51,7 @@ function catalyst_media_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystMediaJavascriptMigration',
       ),
+      'migration sources' => array('package'),
       'crud' => array(
         'admin' => array(
           'path' => 'admin/catalyst/javascript',
@@ -81,6 +82,7 @@ function catalyst_media_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystMediaFileMigration',
       ),
+      'migration sources' => array('package'),
       'crud' => array(
         'admin' => array(
           'path' => 'admin/catalyst/file',

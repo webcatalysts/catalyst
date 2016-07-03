@@ -18,7 +18,9 @@ function catalyst_page_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystPageMigration',
       ),
-      'migration sources' => array('block', 'layout', 'stylesheet', 'javascript', 'file'),
+      'migration sources' => array(
+        'package', 'block', 'layout', 'stylesheet', 'javascript', 'file'
+      ),
     ),
   );
 }

@@ -18,7 +18,9 @@ function catalyst_layout_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystLayoutMigration',
       ),
-      'migration sources' => array('block', 'doctype', 'stylesheet', 'javascript', 'file'),
+      'migration sources' => array(
+        'package', 'block', 'doctype', 'stylesheet','javascript', 'file',
+      ),
       'crud' => array(
         'admin' => array(
           'path' => 'admin/catalyst/layout',
