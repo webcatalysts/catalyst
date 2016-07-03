@@ -177,7 +177,8 @@ function catalyst_expand_export($export, $group, $groups) {
         }
         foreach ($field_value AS $file) {
           // Cast file as an object so it doesn't ever get merged
-          $dependencies['attached_files'][$group['type']][$wrapper->getIdentifier()][$file['fid']] = (object)$file;
+          $id = catalyst_export_entity_id($wrapper);
+          $dependencies['attached_files'][$group['type']][$id][$file['fid']] = (object)$file;
         }
       }
     }
@@ -224,7 +225,7 @@ function catalyst_export_helper_filter_references($values, $type, $exports) {
   if (is_a($values, 'EntityListWrapper')) {
     $return = array();
     foreach ($values AS $wrapper) {
-      $id = $wrapper->getIdentifier();
+      $id = catalyst_export_entity_id($wrapper);
       if (!catalyst_export_exists($id, $type, $exports)) {
         continue;
       }
@@ -232,7 +233,7 @@ function catalyst_export_helper_filter_references($values, $type, $exports) {
     }
   }
   else {
-    $return = $values->getIdentifier();
+    $return = catalyst_export_entity_id($values);
     if (!catalyst_export_exists($return, $type, $exports)) {
       $return = NULL;
     }
@@ -252,6 +253,13 @@ function catalyst_export_helper_files($values, $entity_id) {
     $return = $entity_id . '/' . $file['filename'];
   }
   return $return;
+}
+
+function catalyst_export_entity_id(EntityMetadataWrapper $wrapper) {
+  if (isset($wrapper->field__machine)) {
+    return $wrapper->field__machine->machine->value();
+  }
+  return $wrapper->getIdentifier();
 }
 
 /**

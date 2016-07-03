@@ -59,7 +59,7 @@ function catalyst_core_catalyst_export_dependencies($export, $group) {
   if (isset($group['entity_type']) && isset($group['bundle'])) {
     $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
     if (isset($wrapper->field__package) && $wrapper->field__package->value()) {
-      catalyst_add_export($dependencies, 'package', $wrapper->field__package->getIdentifier());
+      catalyst_add_export($dependencies, 'package', catalyst_export_entity_id($wrapper->field__package));
     }
   }
   return $dependencies;
@@ -69,7 +69,7 @@ function catalyst_core_catalyst_export_dependencies($export, $group) {
  * Implements hook_catalyst_export_prepare().
  */
 function catalyst_core_catalyst_prepare_export($export, $group, $exports) {
-  return (object)array('id' => $export->id);
+  return (object) array();
 }
 
 /**
@@ -81,7 +81,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
   if (isset($group['entity_type'])) {
     $wrapper = entity_metadata_wrapper($group['entity_type'], $original);
     if (! isset($export->id)) {
-      $export->id = $wrapper->getIdentifier();
+      $export->id = catalyst_export_entity_id($wrapper);
     }
     $setprops = array(
       'title' => 'title',
@@ -111,11 +111,10 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       if (!isset($export->{$to}) && isset($wrapper->{$from})) {
         switch ($to) {
           case 'package':
-            $export->{$to} = $wrapper->{$from}->getIdentifier();
+            $export->{$to} = catalyst_export_entity_id($wrapper->{$from});
             break;
           case 'files_custom':
-            $export->{$to} = catalyst_export_helper_files(
-              $wrapper->{$from}, $wrapper->getIdentifier());
+            $export->{$to} = catalyst_export_helper_files($wrapper->{$from}, $wrapper->getIdentifier());
             break;
           case 'machine':
             if (empty($wrapper->{$from}->value())) {

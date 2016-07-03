@@ -137,7 +137,7 @@ function catalyst_media_catalyst_export_dependencies($export, $group) {
     foreach ($fields AS $field => $_type) {
       if (isset($wrapper->{$field})) {
         foreach ($wrapper->{$field} AS $item) {
-          catalyst_add_export($dependencies, $_type, $item->getIdentifier());
+          catalyst_add_export($dependencies, $_type, catalyst_export_entity_id($item));
         }
       }
     }

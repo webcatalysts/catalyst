@@ -68,7 +68,7 @@ function catalyst_layout_catalyst_export_dependencies($export, $group) {
     if (!empty($export->field__layout)) {
       $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
       $layout = $wrapper->field__layout;
-      catalyst_add_export($dependencies, 'layout', $layout->getIdentifier());
+      catalyst_add_export($dependencies, 'layout', catalyst_export_entity_id($layout));
     }
     return $dependencies;
   }

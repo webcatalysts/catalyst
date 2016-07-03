@@ -65,7 +65,7 @@ function catalyst_doctype_catalyst_export_dependencies($export, $group) {
     if (isset($export->field__doctype)) {
       $wrapper = entity_metadata_wrapper($group['entity_type'], $export);
       $doctype = $wrapper->field__doctype;
-      catalyst_add_export($dependencies, 'doctype', $doctype->getIdentifier());
+      catalyst_add_export($dependencies, 'doctype', catalyst_export_entity_id($doctype));
     }
     return $dependencies;
   }

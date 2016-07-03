@@ -74,7 +74,7 @@ function catalyst_export_entity_candidates($bundle, $entity_type = 'catalyst') {
   foreach ($entities AS $entity) {
     $wrapper = entity_metadata_wrapper($entity_type, $entity);
     $candidates[] = array(
-      'id' => $wrapper->getIdentifier(),
+      'id' => catalyst_export_entity_id($wrapper),
       'label' => $wrapper->label(),
       'export' => $entity,
     );
