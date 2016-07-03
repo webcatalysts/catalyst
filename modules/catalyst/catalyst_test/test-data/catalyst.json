@@ -51,7 +51,7 @@
             "class_name": "CatalystPackageMigration",
             "group_name": "catalyst_test",
             "source_filename": "package.json",
-            "source_files_directory": "attached-files\/package",
+            "source_files_directory": "attached-files\/package"
         },
         "catalyst_test__doctype": {
             "class_name": "CatalystDoctypeMigration",
