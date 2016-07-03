@@ -12,6 +12,7 @@
             "source_filename": "layout.json",
             "source_files_directory": "attached-files\/layout",
             "source_migrations": {
+                "package": "catalyst_test__package",
                 "block": "catalyst_test__block",
                 "doctype": "catalyst_test__doctype",
                 "stylesheet": "catalyst_test__stylesheet",
@@ -25,6 +26,7 @@
             "source_filename": "cpage.json",
             "source_files_directory": "attached-files\/cpage",
             "source_migrations": {
+                "package": "catalyst_test__package",
                 "block": "catalyst_test__block",
                 "layout": "catalyst_test__layout",
                 "stylesheet": "catalyst_test__stylesheet",
@@ -38,6 +40,7 @@
             "source_filename": "block.json",
             "source_files_directory": "attached-files\/block",
             "source_migrations": {
+                "package": "catalyst_test__package",
                 "layout": "catalyst_test__layout",
                 "stylesheet": "catalyst_test__stylesheet",
                 "javascript": "catalyst_test__javascript",
@@ -48,13 +51,16 @@
             "class_name": "CatalystPackageMigration",
             "group_name": "catalyst_test",
             "source_filename": "package.json",
-            "source_files_directory": "attached-files\/package"
+            "source_files_directory": "attached-files\/package",
         },
         "catalyst_test__doctype": {
             "class_name": "CatalystDoctypeMigration",
             "group_name": "catalyst_test",
             "source_filename": "doctype.json",
-            "source_files_directory": "attached-files\/doctype"
+            "source_files_directory": "attached-files\/doctype",
+            "source_migrations": {
+                "package": "catalyst_test__package"
+            }
         },
         "catalyst_test__stylesheet": {
             "class_name": "CatalystMediaStylesheetMigration",
@@ -62,6 +68,7 @@
             "source_filename": "stylesheet.json",
             "source_files_directory": "attached-files\/stylesheet",
             "source_migrations": {
+                "package": "catalyst_test__package",
                 "file": "catalyst_test__file"
             }
         },
@@ -69,13 +76,19 @@
             "class_name": "CatalystMediaJavascriptMigration",
             "group_name": "catalyst_test",
             "source_filename": "javascript.json",
-            "source_files_directory": "attached-files\/javascript"
+            "source_files_directory": "attached-files\/javascript",
+            "source_migrations": {
+              "package": "catalyst_test__package"
+            }
         },
         "catalyst_test__file": {
             "class_name": "CatalystMediaFileMigration",
             "group_name": "catalyst_test",
             "source_filename": "file.json",
-            "source_files_directory": "attached-files\/file"
+            "source_files_directory": "attached-files\/file",
+            "source_migrations": {
+              "package": "catalyst_test__package"
+            }
         }
     }
 }
