@@ -43,11 +43,12 @@ function catalyst_get_export_groups() {
 /**
  * Build all export data.
  */
-function catalyst_build_export_data($exports, $groups, $name = 'Catalyst') {
+function catalyst_build_export_data($exports, $groups, $options = array()) {
+  $options += array('title' => 'Catalyst');
   $exports = catalyst_expand_exports($exports, $groups);
   return array(
     'exports' => catalyst_prepare_exports($exports, $groups),
-    'info' => catalyst_prepare_exports_info($name, $exports, $groups),
+    'info' => catalyst_prepare_exports_info($options, $exports, $groups),
   );
 }
 
@@ -105,10 +106,12 @@ function catalyst_prepare_exports($unprepared_exports, $groups) {
 /**
  * Build the export manifest which integrates with migrate.
  */
-function catalyst_prepare_exports_info($export_name, $exports, $groups) {
-  // Create a random hash for this export which will be used to limit
-  // collisions when importing (eg. in hook_migrate_api())
-  $hash = hash('adler32', $export_name . microtime());
+function catalyst_prepare_exports_info($options, $exports, $groups) {
+  if (empty($options['group'])) {
+    // Create a random hash for this export which will be used to limit
+    // collisions when importing (eg. in hook_migrate_api())
+    $options['group'] = hash('adler32', $options['title'] . microtime());
+  }
 
   $migrations = array();
   foreach (array_keys($exports) AS $type) {
@@ -116,19 +119,19 @@ function catalyst_prepare_exports_info($export_name, $exports, $groups) {
     $group = $groups[$type];
     $migration = $group['migration'];
     // Set the migration group
-    $migration['group_name'] = $hash;
+    $migration['group_name'] = $options['group'];
     $migration['source_filename'] = $group['export filename'];
     $migration['source_files_directory'] = 'attached-files/' . $type;
     foreach ($group['migration sources'] AS $source_type) {
       if (isset($exports[$source_type])) {
-        $migration['source_migrations'][$source_type] = $source_type . '_' . $hash;
+        $migration['source_migrations'][$source_type] = $source_type . '_' . $options['group'];
       }
     }
-    $migrations[$type . '_' . $hash] = $migration;
+    $migrations[$options['group'] . '__' . $type] = $migration;
   }
   return array(
     'api' => 2,
-    'groups' => array($hash => array('title' => $export_name)),
+    'groups' => array($options['group'] => array('title' => $options['title'])),
     'migrations' => $migrations,
   );
 }

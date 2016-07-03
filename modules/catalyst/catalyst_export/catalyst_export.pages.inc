@@ -220,9 +220,11 @@ function catalyst_export_form_process_exports($element, &$form_state, &$form) {
 
 function catalyst_export_form_preview_ajax($form, $form_state) {
   $groups = $form['#export_groups'];
-  $export_name = $form_state['values']['export_name'];
   $selections = catalyst_export_form_prepare_selections($form, $form_state);
-  $data = catalyst_build_export_data($selections, $groups, $export_name);
+  $data = catalyst_build_export_data($selections, $groups, array(
+    'title' => $form_state['values']['export_name'],
+    'group' => $form_state['values']['export_filename'],
+  ));
   dsm($data);
   return $form['preview'];
 }
@@ -254,7 +256,10 @@ function catalyst_export_form_submit($form, &$form_state) {
   $export_filename = $form_state['values']['export_filename'] . '.zip';
 
   $selections = catalyst_export_form_prepare_selections($form, $form_state);
-  $build = catalyst_build_export_data($selections, $groups, $export_name);
+  $build = catalyst_build_export_data($selections, $groups, array(
+    'title' => $export_name,
+    'group' => $export_filename,
+  ));
 
   // archive to be cleaned up at the end.
   $cleanup = &drupal_static('catalyst_export_cleanup');
