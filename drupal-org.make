@@ -158,12 +158,10 @@ projects[machine][download][branch] = "7.x-1.x"
 projects[machine][download][url] = "http://git.drupal.org/sandbox/lee20/2642174.git"
 projects[machine][download][revision] = "3f55b5b"
 
-projects[wysiwyg_ace][type] = "module"
-projects[wysiwyg_ace][subdir] = "sandbox"
-projects[wysiwyg_ace][download][type] = "git"
-projects[wysiwyg_ace][download][branch] = "7.x-1.x"
-projects[wysiwyg_ace][download][url] = "http://git.drupal.org/sandbox/lee20/2642232.git"
-projects[wysiwyg_ace][download][revision] = "4c9899b"
+projects[ace][type] = "module"
+projects[ace][subdir] = "contrib"
+projects[ace][download][type] = "git"
+projects[ace][download][branch] = "7.x-1.x"
 
 ; Libraries
 
