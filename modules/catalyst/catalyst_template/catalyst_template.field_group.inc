@@ -84,8 +84,8 @@ function catalyst_template_field_group_info() {
     'label' => 'Template',
     'weight' => '7',
     'children' => array(
-      0 => 'field__layout',
-      1 => 'field__body',
+      0 => 'field__body',
+      1 => 'field__layout',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
@@ -226,9 +226,9 @@ function catalyst_template_field_group_info() {
     'label' => 'Tabs',
     'weight' => '4',
     'children' => array(
-      0 => 'group_template_content',
-      1 => 'group_template_advanced',
-      2 => 'group_template_blocks',
+      0 => 'group_template_advanced',
+      1 => 'group_template_blocks',
+      2 => 'group_template_content',
       3 => 'group_template_css',
       4 => 'group_template_files',
       5 => 'group_template_js',

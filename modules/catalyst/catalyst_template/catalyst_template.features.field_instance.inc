@@ -636,6 +636,48 @@ function catalyst_template_field_default_field_instances() {
     ),
   );
 
+  // Exported field_instance: 'catalyst-template-field__machine'.
+  $field_instances['catalyst-template-field__machine'] = array(
+    'bundle' => 'template',
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'machine',
+        'settings' => array(),
+        'type' => 'machine_default',
+        'weight' => 23,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field__machine',
+    'label' => 'Machine name',
+    'required' => 1,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 1,
+      'module' => 'machine',
+      'settings' => array(
+        'editable' => 0,
+        'field_size' => 60,
+        'machine_field_label' => 'Machine name',
+        'machine_replace_pattern' => '[^a-z0-9_]+',
+        'machine_replace_with' => '_',
+      ),
+      'type' => 'machine_from_title_widget',
+      'weight' => 1,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-template-field__media_files'.
   $field_instances['catalyst-template-field__media_files'] = array(
     'bundle' => 'template',
@@ -962,7 +1004,7 @@ function catalyst_template_field_default_field_instances() {
         'machine_replace_with' => '_',
       ),
       'type' => 'machine_default_widget',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -1010,7 +1052,7 @@ function catalyst_template_field_default_field_instances() {
         'machine_replace_with' => '_',
       ),
       'type' => 'machine_default_widget',
-      'weight' => 1,
+      'weight' => 2,
     ),
   );
 
@@ -1029,6 +1071,7 @@ function catalyst_template_field_default_field_instances() {
   t('Help/Instructions');
   t('Internal');
   t('Layout');
+  t('Machine name');
   t('Package');
   t('Preprocessing');
   t('Shared Files');
