@@ -114,7 +114,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
             $export->{$to} = catalyst_export_entity_id($wrapper->{$from});
             break;
           case 'files_custom':
-            $export->{$to} = catalyst_export_helper_files($wrapper->{$from}, $wrapper->getIdentifier());
+            $export->{$to} = catalyst_export_helper_files($wrapper->{$from}, catalyst_export_entity_id($wrapper));
             break;
           case 'machine':
             if (empty($wrapper->{$from}->value())) {

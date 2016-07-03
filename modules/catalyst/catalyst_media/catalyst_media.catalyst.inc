@@ -164,7 +164,7 @@ function catalyst_media_catalyst_prepare_export($export, $group, $exports) {
       $export->scope = $wrapper->field__media_javascript_scope->value();
       break;
     case 'file':
-      $export->file_path = catalyst_export_helper_files($wrapper->field__media_file, $wrapper->getIdentifier());
+      $export->file_path = catalyst_export_helper_files($wrapper->field__media_file, catalyst_export_entity_id($wrapper));
       break;
   }
   return $export;

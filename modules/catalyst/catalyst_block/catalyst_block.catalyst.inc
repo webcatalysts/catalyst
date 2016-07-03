@@ -107,7 +107,7 @@ function catalyst_block_catalyst_export_alter(&$export, $original, $group, $expo
         $export->block_placements = array();
         $export->block_placement_ids = array();
         foreach ($wrapper->{$field_name}->value() AS $placement) {
-          $item = entity_load('catalyst', $placement[$id_key]);
+          $item = entity_load_single('catalyst', $placement[$id_key]);
           $item_wrapper = entity_metadata_wrapper('catalyst', $item);
           $export->block_placement_ids[] = catalyst_export_entity_id($item_wrapper);
           unset($placement[$id_key]);
