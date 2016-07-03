@@ -151,7 +151,8 @@ function catalyst_layout_field_default_field_instances() {
       'settings' => array(
         'fields' => array(),
         'type_settings' => array(
-          'allow_existing' => 0,
+          'allow_clone' => 0,
+          'allow_existing' => 1,
           'allow_new' => 1,
           'delete_references' => 0,
           'label_plural' => 'blocks',
