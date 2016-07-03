@@ -124,7 +124,7 @@ function catalyst_prepare_exports_info($options, $exports, $groups) {
     $migration['source_files_directory'] = 'attached-files/' . $type;
     foreach ($group['migration sources'] AS $source_type) {
       if (isset($exports[$source_type])) {
-        $migration['source_migrations'][$source_type] = $source_type . '_' . $options['group'];
+        $migration['source_migrations'][$source_type] = $options['group'] . '__' . $source_type;
       }
     }
     $migrations[$options['group'] . '__' . $type] = $migration;

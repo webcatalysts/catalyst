@@ -1,79 +1,79 @@
 {
     "api": 2,
     "groups": {
-        "catalyst_test.zip": {
+        "catalyst_test": {
             "title": "Catatlyst Test"
         }
     },
     "migrations": {
-        "catalyst_test.zip__layout": {
+        "catalyst_test__layout": {
             "class_name": "CatalystLayoutMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "layout.json",
             "source_files_directory": "attached-files\/layout",
             "source_migrations": {
-                "block": "block_catalyst_test.zip",
-                "doctype": "doctype_catalyst_test.zip",
-                "stylesheet": "stylesheet_catalyst_test.zip",
-                "javascript": "javascript_catalyst_test.zip",
-                "file": "file_catalyst_test.zip"
+                "block": "catalyst_test__block",
+                "doctype": "catalyst_test__doctype",
+                "stylesheet": "catalyst_test__stylesheet",
+                "javascript": "catalyst_test__javascript",
+                "file": "catalyst_test__file"
             }
         },
-        "catalyst_test.zip__cpage": {
+        "catalyst_test__cpage": {
             "class_name": "CatalystPageMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "cpage.json",
             "source_files_directory": "attached-files\/cpage",
             "source_migrations": {
-                "block": "block_catalyst_test.zip",
-                "layout": "layout_catalyst_test.zip",
-                "stylesheet": "stylesheet_catalyst_test.zip",
-                "javascript": "javascript_catalyst_test.zip",
-                "file": "file_catalyst_test.zip"
+                "block": "catalyst_test__block",
+                "layout": "catalyst_test__layout",
+                "stylesheet": "catalyst_test__stylesheet",
+                "javascript": "catalyst_test__javascript",
+                "file": "catalyst_test__file"
             }
         },
-        "catalyst_test.zip__block": {
+        "catalyst_test__block": {
             "class_name": "CatalystBlockMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "block.json",
             "source_files_directory": "attached-files\/block",
             "source_migrations": {
-                "layout": "layout_catalyst_test.zip",
-                "stylesheet": "stylesheet_catalyst_test.zip",
-                "javascript": "javascript_catalyst_test.zip",
-                "file": "file_catalyst_test.zip"
+                "layout": "catalyst_test__layout",
+                "stylesheet": "catalyst_test__stylesheet",
+                "javascript": "catalyst_test__javascript",
+                "file": "catalyst_test__file"
             }
         },
-        "catalyst_test.zip__package": {
+        "catalyst_test__package": {
             "class_name": "CatalystPackageMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "package.json",
             "source_files_directory": "attached-files\/package"
         },
-        "catalyst_test.zip__doctype": {
+        "catalyst_test__doctype": {
             "class_name": "CatalystDoctypeMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "doctype.json",
             "source_files_directory": "attached-files\/doctype"
         },
-        "catalyst_test.zip__stylesheet": {
+        "catalyst_test__stylesheet": {
             "class_name": "CatalystMediaStylesheetMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "stylesheet.json",
             "source_files_directory": "attached-files\/stylesheet",
             "source_migrations": {
-                "file": "file_catalyst_test.zip"
+                "file": "catalyst_test__file"
             }
         },
-        "catalyst_test.zip__javascript": {
+        "catalyst_test__javascript": {
             "class_name": "CatalystMediaJavascriptMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "javascript.json",
             "source_files_directory": "attached-files\/javascript"
         },
-        "catalyst_test.zip__file": {
+        "catalyst_test__file": {
             "class_name": "CatalystMediaFileMigration",
-            "group_name": "catalyst_test.zip",
+            "group_name": "catalyst_test",
             "source_filename": "file.json",
             "source_files_directory": "attached-files\/file"
         }

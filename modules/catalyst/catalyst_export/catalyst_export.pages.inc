@@ -258,7 +258,7 @@ function catalyst_export_form_submit($form, &$form_state) {
   $selections = catalyst_export_form_prepare_selections($form, $form_state);
   $build = catalyst_build_export_data($selections, $groups, array(
     'title' => $export_name,
-    'group' => $export_filename,
+    'group' => $form_state['values']['export_filename'],
   ));
 
   // archive to be cleaned up at the end.
