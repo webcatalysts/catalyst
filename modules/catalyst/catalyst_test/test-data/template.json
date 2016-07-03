@@ -1,0 +1,31 @@
+[
+    {
+        "entity_type": {
+            "machine": "node"
+        },
+        "bundle": {
+            "machine": "catalyst_test"
+        },
+        "block_placements": [],
+        "block_placement_ids": [],
+        "id": "node__catalyst_test",
+        "title": "Catalyst Test (Node)",
+        "created": "1467524592",
+        "changed": "1467524625",
+        "content": "{{ content }}",
+        "css_custom": null,
+        "debug": false,
+        "html_head": null,
+        "internal": false,
+        "files_custom": [],
+        "js_custom": null,
+        "machine": "node__catalyst_test",
+        "package": "catalyst_test",
+        "preprocess_php": null,
+        "admin_notes": null,
+        "layout": "catalyst_test_default_html",
+        "stylesheets": [],
+        "javascripts": [],
+        "files_shared": []
+    }
+]

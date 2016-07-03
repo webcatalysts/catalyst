@@ -1,75 +1,87 @@
 {
     "api": 2,
     "groups": {
-        "b9760931": {
+        "b934092e": {
             "title": "Catalyst Test"
         }
     },
     "migrations": {
-        "layout_b9760931": {
-            "class_name": "CatalystLayoutMigration",
-            "group_name": "b9760931",
-            "source_filename": "layout.json",
-            "source_files_directory": "attached-files\/layout",
-            "source_migrations": {
-                "block": "block_b9760931",
-                "doctype": "doctype_b9760931",
-                "stylesheet": "stylesheet_b9760931",
-                "javascript": "javascript_b9760931",
-                "file": "file_b9760931"
-            }
-        },
-        "cpage_b9760931": {
+        "cpage_b934092e": {
             "class_name": "CatalystPageMigration",
-            "group_name": "b9760931",
+            "group_name": "b934092e",
             "source_filename": "cpage.json",
             "source_files_directory": "attached-files\/cpage",
             "source_migrations": {
-                "block": "block_b9760931",
-                "layout": "layout_b9760931",
-                "stylesheet": "stylesheet_b9760931",
-                "javascript": "javascript_b9760931",
-                "file": "file_b9760931"
+                "block": "block_b934092e",
+                "layout": "layout_b934092e",
+                "stylesheet": "stylesheet_b934092e",
+                "javascript": "javascript_b934092e",
+                "file": "file_b934092e"
             }
         },
-        "block_b9760931": {
+        "block_b934092e": {
             "class_name": "CatalystBlockMigration",
-            "group_name": "b9760931",
+            "group_name": "b934092e",
             "source_filename": "block.json",
             "source_files_directory": "attached-files\/block",
             "source_migrations": {
-                "layout": "layout_b9760931",
-                "stylesheet": "stylesheet_b9760931",
-                "javascript": "javascript_b9760931",
-                "file": "file_b9760931"
+                "layout": "layout_b934092e",
+                "stylesheet": "stylesheet_b934092e",
+                "javascript": "javascript_b934092e",
+                "file": "file_b934092e"
             }
         },
-        "doctype_b9760931": {
-            "class_name": "CatalystDoctypeMigration",
-            "group_name": "b9760931",
-            "source_filename": "doctype.json",
-            "source_files_directory": "attached-files\/doctype"
+        "template_b934092e": {
+            "class_name": "CatalystTemplateMigration",
+            "group_name": "b934092e",
+            "source_filename": "template.json",
+            "source_files_directory": "attached-files\/template"
         },
-        "stylesheet_b9760931": {
+        "package_b934092e": {
+            "class_name": "CatalystPackageMigration",
+            "group_name": "b934092e",
+            "source_filename": "package.json",
+            "source_files_directory": "attached-files\/package"
+        },
+        "layout_b934092e": {
+            "class_name": "CatalystLayoutMigration",
+            "group_name": "b934092e",
+            "source_filename": "layout.json",
+            "source_files_directory": "attached-files\/layout",
+            "source_migrations": {
+                "block": "block_b934092e",
+                "doctype": "doctype_b934092e",
+                "stylesheet": "stylesheet_b934092e",
+                "javascript": "javascript_b934092e",
+                "file": "file_b934092e"
+            }
+        },
+        "stylesheet_b934092e": {
             "class_name": "CatalystMediaStylesheetMigration",
-            "group_name": "b9760931",
+            "group_name": "b934092e",
             "source_filename": "stylesheet.json",
             "source_files_directory": "attached-files\/stylesheet",
             "source_migrations": {
-                "file": "file_b9760931"
+                "file": "file_b934092e"
             }
         },
-        "javascript_b9760931": {
+        "javascript_b934092e": {
             "class_name": "CatalystMediaJavascriptMigration",
-            "group_name": "b9760931",
+            "group_name": "b934092e",
             "source_filename": "javascript.json",
             "source_files_directory": "attached-files\/javascript"
         },
-        "file_b9760931": {
+        "file_b934092e": {
             "class_name": "CatalystMediaFileMigration",
-            "group_name": "b9760931",
+            "group_name": "b934092e",
             "source_filename": "file.json",
             "source_files_directory": "attached-files\/file"
+        },
+        "doctype_b934092e": {
+            "class_name": "CatalystDoctypeMigration",
+            "group_name": "b934092e",
+            "source_filename": "doctype.json",
+            "source_files_directory": "attached-files\/doctype"
         }
     }
 }

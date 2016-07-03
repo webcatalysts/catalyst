@@ -25,6 +25,7 @@ function catalyst_test_enable() {
  * Implements hook_disable().
  */
 function catalyst_test_disable() {
+return;
   catalyst_include('import');
   catalyst_rollback_import(catalyst_get_path('test') . '/test-data');
 }

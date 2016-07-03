@@ -58,4 +58,5 @@ features[wysiwyg][] = catalyst_html
 features[wysiwyg][] = catalyst_js
 features[wysiwyg][] = catalyst_php
 files[] = catalyst_core.migrate.inc
+files[] = includes/migrate.inc
 project path = profiles/catalyst/modules/catalyst

@@ -16,7 +16,7 @@ function catalyst_core_catalyst_plugin_info() {
       'bundle' => 'package',
       'exportables' => TRUE,
       'migration' => array(
-        'class name' => 'CatalystPackageMigration',
+        'class_name' => 'CatalystPackageMigration',
       ),
       'crud' => array(
         'admin' => array(

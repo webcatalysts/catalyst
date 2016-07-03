@@ -48,11 +48,11 @@ abstract class CatalystBaseMigration extends BetterMigration {
 abstract class CatalystMigration extends CatalystBaseMigration {
   use CatalystEntityMachineNamePrepare;
   use BetterMigrateSourceJSON;
-  use BetterMigrateMapSQLSimpleInteger;
+  use BetterMigrateMapSQLSimpleString;
 
   protected $machineField = 'field__machine';
   protected $machineKey = 'machine';
-  protected $sourceIDField = 'id';
+  protected $sourceIDField = 'machine';
 
   public function prepareRow($row) {
     parent::prepareRow($row);
@@ -75,6 +75,8 @@ abstract class CatalystMigration extends CatalystBaseMigration {
     $this->addFieldMapping('language')->defaultValue(LANGUAGE_NONE);
     $this->addUnmigratedDestinations(array('created', 'changed'));
   }
+
+
 }
 
 abstract class CatalystEntityMigration extends CatalystMigration {
