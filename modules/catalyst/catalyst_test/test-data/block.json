@@ -20,7 +20,7 @@
         "css_custom": ".block-custom-css-test {\n  border: 2px solid red;\n  padding: 4px;\n  margin: 4px;\n}",
         "internal": false,
         "files_custom": [
-            "50\/block-custom-test.png"
+            "block_region_test\/block-custom-test.png"
         ],
         "js_custom": "var block_custom_js_var = 'defined';",
         "machine": "block_region_test",
@@ -145,7 +145,7 @@
         "css_custom": ".block-embed-custom-css-test {\n  border: 2px solid orange;\n  padding: 4px;\n  margin: 4px;\n}",
         "internal": false,
         "files_custom": [
-            "39\/block-embed-custom-test.png"
+            "block_embed_test\/block-embed-custom-test.png"
         ],
         "js_custom": "var block_embed_custom_js_var = 'defined';",
         "machine": "block_embed_test",

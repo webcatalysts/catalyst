@@ -41,7 +41,7 @@
         "html_head": "<meta id=\"layout-custom-head-test\" value=\"success\" \/>",
         "internal": false,
         "files_custom": [
-            "15\/layout-custom-test.png"
+            "catalyst_test_1\/layout-custom-test.png"
         ],
         "js_custom": "var layout_custom_js_var = 'defined';",
         "machine": "catalyst_test_1",

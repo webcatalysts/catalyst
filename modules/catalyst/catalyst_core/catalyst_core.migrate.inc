@@ -51,8 +51,8 @@ abstract class CatalystMigration extends CatalystBaseMigration {
   use BetterMigrateMapSQLSimpleString;
 
   protected $machineField = 'field__machine';
-  protected $machineKey = 'machine';
-  protected $sourceIDField = 'machine';
+  protected $machineKey = 'id';
+  protected $sourceIDField = 'id';
 
   public function prepareRow($row) {
     parent::prepareRow($row);
@@ -104,7 +104,7 @@ abstract class CatalystEntityMigration extends CatalystMigration {
 abstract class CatalystNodeMigration extends CatalystMigration {
   use BetterMigrateSourceJSON;
   use BetterMigrationDestinationNode;
-  use BetterMigrateMapSQLSimpleInteger;
+  use BetterMigrateMapSQLSimpleString;
 
   protected $entityType = 'node';
 

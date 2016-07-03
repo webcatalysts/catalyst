@@ -70,6 +70,10 @@ function catalyst_media_filepath($machine_name, $format = 'path') {
       case 'remote':
         return url($file->field__media_path->value());
       case 'custom':
+        if (!isset($file->field__media_file) || !$file->field__media_file->value()) {
+          throw new Exception(t('Missing catalyst file: @machine_name', array('@machine_name' => $machine_name)));
+        }
+
         if ($format == 'url') {
           return $file->field__media_file->file->url->value();
         }

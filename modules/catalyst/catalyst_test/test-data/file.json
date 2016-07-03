@@ -2,7 +2,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "file_path": "19\/page-shared-test.png",
+        "file_path": "page_shared_test\/page-shared-test.png",
         "id": "page_shared_test",
         "title": "Page Shared Test",
         "created": "1467523458",
@@ -41,7 +41,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "file_path": "5\/layout-shared-test.png",
+        "file_path": "layout_shared_test\/layout-shared-test.png",
         "id": "layout_shared_test",
         "title": "Layout Shared Test",
         "created": "1467523457",
@@ -80,7 +80,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "file_path": "29\/block-embed-shared-test.png",
+        "file_path": "block_embed_shared_test\/block-embed-shared-test.png",
         "id": "block_embed_shared_test",
         "title": "Block Embed Shared Test",
         "created": "1467523458",
@@ -119,7 +119,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "file_path": "40\/block-shared-test.png",
+        "file_path": "block_shared_test\/block-shared-test.png",
         "id": "block_shared_test",
         "title": "Block Shared Test",
         "created": "1467523458",
