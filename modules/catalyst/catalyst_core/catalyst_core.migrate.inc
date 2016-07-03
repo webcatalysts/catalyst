@@ -66,6 +66,9 @@ abstract class CatalystMigration extends CatalystBaseMigration {
       'id' => t('ID'),
       'title' => t('Title'),
       'machine' => t('Machine name'),
+      'notes' => t('Notes'),
+      'internal' => t('Internal (Realm)'),
+      'package' => t('Package'),
     );
   }
 
@@ -74,9 +77,10 @@ abstract class CatalystMigration extends CatalystBaseMigration {
     $this->addFieldMapping('field__machine', 'machine');
     $this->addFieldMapping('language')->defaultValue(LANGUAGE_NONE);
     $this->addUnmigratedDestinations(array('created', 'changed'));
+    $this->addFormattedFieldMapping('field__admin_notes', 'notes', 'catalyst_markdown');
+    $this->addFieldMapping('field__internal', 'internal');
+    $this->addReferenceFieldMapping('field__package', 'package', 'package');
   }
-
-
 }
 
 abstract class CatalystEntityMigration extends CatalystMigration {
