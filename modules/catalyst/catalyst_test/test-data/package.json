@@ -2,8 +2,6 @@
     {
         "id": "catalyst_test",
         "title": "Catalyst Test",
-        "created": "1467549212",
-        "changed": "1467549212",
         "internal": false,
         "machine": "catalyst_test",
         "admin_notes": null

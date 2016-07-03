@@ -2,7 +2,7 @@
     "api": 2,
     "groups": {
         "catalyst_test": {
-            "title": "Catatlyst Test"
+            "title": "Catalyst Test"
         }
     },
     "migrations": {

@@ -85,8 +85,8 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
     }
     $setprops = array(
       'title' => 'title',
-      'created' => 'created',
-      'changed' => 'changed',
+      //'created' => 'created',
+      //'changed' => 'changed',
       'status' => 'status',
       'field__body' => 'content',
       'field__css' => 'css_custom',

@@ -10,8 +10,6 @@
         "block_placement_ids": [],
         "id": "node__catalyst_test",
         "title": "Catalyst Test (Node)",
-        "created": "1467524592",
-        "changed": "1467524625",
         "content": "{{ content }}",
         "css_custom": null,
         "debug": false,
