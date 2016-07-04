@@ -260,6 +260,14 @@ function catalyst_export_helper_files($values, $entity_id) {
 
 function catalyst_export_entity_id(EntityMetadataWrapper $wrapper) {
   if (isset($wrapper->field__machine)) {
+    if (!$wrapper->field__machine->value()) {
+      throw new Exception(t('Missing machine name for @type:@bundle:@id labeled @label', array(
+        '@type' => $wrapper->type(),
+        '@bundle' => $wrapper->getBundle(),
+        '@id' => $wrapper->getIdentifier(),
+        '@label' => $wrapper->label(),
+      )));
+    }
     return $wrapper->field__machine->machine->value();
   }
   return $wrapper->getIdentifier();
