@@ -107,6 +107,10 @@ projects[select_or_other][version] = "2.22"
 projects[select_or_other][type] = "module"
 projects[select_or_other][subdir] = "contrib"
 
+projects[serialized_field][version] = "1.0-beta1"
+projects[serialized_field][type] = module
+projects[serialized_field][subdir] = contrib
+
 projects[shortcutperrole][version] = "1.2"
 projects[shortcutperrole][type] = "module"
 projects[shortcutperrole][subdir] = "contrib"
