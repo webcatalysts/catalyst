@@ -177,6 +177,89 @@ function catalyst_core_form_filter_admin_overview_alter(&$form, &$form_state) {
 }
 
 /**
+ * Implements hook_form_alter().
+ */
+function catalyst_core_form_alter(&$form, &$form_state, $form_id) {
+  if (isset($form['field__data'])) {
+    $form['#submit'][] = 'catalyst_core_data_submit';
+  }
+  if (isset($form['field__path'])) {
+    $form['field__path']['und']['#weight'] = -10;
+
+    $form['field__path']['menu'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Menu options'),
+      '#collapsible' => TRUE,
+      '#collapsed' => TRUE,
+      '#tree' => FALSE,
+    );
+    $form['field__path']['menu']['type'] = array(
+      '#name' => 'menu[type]',
+      '#title' => t('Type'),
+      '#type' => 'radios',
+      '#options' => array(
+        'none' => t('No menu entry'),
+        'normal' => t('Normal menu entry'),
+        'tab' => t('Menu tab'),
+        'default tab' => t('Default menu tab'),
+      ),
+      '#default_value' => 'none',
+    );
+    $form['field__path']['menu']['title'] = array(
+      '#title' => t('Title'),
+      '#description' => t('If set to normal or tab, enter the text to use for the menu item.'),
+      '#type' => 'textfield',
+      '#default_value' => NULL,
+    );
+    $form['field__path']['menu']['description'] = array(
+      '#title' => t('Description'),
+      '#description' => t("If set to normal or tab, enter the text to use for the menu item's description."),
+      '#type' => 'textfield',
+    );
+    $form['field__path']['menu']['name'] = array(
+      '#title' => t('Menu'),
+      '#type' => 'select',
+      '#options' => menu_get_menus(),
+      '#default_value' => NULL,
+      '#description' => t('Insert item into an available menu.'),
+      '#dependency' => array('radios:menu[type]' => array('normal', 'default tab')),
+    );
+    $form['field__path']['menu']['weight'] = array(
+      '#title' => t('Weight'),
+      '#description' => t('The lower the weight the higher/further left it will appear.'),
+      '#type' => 'textfield',
+      '#default_value' => 0,
+    );
+    $form['field__path']['menu']['parent'] = array(
+      '#type' => 'fieldset',
+      '#title' => t('Default tab options'),
+    );
+    $form['field__path']['menu']['parent']['type'] = array(
+      '#type' => 'radios',
+      '#title' => t('Parent menu item'),
+      '#options' => array(
+        'none' => t('Already exists'),
+        'normal' => t('Normal menu item'),
+        'tab' => t('Menu tab'),
+      ),
+      '#default_value' => 'none',
+    );
+    $form['field__path']['menu']['parent']['title'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Title'),
+      '#description' => t('If creating a parent menu item, enter the title of the item.'),
+      '#default_value' => NULL,
+    );
+    $form['field__path']['menu']['parent']['description'] = array(
+      '#type' => 'textfield',
+      '#title' => t('Description'),
+      '#description' => t('If creating a parent menu item, enter the description of the item.'),
+      '#default_value' => NULL,
+    );
+  }
+}
+
+/**
  * Shortcut function to include common catalyst files.
  */
 function catalyst_include($name, $module = 'core') {

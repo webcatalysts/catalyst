@@ -24,6 +24,29 @@ function catalyst_page_views_api($module = NULL, $api = NULL) {
 }
 
 /**
+ * Implements hook_eck_bundle_info().
+ */
+function catalyst_page_eck_bundle_info() {
+  $items = array(
+    'catalyst_page' => array(
+      'machine_name' => 'catalyst_page',
+      'entity_type' => 'catalyst',
+      'name' => 'page',
+      'label' => 'Page',
+      'config' => array(
+        'managed_properties' => array(
+          'title' => 'title',
+          'created' => 0,
+          'changed' => 0,
+          'language' => 0,
+        ),
+      ),
+    ),
+  );
+  return $items;
+}
+
+/**
  * Implements hook_node_info().
  */
 function catalyst_page_node_info() {
