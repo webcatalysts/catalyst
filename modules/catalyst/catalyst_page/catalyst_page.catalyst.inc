@@ -11,15 +11,40 @@
 function catalyst_page_catalyst_plugin_info() {
   return array(
     'cpage' => array(
-      'title' => t('Pages'),
+      'title' => t('Pages (nodes)'),
       'entity_type' => 'node',
       'bundle' => 'cpage',
       'exportables' => TRUE,
       'migration' => array(
-        'class_name' => 'CatalystPageMigration',
+        'class_name' => 'CatalystNodePageMigration',
       ),
       'migration sources' => array(
         'package', 'block', 'layout', 'stylesheet', 'javascript', 'file'
+      ),
+    ),
+    'page' => array(
+      'title' =>  t('Pages'),
+      'entity_type' => 'catalyst',
+      'bundle' => 'page',
+      'exportables' => TRUE,
+      'migration' => array(
+        'class_name' => 'CatalystEntityPageMigration',
+      ),
+      'migration sources' => array(
+        'package', 'block', 'layout', 'stylesheet', 'javascript', 'file'
+      ),
+      'crud' => array(
+        'admin' => array('path' => 'admin/catalyst/page'),
+        'add' => array('path' => 'admin/catalyst/page/add'),
+        'edit' => array(
+          'path' => 'admin/catalyst/page/%eckentity',
+          'entity_id' => 3,
+        ),
+        'delete' => array(
+          'path' => 'admin/catalyst/page/%eckentity/delete',
+          'entity_id' => 3,
+        ),
+        'view' => NULL,
       ),
     ),
   );

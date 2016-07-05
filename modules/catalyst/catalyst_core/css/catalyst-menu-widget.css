@@ -1,0 +1,8 @@
+.catalyst-menu-widget-column {
+  float: left;
+  padding-right: 10px;
+}
+.catalyst-menu-widget-column .ajax-progress-throbber .message { display: none; }
+.catalyst-menu-widget-column-menu-type {  min-width: 160px; }
+.catalyst-menu-widget-column-menu-options {  min-width: 400px; }
+.catalyst-menu-widget-column-menu-parent {  min-width: 400px; }
