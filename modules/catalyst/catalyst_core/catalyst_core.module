@@ -134,7 +134,9 @@ function catalyst_core_menu_alter(&$menu_items) {
   catalyst_eck__bundle_menu_alter($menu_items);
   catalyst_eck__entity_type_menu_alter($menu_items);
   catalyst_include('menu_widget');
-  catalyst_menu_widget_menu_alter($menu_items);
+  if (variable_get('install_task', 'done') != 'install_system_module') {
+    catalyst_menu_widget_menu_alter($menu_items);
+  }
 }
 
 /**
