@@ -336,7 +336,8 @@ function catalyst_blocks_by_region($region) {
  * @param $variables array
  *   An array of variables that the $code is able to modify.
  */
-function catalyst_eval($code, &$variables) {
+function catalyst_eval($code, &$variables, $exportvars = array()) {
+  extract($exportvars);
   ob_start();
   print eval($code);
   $output = ob_get_contents();

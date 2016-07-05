@@ -383,10 +383,41 @@ function catalyst_menu_access_callback($entity_type, $entity_id) {
   $wrapper = entity_metadata_wrapper($entity_type, $entity);
   $menu = entity_valval($wrapper->field__menu);
   if ($accessphp = entity_valval($wrapper->field__access)) {
-    $variables = catalyst_menu_parse_path($menu['path']);
-    return (boolean) catalyst_eval($accessphp, $variables);
+    $variables = array();
+    $exportvars = catalyst_menu_parse_path($menu['path']);
+    return (boolean) catalyst_eval($accessphp, $variables, $exportvars);
   }
   return FALSE;
+}
+
+function catalyst_menu_title_callback($entity_type, $entity_id) {
+  $entity = entity_load_single($entity_type, $entity_id);
+  $wrapper = entity_metadata_wrapper($entity_type, $entity);
+  $menu_options = entity_valval($wrapper->field__menu);
+  $variables = catalyst_menu_parse_path($menu_options['path']);
+  $key = implode(':', array(
+    $wrapper->type(),
+    $wrapper->getBundle(),
+    $wrapper->getIdentifier(),
+    'menu_title',
+  ));
+  module_load_include('inc', 'catalyst', 'includes/twig');
+  return catalyst_twig_render($menu_options['menu']['title'], $variables, $key);
+}
+
+function catalyst_menu_parent_title_callback($entity_type, $entity_id) {
+  $entity = entity_load_single($entity_type, $entity_id);
+  $wrapper = entity_metadata_wrapper($entity_type, $entity);
+  $menu_options = entity_valval($wrapper->field__menu);
+  $variables = catalyst_menu_parse_path($menu_options['path']);
+  $key = implode(':', array(
+    $wrapper->type(),
+    $wrapper->getBundle(),
+    $wrapper->getIdentifier(),
+    'parent_menu_title',
+  ));
+  module_load_include('inc', 'catalyst', 'includes/twig');
+  return catalyst_twig_render($menu_options['menu']['parent']['title'], $variables, $key);
 }
 
 function catalyst_menu_page_callback($entity_type, $entity_id) {
@@ -394,6 +425,8 @@ function catalyst_menu_page_callback($entity_type, $entity_id) {
   $wrapper = entity_metadata_wrapper($entity_type, $entity);
   switch ($entity_type) {
     case 'catalyst':
+      $template = new CatalystEntityPage($entity);
+      return theme('cpage_content', array('template' => $template));
       return eck__entity__view($entity_type, $wrapper->getBundle(), $entity_id);
     case 'node':
       return node_page_view($entity);

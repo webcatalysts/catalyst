@@ -20,11 +20,11 @@ function catalyst_twig_render($template, $variables = array(), $key = NULL) {
   $extensions = array(
     'addFunction' => array(
       't' => new Twig_SimpleFunction('t', 't'),
-      'render' => new Twig_SimpleFunction('render', 'render'),
+      'render' => new Twig_SimpleFunction('render', 'catalyst_render'),
     ),
     'addFilter' => array(
       't' => new Twig_SimpleFilter('t', 't'),
-      'render' => new Twig_SimpleFilter('render', 'render'),
+      'render' => new Twig_SimpleFilter('render', 'catalyst_render'),
     ),
   );
   /*
@@ -43,3 +43,8 @@ function catalyst_twig_render($template, $variables = array(), $key = NULL) {
   }
   return $twig->render($key, $variables);
 }
+
+function catalyst_render($var) {
+  return render($var);
+}
+

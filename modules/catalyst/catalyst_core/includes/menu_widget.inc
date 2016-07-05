@@ -184,6 +184,8 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
       'page arguments' => array($entity->type(), $entity->getIdentifier()),
       'access callback' => 'catalyst_menu_access_callback',
       'access arguments' => array($entity->type(), $entity->getIdentifier()),
+      'title callback' => 'catalyst_menu_title_callback',
+      'title arguments' => array($entity->type(), $entity->getIdentifier()),
       'file path' => catalyst_get_path() . '/includes',
       'file' => 'menu_widget.inc',
       'weight' => $menu_options['weight'] != "" ? $menu_options['weight'] : 0,
@@ -212,11 +214,14 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
             $parent_path = dirname($path);
             $menu_items[$parent_path] = array(
               'title' => $menu_options['parent']['title'],
+              'title callback' => 'catalyst_menu_parent_title_callback',
               'type' => $menu_options['parent']['type'] == 'tab' ? MENU_LOCAL_TASK : MENU_NORMAL_ITEM,
               'weight' => $parent_weight,
             ) + $base_item;
             $menu_items[$path] = array(
               'title' => $menu_options['title'],
+              'title callback' => 'catalyst_menu_title_callback',
+              'title arguments' => array($entity->type(), $entity->getIdentifier()),
               'type' => MENU_DEFAULT_LOCAL_TASK,
               'weight' => $base_item['weight'],
             );
