@@ -19,6 +19,7 @@ function catalyst_doctype_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystDoctypeMigration',
       ),
+      'migration sources' => array('packages'),
       'crud' => array(
         'admin' => array(
           'path' => 'admin/catalyst/doctype',
