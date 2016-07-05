@@ -17,16 +17,17 @@ function catalyst_menu_widget_form_alter(&$form, &$form_state) {
   $entity = $form['#entity'];
   $entity_type = $form['#entity_type'];
   $bundle = $form['#bundle'];
-  if (isset($form_state['values']['field__menu'][$entity->language][0]['value'])) {
-    $values = $form_state['values']['field__menu'][$entity->language][0]['value'];
+  $wrapper = entity_metadata_wrapper($entity_type, $entity);
+  $language = $form['field__menu']['#language'];
+  $field_instance = field_info_instance($entity_type, 'field__menu', $bundle);
+  if (isset($form_state['values']['field__menu'][$language][0]['value'])) {
+    $values = $form_state['values']['field__menu'][$language][0]['value'];
   }
   else {
-    $wrapper = entity_metadata_wrapper($entity_type, $entity);
     $values = entity_valval($wrapper->field__menu);
   }
-  $field_instance = field_info_instance($entity_type, 'field__menu', $bundle);
 
-  $form['field__menu'][$entity->language][0]['value'] = catalyst_menu_widget($field_instance, $values);
+  $form['field__menu'][$language][0]['value'] = catalyst_menu_widget($field_instance, $values);
   $form['#submit'][] = 'catalyst_menu_widget_submit';
 }
 
@@ -147,20 +148,27 @@ function catalyst_menu_widget($field_instance, $values = array()) {
     '#default_value' => isset($values['menu']['parent']['description']) ? $values['menu']['parent']['description'] : NULl,
     '#access' => $parent_access && $values['menu']['parent']['type'] != 'none',
   );
+  $widget['menu']['parent']['weight'] = array(
+    '#title' => t('Weight'),
+    '#type' => 'textfield',
+    '#default_value' => isset($values['menu']['parent']['weight']) ? $values['menu']['parent']['weight'] : 0,
+    '#access' => $parent_access && $values['menu']['parent']['type'] != 'none',
+  );
   return $widget;
 }
 
 function catalyst_menu_widget_ajax($form, &$form_state) {
   $entity = $form['#entity'];
-  $type = $form_state['values']['field__menu'][$entity->language][0]['value']['menu']['type'];
+  $language = $form['field__menu']['#language'];
+  $type = $form_state['values']['field__menu'][$language][0]['value']['menu']['type'];
   if ($type != 'none') {
-    $widget = &$form['field__menu'][$entity->language][0]['value'];
+    $widget = &$form['field__menu'][$language][0]['value'];
     $widget['menu']['#collapsed'] = FALSE;
     if ($idx = array_search('collapsed', $widget['menu']['#attributes']['class'])) {
       unset($widget['menu']['#attributes']['class'][$idx]);
     }
   }
-  return $form['field__menu'][$entity->language][0]['value'];
+  return $form['field__menu'][$language][0]['value'];
 }
 
 function catalyst_menu_widget_menu_alter(&$menu_items) {
@@ -170,37 +178,58 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
     $menu_options = $value['menu'];
     $parent_options = $value['menu']['parent'];
 
-    switch ($menu_options['type']) {
-      case 'normal':
-        $type = MENU_NORMAL_ITEM;
-        break;
-      case 'tab':
-        $type = MENU_LOCAL_TASK;
-        break;
-      case 'default tab':
-        $type = MENU_DEFAULT_LOCAL_TASK;
-        $parent_path = $path;
-        $path = dirname($path);
-        if ($menu_options['parent']['type'] != 'none') {
-          $menu_items[$parent_path] = array(
-            'type' => $menu_options['parent']['type'] == 'tab' ? MENU_LOCAL_TASK : MENU_NORMAL_ITEM,
-            'title' => $menu_options['parent']['title'],
-          );
-        }
-      default:
-        $type = MENU_CALLBACK;
-    }
-    $menu_items[$path] = array(
+    $base_item = array(
       'title' => $menu_options['title'],
-      //'title callback' => 'catalyst_menu_widget_title_callback',
       'page callback' => 'catalyst_menu_page_callback',
       'page arguments' => array($entity->type(), $entity->getIdentifier()),
       'access callback' => 'catalyst_menu_access_callback',
       'access arguments' => array($entity->type(), $entity->getIdentifier()),
       'file path' => catalyst_get_path() . '/includes',
       'file' => 'menu_widget.inc',
-      'type' => $type,
+      'weight' => $menu_options['weight'] != "" ? $menu_options['weight'] : 0,
     );
+    switch ($menu_options['type']) {
+      case 'normal':
+        $menu_items[$path] = array(
+          'type' => MENU_NORMAL_ITEM,
+        ) + $base_item;
+        break;
+      case 'tab':
+        $menu_items[$path] = array(
+          'type' => MENU_LOCAL_TASK,
+        ) + $base_item;
+        break;
+      case 'default tab':
+        switch ($menu_options['parent']['type']) {
+          case 'none':
+            $menu_items[$path] = array(
+              'type' => MENU_DEFAULT_LOCAL_TASK,
+            ) + $base_item;
+            break;
+          case 'tab':
+          case 'normal':
+            $parent_weight = $parent_options['weight'] != "" ? $parent_options['weight'] : 0;
+            $parent_path = dirname($path);
+            $menu_items[$parent_path] = array(
+              'title' => $menu_options['parent']['title'],
+              'type' => $menu_options['parent']['type'] == 'tab' ? MENU_LOCAL_TASK : MENU_NORMAL_ITEM,
+              'weight' => $parent_weight,
+            ) + $base_item;
+            $menu_items[$path] = array(
+              'title' => $menu_options['title'],
+              'type' => MENU_DEFAULT_LOCAL_TASK,
+              'weight' => $base_item['weight'],
+            );
+            /*
+            dsm('item: ' . $path);
+            dsm($menu_items[$path]);
+            dsm('parent: ' . $parent_path);
+            dsm($menu_items[$parent_path]);
+             */
+            break;
+        }
+        break;
+    }
   }
 }
 
