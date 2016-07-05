@@ -115,7 +115,7 @@ function catalyst_menu_widget($field_instance, $values = array()) {
     '#title' => t('Weight'),
     '#description' => t('The lower the weight the higher/further left it will appear.'),
     '#type' => 'textfield',
-    '#default_value' => isset($values['menu']['weight']) ? $values['menu']['weight'] : NULL,
+    '#default_value' => isset($values['menu']['weight']) ? $values['menu']['weight'] : 0,
     '#access' => $options_access,
   );
   $widget['menu']['parent'] = array(
@@ -239,9 +239,9 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
 }
 
 function catalyst_menu_widget_get_entities() {
+  $entities = array();
   $query = new EntityFieldQuery;
   $query->fieldCondition('field__menu', 'value_serialized', 'NULL', '!=');
-  $entities = array();
   $results = $query->execute();
   foreach ($results AS $entity_type => $result) {
     $loaded = entity_load($entity_type, array_keys($result));
