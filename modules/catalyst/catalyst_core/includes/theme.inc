@@ -9,8 +9,13 @@
  *
  */
 function theme_catalyst_template($variables) {
-  $rendervars = catalyst_template_collect_variables($variables['theme_original'], $variables['element_original']);
-  return $variables['template']->renderTemplate($rendervars);
+  $variables = catalyst_template_collect_variables($variables['theme_original'], $variables['element_original']) + $variables;
+
+  if ($preprocess_php = $variables['template']->getPreprocessPHP()) {
+    catalyst_eval($preprocess_php, $variables);
+  }
+
+  return $variables['template']->renderTemplate($variables);
 }
 
 
