@@ -191,6 +191,11 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
       'weight' => $menu_options['weight'] != "" ? $menu_options['weight'] : 0,
     );
     switch ($menu_options['type']) {
+      case 'none':
+        $menu_items[$path] = array(
+          'type' => MENU_CALLBACK,
+        ) + $base_item;
+        break;
       case 'normal':
         $menu_items[$path] = array(
           'type' => MENU_NORMAL_ITEM,
