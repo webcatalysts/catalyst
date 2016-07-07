@@ -20,11 +20,11 @@
                 "file": "catalyst_test__file"
             }
         },
-        "catalyst_test__cpage": {
+        "catalyst_test__page": {
             "class_name": "CatalystPageMigration",
             "group_name": "catalyst_test",
-            "source_filename": "cpage.json",
-            "source_files_directory": "attached-files\/cpage",
+            "source_filename": "page.json",
+            "source_files_directory": "attached-files\/page",
             "source_migrations": {
                 "package": "catalyst_test__package",
                 "block": "catalyst_test__block",
