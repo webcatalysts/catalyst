@@ -328,21 +328,35 @@ function catalyst_blocks_by_region($region) {
 }
 
 /**
- * Custom eval function.
  *
  * @param $code string
  *   A string of php code without opening and closing tags.
  *
  * @param $variables array
- *   An array of variables that the $code is able to modify.
+ *   An array of variables that the $code is able to modify. $variables are
+ *   intended for a template.
+ * @return NULL or boolean
+ *   Evaluations with catalyst_eval() must return null or boolean. Code
+ *   processed by catalyst_eval() should never return a string. An exception
+ *   will be thrown anticipating a syntax error when a string is returned.
+ * @param array $___exportvars
+ *   Array of "non-$variables" variables that the code cannot modify. Export
+ *   vars are accessible at the top-level of evaluations, but are not
+ *   passed on to templates (but can be manually in preprocessing).
+ *
+ * @todo Improve exception error message/handling for better debugging.
  */
-function catalyst_eval($code, &$variables, $exportvars = array()) {
-  extract($exportvars);
+function catalyst_eval($code, &$variables, $___exportvars = array()) {
+  extract($___exportvars);
+  unset($___exportvars);
   ob_start();
-  print eval($code);
+  $result = eval($code);
   $output = ob_get_contents();
   ob_end_clean();
-  return $output;
+  if (!in_array($result, array(NULL, TRUE, FALSE, 0, 1))) {
+    throw new Exception($output);
+  }
+  return $result;
 }
 
 /**
