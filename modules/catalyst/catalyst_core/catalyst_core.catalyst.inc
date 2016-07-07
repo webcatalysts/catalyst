@@ -101,6 +101,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       'field__js__layout' => 'js_custom',
       'field__js__page' => 'js_custom',
       'field__machine' => 'machine',
+      'field__menu' => 'menu_options',
       'field__onselect' => 'onselect',
       'field__ondeselect' => 'ondeselect',
       'field__package' => 'package',
@@ -135,6 +136,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
           case 'onselect':
           case 'ondeselect':
           case 'preprocess_php':
+          case 'menu_options':
             if (is_a($wrapper->{$from}, 'EntityStructureWrapper')) {
               $export->{$to} = entity_valval($wrapper->{$from});
               break;

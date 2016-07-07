@@ -15,7 +15,7 @@ function catalyst_template_load($entity_type, $bundle, $load_default = TRUE) {
 }
 
 function _catalyst_template_load($entity_type, $bundle, $load_default = TRUE) {
-  if ($entity_type == 'catalyst' || ($entity_type == 'node' && $bundle == 'cpage')) {
+  if ($entity_type == 'catalyst') {
     return FALSE;
   }
   $bundles = $load_default ? array($bundle, '__default__') : array($bundle);

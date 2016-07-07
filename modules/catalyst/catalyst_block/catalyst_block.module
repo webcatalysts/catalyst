@@ -15,7 +15,7 @@ include_once 'catalyst_block.features.inc';
  */
 function catalyst_block_inline_entity_form_entity_form_alter(&$entity_form, &$form_state) {
   // Hide bulky (and unncessary?) groups/fields when the block form is an
-  // inline entity form. Eg. node/add/cpage
+  // inline entity form.
   if ($entity_form['#entity_type'] == 'catalyst' && isset($entity_form['field__body'])) {
     $hide_groups = array('group_block_placement', 'group_block_js', 'group_block_css', 'group_block_files');
     foreach ($hide_groups AS $group) {

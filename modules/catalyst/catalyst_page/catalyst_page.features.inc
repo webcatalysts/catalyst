@@ -45,21 +45,3 @@ function catalyst_page_eck_bundle_info() {
   );
   return $items;
 }
-
-/**
- * Implements hook_node_info().
- */
-function catalyst_page_node_info() {
-  $items = array(
-    'cpage' => array(
-      'name' => t('Advanced Page'),
-      'base' => 'node_content',
-      'description' => t('A catalyst page provides an advanced feature set that facilitates simple to advanced pages.'),
-      'has_title' => '1',
-      'title_label' => t('Title'),
-      'help' => '',
-    ),
-  );
-  drupal_alter('node_info', $items);
-  return $items;
-}

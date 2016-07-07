@@ -4,8 +4,6 @@
  * Code for the Catalyst Menu feature.
  */
 
-include_once 'catalyst_menu.features.inc';
-
 function catalyst_menu_build($menu_name, $depth = 0, $expanded = TRUE) {
   $config = array(
     'menu_name' => $menu_name,

@@ -12,7 +12,6 @@ dependencies[] = views_php
 features[ctools][] = views:views_default:3.0
 features[features_api][] = api:2
 features[views_view][] = catalyst_admin_entity
-features[views_view][] = catalyst_admin_node
 features[views_view][] = catalyst_block_admin
 features[views_view][] = catalyst_doctype_admin
 features[views_view][] = catalyst_file_admin

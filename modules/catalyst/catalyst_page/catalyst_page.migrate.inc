@@ -4,12 +4,12 @@
  * @file
  */
 
-class CatalystPageMigration extends CatalystNodeMigration {
-  protected $nodeType = 'cpage';
-  protected $entityBundle = 'cpage';
+class CatalystPageMigration extends CatalystEntityMigration {
+  protected $entityBundle = 'page';
 
   protected function sourceFields() {
     return array(
+      'menu_options' => t('Menu options'),
       'layout' => t('Layout'),
       'content' => t('Content'),
       'css_custom' => t('Custom CSS'),
@@ -28,6 +28,7 @@ class CatalystPageMigration extends CatalystNodeMigration {
 
   protected function mapFields() {
     parent::mapFields();
+    $this->addFieldMapping('field__menu', 'menu_options');
     // Block Placements
     $this->addFieldMapping('field__blockplacements__layfield', 'block_placements');
     $this->addReferenceFieldMapping('field__blockplacements__layfield:block_id', 'block_placement_ids', 'block');
@@ -45,9 +46,5 @@ class CatalystPageMigration extends CatalystNodeMigration {
     $this->addFormattedFieldMapping('field__js__page', 'js_custom', 'catalyst_js');
     $this->addFormattedFieldMapping('field__html_head', 'html_head', 'catalyst_html');
     $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'catalyst_php');
-    // Unmapped destinations
-    $this->addUnmigratedDestinations(array(
-      'promote', 'sticky',
-    ));
   }
 }

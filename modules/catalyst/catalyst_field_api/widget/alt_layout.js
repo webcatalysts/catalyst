@@ -2,7 +2,7 @@
   Drupal.behaviors.blockPlacementFields = {
     attach: function (context, settings) {
               return;
-      var $layoutSelect = $('#edit-field-cpage-layout-und');
+      var $layoutSelect = $('#edit-field--layout-und');
       $layoutSelect.once('loadregions', function () {
         function onLayoutChange() {
           var $layoutHidden = $('[id^="' + settings.blockPlacement.layout_id + '"]').first();

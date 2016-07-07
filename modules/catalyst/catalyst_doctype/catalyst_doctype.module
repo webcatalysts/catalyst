@@ -19,34 +19,6 @@ function catalyst_doctype_form_eck__entity__form_alter(&$form, &$form_state, $fo
 }
 
 /**
- * Implements hook_menu().
- */
-function catalyst_doctype_menu() {
-  $items['admin/catalyst/doctype/%eckentity/preview'] = array(
-    'title' => 'Preview',
-    'page callback' => 'drupal_get_form',
-    'page arguments' => array('catalyst_doctype_preview_form', 3),
-    // Preview access with edit access
-    'access callback' => 'eck__entity_menu_access',
-    'access arguments' => array('edit', 'catalyst', 'doctype', 3),
-    'type' => MENU_LOCAL_TASK,
-    'file' => 'catalyst_doctype.pages.inc',
-    'weight' => 9,
-    'theme callback' => 'catalyst_doctype_custom_theme',
-  );
-  return $items;
-}
-
-/**
- * Implements hook_custom_theme().
- */
-function catalyst_doctype_custom_theme() {
-  if (preg_match('/admin\/catalyst\/doctype\/[0-9]+\/preview/i', request_path()) && count($_POST)) {
-    return 'notheme';
-  }
-}
-
-/**
  * Preprocess a doctype element.
  */
 function catalyst_doctype_preprocess_doctype(&$variables) {
