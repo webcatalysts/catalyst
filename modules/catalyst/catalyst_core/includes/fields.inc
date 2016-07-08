@@ -33,7 +33,7 @@ function catalyst_list_fields() {
 function catalyst_field_ui_clean_field_list() {
   $instances = field_info_instances();
   unset($instances['catalyst']);
-  $instances['node'] = array_diff_key($instances['node'], catalyst_node_types());
+  //$instances['node'] = array_diff_key($instances['node'], catalyst_node_types());
   return catalyst_field_ui_field_list($instances);
 }
 
