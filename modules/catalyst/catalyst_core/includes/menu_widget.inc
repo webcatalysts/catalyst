@@ -230,12 +230,6 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
               'type' => MENU_DEFAULT_LOCAL_TASK,
               'weight' => $base_item['weight'],
             );
-            /*
-            dsm('item: ' . $path);
-            dsm($menu_items[$path]);
-            dsm('parent: ' . $parent_path);
-            dsm($menu_items[$parent_path]);
-             */
             break;
         }
         break;
