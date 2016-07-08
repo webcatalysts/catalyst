@@ -21,7 +21,4 @@ class CatalystEntityPage extends CatalystEntityTemplate {
     $value = entity_valval($this->wrapper->field__menu);
     return $value['path'];
   }
-  public function getTemplate() {
-    return entity_valval($this->wrapper->field__body);
-  }
 }

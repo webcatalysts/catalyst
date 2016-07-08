@@ -15,7 +15,9 @@ define('CATALYST_MEDIA_GROUP_OTHER', 404);
  * Implements hook_entity_view_alter().
  */
 function catalyst_media_entity_view_alter(&$build, $type) {
-  if (isset($build['field__body'])) {
+  if (isset($build['field__body']) && isset($build['#entity'])
+    && $build['#entity_type'] == 'catalyst'
+    && in_array($build['#bundle'], array('stylesheet', 'javascript'))) {
     if ($template = $build['field__body'][0]['#markup']) {
       theme('media_content', array(
         'template' => $template,

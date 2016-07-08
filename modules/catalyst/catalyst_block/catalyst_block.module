@@ -48,6 +48,14 @@ function catalyst_block_entity_view_alter(&$build, $type) {
       ));
     }
   }
+
+  // Handle "layout field" block placements statically
+  if (!empty($build['#entity']->field__blockplacements__layfield)) {
+    $wrapper = entity_metadata_wrapper($build['#entity_type'], $build['#entity']);
+    foreach ($wrapper->field__blockplacements__layfield AS $placement) {
+      catalyst_block_add_static_placement($placement->value());
+    }
+  }
 }
 
 function template_preprocess_block_content(&$variables) {
@@ -123,7 +131,22 @@ function catalyst_block_block_placements() {
       $placements[] = (array)$item;
     }
   }
+
+  if ($static_placements =& drupal_static('catalyst_block_placements')) {
+    while ($placement = array_shift($static_placements)) {
+      $placements[] = $placement;
+    }
+  }
   return $placements;
+}
+
+function catalyst_block_add_static_placement($placement) {
+  $placements =& drupal_static('catalyst_block_placements');
+  if (!isset($placements)) {
+    $placements = array();
+  }
+  $placements[] = $placement;
+  return $placement;
 }
 
 /**

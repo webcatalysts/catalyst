@@ -32,7 +32,11 @@ function catalyst_page_catalyst_plugin_info() {
           'path' => 'admin/catalyst/page/%eckentity/delete',
           'entity_id' => 3,
         ),
-        'view' => NULL,
+        'view' => array(
+          'path' => 'admin/catalyst/page/%eckentity/edit',
+          'entity_id' => 3,
+          'menu_item' => FALSE,
+        ),
       ),
     ),
   );

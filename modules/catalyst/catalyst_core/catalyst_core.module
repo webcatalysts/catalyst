@@ -415,8 +415,8 @@ function catalyst_menu_parent_title_callback($entity_type, $entity_id) {
 function catalyst_menu_page_callback($entity_type, $entity_id) {
   $entity = entity_load_single($entity_type, $entity_id);
   $wrapper = entity_metadata_wrapper($entity_type, $entity);
-  $template = new CatalystEntityPage($entity);
-  return theme('page_content', array('template' => $template));
+  module_load_include('entity.inc', 'eck');
+  return eck__entity__view_callback(array($entity), 'full', $wrapper->language());
 }
 
 function catalyst_menu_parse_path($path) {

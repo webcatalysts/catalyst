@@ -88,6 +88,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       //'created' => 'created',
       //'changed' => 'changed',
       'status' => 'status',
+      'field__access' => 'access_php',
       'field__body' => 'content',
       'field__css' => 'css_custom',
       'field__css__layout' => 'css_custom',
@@ -128,6 +129,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
             }
             $export->{$to} = $wrapper->{$from}->machine->value();
             break;
+          case 'access_php':
           case 'content':
           case 'js_custom':
           case 'css_custom':

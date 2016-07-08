@@ -61,14 +61,3 @@ function catalyst_template_entity_view_alter(&$build, $type) {
     $build['#theme'] = 'catalyst_template';
   }
 }
-
-function catalyst_template_process_node(&$variables) {
-  if (isset($variables['content']['links'])) {
-    $variables['links'] = $variables['content']['links'];
-    unset($variables['content']['links']);
-  }
-  if (isset($variables['content']['comments'])) {
-    $variables['comments'] = $variables['content']['comments'];
-    unset($variables['content']['comments']);
-  }
-}

@@ -20,8 +20,8 @@ function catalyst_export_form($form, &$form_state) {
   $form['#attached']['js'][] = $module_path . '/js/export-form.js';
   $form['#attached']['css'][] = $module_path . '/css/export-form.css';
 
-  $internal = 0;
-  $package = 'none';
+  $internal = 'all';
+  $package = 'all';
 
   if (isset($form_state['values']['filters'])) {
     $internal = $form_state['values']['filters']['internal'];
@@ -60,6 +60,12 @@ function catalyst_export_form($form, &$form_state) {
       ) + $package_options,
       '#default_value' => $package,
       '#ajax' => $filters_ajax,
+    );
+  }
+  else {
+    $form['filters']['package'] = array(
+      '#type' => 'hidden',
+      '#value' => $package,
     );
   }
 

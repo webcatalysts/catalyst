@@ -20,20 +20,11 @@ function catalyst_page_theme() {
 }
 
 /**
- * Implements hook_block_placements().
- */
-function catalyst_page_block_placements() {
-  $node = menu_get_object();
-  if (!empty($node->field__blockplacements__layfield)) {
-    return $node->field__blockplacements__layfield[$node->language];
-  }
-}
-
-/**
  * Implements hook_entity_view_alter().
  */
 function catalyst_page_entity_view_alter(&$build) {
-  if ($build['#view_mode'] == 'template' && isset($build['field__body'])) {
+  if (isset($build['field__body']) && isset($build['#entity']) && $build['#view_mode'] == 'full'
+    && $build['#entity_type'] == 'catalyst' && $build['#bundle'] == 'page') {
     if ($template = $build['field__body'][0]['#markup']) {
       $build['field__body'][0]['#markup'] = theme('page_content', array(
         'template' => new CatalystEntityPage($build['#entity']),
@@ -49,6 +40,7 @@ function template_preprocess_page_content(&$variables) {
 function catalyst_page_preprocess_page_content(&$variables) {
   $template = $variables['template'];
 
+  $pathvars = array();
   if ($path = $template->getMenuPath()) {
     if ($pathvars = catalyst_menu_parse_path($path)) {
       $variables = array_merge($variables, $pathvars);
