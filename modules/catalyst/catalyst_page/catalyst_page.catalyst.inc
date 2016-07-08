@@ -16,7 +16,7 @@ function catalyst_page_catalyst_plugin_info() {
       'bundle' => 'page',
       'exportables' => TRUE,
       'migration' => array(
-        'class_name' => 'CatalystEntityPageMigration',
+        'class_name' => 'CatalystPageMigration',
       ),
       'migration sources' => array(
         'package', 'block', 'layout', 'stylesheet', 'javascript', 'file'

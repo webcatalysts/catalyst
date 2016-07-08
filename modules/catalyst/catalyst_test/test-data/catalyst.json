@@ -21,7 +21,7 @@
             }
         },
         "catalyst_test__page": {
-            "class_name": "CatalystEntityPageMigration",
+            "class_name": "CatalystPageMigration",
             "group_name": "catalyst_test",
             "source_filename": "page.json",
             "source_files_directory": "attached-files\/page",
