@@ -22,7 +22,14 @@ function catalyst_page_strongarm() {
           'weight' => '0',
         ),
       ),
-      'display' => array(),
+      'display' => array(
+        'title' => array(
+          'template' => array(
+            'weight' => '1',
+            'visible' => FALSE,
+          ),
+        ),
+      ),
     ),
   );
   $export['field_bundle_settings_catalyst__page'] = $strongarm;
