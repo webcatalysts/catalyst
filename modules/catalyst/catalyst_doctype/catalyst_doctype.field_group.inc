@@ -27,8 +27,7 @@ function catalyst_doctype_field_group_info() {
       1 => 'field__package',
       2 => 'field__preprocess',
       3 => 'group_doctype_drupal',
-      4 => 'group_doctype_form_alter',
-      5 => 'group_doctype_help',
+      4 => 'group_doctype_help',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -59,8 +58,8 @@ function catalyst_doctype_field_group_info() {
       0 => 'field__body',
       1 => 'field__doctype_charset',
       2 => 'field__doctype_content_type',
-      3 => 'title',
-      4 => 'field__machine',
+      3 => 'field__machine',
+      4 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
