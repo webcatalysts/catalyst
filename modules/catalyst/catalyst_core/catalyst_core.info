@@ -23,6 +23,7 @@ dependencies[] = options
 dependencies[] = path
 dependencies[] = serialized_field
 dependencies[] = text
+dependencies[] = transliteration
 dependencies[] = wysiwyg
 features[eck_bundle][] = catalyst_package
 features[eck_entity_type][] = catalyst
