@@ -572,6 +572,360 @@ Off|Site',
   $export['catalyst_admin_entity'] = $view;
 
   $view = new view();
+  $view->name = 'catalyst_admin_list';
+  $view->description = '';
+  $view->tag = 'default';
+  $view->base_table = 'eck_catalyst';
+  $view->human_name = 'catalyst_admin_list';
+  $view->core = 7;
+  $view->api_version = '3.0';
+  $view->disabled = FALSE; /* Edit this to true to make a default view disabled initially */
+
+  /* Display: Master */
+  $handler = $view->new_display('default', 'Master', 'default');
+  $handler->display->display_options['title'] = 'Catalyst';
+  $handler->display->display_options['use_ajax'] = TRUE;
+  $handler->display->display_options['use_more_always'] = FALSE;
+  $handler->display->display_options['access']['type'] = 'none';
+  $handler->display->display_options['cache']['type'] = 'none';
+  $handler->display->display_options['query']['type'] = 'views_query';
+  $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
+  $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['reset_button_label'] = 'Clear Filters';
+  $handler->display->display_options['exposed_form']['options']['expose_sort_order'] = FALSE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['bef'] = array(
+    'general' => array(
+      'input_required' => 0,
+      'text_input_required' => array(
+        'text_input_required' => array(
+          'value' => 'Select any filter and click on Apply to see results',
+          'format' => 'catalyst_js',
+        ),
+      ),
+      'allow_secondary' => 1,
+      'secondary_label' => 'Advanced search',
+      'secondary_collapse_override' => '0',
+    ),
+    'pager' => array(
+      'bef_format' => 'default',
+      'is_secondary' => 1,
+    ),
+    'type' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'is_secondary' => 0,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field__internal_value' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'is_secondary' => 1,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+    'field__package_target_id' => array(
+      'bef_format' => 'default',
+      'more_options' => array(
+        'bef_select_all_none' => FALSE,
+        'bef_collapsible' => 0,
+        'is_secondary' => 1,
+        'any_label' => '',
+        'bef_filter_description' => '',
+        'rewrite' => array(
+          'filter_rewrite_values' => '',
+        ),
+      ),
+    ),
+  );
+  $handler->display->display_options['pager']['type'] = 'full';
+  $handler->display->display_options['pager']['options']['items_per_page'] = '20';
+  $handler->display->display_options['pager']['options']['offset'] = '0';
+  $handler->display->display_options['pager']['options']['id'] = '0';
+  $handler->display->display_options['pager']['options']['quantity'] = '9';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page'] = TRUE;
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_label'] = 'Per page';
+  $handler->display->display_options['pager']['options']['expose']['items_per_page_options_all'] = TRUE;
+  $handler->display->display_options['style_plugin'] = 'table';
+  $handler->display->display_options['style_options']['columns'] = array(
+    'views_bulk_operations' => 'views_bulk_operations',
+    'id' => 'id',
+    'title' => 'title',
+    'changed' => 'changed',
+    'created' => 'created',
+    'edit_link' => 'edit_link',
+    'view_link' => 'view_link',
+    'delete_link' => 'delete_link',
+    'field__internal' => 'field__internal',
+    'field__package' => 'field__package',
+    'label' => 'label',
+  );
+  $handler->display->display_options['style_options']['default'] = 'changed';
+  $handler->display->display_options['style_options']['info'] = array(
+    'views_bulk_operations' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'id' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'title' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'asc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'changed' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'created' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'edit_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'view_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'delete_link' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field__internal' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'field__package' => array(
+      'sortable' => 1,
+      'default_sort_order' => 'desc',
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+    'label' => array(
+      'align' => '',
+      'separator' => '',
+      'empty_column' => 0,
+    ),
+  );
+  /* No results behavior: Global: PHP */
+  $handler->display->display_options['empty']['php']['id'] = 'php';
+  $handler->display->display_options['empty']['php']['table'] = 'views';
+  $handler->display->display_options['empty']['php']['field'] = 'php';
+  $handler->display->display_options['empty']['php']['empty'] = TRUE;
+  $handler->display->display_options['empty']['php']['php_output'] = '<?php
+catalyst_include(\'views\', \'admin\');
+print catalyst_admin_views_no_results($view, \'packages\', array(
+  \'bundle\' => \'package\',
+  \'path\' => \'admin/catalyst/package/add\',
+  \'destination\' => \'admin/catalyst/package\',
+)); ?>';
+  /* Field: Bulk operations: Catalyst */
+  $handler->display->display_options['fields']['views_bulk_operations']['id'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['views_bulk_operations']['field'] = 'views_bulk_operations';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['display_type'] = '0';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['enable_select_all_pages'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['row_clickable'] = 1;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
+  $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::views_bulk_operations_delete_item' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::catalyst_update_package_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 0,
+      'override_label' => 0,
+      'label' => '',
+    ),
+  );
+  /* Field: Field: Machine name */
+  $handler->display->display_options['fields']['field__machine']['id'] = 'field__machine';
+  $handler->display->display_options['fields']['field__machine']['table'] = 'field_data_field__machine';
+  $handler->display->display_options['fields']['field__machine']['field'] = 'field__machine';
+  $handler->display->display_options['fields']['field__machine']['exclude'] = TRUE;
+  /* Field: Broken/missing handler */
+  $handler->display->display_options['fields']['label']['id'] = 'label';
+  $handler->display->display_options['fields']['label']['table'] = 'views_entity_catalyst';
+  $handler->display->display_options['fields']['label']['field'] = 'label';
+  $handler->display->display_options['fields']['label']['label'] = 'Title';
+  $handler->display->display_options['fields']['label']['alter']['alter_text'] = TRUE;
+  $handler->display->display_options['fields']['label']['alter']['text'] = '<span class="label">[label]</div>
+<span class="machine"><em>[[field__machine]]</em></span>';
+  /* Field: Catalyst: catalyst type */
+  $handler->display->display_options['fields']['type']['id'] = 'type';
+  $handler->display->display_options['fields']['type']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['type']['field'] = 'type';
+  $handler->display->display_options['fields']['type']['label'] = 'Type';
+  /* Field: Field: Package */
+  $handler->display->display_options['fields']['field__package']['id'] = 'field__package';
+  $handler->display->display_options['fields']['field__package']['table'] = 'field_data_field__package';
+  $handler->display->display_options['fields']['field__package']['field'] = 'field__package';
+  /* Field: Catalyst: Changed */
+  $handler->display->display_options['fields']['changed']['id'] = 'changed';
+  $handler->display->display_options['fields']['changed']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['changed']['field'] = 'changed';
+  $handler->display->display_options['fields']['changed']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['changed']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['changed']['second_date_format'] = 'long';
+  /* Field: Catalyst: Created */
+  $handler->display->display_options['fields']['created']['id'] = 'created';
+  $handler->display->display_options['fields']['created']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['created']['field'] = 'created';
+  $handler->display->display_options['fields']['created']['date_format'] = 'custom';
+  $handler->display->display_options['fields']['created']['custom_date_format'] = 'm/d/Y';
+  $handler->display->display_options['fields']['created']['second_date_format'] = 'long';
+  /* Field: Catalyst: Edit link */
+  $handler->display->display_options['fields']['edit_link']['id'] = 'edit_link';
+  $handler->display->display_options['fields']['edit_link']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['edit_link']['field'] = 'edit_link';
+  $handler->display->display_options['fields']['edit_link']['label'] = 'Actions';
+  $handler->display->display_options['fields']['edit_link']['text'] = 'edit';
+  /* Field: Catalyst: Delete link */
+  $handler->display->display_options['fields']['delete_link']['id'] = 'delete_link';
+  $handler->display->display_options['fields']['delete_link']['table'] = 'eck_catalyst';
+  $handler->display->display_options['fields']['delete_link']['field'] = 'delete_link';
+  $handler->display->display_options['fields']['delete_link']['label'] = 'Delete';
+  /* Filter criterion: Catalyst: Title */
+  $handler->display->display_options['filters']['title']['id'] = 'title';
+  $handler->display->display_options['filters']['title']['table'] = 'eck_catalyst';
+  $handler->display->display_options['filters']['title']['field'] = 'title';
+  $handler->display->display_options['filters']['title']['operator'] = 'contains';
+  $handler->display->display_options['filters']['title']['group'] = 1;
+  $handler->display->display_options['filters']['title']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['operator_id'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['label'] = 'Title';
+  $handler->display->display_options['filters']['title']['expose']['operator'] = 'title_op';
+  $handler->display->display_options['filters']['title']['expose']['identifier'] = 'title';
+  $handler->display->display_options['filters']['title']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['title']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+  );
+  /* Filter criterion: Catalyst: catalyst type */
+  $handler->display->display_options['filters']['type']['id'] = 'type';
+  $handler->display->display_options['filters']['type']['table'] = 'eck_catalyst';
+  $handler->display->display_options['filters']['type']['field'] = 'type';
+  $handler->display->display_options['filters']['type']['group'] = 1;
+  $handler->display->display_options['filters']['type']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['operator_id'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['label'] = 'Type';
+  $handler->display->display_options['filters']['type']['expose']['operator'] = 'type_op';
+  $handler->display->display_options['filters']['type']['expose']['identifier'] = 'type';
+  $handler->display->display_options['filters']['type']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['type']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+  );
+  /* Filter criterion: Field: Machine name (field__machine) */
+  $handler->display->display_options['filters']['field__machine_machine']['id'] = 'field__machine_machine';
+  $handler->display->display_options['filters']['field__machine_machine']['table'] = 'field_data_field__machine';
+  $handler->display->display_options['filters']['field__machine_machine']['field'] = 'field__machine_machine';
+  $handler->display->display_options['filters']['field__machine_machine']['operator'] = 'allwords';
+  $handler->display->display_options['filters']['field__machine_machine']['group'] = 1;
+  $handler->display->display_options['filters']['field__machine_machine']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__machine_machine']['expose']['operator_id'] = 'field__machine_machine_op';
+  $handler->display->display_options['filters']['field__machine_machine']['expose']['label'] = 'Machine name';
+  $handler->display->display_options['filters']['field__machine_machine']['expose']['operator'] = 'field__machine_machine_op';
+  $handler->display->display_options['filters']['field__machine_machine']['expose']['identifier'] = 'machine';
+  $handler->display->display_options['filters']['field__machine_machine']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__machine_machine']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+  );
+  /* Filter criterion: Realm */
+  $handler->display->display_options['filters']['field__internal_value']['id'] = 'field__internal_value';
+  $handler->display->display_options['filters']['field__internal_value']['table'] = 'field_data_field__internal';
+  $handler->display->display_options['filters']['field__internal_value']['field'] = 'field__internal_value';
+  $handler->display->display_options['filters']['field__internal_value']['ui_name'] = 'Realm';
+  $handler->display->display_options['filters']['field__internal_value']['group'] = 1;
+  $handler->display->display_options['filters']['field__internal_value']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__internal_value']['expose']['operator_id'] = 'field__internal_value_op';
+  $handler->display->display_options['filters']['field__internal_value']['expose']['label'] = 'Realm';
+  $handler->display->display_options['filters']['field__internal_value']['expose']['operator'] = 'field__internal_value_op';
+  $handler->display->display_options['filters']['field__internal_value']['expose']['identifier'] = 'internal';
+  $handler->display->display_options['filters']['field__internal_value']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__internal_value']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+  );
+  /* Filter criterion: Package */
+  $handler->display->display_options['filters']['field__package_target_id']['id'] = 'field__package_target_id';
+  $handler->display->display_options['filters']['field__package_target_id']['table'] = 'field_data_field__package';
+  $handler->display->display_options['filters']['field__package_target_id']['field'] = 'field__package_target_id';
+  $handler->display->display_options['filters']['field__package_target_id']['ui_name'] = 'Package';
+  $handler->display->display_options['filters']['field__package_target_id']['group'] = 1;
+  $handler->display->display_options['filters']['field__package_target_id']['exposed'] = TRUE;
+  $handler->display->display_options['filters']['field__package_target_id']['expose']['operator_id'] = 'field__package_target_id_op';
+  $handler->display->display_options['filters']['field__package_target_id']['expose']['label'] = 'Package';
+  $handler->display->display_options['filters']['field__package_target_id']['expose']['operator'] = 'field__package_target_id_op';
+  $handler->display->display_options['filters']['field__package_target_id']['expose']['identifier'] = 'package';
+  $handler->display->display_options['filters']['field__package_target_id']['expose']['remember'] = TRUE;
+  $handler->display->display_options['filters']['field__package_target_id']['expose']['remember_roles'] = array(
+    2 => '2',
+    1 => 0,
+  );
+  /* Filter criterion: Global: Combine fields filter */
+  $handler->display->display_options['filters']['combine']['id'] = 'combine';
+  $handler->display->display_options['filters']['combine']['table'] = 'views';
+  $handler->display->display_options['filters']['combine']['field'] = 'combine';
+
+  /* Display: Page */
+  $handler = $view->new_display('page', 'Page', 'page_1');
+  $handler->display->display_options['path'] = 'admin/catalyst/list';
+  $handler->display->display_options['menu']['type'] = 'default tab';
+  $handler->display->display_options['menu']['title'] = 'List';
+  $handler->display->display_options['menu']['weight'] = '0';
+  $handler->display->display_options['menu']['context'] = 0;
+  $handler->display->display_options['menu']['context_only_inline'] = 0;
+  $handler->display->display_options['tab_options']['type'] = 'normal';
+  $handler->display->display_options['tab_options']['title'] = 'Catalyst';
+  $handler->display->display_options['tab_options']['weight'] = '0';
+  $handler->display->display_options['tab_options']['name'] = 'management';
+  $export['catalyst_admin_list'] = $view;
+
+  $view = new view();
   $view->name = 'catalyst_admin_node';
   $view->description = '';
   $view->tag = 'default';
