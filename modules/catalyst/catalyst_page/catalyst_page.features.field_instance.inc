@@ -320,7 +320,7 @@ function catalyst_page_field_default_field_instances() {
         'rows' => 30,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 4,
     ),
   );
 
@@ -688,7 +688,7 @@ function catalyst_page_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 2,
     ),
   );
 
@@ -918,7 +918,7 @@ function catalyst_page_field_default_field_instances() {
       'module' => 'serialized_field',
       'settings' => array(),
       'type' => 'serialized_hidden',
-      'weight' => 2,
+      'weight' => 3,
     ),
   );
 
@@ -1048,16 +1048,13 @@ function catalyst_page_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Access');
-  t('Add Blocks');
   t('Block placements');
-  t('Blocks');
   t('Blocks (embedded usage)');
   t('Content');
   t('Custom CSS');
   t('Custom Files');
   t('Custom Head');
   t('Custom Javascript');
-  t('Custom markup that will be added the <head> tag of the layout. Allows for metatags, external javascript/stylesheets, etc.');
   t('Help/Instructions');
   t('Internal');
   t('Javascript Includes');

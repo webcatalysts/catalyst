@@ -174,13 +174,14 @@ function catalyst_page_field_group_info() {
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'label' => 'Custom Help/Instructions',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => 'group-page-help field-group-fieldset',
         'required_fields' => 1,
         'id' => '',
+        'classes' => 'group-page-help field-group-fieldset',
+        'description' => '',
       ),
+      'formatter' => 'collapsed',
     ),
   );
   $field_groups['group_page_help|catalyst|page|form'] = $field_group;
@@ -277,14 +278,10 @@ function catalyst_page_field_group_info() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Advanced');
-  t('Advanced Settings');
   t('Blocks');
-  t('Cascading Style Sheets');
   t('Custom Help/Instructions');
   t('Files');
-  t('Javascript');
   t('Javascripts');
-  t('Media/Files');
   t('Page content');
   t('Processing');
   t('Stylesheets');

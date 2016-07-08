@@ -30,8 +30,7 @@ function catalyst_layout_field_group_info() {
       4 => 'field__package',
       5 => 'field__preprocess',
       6 => 'group_layout_drupal',
-      7 => 'group_layout_form_alter',
-      8 => 'group_layout_help',
+      7 => 'group_layout_help',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -91,8 +90,8 @@ function catalyst_layout_field_group_info() {
     'children' => array(
       0 => 'field__body',
       1 => 'field__doctype',
-      2 => 'title',
-      3 => 'field__machine',
+      2 => 'field__machine',
+      3 => 'title',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
