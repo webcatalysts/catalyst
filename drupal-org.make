@@ -27,9 +27,10 @@ projects[eck][subdir] = "contrib"
 ; https://www.drupal.org/node/2647610
 projects[eck][patch][] = "https://www.drupal.org/files/issues/eck-entity-custom-admin-path-2647610-2-7x2x.patch"
 
-projects[entity][version] = "1.7"
+projects[entity][version] = "1.x"
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
+projects[entity][patch][] = "https://www.drupal.org/files/entity-field-label-handler-1435418-5.patch"
 
 projects[entityreference][version] = "1.1"
 projects[entityreference][type] = "module"
