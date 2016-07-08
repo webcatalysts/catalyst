@@ -15,7 +15,14 @@ function catalyst_page_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'field_bundle_settings_catalyst__page';
   $strongarm->value = array(
-    'view_modes' => array(),
+    'view_modes' => array(
+      'template' => array(
+        'custom_settings' => TRUE,
+      ),
+      'full' => array(
+        'custom_settings' => FALSE,
+      ),
+    ),
     'extra_fields' => array(
       'form' => array(
         'title' => array(
@@ -26,6 +33,10 @@ function catalyst_page_strongarm() {
         'title' => array(
           'template' => array(
             'weight' => '1',
+            'visible' => FALSE,
+          ),
+          'default' => array(
+            'weight' => '0',
             'visible' => FALSE,
           ),
         ),
