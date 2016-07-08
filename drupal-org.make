@@ -63,10 +63,6 @@ projects[markdown][version] = "1.2"
 projects[markdown][type] = "module"
 projects[markdown][subdir] = "contrib"
 
-projects[menu_admin_per_menu][version] = "1.1"
-projects[menu_admin_per_menu][type] = "module"
-projects[menu_admin_per_menu][subdir] = "contrib"
-
 projects[menu_block][version] = "2.7"
 projects[menu_block][type] = "module"
 projects[menu_block][subdir] = "contrib"
@@ -83,21 +79,9 @@ projects[module_filter][version] = "2.0"
 projects[module_filter][type] = "module"
 projects[module_filter][subdir] = "contrib"
 
-projects[multiple_node_menu][version] = "1.0-beta2"
-projects[multiple_node_menu][type] = "module"
-projects[multiple_node_menu][subdir] = "contrib"
-
 projects[navbar][version] = "1.7"
 projects[navbar][type] = "module"
 projects[navbar][subdir] = "contrib"
-
-projects[override_node_options][version] = "1.13"
-projects[override_node_options][type] = "module"
-projects[override_node_options][subdir] = "contrib"
-
-projects[pathauto][version] = "1.3"
-projects[pathauto][type] = "module"
-projects[pathauto][subdir] = "contrib"
 
 projects[responsive_preview][version] = "1.1"
 projects[responsive_preview][type] = "module"
