@@ -2,7 +2,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "defer": null,
+        "defer": false,
         "scope": "header",
         "id": "page_shared_test",
         "title": "Page Shared Test",
@@ -15,7 +15,7 @@
     {
         "media_type": "local",
         "media_path": "profiles\/catalyst\/modules\/catalyst\/catalyst_test\/files\/page-local-test.js",
-        "defer": null,
+        "defer": false,
         "scope": "header",
         "id": "page_local_test",
         "title": "Page Local Test",
@@ -28,7 +28,7 @@
     {
         "media_type": "remote",
         "media_path": "https:\/\/cdn.rawgit.com\/speedytwenty\/catalyst-tests\/7x1x\/page-remote-test.js",
-        "defer": null,
+        "defer": false,
         "scope": "header",
         "id": "page_remote_test",
         "title": "Page Remote Test",
@@ -41,7 +41,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "defer": null,
+        "defer": false,
         "scope": "footer",
         "id": "page_footer_test",
         "title": "Page Footer Test",
@@ -54,7 +54,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "defer": null,
+        "defer": false,
         "scope": "header",
         "id": "layout_shared_js_test",
         "title": "Layout Shared JS Test",
@@ -67,7 +67,7 @@
     {
         "media_type": "local",
         "media_path": "profiles\/catalyst\/modules\/catalyst\/catalyst_test\/files\/layout-local-test.js",
-        "defer": null,
+        "defer": false,
         "scope": "header",
         "id": "layout_local_js_test",
         "title": "Layout Local JS Test",
@@ -80,7 +80,7 @@
     {
         "media_type": "remote",
         "media_path": "https:\/\/cdn.rawgit.com\/speedytwenty\/catalyst-tests\/7x1x\/layout-remote-test.js",
-        "defer": null,
+        "defer": false,
         "scope": "header",
         "id": "layout_remote_js_test",
         "title": "Layout Remote JS Test",
@@ -93,7 +93,7 @@
     {
         "media_type": "custom",
         "media_path": null,
-        "defer": null,
+        "defer": false,
         "scope": "footer",
         "id": "layout_footer_js_test",
         "title": "Layout Footer JS Test",
