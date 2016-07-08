@@ -1022,124 +1022,6 @@ function catalyst_layout_field_default_field_instances() {
     ),
   );
 
-  // Exported field_instance: 'catalyst-layout-field__ondeselect'.
-  $field_instances['catalyst-layout-field__ondeselect'] = array(
-    'bundle' => 'layout',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Custom javascript that is executed on the page form when this layout is selected.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 14,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'template' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field__ondeselect',
-    'label' => 'On DeSelect',
-    'required' => 0,
-    'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'catalyst_js' => 'catalyst_js',
-        ),
-        'allowed_formats_toggle' => 1,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'catalyst_js' => array(
-              'weight' => 0,
-            ),
-          ),
-        ),
-      ),
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 6,
-    ),
-  );
-
-  // Exported field_instance: 'catalyst-layout-field__onselect'.
-  $field_instances['catalyst-layout-field__onselect'] = array(
-    'bundle' => 'layout',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Custom javascript that is executed on the page form when this layout is selected.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 13,
-      ),
-      'teaser' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-      'template' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field__onselect',
-    'label' => 'On Select',
-    'required' => 0,
-    'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'catalyst_js' => 'catalyst_js',
-        ),
-        'allowed_formats_toggle' => 1,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'catalyst_js' => array(
-              'weight' => 0,
-            ),
-          ),
-        ),
-      ),
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 5,
-    ),
-  );
-
   // Exported field_instance: 'catalyst-layout-field__package'.
   $field_instances['catalyst-layout-field__package'] = array(
     'bundle' => 'layout',
@@ -1250,7 +1132,6 @@ function catalyst_layout_field_default_field_instances() {
   t('Custom HTML Head');
   t('Custom Javascript');
   t('Custom javascript specific to this layout.');
-  t('Custom javascript that is executed on the page form when this layout is selected.');
   t('Doctype');
   t('Drupal Javascript');
   t('Drupal Stylesheets');
@@ -1260,8 +1141,6 @@ function catalyst_layout_field_default_field_instances() {
   t('Internal');
   t('Javascript Includes');
   t('Machine name');
-  t('On DeSelect');
-  t('On Select');
   t('Package');
   t('Page title pattern');
   t('Preprocessing');
