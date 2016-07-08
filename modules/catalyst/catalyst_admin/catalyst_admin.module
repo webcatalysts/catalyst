@@ -87,11 +87,19 @@ function catalyst_admin_form_alter(&$form, &$form_state, $form_id) {
     elseif (isset($form['#entity_type'])) {
       $wrapper = entity_metadata_wrapper($form['#entity_type'], $form['#entity']);
     }
-    $form['catalyst_form_help'] = array(
-      '#type' => 'markup',
-      '#markup' => '<p class="help catalyst-form-help">' . entity_valval($wrapper->field__admin_notes) . '</p>',
-      '#weight' => -100000,
-    );
+    if ($notes = entity_valval($wrapper->field__admin_notes)) {;
+      $form['catalyst_form_help'] = array(
+        '#type' => 'fieldset',
+        '#title' => t('Help/Instructions'),
+        '#collapsible' => TRUE,
+        '#collapsed' => TRUE,
+        'content' => array(
+          '#type' => 'markup',
+          '#markup' => '<p class="help catalyst-form-help">' . $notes . '</p>',
+          '#weight' => -100000,
+        ),
+      );
+    }
   }
 
   // Alter views bulk operations forms
