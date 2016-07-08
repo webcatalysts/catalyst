@@ -90,7 +90,7 @@ abstract class CatalystEntityMigration extends CatalystMigration {
   protected function mapFields() {
     parent::mapFields();
     $this->addFieldMapping('type')->defaultValue($this->entityBundle);
-    $this->addUnmigratedDestinations(array('id', 'path', 'pathauto'));
+    $this->addUnmigratedDestinations(array('id', 'path'));
   }
 
   protected function createStub(Migration $migration, array $source_id) {
@@ -124,7 +124,6 @@ abstract class CatalystNodeMigration extends CatalystMigration {
     $this->addFieldMapping('uid')->defaultValue(1);
     $this->addFieldMapping('status', 'status');
     $this->addFieldMapping('path', 'path');
-    $this->addFieldMapping('pathauto')->defaultValue(1);
     $this->addUnmigratedDestinations(array(
       'revision', 'log', 'tnid', 'translate', 'revision_uid', 'is_new', 'comment',
     ));

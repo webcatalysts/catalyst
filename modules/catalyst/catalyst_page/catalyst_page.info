@@ -18,7 +18,6 @@ dependencies[] = inline_entity_form
 dependencies[] = list
 dependencies[] = machine
 dependencies[] = options
-dependencies[] = pathauto
 dependencies[] = serialized_field
 dependencies[] = strongarm
 dependencies[] = text

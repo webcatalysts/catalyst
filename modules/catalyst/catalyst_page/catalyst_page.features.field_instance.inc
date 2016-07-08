@@ -432,7 +432,7 @@ function catalyst_page_field_default_field_instances() {
           'options' => array(
             'pathauto' => 1,
             'slashes' => 0,
-            'transliterate' => 0,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
