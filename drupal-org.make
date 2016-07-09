@@ -27,9 +27,12 @@ projects[eck][subdir] = "contrib"
 ; https://www.drupal.org/node/2647610
 projects[eck][patch][] = "https://www.drupal.org/files/issues/eck-entity-custom-admin-path-2647610-2-7x2x.patch"
 
-projects[entity][version] = "1.x"
+projects[entity][download][branch] = "7.x-1.7"
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
+projects[entity][download][type] = "git"
+; Add views field handler to link entity title (label) to it's url callback
+; https://www.drupal.org/node/1435418#comment-6063078
 projects[entity][patch][] = "https://www.drupal.org/files/entity-field-label-handler-1435418-5.patch"
 
 projects[entityreference][version] = "1.1"
