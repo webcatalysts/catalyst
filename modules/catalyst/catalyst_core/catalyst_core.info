@@ -4,6 +4,7 @@ core = 7.x
 package = Catalyst
 version = 7.x-0.7
 dependencies[] = ace
+dependencies[] = better_migrate
 dependencies[] = better_formats
 dependencies[] = ctools
 dependencies[] = eck
