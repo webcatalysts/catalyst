@@ -59,7 +59,7 @@ projects[libraries][version] = "2.3"
 projects[libraries][type] = "module"
 projects[libraries][subdir] = "contrib"
 
-projects[markdown][version] = "1.2"
+projects[markdown][version] = "1.4"
 projects[markdown][type] = "module"
 projects[markdown][subdir] = "contrib"
 
@@ -123,7 +123,7 @@ projects[views_php][version] = "1.0-alpha3"
 projects[views_php][type] = "module"
 projects[views_php][subdir] = "contrib"
 
-projects[webform][version] = "4.12"
+projects[webform][version] = "4.13"
 projects[webform][type] = "module"
 projects[webform][subdir] = "contrib"
 
