@@ -82,7 +82,7 @@ function catalyst_template_catalyst_prepare_export($export, $group, $exports) {
   // Everything else should be attached in hook_catalyst_export_alter().
   return (object)array(
     // no id necessary
-    'entity_type' => $wrapper->field__template_entity_type->value(),
-    'bundle' => $wrapper->field__template_bundle->value(),
+    'entity_type' => $wrapper->field__template_entity_type->machine->value(),
+    'bundle' => $wrapper->field__template_bundle->machine->value(),
   );
 }

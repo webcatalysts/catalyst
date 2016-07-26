@@ -27,7 +27,9 @@ class CatalystBlockMigration extends CatalystEntityMigration {
     parent::mapFields();
     // Block placements
     $this->addFieldMapping('field__blockplacements__block', 'block_placements');
-    $this->addReferenceFieldMapping('field__blockplacements__block:layout_id', 'block_placement_ids', 'layout');
+    if ($this->hasSourceMigration('layout')) {
+      $this->addReferenceFieldMapping('field__blockplacements__block:layout_id', 'block_placement_ids', 'layout');
+    }
     // Reference field mapping
     $this->addReferenceFieldMapping('field__media_stylesheets', 'stylesheets', 'stylesheet');
     $this->addReferenceFieldMapping('field__media_javascripts', 'javascripts', 'javascript');

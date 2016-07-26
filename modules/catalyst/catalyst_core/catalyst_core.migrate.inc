@@ -30,6 +30,10 @@ abstract class CatalystBaseMigration extends BetterMigration {
     return $key;
   }
 
+  protected function hasSourceMigration($key) {
+    return !empty($this->arguments['source_migrations'][$key]);
+  }
+
   protected function getSourceFilesDirectory() {
     if (isset($this->arguments['source_files_directory'])) {
       return $this->getSourceDirectory() . '/' . $this->arguments['source_files_directory'];
@@ -79,7 +83,9 @@ abstract class CatalystMigration extends CatalystBaseMigration {
     $this->addUnmigratedDestinations(array('created', 'changed'));
     $this->addFormattedFieldMapping('field__admin_notes', 'notes', 'catalyst_markdown');
     $this->addFieldMapping('field__internal', 'internal');
-    $this->addReferenceFieldMapping('field__package', 'package', 'package');
+    if ($this->hasSourceMigration('package')) {
+      $this->addReferenceFieldMapping('field__package', 'package', 'package');
+    }
   }
 }
 
