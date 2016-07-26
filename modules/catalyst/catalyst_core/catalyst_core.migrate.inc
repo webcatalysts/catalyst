@@ -100,6 +100,9 @@ abstract class CatalystEntityMigration extends CatalystMigration {
   }
 
   protected function createStub(Migration $migration, array $source_id) {
+    if ($id = machine_lookup_single($this->machineField, $source_id[0], $this->entityType, $this->entityBundle)) {
+      return array($id);
+    }
     $entity = entity_create($this->entityType, array('type' => $this->entityBundle));
     $wrapper = entity_metadata_wrapper($this->entityType, $entity);
     $wrapper->title->set($this->createStubTitle($migration, $source_id));
