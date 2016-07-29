@@ -200,7 +200,7 @@ function catalyst_add_custom_css($data, $group, $field, $entity_id) {
 
   $key = $field . ':' . $entity_id;
   if (!isset($custom_css[$key])) {
-    catalyst_include('twig');
+      module_load_include('inc', 'catalyst', 'includes/twig');
     drupal_add_css(catalyst_twig_render($data, array(), $key), array(
       'type' => 'inline',
       'media' => 'all',
