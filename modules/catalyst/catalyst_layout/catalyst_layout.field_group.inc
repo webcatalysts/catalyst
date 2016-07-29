@@ -200,35 +200,6 @@ function catalyst_layout_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_layout_form_alter|catalyst|layout|form';
-  $field_group->group_name = 'group_layout_form_alter';
-  $field_group->entity_type = 'catalyst';
-  $field_group->bundle = 'layout';
-  $field_group->mode = 'form';
-  $field_group->parent_name = 'group_layout_advanced';
-  $field_group->data = array(
-    'label' => 'Page form customizations',
-    'weight' => '8',
-    'children' => array(
-      0 => 'field__ondeselect',
-      1 => 'field__onselect',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'label' => 'Page form customizations',
-      'instance_settings' => array(
-        'required_fields' => 1,
-        'classes' => 'group-layout-form-alter field-group-fieldset',
-        'description' => '',
-      ),
-      'formatter' => 'collapsed',
-    ),
-  );
-  $field_groups['group_layout_form_alter|catalyst|layout|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
   $field_group->identifier = 'group_layout_help|catalyst|layout|form';
   $field_group->group_name = 'group_layout_help';
   $field_group->entity_type = 'catalyst';

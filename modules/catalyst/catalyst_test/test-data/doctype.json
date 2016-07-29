@@ -8,8 +8,6 @@
         "drupal_processing": false,
         "internal": false,
         "machine": "catalyst_test_default",
-        "onselect": null,
-        "ondeselect": null,
         "package": "catalyst_test",
         "preprocess_php": null,
         "admin_notes": null
@@ -23,8 +21,6 @@
         "drupal_processing": false,
         "internal": false,
         "machine": "catalyst_test_1",
-        "onselect": "console.log('onselect');",
-        "ondeselect": "console.log('onselect');",
         "package": "catalyst_test",
         "preprocess_php": "$variables['test_doctype_var'] = 'doctype var value';",
         "admin_notes": null
@@ -38,8 +34,6 @@
         "drupal_processing": false,
         "internal": false,
         "machine": "catalyst_test_json",
-        "onselect": null,
-        "ondeselect": null,
         "package": "catalyst_test",
         "preprocess_php": null,
         "admin_notes": null

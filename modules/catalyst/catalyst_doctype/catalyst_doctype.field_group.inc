@@ -105,35 +105,6 @@ function catalyst_doctype_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
-  $field_group->identifier = 'group_doctype_form_alter|catalyst|doctype|form';
-  $field_group->group_name = 'group_doctype_form_alter';
-  $field_group->entity_type = 'catalyst';
-  $field_group->bundle = 'doctype';
-  $field_group->mode = 'form';
-  $field_group->parent_name = 'group_doctype_advanced';
-  $field_group->data = array(
-    'label' => 'Form customizations',
-    'weight' => '26',
-    'children' => array(
-      0 => 'field__ondeselect',
-      1 => 'field__onselect',
-    ),
-    'format_type' => 'fieldset',
-    'format_settings' => array(
-      'label' => 'Form customizations',
-      'instance_settings' => array(
-        'required_fields' => 1,
-        'classes' => 'group-doctype-form-alter field-group-fieldset',
-        'description' => '',
-      ),
-      'formatter' => 'collapsed',
-    ),
-  );
-  $field_groups['group_doctype_form_alter|catalyst|doctype|form'] = $field_group;
-
-  $field_group = new stdClass();
-  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
-  $field_group->api_version = 1;
   $field_group->identifier = 'group_doctype_help|catalyst|doctype|form';
   $field_group->group_name = 'group_doctype_help';
   $field_group->entity_type = 'catalyst';

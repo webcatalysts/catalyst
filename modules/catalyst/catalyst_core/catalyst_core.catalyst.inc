@@ -103,8 +103,6 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       'field__js__page' => 'js_custom',
       'field__machine' => 'machine',
       'field__menu' => 'menu_options',
-      'field__onselect' => 'onselect',
-      'field__ondeselect' => 'ondeselect',
       'field__package' => 'package',
       'field__preprocess' => 'preprocess_php',
       'field__admin_notes' => 'admin_notes',
@@ -135,8 +133,6 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
           case 'css_custom':
           case 'html_head':
           case 'admin_notes':
-          case 'onselect':
-          case 'ondeselect':
           case 'preprocess_php':
           case 'menu_options':
             if (is_a($wrapper->{$from}, 'EntityStructureWrapper')) {

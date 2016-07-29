@@ -13,8 +13,6 @@ class CatalystDoctypeMigration extends CatalystEntityMigration {
       'http_content_type' => t('Content type'),
       'drupal_processing' => t('Drupal processing enabled'),
       'preprocess_php' => t('Preprocessing PHP'),
-      'onselect' => t('OnSelect'),
-      'ondeselect' => t('OnDeselect'),
     ) + parent::sourceFields();
   }
   protected function mapFields() {
@@ -25,7 +23,5 @@ class CatalystDoctypeMigration extends CatalystEntityMigration {
     // Formatted field mappings
     $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');
     $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'catalyst_php');
-    $this->addFormattedFieldMapping('field__onselect', 'onselect', 'catalyst_js');
-    $this->addFormattedFieldMapping('field__ondeselect', 'ondeselect', 'catalyst_js');
   }
 }
