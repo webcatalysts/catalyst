@@ -21,14 +21,13 @@ function catalyst_template_field_group_info() {
   $field_group->parent_name = 'group_template_tabs';
   $field_group->data = array(
     'label' => 'Advanced',
-    'weight' => '12',
+    'weight' => '13',
     'children' => array(
       0 => 'field__debug',
       1 => 'field__html_head',
       2 => 'field__internal',
       3 => 'field__package',
-      4 => 'field__preprocess',
-      5 => 'group_template_help',
+      4 => 'group_template_help',
     ),
     'format_type' => 'htab',
     'format_settings' => array(
@@ -54,7 +53,7 @@ function catalyst_template_field_group_info() {
   $field_group->parent_name = 'group_template_tabs';
   $field_group->data = array(
     'label' => 'Blocks',
-    'weight' => '11',
+    'weight' => '12',
     'children' => array(
       0 => 'field__blockplacements__layfield',
       1 => 'field__blocks_related',
@@ -110,7 +109,7 @@ function catalyst_template_field_group_info() {
   $field_group->parent_name = 'group_template_tabs';
   $field_group->data = array(
     'label' => 'Stylesheets',
-    'weight' => '8',
+    'weight' => '9',
     'children' => array(
       0 => 'field__css__page',
       1 => 'field__media_stylesheets__page',
@@ -139,7 +138,7 @@ function catalyst_template_field_group_info() {
   $field_group->parent_name = 'group_template_tabs';
   $field_group->data = array(
     'label' => 'Media/Files',
-    'weight' => '10',
+    'weight' => '11',
     'children' => array(
       0 => 'field__files',
       1 => 'field__media_files',
@@ -195,7 +194,7 @@ function catalyst_template_field_group_info() {
   $field_group->parent_name = 'group_template_tabs';
   $field_group->data = array(
     'label' => 'Javascript',
-    'weight' => '9',
+    'weight' => '10',
     'children' => array(
       0 => 'field__js__page',
       1 => 'field__media_javascripts__page',
@@ -216,6 +215,33 @@ function catalyst_template_field_group_info() {
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
   $field_group->api_version = 1;
+  $field_group->identifier = 'group_template_php|catalyst|template|form';
+  $field_group->group_name = 'group_template_php';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'template';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_template_tabs';
+  $field_group->data = array(
+    'label' => 'Processing',
+    'weight' => '8',
+    'children' => array(
+      0 => 'field__preprocess',
+    ),
+    'format_type' => 'htab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-template-php field-group-htab',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_template_php|catalyst|template|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
   $field_group->identifier = 'group_template_tabs|catalyst|template|form';
   $field_group->group_name = 'group_template_tabs';
   $field_group->entity_type = 'catalyst';
@@ -232,6 +258,7 @@ function catalyst_template_field_group_info() {
       3 => 'group_template_css',
       4 => 'group_template_files',
       5 => 'group_template_js',
+      6 => 'group_template_php',
     ),
     'format_type' => 'htabs',
     'format_settings' => array(
@@ -250,6 +277,7 @@ function catalyst_template_field_group_info() {
   t('Custom Help/Instructions');
   t('Javascript');
   t('Media/Files');
+  t('Processing');
   t('Stylesheets');
   t('Tabs');
   t('Template');
