@@ -666,7 +666,7 @@ function catalyst_page_field_default_field_instances() {
     'entity_type' => 'catalyst',
     'field_name' => 'field__layout',
     'label' => 'Layout',
-    'required' => 1,
+    'required' => 0,
     'settings' => array(
       'user_register_form' => FALSE,
     ),
