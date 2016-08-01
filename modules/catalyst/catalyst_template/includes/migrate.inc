@@ -31,7 +31,6 @@ class CatalystTemplateMigration extends CatalystEntityMigration {
     $this->addFieldMapping('field__template_entity_type', 'entity_type');
     $this->addFieldMapping('field__template_bundle', 'bundle');
     $this->addFieldMapping('field__layout', 'layout');
-    $this->addFieldMapping('field__package', 'package');
 
     $this->addFieldMapping('field__debug', 'debug');
     // Block placements
