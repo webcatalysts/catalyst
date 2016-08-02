@@ -110,10 +110,8 @@ function catalyst_admin_form_alter(&$form, &$form_state, $form_id) {
     $form['#after_build'][] = 'catalyst_admin_views_form_after_build';
   }
   elseif ($form_id == 'views_exposed_form' && strpos($form_state['view']->name, 'catalyst_') === 0) {
-    $form['#attributes']['class'][] = 'container-inline';
-    if (isset($form['secondary'])) {
-      $form['secondary']['#attributes']['class'][] = 'container-inline';
-    }
+    catalyst_form_load_include($form_state, 'uncommon', 'admin');
+    $form['#after_build'][] = 'catalyst_admin_views_exposed_form_after_build';
   }
 }
 
