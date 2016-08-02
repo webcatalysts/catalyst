@@ -76,7 +76,7 @@ function catalyst_menu_widget($field_instance, $values = array()) {
       'default tab' => t('Default menu tab'),
     ),
     '#required' => $field_instance['required'],
-    '#default_value' => isset($values['menu']['type']) ? $values['menu']['type'] : NULL,
+    '#default_value' => isset($values['menu']['type']) ? $values['menu']['type'] : 'none',
     '#ajax' => $ajax,
   );
   $options_access = FALSE;
