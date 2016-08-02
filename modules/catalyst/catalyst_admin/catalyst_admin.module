@@ -28,6 +28,10 @@ function catalyst_admin_menu() {
       'file' => 'system.admin.inc',
       'weight' => -10,
     ),
+    'admin/catalyst/all' => array(
+      'title' => 'All',
+      'type' => MENU_DEFAULT_LOCAL_TASK,
+    ),
   );
 }
 
