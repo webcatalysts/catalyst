@@ -20,7 +20,9 @@ function catalyst_template_catalyst_plugin_info() {
       'migration' => array(
         'class_name' => 'CatalystTemplateMigration',
       ),
-      'migration sources' => array('package'),
+      'migration sources' => array(
+        'package', 'block', 'doctype', 'stylesheet', 'javascript', 'file',
+      ),
       'crud' => array(
         'admin' => array(
           'path' => 'admin/catalyst/template',
