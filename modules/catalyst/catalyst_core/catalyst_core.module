@@ -40,10 +40,16 @@ function catalyst_core_action_info() {
       'configurable' => TRUE,
       'triggers' => array('any'),
     ),
-    'node_update_package_action' => array(
-      'type' => 'node',
-      'label' => t('Set or change package'),
-      'configurable' => TRUE,
+    'catalyst_set_realm_system_action' => array(
+      'type' => 'catalyst',
+      'label' => t('Send to system realm'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
+    'catalyst_set_realm_site_action' => array(
+      'type' => 'catalyst',
+      'label' => t('Send to site realm'),
+      'configurable' => FALSE,
       'triggers' => array('any'),
     ),
   );
@@ -336,6 +342,16 @@ function catalyst_menu_item_restore(&$menu_item) {
   }
 }
 
+function catalyst_set_realm_site_action($entity, $context) {
+  $wrapper = entity_metadata_wrapper('catalyst', $entity);
+  $wrapper->field__internal->set(FALSE);
+}
+
+function catalyst_set_realm_system_action($entity, $context) {
+  $wrapper = entity_metadata_wrapper('catalyst', $entity);
+  $wrapper->field__internal->set(TRUE);
+}
+
 function catalyst_update_package_action_form($context) {
   catalyst_include('actions');
   $context['entity_type'] = 'catalyst';
@@ -346,20 +362,6 @@ function catalyst_update_package_action_submit($form, $form_state) {
   return catalyst_update_package_form_submit($form, $form_state);
 }
 function catalyst_update_package_action($entity, $context) {
-  catalyst_include('actions');
-  catalyst_update_package($entity, $context);
-}
-
-function node_update_package_action_form($context) {
-  catalyst_include('actions');
-  $context['entity_type'] = 'node';
-  return catalyst_update_package_form($context);
-}
-function node_update_package_action_submit($form, $form_state) {
-  catalyst_include('actions');
-  return catalyst_update_package_form_submit($form, $form_state);
-}
-function node_update_package_action($entity, $context) {
   catalyst_include('actions');
   catalyst_update_package($entity, $context);
 }

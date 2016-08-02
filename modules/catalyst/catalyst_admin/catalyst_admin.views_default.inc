@@ -292,13 +292,14 @@ print catalyst_admin_views_no_results($view, \'packages\', array(
   $handler->display->display_options['defaults']['exposed_form'] = FALSE;
   $handler->display->display_options['exposed_form']['type'] = 'better_exposed_filters';
   $handler->display->display_options['exposed_form']['options']['reset_button'] = TRUE;
+  $handler->display->display_options['exposed_form']['options']['autosubmit'] = TRUE;
   $handler->display->display_options['exposed_form']['options']['bef'] = array(
     'general' => array(
       'input_required' => 0,
       'text_input_required' => array(
         'text_input_required' => array(
           'value' => 'Select any filter and click on Apply to see results',
-          'format' => 'css',
+          'format' => 'catalyst_js',
         ),
       ),
       'allow_secondary' => 0,
@@ -311,11 +312,6 @@ print catalyst_admin_views_no_results($view, \'packages\', array(
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
         ),
@@ -329,11 +325,6 @@ print catalyst_admin_views_no_results($view, \'packages\', array(
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
         ),
@@ -347,14 +338,8 @@ print catalyst_admin_views_no_results($view, \'packages\', array(
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
         'rewrite' => array(
-          'filter_rewrite_values' => 'On|System
-Off|Site',
+          'filter_rewrite_values' => '',
         ),
       ),
     ),
@@ -366,11 +351,6 @@ Off|Site',
         'is_secondary' => 0,
         'any_label' => '',
         'bef_filter_description' => '',
-        'tokens' => array(
-          'available' => array(
-            0 => 'global_types',
-          ),
-        ),
         'rewrite' => array(
           'filter_rewrite_values' => '',
         ),
@@ -402,10 +382,24 @@ Off|Site',
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['force_single'] = 0;
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_settings']['entity_load_capacity'] = '10';
   $handler->display->display_options['fields']['views_bulk_operations']['vbo_operations'] = array(
+    'action::catalyst_set_realm_site_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 1,
+      'override_label' => 0,
+      'label' => '',
+    ),
+    'action::catalyst_set_realm_system_action' => array(
+      'selected' => 1,
+      'postpone_processing' => 0,
+      'skip_confirmation' => 1,
+      'override_label' => 0,
+      'label' => '',
+    ),
     'action::catalyst_update_package_action' => array(
       'selected' => 1,
       'postpone_processing' => 0,
-      'skip_confirmation' => 0,
+      'skip_confirmation' => 1,
       'override_label' => 0,
       'label' => '',
     ),
