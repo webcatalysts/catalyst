@@ -22,10 +22,19 @@ function catalyst_export_form($form, &$form_state) {
 
   $internal = 'all';
   $package = 'all';
+  $select_all = 0;
 
   if (isset($form_state['values']['filters'])) {
     $internal = $form_state['values']['filters']['internal'];
     $package = $form_state['values']['filters']['package'];
+    $select_all = $form_state['values']['filters']['select_all'];
+  }
+
+  if (isset($form_state['triggering_element'])) {
+    $triggering_element = $form_state['triggering_element'];
+    if ($triggering_element['#name'] == 'filters[select_all]' && $triggering_element['#value'] == 0) {
+      $form_state['values']['exports'] = array();
+    }
   }
 
   $filters_ajax = array(
@@ -68,6 +77,12 @@ function catalyst_export_form($form, &$form_state) {
       '#value' => $package,
     );
   }
+  $form['filters']['select_all'] = array(
+    '#type' => 'checkbox',
+    '#title' => t('Select all'),
+    '#default_value' => $select_all,
+    '#ajax' => $filters_ajax,
+  );
 
 
   // Exports container
@@ -117,6 +132,11 @@ function catalyst_export_form($form, &$form_state) {
         '#ajax' => $ajax,
         '#export' => (object)$item['export'],
       );
+      if ($select_all) {
+        $form['exports'][$type][$item_id]['#value'] = $select_all;
+        $form['exports'][$type][$item_id]['#disabled'] = $select_all;
+        $form_state['values']['exports'][$type][$item_id] = $item_id;
+      }
     }
   }
 
@@ -235,7 +255,7 @@ function catalyst_export_form_preview_ajax($form, $form_state) {
   return $form['preview'];
 }
 
-function catalyst_export_form_ajax($form, $form_state) {
+function catalyst_export_form_ajax($form, &$form_state) {
   return $form;
 }
 
