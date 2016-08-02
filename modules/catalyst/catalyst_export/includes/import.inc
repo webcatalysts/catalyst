@@ -18,7 +18,7 @@ function catalyst_import_form($form, &$form_state) {
     '#type' => 'file',
     '#title' => t('Upload ZIP export'),
   );
-  $form['upload']['degregister'] = array(
+  $form['upload']['deregister'] = array(
     '#type' => 'checkbox',
     '#title' => t('Deregister the import upon successful completion'),
     '#default_value' => 1,
@@ -67,5 +67,7 @@ function catalyst_import_form_submit($form, &$form_state) {
   catalyst_include('import');
   catalyst_import($form_state['source_directory']);
   $info = catalyst_load_import($form_state['source_directory']);
-  catalyst_deregister_import($info);
+  if ($form_state['values']['deregister']) {
+    catalyst_deregister_import($info);
+  }
 }

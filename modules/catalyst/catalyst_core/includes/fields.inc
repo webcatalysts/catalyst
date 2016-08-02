@@ -17,7 +17,6 @@ function catalyst_list_fields() {
     foreach (array_keys(field_info_bundles('catalyst')) AS $bundle) {
       $fields = array_merge($fields, $cache->getBundleInstances('catalyst', $bundle));
     }
-    $fields = array_merge($fields, $cache->getBundleInstances('node', 'cpage'));
   }
   return $fields;
 }
@@ -34,7 +33,7 @@ function catalyst_list_fields() {
 function catalyst_field_ui_clean_field_list() {
   $instances = field_info_instances();
   unset($instances['catalyst']);
-  $instances['node'] = array_diff_key($instances['node'], catalyst_node_types());
+  //$instances['node'] = array_diff_key($instances['node'], catalyst_node_types());
   return catalyst_field_ui_field_list($instances);
 }
 
@@ -44,7 +43,6 @@ function catalyst_field_ui_clean_field_list() {
  */
 function catalyst_field_ui_catalyst_field_list() {
   $instances = array_intersect_key(field_info_instances(), array_flip(array('catalyst', 'node')));
-  $instances['node'] = array_intersect_key($instances['node'], array_flip(array('cpage')));
   return catalyst_field_ui_field_list($instances);
 }
 

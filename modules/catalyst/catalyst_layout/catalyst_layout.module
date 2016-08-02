@@ -11,7 +11,7 @@ include_once 'catalyst_layout.features.inc';
  * Implements hook_entity_view().
  */
 function catalyst_layout_entity_view($entity, $type, $view_mode, $langcode) {
-  if (isset($entity->field__layout)) {
+  if ($view_mode == 'full' && isset($entity->field__layout)) {
     $wrapper = entity_metadata_wrapper($type, $entity);
     if ($layout = $wrapper->field__layout->value()) {
       catalyst_set_layout($layout);

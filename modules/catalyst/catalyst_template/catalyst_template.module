@@ -15,7 +15,7 @@ function catalyst_template_load($entity_type, $bundle, $load_default = TRUE) {
 }
 
 function _catalyst_template_load($entity_type, $bundle, $load_default = TRUE) {
-  if ($entity_type == 'catalyst' || ($entity_type == 'node' && $bundle == 'cpage')) {
+  if ($entity_type == 'catalyst') {
     return FALSE;
   }
   $bundles = $load_default ? array($bundle, '__default__') : array($bundle);
@@ -59,16 +59,5 @@ function catalyst_template_entity_view_alter(&$build, $type) {
     $build['#template'] = new CatalystTemplateEntity($template);
     $build['#theme_original'] = $build['#theme'];
     $build['#theme'] = 'catalyst_template';
-  }
-}
-
-function catalyst_template_process_node(&$variables) {
-  if (isset($variables['content']['links'])) {
-    $variables['links'] = $variables['content']['links'];
-    unset($variables['content']['links']);
-  }
-  if (isset($variables['content']['comments'])) {
-    $variables['comments'] = $variables['content']['comments'];
-    unset($variables['content']['comments']);
   }
 }

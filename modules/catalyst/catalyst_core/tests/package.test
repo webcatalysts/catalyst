@@ -1,0 +1,15 @@
+<?php
+
+class CatalystPackageTestCase extends DrupalWebTestCase {
+    public static function getInfo() {
+        return array(
+            'name' => 'Catalyst Package Tests',
+            'description' => 'Tests generic package functionality.',
+            'group' => 'Catalyst',
+        );
+    }
+
+    public function testPackageExport() {
+
+    }
+}

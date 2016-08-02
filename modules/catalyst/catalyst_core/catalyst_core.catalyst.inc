@@ -88,6 +88,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       //'created' => 'created',
       //'changed' => 'changed',
       'status' => 'status',
+      'field__access' => 'access_php',
       'field__body' => 'content',
       'field__css' => 'css_custom',
       'field__css__layout' => 'css_custom',
@@ -101,8 +102,7 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
       'field__js__layout' => 'js_custom',
       'field__js__page' => 'js_custom',
       'field__machine' => 'machine',
-      'field__onselect' => 'onselect',
-      'field__ondeselect' => 'ondeselect',
+      'field__menu' => 'menu_options',
       'field__package' => 'package',
       'field__preprocess' => 'preprocess_php',
       'field__admin_notes' => 'admin_notes',
@@ -127,14 +127,14 @@ function catalyst_core_catalyst_export_alter(&$export, $original, $group) {
             }
             $export->{$to} = $wrapper->{$from}->machine->value();
             break;
+          case 'access_php':
           case 'content':
           case 'js_custom':
           case 'css_custom':
           case 'html_head':
           case 'admin_notes':
-          case 'onselect':
-          case 'ondeselect':
           case 'preprocess_php':
+          case 'menu_options':
             if (is_a($wrapper->{$from}, 'EntityStructureWrapper')) {
               $export->{$to} = entity_valval($wrapper->{$from});
               break;

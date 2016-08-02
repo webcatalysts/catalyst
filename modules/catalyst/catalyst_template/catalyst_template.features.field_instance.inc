@@ -392,7 +392,7 @@ function catalyst_template_field_default_field_instances() {
           'options' => array(
             'pathauto' => 1,
             'slashes' => 0,
-            'transliterate' => 0,
+            'transliterate' => 1,
           ),
           'value' => '[file:ffp-name-only-original].[file:ffp-extension-original]',
         ),
@@ -934,14 +934,34 @@ function catalyst_template_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 0,
+          'catalyst_html' => 0,
+          'catalyst_js' => 0,
           'catalyst_php' => 'catalyst_php',
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
             'catalyst_php' => array(
               'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -953,7 +973,7 @@ function catalyst_template_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 5,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 17,

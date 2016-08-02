@@ -30,6 +30,10 @@ abstract class CatalystBaseMigration extends BetterMigration {
     return $key;
   }
 
+  protected function hasSourceMigration($key) {
+    return !empty($this->arguments['source_migrations'][$key]);
+  }
+
   protected function getSourceFilesDirectory() {
     if (isset($this->arguments['source_files_directory'])) {
       return $this->getSourceDirectory() . '/' . $this->arguments['source_files_directory'];
@@ -79,7 +83,9 @@ abstract class CatalystMigration extends CatalystBaseMigration {
     $this->addUnmigratedDestinations(array('created', 'changed'));
     $this->addFormattedFieldMapping('field__admin_notes', 'notes', 'catalyst_markdown');
     $this->addFieldMapping('field__internal', 'internal');
-    $this->addReferenceFieldMapping('field__package', 'package', 'package');
+    if ($this->hasSourceMigration('package')) {
+      $this->addReferenceFieldMapping('field__package', 'package', 'package');
+    }
   }
 }
 
@@ -90,10 +96,13 @@ abstract class CatalystEntityMigration extends CatalystMigration {
   protected function mapFields() {
     parent::mapFields();
     $this->addFieldMapping('type')->defaultValue($this->entityBundle);
-    $this->addUnmigratedDestinations(array('id', 'path', 'pathauto'));
+    $this->addUnmigratedDestinations(array('id', 'path'));
   }
 
   protected function createStub(Migration $migration, array $source_id) {
+    if ($id = machine_lookup_single($this->machineField, $source_id[0], $this->entityType, $this->entityBundle)) {
+      return array($id);
+    }
     $entity = entity_create($this->entityType, array('type' => $this->entityBundle));
     $wrapper = entity_metadata_wrapper($this->entityType, $entity);
     $wrapper->title->set($this->createStubTitle($migration, $source_id));
@@ -124,7 +133,6 @@ abstract class CatalystNodeMigration extends CatalystMigration {
     $this->addFieldMapping('uid')->defaultValue(1);
     $this->addFieldMapping('status', 'status');
     $this->addFieldMapping('path', 'path');
-    $this->addFieldMapping('pathauto')->defaultValue(1);
     $this->addUnmigratedDestinations(array(
       'revision', 'log', 'tnid', 'translate', 'revision_uid', 'is_new', 'comment',
     ));

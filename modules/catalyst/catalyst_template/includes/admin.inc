@@ -8,7 +8,6 @@
 function catalyst_template_admin_list() {
   $entity_info = entity_get_info();
   unset($entity_info['catalyst']);
-  unset($entity_info['node']['bundles']['cpage']);
   $build = array();
   foreach ($entity_info  AS $entity_type => $entity_type_info) {
     if (empty($entity_type_info['view modes'])) {

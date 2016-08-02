@@ -21,19 +21,16 @@ function catalyst_twig_render($template, $variables = array(), $key = NULL) {
     'addFunction' => array(
       't' => new Twig_SimpleFunction('t', 't'),
       'render' => new Twig_SimpleFunction('render', 'catalyst_render'),
+      'url' => new Twig_SimpleFunction('url', 'url'),
+      'l' => new Twig_SimpleFunction('l', 'l'),
     ),
     'addFilter' => array(
       't' => new Twig_SimpleFilter('t', 't'),
       'render' => new Twig_SimpleFilter('render', 'catalyst_render'),
+      'show' => new Twig_SimpleFilter('show', 'show'),
+      'hide' => new Twig_SimpleFilter('show', 'hide'),
     ),
   );
-  /*
-  $twig->addFunction(new Twig_SimpleFunction('t', 't'));
-  $twig->addFilter(new Twig_SimpleFilter('t', 't'));
-  $twig->addFunction(new Twig_SimpleFunction('render', 'render'));
-  $twig->addFilter(new Twig_SimpleFilter('render', 'render'));
-  // */
-  //
   drupal_alter(__FUNCTION__, $twig, $extensions, $variables, $key);
 
   foreach ($extensions AS $callback => $items) {

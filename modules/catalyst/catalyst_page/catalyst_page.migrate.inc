@@ -4,12 +4,13 @@
  * @file
  */
 
-class CatalystPageMigration extends CatalystNodeMigration {
-  protected $nodeType = 'cpage';
-  protected $entityBundle = 'cpage';
+class CatalystPageMigration extends CatalystEntityMigration {
+  protected $entityBundle = 'page';
 
   protected function sourceFields() {
     return array(
+      'access_php' => t('Access PHP'),
+      'menu_options' => t('Menu options'),
       'layout' => t('Layout'),
       'content' => t('Content'),
       'css_custom' => t('Custom CSS'),
@@ -28,6 +29,9 @@ class CatalystPageMigration extends CatalystNodeMigration {
 
   protected function mapFields() {
     parent::mapFields();
+    // Menu options see prepare()
+    $this->addFieldMapping('field__menu', NULL);
+    $this->addFieldMapping('field__menu:serialization', NULL);
     // Block Placements
     $this->addFieldMapping('field__blockplacements__layfield', 'block_placements');
     $this->addReferenceFieldMapping('field__blockplacements__layfield:block_id', 'block_placement_ids', 'block');
@@ -40,14 +44,21 @@ class CatalystPageMigration extends CatalystNodeMigration {
     $this->addReferenceFieldMapping('field__media_files', 'files_shared', 'file');
     $this->addReferenceFieldMapping('field__blocks_related', 'blocks_reference', 'block');
     // Formmatted field mappings
+    $this->addFormattedFieldMapping('field__access', 'access_php', 'catalyst_php');
     $this->addFormattedFieldMapping('field__body', 'content', 'catalyst_html');
     $this->addFormattedFieldMapping('field__css__page', 'css_custom', 'catalyst_css');
     $this->addFormattedFieldMapping('field__js__page', 'js_custom', 'catalyst_js');
     $this->addFormattedFieldMapping('field__html_head', 'html_head', 'catalyst_html');
     $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'catalyst_php');
-    // Unmapped destinations
-    $this->addUnmigratedDestinations(array(
-      'promote', 'sticky',
-    ));
+  }
+
+  public function prepare($entity, $row) {
+    $language = isset($entity->language) ? $entity->language : LANGUAGE_NONE;
+    $entity->field__menu[$language][0]['value'] = drupal_json_decode(drupal_json_encode($row->menu_options));
+  }
+
+  public function postImport() {
+    parent::postImport();
+    menu_rebuild();
   }
 }

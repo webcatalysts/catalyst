@@ -11,7 +11,7 @@ include_once 'catalyst_page.features.inc';
  */
 function catalyst_page_theme() {
   return array(
-    'cpage_content' => array(
+    'page_content' => array(
       'variables' => array(
         'template' => NULL,
       ),
@@ -20,84 +20,38 @@ function catalyst_page_theme() {
 }
 
 /**
- * Implements hook_block_placements().
+ * Implements hook_entity_view_alter().
  */
-function catalyst_page_block_placements() {
-  $node = menu_get_object();
-  if (!empty($node->field__blockplacements__layfield)) {
-    return $node->field__blockplacements__layfield[$node->language];
-  }
-}
-
-function catalyst_page_form_cpage_node_form_alter(&$form, &$form_state) {
-  $query = new EntityFieldQuery;
-  $query->entityCondition('entity_type', 'catalyst')
-    ->entityCondition('bundle', 'layout')
-    ->addMetaData('account', user_load(1))
-    ->addTag(__FUNCTION__);
-  $result = $query->execute();
-  if (isset($result['catalyst'])) {
-    $callbacks = array(
-      'onselect' => array(),
-      'ondeselect' => array(),
-    );
-    $layouts = entity_load('catalyst', array_keys($result['catalyst']));
-    foreach ($layouts AS $id => $_layout) {
-      $layout = entity_metadata_wrapper('catalyst', $_layout);
-      if ($onselect = $layout->field__onselect->value()) {
-        $callbacks['onselect'][$id] = $onselect;
-      }
-      if ($ondeselect = $layout->field__ondeselect->value()) {
-        $callbacks['ondeselect'][$id] = $ondeselect;
-      }
-    }
-    $form['#attached']['js']['catalyst_page'] = drupal_get_path('module', 'catalyst_page') . '/catalyst_page_form.js';
-    drupal_add_js(array(
-      'pageLayoutOnChange' => array(
-        'selector' => '#edit-field-cpage-layout-und',
-        'callbacks' => $callbacks,
-      )),
-      'setting'
-    );
-  }
-}
-
-/**
- * Implements hook_node_view().
- */
-function catalyst_page_node_view($node, $view_mode, $langcode) {
-  $wrapper = entity_metadata_wrapper('node', $node);
-  if ($wrapper->getBundle() == 'cpage' && $view_mode == 'full') {
-    if ($layout = $wrapper->field__layout->value()) {
-      catalyst_set_layout($layout);
-    }
-  }
-}
-
-/**
- * Implements hook_node_view_alter().
- */
-function catalyst_page_node_view_alter(&$build) {
-  if (isset($build['field__body'])) {
+function catalyst_page_entity_view_alter(&$build) {
+  if (isset($build['field__body']) && isset($build['#entity']) && $build['#view_mode'] == 'full'
+    && $build['#entity_type'] == 'catalyst' && $build['#bundle'] == 'page') {
     if ($template = $build['field__body'][0]['#markup']) {
-      $build['field__body'][0]['#markup'] = theme('cpage_content', array(
-        'template' => new CatalystNodePage($build['#node']),
+      $build['field__body'][0]['#markup'] = theme('page_content', array(
+        'template' => new CatalystEntityPage($build['#entity']),
       ));
     }
   }
 }
 
-function template_process_cpage_content(&$variables) {
+function template_preprocess_page_content(&$variables) {
   $variables['title'] = drupal_get_title();
 }
 
-function catalyst_page_preprocess_cpage_content(&$variables) {
+function catalyst_page_preprocess_page_content(&$variables) {
   $template = $variables['template'];
+
+  $pathvars = array();
+  if ($path = $template->getMenuPath()) {
+    if ($pathvars = catalyst_menu_parse_path($path)) {
+      $variables = array_merge($variables, $pathvars);
+    }
+  }
 
   // Custom processing defined by the page
   if ($preprocess_php = $template->getPreprocessPHP()) {
-    catalyst_eval($preprocess_php, $variables);
+    catalyst_eval($preprocess_php, $variables, $pathvars);
   }
+
   // Custom HTML head defined by the page
   if ($custom_html_head = $template->getHTMLHead()) {
     drupal_add_html_head(
@@ -105,11 +59,11 @@ function catalyst_page_preprocess_cpage_content(&$variables) {
         '#type' => 'markup',
         '#markup' => $custom_html_head . "\n",
       ),
-      'cpage_html_head'
+      'catalyst_page_html_head'
     );
   }
 }
 
-function theme_cpage_content($variables) {
+function theme_page_content($variables) {
   return $variables['template']->renderTemplate($variables);
 }

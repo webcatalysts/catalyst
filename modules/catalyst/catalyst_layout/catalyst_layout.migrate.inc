@@ -28,8 +28,6 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
       'drupal_js_options' => t('Drupal JS Options'),
       'drupal_processing' => t('Drupal processing'),
       'preprocess_php' => t('Preprocessing PHP'),
-      'onselect' => t('Layout On Select'),
-      'ondeselect' => t('Layout On DeSelect'),
     ) + parent::SourceFields();
   }
   protected function mapFields() {
@@ -60,7 +58,5 @@ class CatalystLayoutMigration extends CatalystEntityMigration {
     $this->addFormattedFieldMapping('field__js__layout', 'js_custom', 'catalyst_js');
     $this->addFormattedFieldMapping('field__html_head', 'html_head', 'catalyst_html');
     $this->addFormattedFieldMapping('field__preprocess', 'preprocess_php', 'catalyst_php');
-    $this->addFormattedFieldMapping('field__onselect', 'onselect', 'catalyst_js');
-    $this->addFormattedFieldMapping('field__ondeselect', 'ondeselect', 'catalyst_js');
   }
 }

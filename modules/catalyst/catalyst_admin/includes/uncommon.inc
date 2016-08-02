@@ -20,3 +20,18 @@ function catalyst_admin_views_form_after_build($form, &$form_state) {
   }
   return $form;
 }
+
+/**
+ * Form after build callback for views exposed forms.
+ *
+ * @see catalyst_admin_form_alter().
+ */
+function catalyst_admin_views_exposed_form_after_build($form, &$form_state) {
+  $form['#attached']['js'][] = catalyst_get_path('admin') . '/js/views.js';
+
+  $form['#attributes']['class'][] = 'container-inline';
+  if (isset($form['secondary'])) {
+    $form['secondary']['#attributes']['class'][] = 'container-inline';
+  }
+  return $form;
+}

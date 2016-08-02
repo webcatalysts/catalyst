@@ -40,10 +40,16 @@ function catalyst_core_action_info() {
       'configurable' => TRUE,
       'triggers' => array('any'),
     ),
-    'node_update_package_action' => array(
-      'type' => 'node',
-      'label' => t('Set or change package'),
-      'configurable' => TRUE,
+    'catalyst_set_realm_system_action' => array(
+      'type' => 'catalyst',
+      'label' => t('Send to system realm'),
+      'configurable' => FALSE,
+      'triggers' => array('any'),
+    ),
+    'catalyst_set_realm_site_action' => array(
+      'type' => 'catalyst',
+      'label' => t('Send to site realm'),
+      'configurable' => FALSE,
       'triggers' => array('any'),
     ),
   );
@@ -142,24 +148,16 @@ function catalyst_core_menu_alter(&$menu_items) {
 /**
  * Implements hook_form_FORM_ID_alter().
  *
- * Make the field ui more usable by removing catalyst fields from not
+ * Make the field ui more usable by removing catalyst fields from none
  * catalyst entities.
- *
- * This does not belong in catalyst_admin as theoretically catalyst_admin
- * can be disabled/uninstalled.
  */
 function catalyst_core_form_field_ui_field_overview_form_alter(&$form, &$form_state) {
-  switch (true) {
-    // Skip catalyst entity field ui forms
-    case $form['#entity_type'] == 'catalyst':
-    // Skip catalyst cpage node field ui form
-    case $form['#entity_type'] == 'node' && $form['#bundle'] == 'cpage':
-      return;
+  if ($form['#entity_type'] == 'catalyst')  {
+    // After build callback in catalyst_core/includes/uncommoon.inc
+    catalyst_form_load_include($form_state, 'uncommon');
+    // Make any alterations as late as possible
+    $form['#after_build'][] = 'catalyst_field_ui_field_overview_form_after_build';
   }
-  // After build callback in catalyst_core/includes/uncommoon.inc
-  catalyst_form_load_include($form_state, 'uncommon');
-  // Make any alterations as late as possible
-  $form['#after_build'][] = 'catalyst_field_ui_field_overview_form_after_build';
 }
 
 /**
@@ -211,9 +209,7 @@ function catalyst_get_path($module = 'core') {
 }
 
 function catalyst_node_types() {
-  return array_intersect_key(node_type_get_types(),
-    array_flip(array('cpage')));
-  // module_invoke_all('catalyst_node_types')));
+  return array();
 }
 
 function catalyst_entity_is_a($bundle, $entity, $entity_type = 'catalyst', $bundle_key = 'type') {
@@ -346,6 +342,16 @@ function catalyst_menu_item_restore(&$menu_item) {
   }
 }
 
+function catalyst_set_realm_site_action($entity, $context) {
+  $wrapper = entity_metadata_wrapper('catalyst', $entity);
+  $wrapper->field__internal->set(FALSE);
+}
+
+function catalyst_set_realm_system_action($entity, $context) {
+  $wrapper = entity_metadata_wrapper('catalyst', $entity);
+  $wrapper->field__internal->set(TRUE);
+}
+
 function catalyst_update_package_action_form($context) {
   catalyst_include('actions');
   $context['entity_type'] = 'catalyst';
@@ -356,20 +362,6 @@ function catalyst_update_package_action_submit($form, $form_state) {
   return catalyst_update_package_form_submit($form, $form_state);
 }
 function catalyst_update_package_action($entity, $context) {
-  catalyst_include('actions');
-  catalyst_update_package($entity, $context);
-}
-
-function node_update_package_action_form($context) {
-  catalyst_include('actions');
-  $context['entity_type'] = 'node';
-  return catalyst_update_package_form($context);
-}
-function node_update_package_action_submit($form, $form_state) {
-  catalyst_include('actions');
-  return catalyst_update_package_form_submit($form, $form_state);
-}
-function node_update_package_action($entity, $context) {
   catalyst_include('actions');
   catalyst_update_package($entity, $context);
 }
@@ -425,14 +417,8 @@ function catalyst_menu_parent_title_callback($entity_type, $entity_id) {
 function catalyst_menu_page_callback($entity_type, $entity_id) {
   $entity = entity_load_single($entity_type, $entity_id);
   $wrapper = entity_metadata_wrapper($entity_type, $entity);
-  switch ($entity_type) {
-    case 'catalyst':
-      $template = new CatalystEntityPage($entity);
-      return theme('cpage_content', array('template' => $template));
-      return eck__entity__view($entity_type, $wrapper->getBundle(), $entity_id);
-    case 'node':
-      return node_page_view($entity);
-  }
+  module_load_include('entity.inc', 'eck');
+  return eck__entity__view_callback(array($entity), 'full', $wrapper->language());
 }
 
 function catalyst_menu_parse_path($path) {

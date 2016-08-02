@@ -76,7 +76,7 @@ function catalyst_menu_widget($field_instance, $values = array()) {
       'default tab' => t('Default menu tab'),
     ),
     '#required' => $field_instance['required'],
-    '#default_value' => isset($values['menu']['type']) ? $values['menu']['type'] : NULL,
+    '#default_value' => isset($values['menu']['type']) ? $values['menu']['type'] : 'none',
     '#ajax' => $ajax,
   );
   $options_access = FALSE;
@@ -230,12 +230,6 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
               'type' => MENU_DEFAULT_LOCAL_TASK,
               'weight' => $base_item['weight'],
             );
-            /*
-            dsm('item: ' . $path);
-            dsm($menu_items[$path]);
-            dsm('parent: ' . $parent_path);
-            dsm($menu_items[$parent_path]);
-             */
             break;
         }
         break;

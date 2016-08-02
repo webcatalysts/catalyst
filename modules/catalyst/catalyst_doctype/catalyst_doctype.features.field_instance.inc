@@ -76,7 +76,7 @@ function catalyst_doctype_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 30,
+        'rows' => 20,
       ),
       'type' => 'text_textarea',
       'weight' => 28,
@@ -112,14 +112,34 @@ function catalyst_doctype_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 0,
           'catalyst_html' => 'catalyst_html',
+          'catalyst_js' => 0,
+          'catalyst_php' => 0,
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
             'catalyst_html' => array(
               'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -131,10 +151,10 @@ function catalyst_doctype_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
-      'weight' => 18,
+      'weight' => 20,
     ),
   );
 
@@ -185,7 +205,7 @@ function catalyst_doctype_field_default_field_instances() {
         'sort_options' => 0,
       ),
       'type' => 'select_or_other',
-      'weight' => 20,
+      'weight' => 19,
     ),
   );
 
@@ -238,7 +258,7 @@ text/html|text/html',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other',
-      'weight' => 19,
+      'weight' => 18,
     ),
   );
 
@@ -367,112 +387,6 @@ text/html|text/html',
     ),
   );
 
-  // Exported field_instance: 'catalyst-doctype-field__ondeselect'.
-  $field_instances['catalyst-doctype-field__ondeselect'] = array(
-    'bundle' => 'doctype',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Custom javascript that is executed when this doctype is deselected on the layout form.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 4,
-      ),
-      'template' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field__ondeselect',
-    'label' => 'On DeSelect',
-    'required' => 0,
-    'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'catalyst_js' => 'catalyst_js',
-        ),
-        'allowed_formats_toggle' => 1,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'catalyst_js' => array(
-              'weight' => 0,
-            ),
-          ),
-        ),
-      ),
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 28,
-    ),
-  );
-
-  // Exported field_instance: 'catalyst-doctype-field__onselect'.
-  $field_instances['catalyst-doctype-field__onselect'] = array(
-    'bundle' => 'doctype',
-    'default_value' => NULL,
-    'deleted' => 0,
-    'description' => 'Custom javascript that is called when this doctype is selected on the layout form.',
-    'display' => array(
-      'default' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 3,
-      ),
-      'template' => array(
-        'label' => 'above',
-        'settings' => array(),
-        'type' => 'hidden',
-        'weight' => 0,
-      ),
-    ),
-    'entity_type' => 'catalyst',
-    'field_name' => 'field__onselect',
-    'label' => 'On Select',
-    'required' => 0,
-    'settings' => array(
-      'better_formats' => array(
-        'allowed_formats' => array(
-          'catalyst_js' => 'catalyst_js',
-        ),
-        'allowed_formats_toggle' => 1,
-        'default_order_toggle' => 0,
-        'default_order_wrapper' => array(
-          'formats' => array(
-            'catalyst_js' => array(
-              'weight' => 0,
-            ),
-          ),
-        ),
-      ),
-      'text_processing' => 1,
-      'user_register_form' => FALSE,
-    ),
-    'widget' => array(
-      'active' => 1,
-      'module' => 'text',
-      'settings' => array(
-        'rows' => 5,
-      ),
-      'type' => 'text_textarea',
-      'weight' => 27,
-    ),
-  );
-
   // Exported field_instance: 'catalyst-doctype-field__package'.
   $field_instances['catalyst-doctype-field__package'] = array(
     'bundle' => 'doctype',
@@ -546,14 +460,34 @@ text/html|text/html',
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 0,
+          'catalyst_html' => 0,
+          'catalyst_js' => 0,
           'catalyst_php' => 'catalyst_php',
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
             'catalyst_php' => array(
               'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -565,7 +499,7 @@ text/html|text/html',
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 10,
+        'rows' => 15,
       ),
       'type' => 'text_textarea',
       'weight' => 24,
@@ -577,15 +511,11 @@ text/html|text/html',
   t('<p><em>For a complete list of content types goto <a href="http://www.freeformatter.com/mime-types-list.html" target="_blank">http://www.freeformatter.com/mime-types-list.html</a>.</em></p>');
   t('Character Set');
   t('Content');
-  t('Custom javascript that is called when this doctype is selected on the layout form.');
-  t('Custom javascript that is executed when this doctype is deselected on the layout form.');
   t('Enable Drupal processing');
   t('HTTP Content-Type');
   t('Help/Instructions');
   t('Internal');
   t('Machine name');
-  t('On DeSelect');
-  t('On Select');
   t('Package');
   t('Preprocessing');
 

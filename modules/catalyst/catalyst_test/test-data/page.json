@@ -1,0 +1,99 @@
+[
+    {
+        "block_placements": [
+            {
+                "region": "page_test_region",
+                "weight": "0",
+                "cache": "0"
+            }
+        ],
+        "block_placement_ids": [
+            "page_region_block_test"
+        ],
+        "id": "catalyst_test_1",
+        "title": "Catalyst Page Test #1",
+        "access_php": "return user_access('access content');",
+        "content": "<h2>Page Tests<\/h2>\n<script>\n<!--\/\/--><![CDATA[\/\/ ><!--\n\n  QUnit.test(\"Page Basics Tests\", function (assert) {\n    assert.equal('{{ test_page_var }}', 'preprocess var val', 'Page Preprocessing Test');\n    assert.ok(jQuery('head meta#page-custom-head-test').length, 'Page Custom HTML Head Test');\n    assert.ok('{{ title }}', 'Page {{ title }} title variable test');\n  });\n  QUnit.test(\"Page JS Tests\", function (assert) {\n    assert.notEqual(typeof page_custom_js_var, 'undefined', 'Page Custom Javascript Test');\n    assert.notEqual(typeof page_shared_js_var, 'undefined', 'Page Shared Javascript Test');\n    assert.notEqual(typeof page_remote_js_var, 'undefined', 'Page Remote Javascript Test');\n    assert.notEqual(typeof page_local_js_var, 'undefined', 'Page Local Javascript Test');\n    assert.notEqual(typeof page_footer_js_var, 'undefined', 'Page Footer Javascript Test');\n  });\n\n\/\/--><!]]>\n<\/script><h3>Page CSS Tests<\/h3>\n<ul><li class=\"page-custom-css-test\">This should have a <strong>solid<\/strong> border.<\/li>\n  <li class=\"page-shared-css-test\">This should have a <strong>double<\/strong> border.<\/li>\n  <li class=\"page-remote-css-test\">This should have a <strong>dotted<\/strong> border.<\/li>\n  <li class=\"page-local-css-test\">This should have a <strong>dashed<\/strong> border.<\/li>\n<\/ul><script>\n<!--\/\/--><![CDATA[\/\/ ><!--\n\n  QUnit.test(\"Page CSS Tests\", function (assert) {\n    assert.equal(jQuery('.page-custom-css-test').css('border-top-style'), 'solid', 'Page Custom CSS Test');\n    assert.equal(jQuery('.page-shared-css-test').css('border-top-style'), 'double', 'Page Shared CSS Test');\n    assert.equal(jQuery('.page-local-css-test').css('border-top-style'), 'dashed', 'Page Local CSS Test');\n    assert.equal(jQuery('.page-remote-css-test').css('border-top-style'), 'dotted', 'Page Remote CSS Test');\n  });\n\n\/\/--><!]]>\n<\/script><h3>Page Files Tests<\/h3>\n<strong>Custom file test:<\/strong>\n<ul><li>Test <em>custom<\/em> file PATH: <strong>{{ customfilepath('page-custom-test.png') }}<\/strong><\/li>\n  <li>Test <em>custom<\/em> file URL: <strong>{{ customfileurl('page-custom-test.png') }}<\/strong><\/li>\n  <li>Test <em>custom<\/em> file as image:<br \/><img id=\"page-custom-file-test\" src=\"{{ customfilepath('page-custom-test.png') }}\" \/><\/li>\n<\/ul><strong>Shared file test:<\/strong>\n<ul><li>Test <em>shared<\/em> file PATH: <strong>{{ filepath('page_shared_test') }}<\/strong><\/li>\n  <li>Test <em>shared<\/em> file URL: <strong>{{ fileurl('page_shared_test') }}<\/strong><\/li>\n  <li>Test <em>shared<\/em> file as image:<br \/><img id=\"page-shared-file-test\" src=\"{{ filepath('page_shared_test') }}\" \/><\/li>\n<\/ul><strong>Local file test:<\/strong>\n<ul><li>Test <em>local<\/em> file PATH: <strong>{{ filepath('page_local_test') }}<\/strong><\/li>\n  <li>Test <em>local<\/em> file URL: <strong>{{ fileurl('page_local_test') }}<\/strong><\/li>\n  <li>Test <em>local<\/em> file as image:<br \/><img id=\"page-local-file-test\" src=\"{{ filepath('page_local_test') }}\" \/><\/li>\n<\/ul><strong>Remote file test:<\/strong>\n<ul><li>Test <em>remote<\/em> file PATH: <strong>{{ filepath('page_remote_test') }}<\/strong><\/li>\n  <li>Test <em>remote<\/em> file URL: <strong>{{ fileurl('page_remote_test') }}<\/strong><\/li>\n  <li>Test <em>remote<\/em> file as image:<br \/><img id=\"page-remote-file-test\" src=\"{{ filepath('page_remote_test') }}\" \/><\/li>\n<\/ul><script>\n<!--\/\/--><![CDATA[\/\/ ><!--\n\nQUnit.test(\"Page Files Tests\", function (assert) {\n  var pageCustomFileImg = jQuery('img#page-custom-file-test');\n  assert.ok(pageCustomFileImg.attr('src'), 'Page Custom File Data Test');\n  assert.equal(pageCustomFileImg.width(), 402, 'Page Custom File Exists Test');\n  var pageSharedFileImg = jQuery('img#page-shared-file-test');\n  assert.ok(pageSharedFileImg.attr('src'), 'Page Shared File Data Test');\n  assert.equal(pageSharedFileImg.width(), 302, 'Page Shared File Exists Test');\n  var pageLocalFileImg = jQuery('img#page-local-file-test');\n  assert.ok(pageLocalFileImg.attr('src'), 'Page Local File Data Test');\n  assert.equal(pageLocalFileImg.width(), 202, 'Page Local File Exists Test');\n  var pageRemoteFileImg = jQuery('img#page-remote-file-test');\n  assert.ok(pageRemoteFileImg.attr('src'), 'Page Remote File Data Test');\n  assert.equal(pageRemoteFileImg.width(), 102, 'Page Remote File Exists Test');\n});\n\n\/\/--><!]]>\n<\/script><h3>Page Block Tests<\/h3>\n{{ showblock('page_embedded_block_test') }}\n<script>\n<!--\/\/--><![CDATA[\/\/ ><!--\n\n  QUnit.test(\"Page block tests\", function(assert) {\n    assert.ok(jQuery('#page-embedded-block').length, 'Page Embedded Block Embedded Test');\n    assert.equal(jQuery('#page-test-region #page-region-block').length, 1, 'Page Region Block Embedded Test');\n  });\n\n\/\/--><!]]>\n<\/script>",
+        "css_custom": ".page-custom-css-test,\n.page-custom-css-no-override {\n  border: 2px solid green;\n  padding: 4px;\n  margin: 4px;\n}\n.page-shared-css-override,\n.page-local-css-override,\n.page-remote-css-override,\n.block-custom-css-override-page,\n.layout-custom-css-override-page,\n.stylesheet-custom-css-override-page {\n  border-style: groove;\n}",
+        "html_head": "<meta id=\"page-custom-head-test\" value=\"success\" \/>",
+        "internal": false,
+        "files_custom": [
+            "catalyst_test_1\/page-custom-test.png"
+        ],
+        "js_custom": "var page_custom_js_var = 'defined';\nvar block_js_var_override_page = 'page';\nvar layout_js_var_override_page = 'page';",
+        "machine": "catalyst_test_1",
+        "menu_options": {
+            "path": "catalyst-test\/test-1",
+            "menu": {
+                "type": "default tab",
+                "title": "Catalyst Tests",
+                "description": "",
+                "name": "navigation",
+                "weight": "0",
+                "parent": {
+                    "type": "normal",
+                    "title": "Test 1",
+                    "description": "",
+                    "weight": "0"
+                }
+            }
+        },
+        "package": "catalyst_test",
+        "preprocess_php": "$variables['test_page_var'] = 'preprocess var val';",
+        "admin_notes": null,
+        "layout": "catalyst_test_1",
+        "stylesheets": [
+            "page_shared_test",
+            "page_local_test",
+            "page_remote_test"
+        ],
+        "javascripts": [
+            "page_shared_test",
+            "page_local_test",
+            "page_remote_test",
+            "page_footer_test"
+        ],
+        "files_shared": [
+            "page_shared_test",
+            "page_local_test",
+            "page_remote_test"
+        ]
+    },
+    {
+        "block_placements": [],
+        "block_placement_ids": [],
+        "id": "catalyst_test_json",
+        "title": "Catalyst Test - JSON",
+        "access_php": "return user_access('access content');",
+        "content": "{{ encoded_json }}",
+        "css_custom": null,
+        "html_head": null,
+        "internal": false,
+        "files_custom": [],
+        "js_custom": null,
+        "machine": "catalyst_test_json",
+        "menu_options": {
+            "path": "catalyst-test\/json",
+            "menu": {
+                "type": "none",
+                "title": "",
+                "description": "",
+                "name": "",
+                "weight": 0,
+                "parent": {
+                    "type": "none",
+                    "title": "",
+                    "description": "",
+                    "weight": 0
+                }
+            }
+        },
+        "package": "catalyst_test",
+        "preprocess_php": "$data = array(\n  'title' => t('Hello World'),\n  'description' => t('The quick brown fox jumps over the lazy dog'),\n);\n$variables['encoded_json'] = drupal_json_encode($data);",
+        "admin_notes": null,
+        "layout": "catalyst_test_json",
+        "stylesheets": [],
+        "javascripts": [],
+        "files_shared": []
+    }
+]

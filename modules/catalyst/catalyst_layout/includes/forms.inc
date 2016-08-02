@@ -68,7 +68,7 @@ function catalyst_default_layout_form_ajax($form, $form_state) {
  */
 function catalyst_node_default_layout_form($form, &$form_state) {
   // Need to implement a hook here
-  $custom_node_types = array_diff_key(node_type_get_names(), array('cpage' => 1));
+  $custom_node_types = node_type_get_names();
   $layout_options = catalyst_default_layout_options();
   if (!$custom_node_types || !$layout_options) {
     return array();
