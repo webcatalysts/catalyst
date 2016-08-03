@@ -8,7 +8,7 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
 
   public function getLayoutID() {
     if ($this->has_entity) {
-      return $this->wrapper->getIdentifier();
+      return $this->wrapper->field__machine->machine->value();
     }
     return FALSE;
   }

@@ -13,8 +13,8 @@ function catalyst_layout_initialize() {
   if (!isset($current_layout)) {
     $resolved_layout = FALSE;
     // Initialize the default layout if one is set
-    if ($layout_entity_id = variable_get('catalyst_layout_default', FALSE)) {
-      $resolved_layout = catalyst_load_single($layout_entity_id);
+    if ($default_layout = variable_get('catalyst_layout_default', FALSE)) {
+      $resolved_layout = machine_load_single('field__machine', $default_layout, 'catalyst', 'layout');
     }
     // This might not be the right way to implement this as the layout
     // shouldn't be altered but this gives other modules a chance to call
@@ -30,7 +30,7 @@ function catalyst_get_layout() {
   return catalyst_set_layout();
 }
 
-function catalyst_set_layout($layout = NULL) {
+function catalyst_set_layout($layout = NULL, $entity_type = 'catalyst') {
   $stored_layout =& drupal_static('catalyst_layout');
   if ($layout !== NULL) {
     // Prevent "changing" the layout to the same layout
@@ -38,9 +38,13 @@ function catalyst_set_layout($layout = NULL) {
       switch (true) {
         // $layout is null, false, or an ID and matches the stored layout
         case (!$layout || is_int($layout)) && $stored_layout->getLayoutID() == $layout:
+            return $stored_layout;
         // $layout is an entity and matches the stored layout.
-        case is_a($layout, 'Entity') && $stored_layout->getLayoutID() == $layout->id:
-          return $stored_layout;
+        case is_a($layout, 'Entity'):
+          $wrapper = entity_metadata_wrapper($entity_type, $layout);
+          if (isset($wrapper->field__machine) && $stored_layout->getLayoutID() == entity_valval($wrapper->field__machine)) {
+            return $stored_layout;
+          }
       }
     }
 

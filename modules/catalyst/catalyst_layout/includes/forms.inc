@@ -101,7 +101,7 @@ function catalyst_default_layout_options() {
       $wrapper = entity_metadata_wrapper('catalyst', $layout);
       if ($doctype = $wrapper->field__doctype) {
         if (isset($doctype->field__doctype_content_type) && $doctype->field__doctype_content_type->value() == 'text/html') {
-          $options[$wrapper->getIdentifier()] = $wrapper->label();
+          $options[$wrapper->field__machine->machine->value()] = $wrapper->label();
         }
       }
     }
