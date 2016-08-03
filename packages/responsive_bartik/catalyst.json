@@ -1,0 +1,66 @@
+{
+    "api": 2,
+    "groups": {
+        "responsive_bartik": {
+            "title": "Responsive Bartik 1.0-alpha"
+        }
+    },
+    "migrations": {
+        "responsive_bartik__layout": {
+            "class_name": "CatalystLayoutMigration",
+            "group_name": "responsive_bartik",
+            "source_filename": "layout.json",
+            "source_files_directory": "attached-files\/layout",
+            "source_migrations": {
+                "package": "responsive_bartik__package",
+                "doctype": "responsive_bartik__doctype",
+                "stylesheet": "responsive_bartik__stylesheet",
+                "javascript": "responsive_bartik__javascript",
+                "file": "responsive_bartik__file"
+            }
+        },
+        "responsive_bartik__stylesheet": {
+            "class_name": "CatalystMediaStylesheetMigration",
+            "group_name": "responsive_bartik",
+            "source_filename": "stylesheet.json",
+            "source_files_directory": "attached-files\/stylesheet",
+            "source_migrations": {
+                "package": "responsive_bartik__package",
+                "file": "responsive_bartik__file"
+            }
+        },
+        "responsive_bartik__doctype": {
+            "class_name": "CatalystDoctypeMigration",
+            "group_name": "responsive_bartik",
+            "source_filename": "doctype.json",
+            "source_files_directory": "attached-files\/doctype",
+            "source_migrations": {
+                "package": "responsive_bartik__package"
+            }
+        },
+        "responsive_bartik__file": {
+            "class_name": "CatalystMediaFileMigration",
+            "group_name": "responsive_bartik",
+            "source_filename": "file.json",
+            "source_files_directory": "attached-files\/file",
+            "source_migrations": {
+                "package": "responsive_bartik__package"
+            }
+        },
+        "responsive_bartik__javascript": {
+            "class_name": "CatalystMediaJavascriptMigration",
+            "group_name": "responsive_bartik",
+            "source_filename": "javascript.json",
+            "source_files_directory": "attached-files\/javascript",
+            "source_migrations": {
+                "package": "responsive_bartik__package"
+            }
+        },
+        "responsive_bartik__package": {
+            "class_name": "CatalystPackageMigration",
+            "group_name": "responsive_bartik",
+            "source_filename": "package.json",
+            "source_files_directory": "attached-files\/package"
+        }
+    }
+}

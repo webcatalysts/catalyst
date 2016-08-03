@@ -1,0 +1,109 @@
+[
+    {
+        "regions": [
+            {
+                "machine": "header",
+                "text": "Header"
+            },
+            {
+                "machine": "help",
+                "text": "Help"
+            },
+            {
+                "machine": "page_top",
+                "text": "Page top"
+            },
+            {
+                "machine": "page_bottom",
+                "text": "Page bottom"
+            },
+            {
+                "machine": "highlighted",
+                "text": "Highlighted"
+            },
+            {
+                "machine": "featured",
+                "text": "Featured"
+            },
+            {
+                "machine": "sidebar_first",
+                "text": "Sidebar first"
+            },
+            {
+                "machine": "sidebar_second",
+                "text": "Sidebar second"
+            },
+            {
+                "machine": "triptych_first",
+                "text": "Triptych first"
+            },
+            {
+                "machine": "triptych_middle",
+                "text": "Triptych middle"
+            },
+            {
+                "machine": "triptych_last",
+                "text": "Triptych last"
+            },
+            {
+                "machine": "footer_first",
+                "text": "Footer first"
+            },
+            {
+                "machine": "footer_second",
+                "text": "Footer second"
+            },
+            {
+                "machine": "footer_third",
+                "text": "Footer third"
+            },
+            {
+                "machine": "footer_fourth",
+                "text": "Footer fourth"
+            },
+            {
+                "machine": "footer",
+                "text": "Footer"
+            }
+        ],
+        "drupal_css_options": [
+            "-100",
+            "0"
+        ],
+        "drupal_js_options": [
+            "-100",
+            "0"
+        ],
+        "page_title_pattern": "{%if title %}{{ title }} | {% endif %}{{ name }}",
+        "show_messages": true,
+        "block_placements": [],
+        "block_placement_ids": [],
+        "id": "responsive_bartik",
+        "title": "Responsive Bartik",
+        "content": "<div id=\"page-wrapper\"><div id=\"page\">\n  <header id=\"header\" role=\"banner\" class=\"{{ (secondary_menu) ? 'with-secondary-menu': 'without-secondary-menu' }}\"><div class=\"section clearfix\">\n    {% if secondary_menu %}\n      <nav id=\"secondary-menu\" role=\"navigation\" class=\"navigation\">\n        {{ secondary_menu }}\n      <\/nav> <!-- \/#secondary-menu -->\n    {% endif %}\n    \n    \n    {% if filepath('responsive_bartik_logo') %}\n      <a href=\"{{ front_page }}\" title=\"{{ t('Home') }}\" rel=\"home\" id=\"logo\">\n        <img src=\"{{ filepath('responsive_bartik_logo') }}\" alt=\"{{ t('Home') }}\" \/>\n      <\/a>\n    {% endif %}\n\n    {% if site_name or site_slogan %}\n      <div id=\"name-and-slogan\"{% if hide_site_name and hide_site_slogan %} class=\"element-invisible\"{% endif %}>\n\n        {% if site_name %}\n          {% if title %}\n            <div id=\"site-name\"{% if hide_site_name %} class=\"element-invisible\"{% endif %}>\n              <strong>\n                <a href=\"{{ front_page }}\" title=\"{{ t('Home') }}\" rel=\"home\"><span>{{ site_name }}<\/span><\/a>\n              <\/strong>\n            <\/div>\n          {% else %} {# Use h1 when the content title is empty #}\n            <h1 id=\"site-name\"{% if hide_site_name %} class=\"element-invisible\"{% endif %}>\n              <a href=\"{{ front_page }}\" title=\"{{ t('Home') }}\" rel=\"home\"><span>{{ site_name }}<\/span><\/a>\n            <\/h1>\n          {% endif %}\n        {% endif %}\n\n        {% if site_slogan %}\n          <div id=\"site-slogan\"{% if hide_site_slogan %} class=\"element-invisible\"{% endif %}>\n            {{ site_slogan }}\n          <\/div>\n        {% endif %}\n\n      <\/div> <!-- \/#name-and-slogan -->\n    {% endif %}\n\n    {{ render(region.header) }}\n\n    {% if main_menu %}\n      <nav id=\"main-menu\" role=\"navigation\" class=\"navigation\">\n        {{ main_menu }}\n      <\/nav> <!-- \/#main-menu -->\n    {% endif %}\n  <\/div><\/header> <!-- \/.section, \/#header -->\n\n  {% if messages %}\n    <div id=\"messages\"><div class=\"section clearfix\">\n      {{ messages }}\n    <\/div><\/div> <!-- \/.section, \/#messages -->\n  {% endif %}\n\n  {% if region.featured %}\n    <div id=\"featured\"><div class=\"section clearfix\">\n      {{ render(region.featured) }}\n    <\/div><\/div> <!-- \/.section, \/#featured -->\n  {% endif %}\n\n  <div id=\"main-wrapper\" class=\"clearfix\"><div id=\"main\" role=\"main\" class=\"clearfix\">\n\n    {{ breadcrumb }}\n\n    <div id=\"content\" class=\"column\"><div class=\"section\">\n      {% if region.highlighted %}<div id=\"highlighted\">{{ render(region.highlighted) }}<\/div>{% endif %}\n      <a id=\"main-content\"><\/a>\n      {{ render(title_prefix) }}\n      {% if title %}\n        <h1 class=\"title\" id=\"page-title\">\n          {{ title }}\n        <\/h1>\n      {% endif %}\n      {{ render(title_suffix) }}\n      {% if tabs %}\n        <div class=\"tabs\">\n          {{ render(tabs) }}\n        <\/div>\n      {% endif %}\n      {{ render(region.help) }}\n      {% if action_links %}\n        <ul class=\"action-links\">\n          {{ render(action_links) }}\n        <\/ul>\n      {% endif %}\n      <div id=\"content\">\n        {{ content }}\n      <\/div>\n      {{ feed_icons }}\n\n    <\/div><\/div> <!-- \/.section, \/#content -->\n\n    {% if region.sidebar_first %}\n      <div id=\"sidebar-first\" class=\"column sidebar\"><div class=\"section\">\n        {{ render(region.sidebar_first) }}\n      <\/div><\/div> <!-- \/.section, \/#sidebar-first -->\n    {% endif %}\n\n    {% if region.sidebar_second %}\n      <div id=\"sidebar-second\" class=\"column sidebar\"><div class=\"section\">\n        {{ render(region.sidebar_second) }}\n      <\/div><\/div> <!-- \/.section, \/#sidebar-second -->\n    {% endif %}\n\n  <\/div><\/div> <!-- \/#main, \/#main-wrapper -->\n\n  {% if region.triptych_first or region.triptych_middle or region.triptych_last %}\n    <div id=\"triptych-wrapper\"><div id=\"triptych\" class=\"clearfix\">\n      {{ render(region.triptych_first) }}\n      {{ render(region.triptych_middle) }}\n      {{ render(region.triptych_last) }}\n    <\/div><\/div> <!-- \/#triptych, \/#triptych-wrapper -->\n  {% endif %}\n\n  <div id=\"footer-wrapper\"><div class=\"section\">\n\n    {% if region.footer_first or region.footer_second or region.footer_third or region.footer_fourth %}\n      <div id=\"footer-columns\" class=\"clearfix\">\n        {{ render(region.footer_first) }}\n        {{ render(region.footer_second) }}\n        {{ render(region.footer_third) }}\n        {{ render(region.footer_fourth) }}\n      <\/div> <!-- \/#footer-columns -->\n    {% endif %}\n\n    {% if region.footer %}\n      <footer id=\"footer\" role=\"contentinfo\" class=\"clearfix\">\n        {{ render(region.footer) }}\n      <\/footer> <!-- \/#footer -->\n    {% endif %}\n\n  <\/div><\/div> <!-- \/.section, \/#footer-wrapper -->\n\n<\/div><\/div> <!-- \/#page, \/#page-wrapper -->",
+        "css_custom": "#content h1,h2,h3,h4,h5,h6 { font-weight: bold; }",
+        "debug": false,
+        "drupal_processing": true,
+        "html_head": "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n<meta name=\"MobileOptimized\" content=\"width\" \/>\n<meta name=\"HandheldFriendly\" content=\"true\" \/>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" \/>\n<meta http-equiv=\"cleartype\" content=\"on\" \/>",
+        "internal": false,
+        "files_custom": [],
+        "js_custom": null,
+        "machine": "responsive_bartik",
+        "package": "responsive_bartik",
+        "preprocess_php": "$variables['main_menu'] = theme('links__system_main_menu', array(\n  'links' => menu_main_menu(),\n  'attributes' => array(\n    'id' => 'main-menu-links',\n    'class' => array('links', 'clearfix'),\n  ),\n  'heading' => array(\n    'text' => t('Main menu'),\n    'level' => 'h2',\n    'class' => array('element-invisible'),\n  ),\n));\n$variables['secondary_menu'] = theme('links__system_secondary_menu', array(\n  'links' => menu_secondary_menu(),\n  'attributes' => array(\n    'id' => 'secondary-menu-links',\n    'class' => array('links', 'inline', 'clearfix'),\n  ),\n  'heading' => array(\n    'text' => t('Secondary menu'),\n    'level' => 'h2',\n    'class' => array('element-invisible'),\n  ),\n));",
+        "admin_notes": null,
+        "doctype": "responsive_bartik",
+        "stylesheets": [
+            "responsive_bartik_layout",
+            "responsive_bartik_style",
+            "responsive_bartik_colors",
+            "responsive_bartik_print"
+        ],
+        "javascripts": [
+            "responsive_bartik_collapsible_menu"
+        ],
+        "files_shared": [
+            "responsive_bartik_logo"
+        ]
+    }
+]
