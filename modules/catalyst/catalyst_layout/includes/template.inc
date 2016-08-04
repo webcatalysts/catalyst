@@ -13,6 +13,13 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
     return FALSE;
   }
 
+  public function getLayoutEntityID() {
+    if ($this->has_entity) {
+      return $this->wrapper->getIdentifier();
+    }
+    return FALSE;
+  }
+
   public function getDoctype() {
     $doctype = FALSE;
     if ($this->has_entity) {

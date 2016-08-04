@@ -115,7 +115,7 @@ function catalyst_block_page_build(&$page) {
 function catalyst_block_block_placements() {
   $layout = catalyst_get_layout();
   $placements = array();
-  if ($layout_id = $layout->getLayoutID()) {
+  if ($layout_id = $layout->getLayoutEntityID()) {
     $query = db_select('field_data_field__blockplacements__block', 't')
       ->condition('field__blockplacements__block_layout_id', $layout_id, '=');
     $query->addField('t', 'entity_id', 'block_id');
@@ -131,7 +131,6 @@ function catalyst_block_block_placements() {
       $placements[] = (array)$item;
     }
   }
-
   if ($static_placements =& drupal_static('catalyst_block_placements')) {
     while ($placement = array_shift($static_placements)) {
       $placements[] = $placement;
