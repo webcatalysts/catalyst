@@ -26,13 +26,13 @@
             "path": "catalyst-test\/test-1",
             "menu": {
                 "type": "default tab",
-                "title": "Catalyst Tests",
+                "title": "Page Test 1",
                 "description": "",
-                "name": "navigation",
+                "name": "main-menu",
                 "weight": "0",
                 "parent": {
                     "type": "normal",
-                    "title": "Test 1",
+                    "title": "Catalyst Tests",
                     "description": "",
                     "weight": "0"
                 }
