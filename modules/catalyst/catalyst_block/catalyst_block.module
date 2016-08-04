@@ -157,7 +157,13 @@ function catalyst_block_block_placements_alter(&$placements) {
       $pages = drupal_strtolower($placement['pages']);
       // Not using the function here see block_block_list_alter()
       $request_path = drupal_strtolower($_GET['q']);
-      if ($placement['visibility'] > CATALYST_BLOCK_VISIBILITY_ALL) {
+      if ($placement['visibility'] == CATALYST_BLOCK_VISIBILITY_PHP) {
+        $variables = array();
+        if (!catalyst_eval($placement['pages'], $variables)) {
+          unset($placements[$key]);
+        }
+      }
+      elseif ($placement['visibility'] > CATALYST_BLOCK_VISIBILITY_ALL) {
         $path = drupal_strtolower(drupal_get_path_alias($request_path));
         $page_match = drupal_match_path($path, $pages);
         if ($path != $request_path) {
