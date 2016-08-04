@@ -1,0 +1,39 @@
+[
+    {
+        "block_placements": [],
+        "block_placement_ids": [],
+        "id": "node_page_default",
+        "title": "Node",
+        "access_php": "return user_access('access content');",
+        "content": "<div id=\"node-page-default\">\n  {{ build|render }}\n<\/div>",
+        "css_custom": "#node-page-default ul {\n  padding-left: 3em;\n}",
+        "html_head": null,
+        "internal": true,
+        "files_custom": [],
+        "js_custom": null,
+        "machine": "node_page_default",
+        "menu_options": {
+            "path": "node",
+            "menu": {
+                "type": "none",
+                "title": "",
+                "description": "",
+                "name": "",
+                "weight": 0,
+                "parent": {
+                    "type": "none",
+                    "title": "",
+                    "description": "",
+                    "weight": 0
+                }
+            }
+        },
+        "package": "catalyst_defaults",
+        "preprocess_php": "$select = db_select('node', 'n')\n  ->fields('n', array('nid', 'sticky', 'created'))\n  ->condition('n.promote', 1)\n  ->condition('n.status', 1)\n  ->orderBy('n.sticky', 'DESC')\n  ->orderBy('n.created', 'DESC')\n  ->extend('PagerDefault')\n  ->limit(variable_get('default_nodes_main', 10))\n  ->addTag('node_access');\n\n$nids = $select->execute()->fetchCol();\nif (!empty($nids)) {\n  $nodes = node_load_multiple($nids);\n  $build = node_view_multiple($nodes);\n\n  \/\/ 'rss.xml' is a path, not a file, registered in node_menu().\n  drupal_add_feed('rss.xml', variable_get('site_name', 'Drupal') . ' ' . t('RSS'));\n  $build['pager'] = array(\n    '#theme' => 'pager',\n    '#weight' => 5,\n  );\n  drupal_set_title('');\n}\nelse {\n  drupal_set_title(t('Welcome to @site-name', array('@site-name' => variable_get('site_name', 'Drupal'))), PASS_THROUGH);\n\n  $default_message = '<p>' . t('No front page content has been created yet.') . '<\/p>';\n\n  $default_links = array();\n  if (user_access('add catalyst doctype entities')) {\n    $default_links[] = l(t('Add new doctype'), 'admin\/catalyst\/layout\/add');\n  }\n  if (user_access('add catalyst layout entities')) {\n    $default_links[] = l(t('Add new layout'), 'admin\/catalyst\/layout\/add');\n  }\n  if (_node_add_access()) {\n    $default_links[] = l(t('Add new content'), 'node\/add');\n  }\n\n  if (!empty($default_links)) {\n    $default_message .= theme('item_list', array('items' => $default_links));\n  }\n\n  $build['default_message'] = array(\n    '#markup' => $default_message,\n    '#prefix' => '<div id=\"first-time\">',\n    '#suffix' => '<\/div>',\n  );\n}\n$variables['build'] = $build;",
+        "admin_notes": null,
+        "layout": null,
+        "stylesheets": [],
+        "javascripts": [],
+        "files_shared": []
+    }
+]

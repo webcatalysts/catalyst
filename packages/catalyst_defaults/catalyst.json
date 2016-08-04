@@ -1,0 +1,35 @@
+{
+    "api": 2,
+    "groups": {
+        "catalyst_defaults": {
+            "title": "Catalyst Defaults"
+        }
+    },
+    "migrations": {
+        "catalyst_defaults__page": {
+            "class_name": "CatalystPageMigration",
+            "group_name": "catalyst_defaults",
+            "source_filename": "page.json",
+            "source_files_directory": "attached-files\/page",
+            "source_migrations": {
+                "package": "catalyst_defaults__package",
+                "block": "catalyst_defaults__block"
+            }
+        },
+        "catalyst_defaults__block": {
+            "class_name": "CatalystBlockMigration",
+            "group_name": "catalyst_defaults",
+            "source_filename": "block.json",
+            "source_files_directory": "attached-files\/block",
+            "source_migrations": {
+                "package": "catalyst_defaults__package"
+            }
+        },
+        "catalyst_defaults__package": {
+            "class_name": "CatalystPackageMigration",
+            "group_name": "catalyst_defaults",
+            "source_filename": "package.json",
+            "source_files_directory": "attached-files\/package"
+        }
+    }
+}

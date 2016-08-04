@@ -16,8 +16,6 @@ function catalyst_install() {
   $default_theme = variable_get('theme_default', 'notheme');
 
   variable_set('theme_default', 'notheme');
-  variable_set('admin_theme', 'seven');
-  variable_set('node_admin_theme', 1);
 
   // Allow visitor account creation, but with administrative approval.
   variable_set('user_register', USER_REGISTER_VISITORS_ADMINISTRATIVE_APPROVAL);
@@ -143,13 +141,14 @@ function catalyst_install_finished(&$install_state) {
 
   $install_packages = array_filter(variable_get('catalyst_install_packages', array(
     'responsive_bartik',
+    'catalyst_defaults',
   )));
 
   if ($install_packages) {
     catalyst_include('import');
     $path = drupal_get_path('module', 'catalyst') . '/packages';
     foreach ($install_packages AS $package) {
-      catalyst_import($path . '/' . $package);
+      catalyst_import($path . '/' . $package, TRUE);
     }
     variable_set('catalyst_layout_default', 'responsive_bartik');
   }

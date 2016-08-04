@@ -87,8 +87,11 @@ function catalyst_deregister_import($info) {
 /**
  * Might need to extend this to support batching..
  */
-function catalyst_import($source_directory) {
+function catalyst_import($source_directory, $deregister = FALSE) {
   $info = catalyst_load_import($source_directory);
   catalyst_register_import($info);
   catalyst_process_import($info['migrations']);
+  if ($deregister) {
+    catalyst_deregister_import($info);
+  }
 }
