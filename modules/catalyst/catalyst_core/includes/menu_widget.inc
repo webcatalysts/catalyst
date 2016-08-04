@@ -189,6 +189,7 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
       'file path' => catalyst_get_path() . '/includes',
       'file' => 'menu_widget.inc',
       'weight' => $menu_options['weight'] != "" ? $menu_options['weight'] : 0,
+      'menu_name' => empty($menu_options['name']) ? 'navigation' : $menu_options['name'],
     );
     switch ($menu_options['type']) {
       case 'none':
