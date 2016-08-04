@@ -56,6 +56,16 @@
                 "package": "responsive_bartik__package"
             }
         },
+        "responsive_bartik__block": {
+            "class_name": "CatalystBlockMigration",
+            "group_name": "responsive_bartik",
+            "source_filename": "block.json",
+            "source_files_directory": "attached-files\/block",
+            "source_migrations": {
+                "package": "responsive_bartik__package",
+                "layout": "responsive_bartik__layout"
+            }
+        },
         "responsive_bartik__package": {
             "class_name": "CatalystPackageMigration",
             "group_name": "responsive_bartik",

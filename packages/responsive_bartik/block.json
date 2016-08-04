@@ -20,7 +20,7 @@
         "files_custom": [],
         "js_custom": null,
         "machine": "user_login",
-        "package": "catalyst_defaults",
+        "package": "responsive_bartik",
         "preprocess_php": "$variables['form'] = drupal_get_form('user_login_block');",
         "admin_notes": null,
         "stylesheets": [],

@@ -16,15 +16,6 @@
                 "block": "catalyst_defaults__block"
             }
         },
-        "catalyst_defaults__block": {
-            "class_name": "CatalystBlockMigration",
-            "group_name": "catalyst_defaults",
-            "source_filename": "block.json",
-            "source_files_directory": "attached-files\/block",
-            "source_migrations": {
-                "package": "catalyst_defaults__package"
-            }
-        },
         "catalyst_defaults__package": {
             "class_name": "CatalystPackageMigration",
             "group_name": "catalyst_defaults",
