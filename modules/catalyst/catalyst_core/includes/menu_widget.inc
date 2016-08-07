@@ -195,6 +195,7 @@ function catalyst_menu_widget_menu_alter(&$menu_items) {
       case 'none':
         $menu_items[$path] = array(
           'type' => MENU_CALLBACK,
+          'menu_name' => NULL,
         ) + $base_item;
         break;
       case 'normal':
