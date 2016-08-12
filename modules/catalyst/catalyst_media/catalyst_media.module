@@ -150,7 +150,10 @@ function catalyst_media_entity_view($entity, $type, $view_mode, $langcode) {
       if (isset($entity->$field)) {
         foreach ($wrapper->$field->value() AS $delta => $include) {
           $include = entity_metadata_wrapper('catalyst', $include);
-          $callback($include, $group, $delta);
+          // Ensure the include exists before attempting to add it
+          if ($include->value()) {
+            $callback($include, $group, $delta);
+          }
         }
       }
     }
