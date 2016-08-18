@@ -65,6 +65,12 @@ abstract class CatalystEntityTemplate extends CatalystTemplate {
     $this->template = $this->retrieveTemplate();
   }
 
+  public function getEntity() {
+    if ($this->has_entity) {
+      return $this->wrapper->value();
+    }
+  }
+
   protected function getTemplate() {
     if ($this->has_entity) {
       return $this->template;
