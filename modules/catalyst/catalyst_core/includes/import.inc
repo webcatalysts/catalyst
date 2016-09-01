@@ -5,10 +5,30 @@
  * Catalyst import functions.
  */
 
-function catalyst_process_import($migrations) {
+/**
+ * Might need to extend this to support batching..
+ */
+function catalyst_import($source_directory, $deregister = FALSE, $update = TRUE) {
+  $info = catalyst_load_import($source_directory);
+  catalyst_register_import($info);
+  catalyst_process_import($info['migrations'], $update);
+  if ($deregister) {
+    catalyst_deregister_import($info);
+  }
+}
+
+function catalyst_import_update($module, $subpath = 'catalyst') {
+  $source_directory = drupal_get_path('module', $module) . '/' . $subpath;
+  catalyst_import($source_directory, TRUE);
+}
+
+function catalyst_process_import($migrations, $update = TRUE) {
   foreach (array_keys($migrations) AS $instance) {
     migrate_static_registration(array($instance));
     $migration = Migration::getInstance($instance);
+    if ($update) {
+      $migration->prepareUpdate();
+    }
     $migration->processImport();
   }
 }
@@ -84,14 +104,3 @@ function catalyst_deregister_import($info) {
   }
 }
 
-/**
- * Might need to extend this to support batching..
- */
-function catalyst_import($source_directory, $deregister = FALSE) {
-  $info = catalyst_load_import($source_directory);
-  catalyst_register_import($info);
-  catalyst_process_import($info['migrations']);
-  if ($deregister) {
-    catalyst_deregister_import($info);
-  }
-}
