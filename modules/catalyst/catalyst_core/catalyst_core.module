@@ -373,13 +373,14 @@ function catalyst_render_block($module, $delta = '') {
 }
 
 function catalyst_menu_access_callback($entity_type, $entity_id) {
-  $entity = entity_load_single($entity_type, $entity_id);
-  $wrapper = entity_metadata_wrapper($entity_type, $entity);
-  $menu = entity_valval($wrapper->field__menu);
-  if ($accessphp = entity_valval($wrapper->field__access)) {
-    $variables = array();
-    $exportvars = catalyst_menu_parse_path($menu['path']);
-    return (boolean) catalyst_eval($accessphp, $variables, $exportvars);
+  if ($entity = entity_load_single($entity_type, $entity_id)) {
+    $wrapper = entity_metadata_wrapper($entity_type, $entity);
+    $menu = entity_valval($wrapper->field__menu);
+    if ($accessphp = entity_valval($wrapper->field__access)) {
+      $variables = array();
+      $exportvars = catalyst_menu_parse_path($menu['path']);
+      return (boolean) catalyst_eval($accessphp, $variables, $exportvars);
+    }
   }
   return FALSE;
 }
