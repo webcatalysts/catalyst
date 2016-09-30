@@ -53,6 +53,7 @@ class CatalystPageMigration extends CatalystEntityMigration {
   }
 
   public function prepare($entity, $row) {
+    parent::prepare($entity, $row);
     $language = isset($entity->language) ? $entity->language : LANGUAGE_NONE;
     $entity->field__menu[$language][0]['value'] = drupal_json_decode(drupal_json_encode($row->menu_options));
   }
