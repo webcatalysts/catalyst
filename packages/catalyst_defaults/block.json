@@ -1,0 +1,30 @@
+[
+    {
+        "block_placements": [
+            {
+                "region": "sidebar_first",
+                "weight": "0",
+                "visibility": "3",
+                "pages": "global $user;\r\nreturn !$user->uid && !(arg(0) == 'user' && !is_numeric(arg(1)));\r\n",
+                "cache": "0"
+            }
+        ],
+        "block_placement_ids": [
+            "responsive_bartik"
+        ],
+        "id": "user_login",
+        "title": "User Login",
+        "content": "<div id=\"user-login-block\" class=\"block\">\n  {{ form|render }}\n<\/div>",
+        "css_custom": null,
+        "internal": true,
+        "files_custom": [],
+        "js_custom": null,
+        "machine": "user_login",
+        "package": "catalyst_defaults",
+        "preprocess_php": "$variables['form'] = drupal_get_form('user_login_block');",
+        "admin_notes": null,
+        "stylesheets": [],
+        "javascripts": [],
+        "files_shared": []
+    }
+]

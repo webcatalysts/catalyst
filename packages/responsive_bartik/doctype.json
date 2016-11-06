@@ -6,7 +6,7 @@
         "title": "Responsive Bartik",
         "content": "<!DOCTYPE html>\n<html lang=\"{{ language.language }}\" dir=\"{{ language.dir }}\"\n{{ rdf_namespaces }}>\n\n<head>\n  {{ head }}\n  <title>{{ head_title }}<\/title>\n  {{ styles }}\n  {{ scripts }}\n<\/head>\n<body class=\"{{ classes }}\" {{ attributes }}>\n  <div id=\"skip-link\">\n    <a href=\"#main-content\" class=\"element-invisible element-focusable\">{{ t('Skip to main content') }}<\/a>\n  <\/div>\n  {{ page_top }}\n  {{ page }}\n  {{ page_bottom }}\n  <\/body>\n<\/html>",
         "drupal_processing": true,
-        "internal": null,
+        "internal": true,
         "machine": "responsive_bartik",
         "package": "responsive_bartik",
         "preprocess_php": null,
