@@ -12,7 +12,7 @@ projects[better_formats][version] = "1.0-beta2"
 projects[better_formats][type] = "module"
 projects[better_formats][subdir] = "contrib"
 
-projects[ctools][version] = "1.9"
+projects[ctools][version] = "1.11"
 projects[ctools][type] = "module"
 projects[ctools][subdir] = "contrib"
 
@@ -27,11 +27,11 @@ projects[eck][subdir] = "contrib"
 ; https://www.drupal.org/node/2647610
 projects[eck][patch][] = "https://www.drupal.org/files/issues/eck-entity-custom-admin-path-2647610-2-7x2x.patch"
 
-projects[entity][version] = "1.7"
+projects[entity][version] = "1.8"
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
 
-projects[entityreference][version] = "1.1"
+projects[entityreference][version] = "1.2"
 projects[entityreference][type] = "module"
 projects[entityreference][subdir] = "contrib"
 
@@ -59,7 +59,7 @@ projects[libraries][version] = "2.3"
 projects[libraries][type] = "module"
 projects[libraries][subdir] = "contrib"
 
-projects[markdown][version] = "1.4"
+projects[markdown][version] = "1.5"
 projects[markdown][type] = "module"
 projects[markdown][subdir] = "contrib"
 
@@ -123,7 +123,7 @@ projects[views_php][version] = "1.0-alpha3"
 projects[views_php][type] = "module"
 projects[views_php][subdir] = "contrib"
 
-projects[webform][version] = "4.13"
+projects[webform][version] = "4.14"
 projects[webform][type] = "module"
 projects[webform][subdir] = "contrib"
 
