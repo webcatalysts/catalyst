@@ -2,7 +2,7 @@
     {
         "id": "responsive_bartik",
         "title": "Responsive Bartik",
-        "internal": false,
+        "internal": true,
         "machine": "responsive_bartik",
         "admin_notes": null
     }

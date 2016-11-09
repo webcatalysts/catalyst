@@ -1,0 +1,25 @@
+[
+    {
+        "entity_type": "user",
+        "bundle": "__default__",
+        "block_placements": [],
+        "block_placement_ids": [],
+        "id": "user___default__",
+        "title": "Default (User)",
+        "content": "<div class=\"profile\"{{ attributes }}>\n  {{ content|render }}\n<\/div>",
+        "css_custom": null,
+        "debug": false,
+        "html_head": null,
+        "internal": true,
+        "files_custom": [],
+        "js_custom": null,
+        "machine": "user___default__",
+        "package": "catalyst_defaults",
+        "preprocess_php": "$variables['content'] = theme('user_profile', $variables);",
+        "admin_notes": null,
+        "layout": null,
+        "stylesheets": [],
+        "javascripts": [],
+        "files_shared": []
+    }
+]

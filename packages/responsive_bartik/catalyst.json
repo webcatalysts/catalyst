@@ -2,7 +2,7 @@
     "api": 2,
     "groups": {
         "responsive_bartik": {
-            "title": "Responsive Bartik 1.0-alpha"
+            "title": "Responsive Bartik"
         }
     },
     "migrations": {
@@ -38,15 +38,6 @@
                 "package": "responsive_bartik__package"
             }
         },
-        "responsive_bartik__file": {
-            "class_name": "CatalystMediaFileMigration",
-            "group_name": "responsive_bartik",
-            "source_filename": "file.json",
-            "source_files_directory": "attached-files\/file",
-            "source_migrations": {
-                "package": "responsive_bartik__package"
-            }
-        },
         "responsive_bartik__javascript": {
             "class_name": "CatalystMediaJavascriptMigration",
             "group_name": "responsive_bartik",
@@ -56,14 +47,13 @@
                 "package": "responsive_bartik__package"
             }
         },
-        "responsive_bartik__block": {
-            "class_name": "CatalystBlockMigration",
+        "responsive_bartik__file": {
+            "class_name": "CatalystMediaFileMigration",
             "group_name": "responsive_bartik",
-            "source_filename": "block.json",
-            "source_files_directory": "attached-files\/block",
+            "source_filename": "file.json",
+            "source_files_directory": "attached-files\/file",
             "source_migrations": {
-                "package": "responsive_bartik__package",
-                "layout": "responsive_bartik__layout"
+                "package": "responsive_bartik__package"
             }
         },
         "responsive_bartik__package": {

@@ -68,11 +68,13 @@
         ],
         "drupal_css_options": [
             "-100",
-            "0"
+            "0",
+            "100"
         ],
         "drupal_js_options": [
             "-100",
-            "0"
+            "0",
+            "100"
         ],
         "page_title_pattern": "{%if title %}{{ title }} | {% endif %}{{ name }}",
         "show_messages": true,
@@ -85,7 +87,7 @@
         "debug": false,
         "drupal_processing": true,
         "html_head": "<meta http-equiv=\"X-UA-Compatible\" content=\"IE=edge,chrome=1\">\n<meta name=\"MobileOptimized\" content=\"width\" \/>\n<meta name=\"HandheldFriendly\" content=\"true\" \/>\n<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0\" \/>\n<meta http-equiv=\"cleartype\" content=\"on\" \/>",
-        "internal": false,
+        "internal": true,
         "files_custom": [],
         "js_custom": null,
         "machine": "responsive_bartik",

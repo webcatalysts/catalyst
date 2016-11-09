@@ -5,7 +5,7 @@
         "file_path": "responsive_bartik_logo\/logo.png",
         "id": "responsive_bartik_logo",
         "title": "Responsive Bartik Logo",
-        "internal": null,
+        "internal": true,
         "machine": "responsive_bartik_logo",
         "package": "responsive_bartik",
         "admin_notes": null

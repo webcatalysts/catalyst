@@ -82,6 +82,7 @@ function catalyst_template_add_form_after_build($form, &$form_state) {
   ));
   $form['field__template_entity_type'][LANGUAGE_NONE][0]['machine']['#value'] = $entity_type;
   $form['field__template_bundle'][LANGUAGE_NONE][0]['machine']['#value'] = $bundle;
+  $form['field__machine'][LANGUAGE_NONE][0]['machine']['#value'] = $entity_type . '_' . $bundle;
 
   return catalyst_template_form_after_build($form, $form_state);
 }
@@ -92,8 +93,8 @@ function catalyst_template_form_after_build($form, &$form_state) {
     '#value' => $form['title']['#value'],
     '#name' => 'title',
   );
-  //$form['title']['#attributes']['class'][] = 'element-hidden';
   $form['field__template_entity_type']['#attributes']['class'][] = 'element-hidden';
   $form['field__template_bundle']['#attributes']['class'][] = 'element-hidden';
+  $form['field__machine']['#attributes']['class'][] = 'element-hidden';
   return $form;
 }
