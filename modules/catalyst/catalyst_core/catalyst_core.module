@@ -30,6 +30,14 @@ function catalyst_core_theme() {
 }
 
 /**
+ * Implements hook_catalyst_twig_render_alter().
+ */
+function catalyst_core_catalyst_twig_render_alter(&$twig, &$variables, $key = NULL) {
+  $twig->addFunction(new Twig_SimpleFunction('coreblock', 'catalyst_coreblock'));
+}
+
+
+/**
  * Implements hook_action_info().
  */
 function catalyst_core_action_info() {
@@ -442,4 +450,17 @@ function catalyst_menu_parse_path($path) {
     }
   }
   return $return;
+}
+
+function catalyst_coreblock($module, $delta = 0, $render = true) {
+  if ($block = block_load($module, $delta)) {
+    if (!isset($block->title)) $block->title = null;
+    if (!isset($block->region)) $block->region = null;
+    $build = _block_get_renderable_array(_block_render_blocks(array($block)));
+    return $render ? drupal_render($build) : $build;
+  }
+  throw new Exception(t('Missing block %delta in %module', array(
+    '%module' => $module,
+    '%delta' => $delta,
+  )));
 }
