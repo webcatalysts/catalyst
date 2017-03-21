@@ -82,7 +82,7 @@ abstract class CatalystMigration extends CatalystBaseMigration {
     $this->addFieldMapping('language')->defaultValue(LANGUAGE_NONE);
     $this->addUnmigratedDestinations(array('created', 'changed'));
     $this->addFormattedFieldMapping('field__admin_notes', 'notes', 'catalyst_markdown');
-    $this->addFieldMapping('field__internal', 'internal');
+    $this->addFieldMapping('field__internal', 'internal')->defaultValue(0);
     if ($this->hasSourceMigration('package')) {
       $this->addReferenceFieldMapping('field__package', 'package', 'package');
     }
