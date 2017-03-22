@@ -580,7 +580,7 @@ function catalyst_media_field_default_field_instances() {
         'machine_replace_with' => '_',
       ),
       'type' => 'machine_from_title_widget',
-      'weight' => 5,
+      'weight' => 6,
     ),
   );
 

@@ -168,7 +168,7 @@ function catalyst_media_field_group_info() {
   $field_group->entity_type = 'catalyst';
   $field_group->bundle = 'javascript';
   $field_group->mode = 'form';
-  $field_group->parent_name = '_add_new_group';
+  $field_group->parent_name = 'group_javascript_tabs';
   $field_group->data = array(
     'label' => 'Advanced',
     'weight' => '2',
@@ -178,15 +178,14 @@ function catalyst_media_field_group_info() {
       2 => 'field__media_javascript_scope',
       3 => 'field__package',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'label' => 'Advanced',
+      'formatter' => 'closed',
       'instance_settings' => array(
-        'required_fields' => 1,
-        'classes' => 'group-javascript-advanced field-group-fieldset',
         'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
       ),
-      'formatter' => 'collapsed',
     ),
   );
   $field_groups['group_javascript_advanced|catalyst|javascript|form'] = $field_group;
@@ -199,7 +198,7 @@ function catalyst_media_field_group_info() {
   $field_group->entity_type = 'catalyst';
   $field_group->bundle = 'javascript';
   $field_group->mode = 'form';
-  $field_group->parent_name = '_add_new_group';
+  $field_group->parent_name = 'group_javascript_tabs';
   $field_group->data = array(
     'label' => 'Content',
     'weight' => '1',
@@ -230,26 +229,52 @@ function catalyst_media_field_group_info() {
   $field_group->entity_type = 'catalyst';
   $field_group->bundle = 'javascript';
   $field_group->mode = 'form';
-  $field_group->parent_name = '_add_new_group';
+  $field_group->parent_name = 'group_javascript_tabs';
   $field_group->data = array(
     'label' => 'Help',
     'weight' => '3',
     'children' => array(
       0 => 'field__admin_notes',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'label' => 'Help',
+      'formatter' => 'closed',
       'instance_settings' => array(
-        'required_fields' => 1,
-        'id' => '',
-        'classes' => 'group-javascript-help field-group-fieldset',
         'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
       ),
-      'formatter' => 'collapsed',
     ),
   );
   $field_groups['group_javascript_help|catalyst|javascript|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_javascript_tabs|catalyst|javascript|form';
+  $field_group->group_name = 'group_javascript_tabs';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'javascript';
+  $field_group->mode = 'form';
+  $field_group->parent_name = '';
+  $field_group->data = array(
+    'label' => 'Tabs',
+    'weight' => '0',
+    'children' => array(
+      0 => 'group_javascript_advanced',
+      1 => 'group_javascript_content',
+      2 => 'group_javascript_help',
+    ),
+    'format_type' => 'tabs',
+    'format_settings' => array(
+      'formatter' => '',
+      'instance_settings' => array(
+        'classes' => 'group-javascript-tabs field-group-tabs',
+        'id' => '',
+      ),
+    ),
+  );
+  $field_groups['group_javascript_tabs|catalyst|javascript|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
