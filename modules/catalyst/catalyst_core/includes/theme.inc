@@ -22,7 +22,7 @@ function theme_catalyst_template($variables) {
 function catalyst_template_collect_variables($theme_hook, $element) {
   $theme_registry = theme_get_registry();
   $info = $theme_registry[$theme_hook];
-  $variables = array();
+  $variables = array('classes_array' => array());
   if (isset($info['variables'])) {
     foreach (array_keys($info['variables']) AS $name) {
       $variables[$name] = $element["#$name"];
