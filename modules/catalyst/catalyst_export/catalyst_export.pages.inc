@@ -337,10 +337,10 @@ function catalyst_export_form_submit($form, &$form_state) {
   drupal_exit();
 }
 
-function catalyst_export_package_options($internal = 0) {
+function catalyst_export_package_options($internal) {
   $options = array();
   $packages = array();
-  if ($internal === FALSE) {
+  if ($internal === 'all') {
     //$packages = catalyst_load(FALSE, array('type' => 'package'));
     $packages = entity_load('catalyst', FALSE, array('type' => 'package'));
   }
