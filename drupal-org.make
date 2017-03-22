@@ -6,7 +6,7 @@ projects[better_exposed_filters][type] = "module"
 projects[better_exposed_filters][subdir] = "contrib"
 ; Keep secondary exposed form options collapsed with default input
 ; https://www.drupal.org/node/2647600
-projects[better_exposed_filters][patch][] = https://www.drupal.org/files/issues/bef-secondary-default-collapse-2-7x3x.patch
+projects[better_exposed_filters][patch][] = https://www.drupal.org/files/issues/better_exposed_filters-collapse_secondary_options_if_select_widget_is_default-2647600-7.patch
 
 projects[better_formats][version] = "1.0-beta2"
 projects[better_formats][type] = "module"
