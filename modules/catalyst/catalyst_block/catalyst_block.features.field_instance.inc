@@ -141,14 +141,34 @@ function catalyst_block_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 0,
           'catalyst_html' => 'catalyst_html',
+          'catalyst_js' => 0,
+          'catalyst_php' => 0,
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
             'catalyst_html' => array(
               'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -160,7 +180,7 @@ function catalyst_block_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 2,
@@ -195,6 +215,11 @@ function catalyst_block_field_default_field_instances() {
       'better_formats' => array(
         'allowed_formats' => array(
           'catalyst_css' => 'catalyst_css',
+          'catalyst_doc' => 0,
+          'catalyst_html' => 0,
+          'catalyst_js' => 0,
+          'catalyst_php' => 0,
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
@@ -202,6 +227,21 @@ function catalyst_block_field_default_field_instances() {
           'formats' => array(
             'catalyst_css' => array(
               'weight' => -50,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -213,7 +253,7 @@ function catalyst_block_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 10,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 5,
@@ -352,14 +392,34 @@ function catalyst_block_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 0,
+          'catalyst_html' => 0,
           'catalyst_js' => 'catalyst_js',
+          'catalyst_php' => 0,
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
             'catalyst_js' => array(
               'weight' => -8,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -371,7 +431,7 @@ function catalyst_block_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 10,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 12,
@@ -415,7 +475,7 @@ function catalyst_block_field_default_field_instances() {
         'machine_replace_with' => '_',
       ),
       'type' => 'machine_from_title_widget',
-      'weight' => 1,
+      'weight' => 4,
     ),
   );
 
@@ -632,14 +692,34 @@ function catalyst_block_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 0,
+          'catalyst_html' => 0,
+          'catalyst_js' => 0,
           'catalyst_php' => 'catalyst_php',
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
             'catalyst_php' => array(
               'weight' => -50,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -651,7 +731,7 @@ function catalyst_block_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 15,
+        'rows' => 20,
       ),
       'type' => 'text_textarea',
       'weight' => 4,

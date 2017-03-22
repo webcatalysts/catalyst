@@ -418,7 +418,7 @@ function catalyst_media_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 15,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 14,
@@ -453,14 +453,34 @@ function catalyst_media_field_default_field_instances() {
     'settings' => array(
       'better_formats' => array(
         'allowed_formats' => array(
+          'catalyst_css' => 0,
+          'catalyst_doc' => 0,
+          'catalyst_html' => 0,
           'catalyst_js' => 'catalyst_js',
+          'catalyst_php' => 0,
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
         'default_order_wrapper' => array(
           'formats' => array(
+            'catalyst_css' => array(
+              'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
             'catalyst_js' => array(
               'weight' => 0,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -472,10 +492,10 @@ function catalyst_media_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 8,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
-      'weight' => 3,
+      'weight' => 1,
     ),
   );
 
@@ -518,7 +538,7 @@ function catalyst_media_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 17,
+      'weight' => 10,
     ),
   );
 
@@ -560,7 +580,7 @@ function catalyst_media_field_default_field_instances() {
         'machine_replace_with' => '_',
       ),
       'type' => 'machine_from_title_widget',
-      'weight' => 1,
+      'weight' => 5,
     ),
   );
 
@@ -604,7 +624,7 @@ function catalyst_media_field_default_field_instances() {
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 6,
+      'weight' => 8,
     ),
   );
 
@@ -646,7 +666,7 @@ function catalyst_media_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 5,
+      'weight' => 7,
     ),
   );
 
@@ -686,7 +706,7 @@ function catalyst_media_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 4,
+      'weight' => 3,
     ),
   );
 
@@ -776,7 +796,7 @@ function catalyst_media_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 16,
+      'weight' => 9,
     ),
   );
 
@@ -840,7 +860,7 @@ function catalyst_media_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 15,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 12,
@@ -876,6 +896,11 @@ function catalyst_media_field_default_field_instances() {
       'better_formats' => array(
         'allowed_formats' => array(
           'catalyst_css' => 'catalyst_css',
+          'catalyst_doc' => 0,
+          'catalyst_html' => 0,
+          'catalyst_js' => 0,
+          'catalyst_php' => 0,
+          'plain_text' => 0,
         ),
         'allowed_formats_toggle' => 1,
         'default_order_toggle' => 0,
@@ -883,6 +908,21 @@ function catalyst_media_field_default_field_instances() {
           'formats' => array(
             'catalyst_css' => array(
               'weight' => 0,
+            ),
+            'catalyst_doc' => array(
+              'weight' => 0,
+            ),
+            'catalyst_html' => array(
+              'weight' => 0,
+            ),
+            'catalyst_js' => array(
+              'weight' => 0,
+            ),
+            'catalyst_php' => array(
+              'weight' => 0,
+            ),
+            'plain_text' => array(
+              'weight' => 10,
             ),
           ),
         ),
@@ -894,10 +934,10 @@ function catalyst_media_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 25,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
-      'weight' => 5,
+      'weight' => 9,
     ),
   );
 
@@ -1043,7 +1083,7 @@ function catalyst_media_field_default_field_instances() {
         'machine_replace_with' => '_',
       ),
       'type' => 'machine_from_title_widget',
-      'weight' => 3,
+      'weight' => 13,
     ),
   );
 
@@ -1128,7 +1168,7 @@ function catalyst_media_field_default_field_instances() {
         'size' => 60,
       ),
       'type' => 'text_textfield',
-      'weight' => 6,
+      'weight' => 11,
     ),
   );
 
@@ -1169,7 +1209,7 @@ function catalyst_media_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 7,
+      'weight' => 14,
     ),
   );
 
@@ -1209,7 +1249,7 @@ function catalyst_media_field_default_field_instances() {
       'module' => 'options',
       'settings' => array(),
       'type' => 'options_select',
-      'weight' => 4,
+      'weight' => 10,
     ),
   );
 

@@ -20,24 +20,24 @@ function catalyst_doctype_field_group_info() {
   $field_group->mode = 'form';
   $field_group->parent_name = 'group_doctype_tabs';
   $field_group->data = array(
-    'label' => 'Advanced Settings',
-    'weight' => '20',
+    'label' => 'Advanced',
+    'weight' => '17',
     'children' => array(
-      0 => 'field__internal',
-      1 => 'field__package',
-      2 => 'field__preprocess',
-      3 => 'group_doctype_drupal',
-      4 => 'group_doctype_help',
+      0 => 'field__doctype_charset',
+      1 => 'field__doctype_content_type',
+      2 => 'field__internal',
+      3 => 'field__package',
+      4 => 'group_doctype_drupal',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'formatter' => 'closed',
+      'label' => 'Advanced',
       'instance_settings' => array(
-        'description' => '',
-        'classes' => '',
         'required_fields' => 1,
-        'id' => '',
+        'classes' => '',
+        'description' => '',
       ),
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_doctype_advanced|catalyst|doctype|form'] = $field_group;
@@ -56,17 +56,15 @@ function catalyst_doctype_field_group_info() {
     'weight' => '15',
     'children' => array(
       0 => 'field__body',
-      1 => 'field__doctype_charset',
-      2 => 'field__doctype_content_type',
-      3 => 'field__machine',
-      4 => 'title',
+      1 => 'field__machine',
+      2 => 'title',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-doctype-content field-group-htab',
+        'classes' => 'group-doctype-content field-group-tab',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -110,18 +108,19 @@ function catalyst_doctype_field_group_info() {
   $field_group->entity_type = 'catalyst';
   $field_group->bundle = 'doctype';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_doctype_advanced';
+  $field_group->parent_name = 'group_doctype_tabs';
   $field_group->data = array(
-    'label' => 'Custom Help/Instructions',
-    'weight' => '27',
+    'label' => 'Help',
+    'weight' => '18',
     'children' => array(
       0 => 'field__admin_notes',
     ),
     'format_type' => 'fieldset',
     'format_settings' => array(
-      'label' => 'Custom Help/Instructions',
+      'label' => 'Help',
       'instance_settings' => array(
         'required_fields' => 1,
+        'id' => '',
         'classes' => 'group-doctype-help field-group-fieldset',
         'description' => '',
       ),
@@ -129,6 +128,33 @@ function catalyst_doctype_field_group_info() {
     ),
   );
   $field_groups['group_doctype_help|catalyst|doctype|form'] = $field_group;
+
+  $field_group = new stdClass();
+  $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
+  $field_group->api_version = 1;
+  $field_group->identifier = 'group_doctype_processing|catalyst|doctype|form';
+  $field_group->group_name = 'group_doctype_processing';
+  $field_group->entity_type = 'catalyst';
+  $field_group->bundle = 'doctype';
+  $field_group->mode = 'form';
+  $field_group->parent_name = 'group_doctype_tabs';
+  $field_group->data = array(
+    'label' => 'Processing',
+    'weight' => '16',
+    'children' => array(
+      0 => 'field__preprocess',
+    ),
+    'format_type' => 'tab',
+    'format_settings' => array(
+      'formatter' => 'closed',
+      'instance_settings' => array(
+        'description' => '',
+        'classes' => 'group-doctype-processing field-group-tab',
+        'required_fields' => 1,
+      ),
+    ),
+  );
+  $field_groups['group_doctype_processing|catalyst|doctype|form'] = $field_group;
 
   $field_group = new stdClass();
   $field_group->disabled = FALSE; /* Edit this to true to make a default field_group disabled initially */
@@ -143,14 +169,16 @@ function catalyst_doctype_field_group_info() {
     'label' => 'Tabs',
     'weight' => '0',
     'children' => array(
-      0 => 'group_doctype_advanced',
-      1 => 'group_doctype_content',
+      0 => 'group_doctype_processing',
+      1 => 'group_doctype_advanced',
+      2 => 'group_doctype_content',
+      3 => 'group_doctype_help',
     ),
-    'format_type' => 'htabs',
+    'format_type' => 'tabs',
     'format_settings' => array(
       'formatter' => '',
       'instance_settings' => array(
-        'classes' => 'group-doctype-tabs field-group-htabs',
+        'classes' => 'group-doctype-tabs field-group-tabs',
       ),
     ),
   );
@@ -158,11 +186,11 @@ function catalyst_doctype_field_group_info() {
 
   // Translatables
   // Included for use with string extractors like potx.
-  t('Advanced Settings');
+  t('Advanced');
   t('Basics');
-  t('Custom Help/Instructions');
   t('Drupal options');
-  t('Form customizations');
+  t('Help');
+  t('Processing');
   t('Tabs');
 
   return $field_groups;

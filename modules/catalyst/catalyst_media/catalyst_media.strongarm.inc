@@ -75,7 +75,7 @@ function catalyst_media_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '0',
+          'weight' => '4',
         ),
       ),
       'display' => array(
@@ -115,7 +115,7 @@ function catalyst_media_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '2',
+          'weight' => '12',
         ),
         'actions' => array(
           'weight' => '100',

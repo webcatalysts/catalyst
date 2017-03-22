@@ -76,7 +76,7 @@ function catalyst_doctype_field_default_field_instances() {
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 20,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 28,
@@ -205,7 +205,7 @@ function catalyst_doctype_field_default_field_instances() {
         'sort_options' => 0,
       ),
       'type' => 'select_or_other',
-      'weight' => 19,
+      'weight' => 24,
     ),
   );
 
@@ -258,7 +258,7 @@ text/html|text/html',
         'sort_options' => 0,
       ),
       'type' => 'select_or_other',
-      'weight' => 18,
+      'weight' => 23,
     ),
   );
 
@@ -342,7 +342,7 @@ text/html|text/html',
         'display_label' => 1,
       ),
       'type' => 'options_onoff',
-      'weight' => 29,
+      'weight' => 27,
     ),
   );
 
@@ -383,7 +383,7 @@ text/html|text/html',
         'machine_replace_with' => '_',
       ),
       'type' => 'machine_from_title_widget',
-      'weight' => 17,
+      'weight' => 22,
     ),
   );
 
@@ -429,7 +429,7 @@ text/html|text/html',
         'size' => 60,
       ),
       'type' => 'entityreference_autocomplete_tags',
-      'weight' => 28,
+      'weight' => 26,
     ),
   );
 
@@ -499,7 +499,7 @@ text/html|text/html',
       'active' => 1,
       'module' => 'text',
       'settings' => array(
-        'rows' => 15,
+        'rows' => 30,
       ),
       'type' => 'text_textarea',
       'weight' => 24,

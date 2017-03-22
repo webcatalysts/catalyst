@@ -26,9 +26,8 @@ function catalyst_page_field_group_info() {
       0 => 'field__html_head',
       1 => 'field__internal',
       2 => 'field__package',
-      3 => 'group_page_help',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
@@ -56,7 +55,7 @@ function catalyst_page_field_group_info() {
       0 => 'field__blockplacements__layfield',
       1 => 'field__blocks_related',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
@@ -87,7 +86,7 @@ function catalyst_page_field_group_info() {
       3 => 'field__menu',
       4 => 'title',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'label' => 'Page content',
       'instance_settings' => array(
@@ -116,7 +115,7 @@ function catalyst_page_field_group_info() {
       0 => 'field__css__page',
       1 => 'field__media_stylesheets__page',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'label' => 'Stylesheets',
       'instance_settings' => array(
@@ -145,7 +144,7 @@ function catalyst_page_field_group_info() {
       0 => 'field__files',
       1 => 'field__media_files',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
@@ -165,23 +164,22 @@ function catalyst_page_field_group_info() {
   $field_group->entity_type = 'catalyst';
   $field_group->bundle = 'page';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_page_advanced';
+  $field_group->parent_name = 'group_page_tabs';
   $field_group->data = array(
-    'label' => 'Custom Help/Instructions',
-    'weight' => '5',
+    'label' => 'Help',
+    'weight' => '8',
     'children' => array(
       0 => 'field__admin_notes',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'label' => 'Custom Help/Instructions',
+      'label' => 'Help',
       'instance_settings' => array(
         'required_fields' => 1,
-        'id' => '',
-        'classes' => 'group-page-help field-group-fieldset',
+        'classes' => '',
         'description' => '',
       ),
-      'formatter' => 'collapsed',
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_page_help|catalyst|page|form'] = $field_group;
@@ -202,7 +200,7 @@ function catalyst_page_field_group_info() {
       0 => 'field__js__page',
       1 => 'field__media_javascripts__page',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'label' => 'Javascripts',
       'instance_settings' => array(
@@ -231,12 +229,12 @@ function catalyst_page_field_group_info() {
       0 => 'field__access',
       1 => 'field__preprocess',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-page-php field-group-htab',
+        'classes' => 'group-page-php field-group-tab',
         'required_fields' => 1,
       ),
     ),
@@ -261,14 +259,15 @@ function catalyst_page_field_group_info() {
       2 => 'group_page_content',
       3 => 'group_page_css',
       4 => 'group_page_files',
-      5 => 'group_page_js',
-      6 => 'group_page_php',
+      5 => 'group_page_help',
+      6 => 'group_page_js',
+      7 => 'group_page_php',
     ),
-    'format_type' => 'htabs',
+    'format_type' => 'tabs',
     'format_settings' => array(
       'formatter' => '',
       'instance_settings' => array(
-        'classes' => 'group-page-tabs field-group-htabs',
+        'classes' => 'group-page-tabs field-group-tabs',
         'id' => '',
       ),
     ),
@@ -279,8 +278,8 @@ function catalyst_page_field_group_info() {
   // Included for use with string extractors like potx.
   t('Advanced');
   t('Blocks');
-  t('Custom Help/Instructions');
   t('Files');
+  t('Help');
   t('Javascripts');
   t('Page content');
   t('Processing');

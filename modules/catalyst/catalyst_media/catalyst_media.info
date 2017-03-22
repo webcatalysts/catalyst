@@ -44,6 +44,7 @@ features[field_group][] = group_file_files|catalyst|stylesheet|form
 features[field_group][] = group_file_help|catalyst|file|form
 features[field_group][] = group_file_tabs|catalyst|stylesheet|form
 features[field_group][] = group_javascript_advanced|catalyst|javascript|form
+features[field_group][] = group_javascript_content|catalyst|javascript|form
 features[field_group][] = group_javascript_help|catalyst|javascript|form
 features[field_group][] = group_stylesheet_advanced|catalyst|stylesheet|form
 features[field_group][] = group_stylesheet_help|catalyst|stylesheet|form

@@ -35,7 +35,7 @@ function catalyst_doctype_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '16',
+          'weight' => '21',
         ),
       ),
       'display' => array(

@@ -27,14 +27,13 @@ function catalyst_template_field_group_info() {
       1 => 'field__html_head',
       2 => 'field__internal',
       3 => 'field__package',
-      4 => 'group_template_help',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-template-advanced field-group-htab',
+        'classes' => 'group-template-advanced field-group-tab',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -58,12 +57,12 @@ function catalyst_template_field_group_info() {
       0 => 'field__blockplacements__layfield',
       1 => 'field__blocks_related',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-template-blocks field-group-fieldset',
+        'classes' => '',
         'required_fields' => 1,
       ),
     ),
@@ -86,12 +85,12 @@ function catalyst_template_field_group_info() {
       0 => 'field__body',
       1 => 'field__layout',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-template-content field-group-fieldset',
+        'classes' => '',
         'required_fields' => 1,
       ),
     ),
@@ -114,12 +113,12 @@ function catalyst_template_field_group_info() {
       0 => 'field__css__page',
       1 => 'field__media_stylesheets__page',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-template-css field-group-htab',
+        'classes' => 'group-template-css field-group-tab',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -143,12 +142,12 @@ function catalyst_template_field_group_info() {
       0 => 'field__files',
       1 => 'field__media_files',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'formatter' => 'collapsible',
+      'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-template-files field-group-fieldset',
+        'classes' => '',
         'required_fields' => 1,
       ),
     ),
@@ -163,22 +162,22 @@ function catalyst_template_field_group_info() {
   $field_group->entity_type = 'catalyst';
   $field_group->bundle = 'template';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_template_advanced';
+  $field_group->parent_name = 'group_template_tabs';
   $field_group->data = array(
-    'label' => 'Custom Help/Instructions',
-    'weight' => '21',
+    'label' => 'Help',
+    'weight' => '14',
     'children' => array(
       0 => 'field__admin_notes',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'label' => 'Custom Help/Instructions',
+      'label' => 'Help',
       'instance_settings' => array(
         'required_fields' => 1,
-        'classes' => 'group-template-help field-group-fieldset',
+        'classes' => '',
         'description' => '',
       ),
-      'formatter' => 'collapsed',
+      'formatter' => 'closed',
     ),
   );
   $field_groups['group_template_help|catalyst|template|form'] = $field_group;
@@ -199,12 +198,12 @@ function catalyst_template_field_group_info() {
       0 => 'field__js__page',
       1 => 'field__media_javascripts__page',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-template-js field-group-htab',
+        'classes' => 'group-template-js field-group-tab',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -227,12 +226,12 @@ function catalyst_template_field_group_info() {
     'children' => array(
       0 => 'field__preprocess',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-template-php field-group-htab',
+        'classes' => 'group-template-php field-group-tab',
         'required_fields' => 1,
       ),
     ),
@@ -257,14 +256,15 @@ function catalyst_template_field_group_info() {
       2 => 'group_template_content',
       3 => 'group_template_css',
       4 => 'group_template_files',
-      5 => 'group_template_js',
-      6 => 'group_template_php',
+      5 => 'group_template_help',
+      6 => 'group_template_js',
+      7 => 'group_template_php',
     ),
-    'format_type' => 'htabs',
+    'format_type' => 'tabs',
     'format_settings' => array(
       'formatter' => '',
       'instance_settings' => array(
-        'classes' => 'group-template-tabs field-group-htabs',
+        'classes' => 'group-template-tabs field-group-tabs',
       ),
     ),
   );
@@ -274,7 +274,7 @@ function catalyst_template_field_group_info() {
   // Included for use with string extractors like potx.
   t('Advanced');
   t('Blocks');
-  t('Custom Help/Instructions');
+  t('Help');
   t('Javascript');
   t('Media/Files');
   t('Processing');

@@ -29,9 +29,8 @@ function catalyst_layout_field_group_info() {
       3 => 'field__layout_page_title_pattern',
       4 => 'field__package',
       5 => 'group_layout_drupal',
-      6 => 'group_layout_help',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'label' => 'Advanced',
       'instance_settings' => array(
@@ -61,12 +60,12 @@ function catalyst_layout_field_group_info() {
       0 => 'field__blockplacements__layout',
       1 => 'field__blocks_related',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-layout-blocks field-group-htab',
+        'classes' => 'group-layout-blocks field-group-tab',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -92,7 +91,7 @@ function catalyst_layout_field_group_info() {
       2 => 'field__machine',
       3 => 'title',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'label' => 'Layout Basics',
       'instance_settings' => array(
@@ -122,7 +121,7 @@ function catalyst_layout_field_group_info() {
       0 => 'field__css__layout',
       1 => 'field__media_stylesheets__layout',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'label' => 'Stylesheets',
       'instance_settings' => array(
@@ -184,12 +183,12 @@ function catalyst_layout_field_group_info() {
       0 => 'field__files',
       1 => 'field__media_files',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-layout-files field-group-htab',
+        'classes' => 'group-layout-files field-group-tab',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -205,22 +204,21 @@ function catalyst_layout_field_group_info() {
   $field_group->entity_type = 'catalyst';
   $field_group->bundle = 'layout';
   $field_group->mode = 'form';
-  $field_group->parent_name = 'group_layout_advanced';
+  $field_group->parent_name = 'group_layout_tabs';
   $field_group->data = array(
     'label' => 'Custom Help/Instructions',
-    'weight' => '7',
+    'weight' => '11',
     'children' => array(
       0 => 'field__admin_notes',
     ),
-    'format_type' => 'fieldset',
+    'format_type' => 'tab',
     'format_settings' => array(
-      'label' => 'Custom Help/Instructions',
+      'formatter' => 'closed',
       'instance_settings' => array(
-        'required_fields' => 1,
-        'classes' => 'group-layout-help field-group-fieldset',
         'description' => '',
+        'classes' => '',
+        'required_fields' => 1,
       ),
-      'formatter' => 'collapsed',
     ),
   );
   $field_groups['group_layout_help|catalyst|layout|form'] = $field_group;
@@ -241,7 +239,7 @@ function catalyst_layout_field_group_info() {
       0 => 'field__js__layout',
       1 => 'field__media_javascripts__layout',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'label' => 'Javascript',
       'instance_settings' => array(
@@ -298,12 +296,12 @@ function catalyst_layout_field_group_info() {
     'children' => array(
       0 => 'field__layout_regions',
     ),
-    'format_type' => 'htab',
+    'format_type' => 'tab',
     'format_settings' => array(
       'formatter' => 'closed',
       'instance_settings' => array(
         'description' => '',
-        'classes' => 'group-layout-regions field-group-htab',
+        'classes' => 'group-layout-regions field-group-tab',
         'required_fields' => 1,
         'id' => '',
       ),
@@ -329,15 +327,16 @@ function catalyst_layout_field_group_info() {
       2 => 'group_layout_content',
       3 => 'group_layout_css',
       4 => 'group_layout_files',
-      5 => 'group_layout_js',
-      6 => 'group_layout_regions',
+      5 => 'group_layout_help',
+      6 => 'group_layout_js',
       7 => 'group_layout_php',
+      8 => 'group_layout_regions',
     ),
-    'format_type' => 'htabs',
+    'format_type' => 'tabs',
     'format_settings' => array(
       'formatter' => '',
       'instance_settings' => array(
-        'classes' => 'group-layout-tabs field-group-htabs',
+        'classes' => 'group-layout-tabs field-group-tabs',
       ),
     ),
   );
@@ -352,7 +351,6 @@ function catalyst_layout_field_group_info() {
   t('Javascript');
   t('Layout Basics');
   t('Media/Files');
-  t('Page form customizations');
   t('Processing');
   t('Regions');
   t('Stylesheets');

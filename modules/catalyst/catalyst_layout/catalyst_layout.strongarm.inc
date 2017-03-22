@@ -35,7 +35,7 @@ function catalyst_layout_strongarm() {
     'extra_fields' => array(
       'form' => array(
         'title' => array(
-          'weight' => '5',
+          'weight' => '9',
         ),
       ),
       'display' => array(

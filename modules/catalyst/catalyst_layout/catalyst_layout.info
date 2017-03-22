@@ -37,7 +37,6 @@ features[field_group][] = group_layout_content|catalyst|layout|form
 features[field_group][] = group_layout_css|catalyst|layout|form
 features[field_group][] = group_layout_drupal|catalyst|layout|form
 features[field_group][] = group_layout_files|catalyst|layout|form
-features[field_group][] = group_layout_form_alter|catalyst|layout|form
 features[field_group][] = group_layout_help|catalyst|layout|form
 features[field_group][] = group_layout_js|catalyst|layout|form
 features[field_group][] = group_layout_php|catalyst|layout|form
