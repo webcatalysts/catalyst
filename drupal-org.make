@@ -43,7 +43,7 @@ projects[features][version] = "2.10"
 projects[features][type] = "module"
 projects[features][subdir] = "contrib"
 
-projects[field_group][version] = "1.x"
+projects[field_group][version] = "1.5"
 projects[field_group][type] = "module"
 projects[field_group][subdir] = "contrib"
 ; Fix to missing field group names in PHP 7
