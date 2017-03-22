@@ -43,9 +43,12 @@ projects[features][version] = "2.10"
 projects[features][type] = "module"
 projects[features][subdir] = "contrib"
 
-projects[field_group][version] = "1.5"
+projects[field_group][version] = "1.x"
 projects[field_group][type] = "module"
 projects[field_group][subdir] = "contrib"
+; Fix to missing field group names in PHP 7
+; https://www.drupal.org/node/2649648
+projects[better_exposed_filters][patch][] = https://www.drupal.org/files/issues/php7_uniform_variable-2649648-5.patch
 
 projects[filefield_paths][version] = "1.0"
 projects[filefield_paths][type] = "module"
