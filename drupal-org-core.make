@@ -1,7 +1,7 @@
 api = 2
 core = 7.x
 projects[drupal][type] = core
-projects[drupal][version] = 7.51
+projects[drupal][version] = 7.54
 
 
 ; Registry rebuild should not parse the same file twice in the same request
