@@ -30,6 +30,7 @@ projects[eck][patch][] = "https://www.drupal.org/files/issues/eck-entity-custom-
 projects[entity][version] = "1.8"
 projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
+projects[entity][patch][] = "https://www.drupal.org/files/issues/entity-on-exception-return-null-1596594-49.patch"
 
 projects[entityreference][version] = "1.2"
 projects[entityreference][type] = "module"
