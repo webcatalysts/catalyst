@@ -32,7 +32,7 @@ projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
 projects[entity][patch][] = "https://www.drupal.org/files/issues/entity-on-exception-return-null-1596594-49.patch"
 
-projects[entityreference][version] = "1.2"
+projects[entityreference][version] = "1.4"
 projects[entityreference][type] = "module"
 projects[entityreference][subdir] = "contrib"
 
@@ -79,7 +79,7 @@ projects[migrate_extras][version] = "2.5"
 projects[migrate_extras][type] = "module"
 projects[migrate_extras][subdir] = "contrib"
 
-projects[module_filter][version] = "2.0"
+projects[module_filter][version] = "2.1"
 projects[module_filter][type] = "module"
 projects[module_filter][subdir] = "contrib"
 
@@ -95,7 +95,7 @@ projects[select_or_other][version] = "2.22"
 projects[select_or_other][type] = "module"
 projects[select_or_other][subdir] = "contrib"
 
-projects[serialized_field][version] = "1.0-beta1"
+projects[serialized_field][version] = "1.0-rc1"
 projects[serialized_field][type] = module
 projects[serialized_field][subdir] = contrib
 
@@ -115,7 +115,7 @@ projects[transliteration][version] = "3.2"
 projects[transliteration][type] = "module"
 projects[transliteration][subdir] = "contrib"
 
-projects[views][version] = "3.15"
+projects[views][version] = "3.16"
 projects[views][type] = "module"
 projects[views][subdir] = "contrib"
 
@@ -127,7 +127,7 @@ projects[views_php][version] = "1.0-alpha3"
 projects[views_php][type] = "module"
 projects[views_php][subdir] = "contrib"
 
-projects[webform][version] = "4.14"
+projects[webform][version] = "4.15"
 projects[webform][type] = "module"
 projects[webform][subdir] = "contrib"
 
