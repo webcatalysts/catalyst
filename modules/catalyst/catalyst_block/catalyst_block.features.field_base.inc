@@ -10,6 +10,31 @@
 function catalyst_block_field_default_field_bases() {
   $field_bases = array();
 
+  // Exported field_base: 'field___block_placements_entity'.
+  $field_bases['field___block_placements_entity'] = array(
+    'active' => 1,
+    'cardinality' => -1,
+    'deleted' => 0,
+    'entity_types' => array(),
+    'field_name' => 'field___block_placements_entity',
+    'indexes' => array(
+      'block_id' => array(
+        0 => 'block_id',
+      ),
+      'layout_id' => array(
+        0 => 'layout_id',
+      ),
+      'region' => array(
+        0 => 'region',
+      ),
+    ),
+    'locked' => 0,
+    'module' => 'catalyst_field_api',
+    'settings' => array(),
+    'translatable' => 0,
+    'type' => 'block_placement_entity',
+  );
+
   // Exported field_base: 'field__blockplacements__block'.
   $field_bases['field__blockplacements__block'] = array(
     'active' => 1,

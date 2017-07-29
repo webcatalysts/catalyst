@@ -60,6 +60,15 @@ function catalyst_field_api_field_schema($field) {
     );
 
     switch ($field['type']) {
+      case 'block_placement_entity':
+        unset($schema['columns']['visibility']);
+        unset($schema['columns']['pages']);
+        $schema['indexes'] = array(
+          'block_id' => array('block_id'),
+          'layout_id' => array('layout_id'),
+          'region' => array('region'),
+        );
+        break;
       case 'block_placement_block':
         unset($schema['columns']['block_id']);
         $schema['indexes'] = array(

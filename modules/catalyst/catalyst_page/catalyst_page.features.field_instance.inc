@@ -10,6 +10,43 @@
 function catalyst_page_field_default_field_instances() {
   $field_instances = array();
 
+  // Exported field_instance: 'catalyst-page-field___block_placements_entity'.
+  $field_instances['catalyst-page-field___block_placements_entity'] = array(
+    'bundle' => 'page',
+    'default_value' => NULL,
+    'deleted' => 0,
+    'description' => '',
+    'display' => array(
+      'default' => array(
+        'label' => 'above',
+        'module' => 'catalyst_field_api',
+        'settings' => array(),
+        'type' => 'block_placement_entity_formatter',
+        'weight' => 20,
+      ),
+      'template' => array(
+        'label' => 'above',
+        'settings' => array(),
+        'type' => 'hidden',
+        'weight' => 0,
+      ),
+    ),
+    'entity_type' => 'catalyst',
+    'field_name' => 'field___block_placements_entity',
+    'label' => 'Advanced Placements',
+    'required' => 0,
+    'settings' => array(
+      'user_register_form' => FALSE,
+    ),
+    'widget' => array(
+      'active' => 0,
+      'module' => 'catalyst_field_api',
+      'settings' => array(),
+      'type' => 'block_placement_entity_widget',
+      'weight' => 8,
+    ),
+  );
+
   // Exported field_instance: 'catalyst-page-field__access'.
   $field_instances['catalyst-page-field__access'] = array(
     'bundle' => 'page',
@@ -1021,6 +1058,7 @@ function catalyst_page_field_default_field_instances() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Access');
+  t('Advanced Placements');
   t('Block placements');
   t('Blocks (embedded usage)');
   t('Content');

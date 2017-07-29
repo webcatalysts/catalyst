@@ -40,6 +40,14 @@ function catalyst_field_api_field_info() {
       'property_type' => 'block_placement',
       'property_callbacks' => array('block_placement_property_info'),
     ),
+    'block_placement_entity' => array(
+      'label' => t('Block placement (entity)'),
+      'description' => t('Add blocks to an entity.'),
+      'default_widget' => 'block_placement_entity_field_widget',
+      'default_formatter' => 'block_placement_entity_formatter',
+      'property_type' => 'block_placement',
+      'property_callbacks' => array('block_placement_property_info'),
+    ),
   );
 }
 
@@ -60,7 +68,44 @@ function catalyst_field_api_field_widget_info() {
       'label' => t('Block placement widget (layout field)'),
       'field types' => array('block_placement_layout_field'),
     ),
+    'block_placement_entity_widget' => array(
+      'label' => t('Block placement widget (entity)'),
+      'field types' => array('block_placement_entity'),
+    ),
   );
+}
+
+/**
+ * Implements hook_field_formatter_info().
+ */
+function catalyst_field_api_field_formatter_info() {
+  return array(
+    'block_placement_entity_formatter' => array(
+      'label' => t('Block placement (entity)'),
+      'field types' => array('block_placement_entity'),
+    ),
+  );
+}
+
+/**
+ * Implements hook_field_formatter_view().
+ */
+function catalyst_field_api_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  switch ($display['type']) {
+    case 'block_placement_entity_formatter':
+      $layout = catalyst_get_layout();
+      if ($layout_id = $layout->getLayoutEntityId()) {
+        foreach ($items AS $item) {
+          if ($item['layout_id'] == $layout_id) {
+            catalyst_block_add_static_placement($item);
+          }
+        }
+      }
+      return;
+    default:
+      throw new Exception(t('Unknown formatter type: @type', array('@type' => $display['type'])));
+  }
+
 }
 
 /**
@@ -76,10 +121,14 @@ function catalyst_field_api_field_widget_form(&$form, &$form_state, $field, $ins
     case 'block_placement_layout_widget':
       form_load_include($form_state, 'inc', 'catalyst_field_api', 'widget/layout');
       return block_placement_layout_widget_form($form, $form_state, $field, $instance, $langcode, $items, $delta, $element);
-      break;
     case 'block_placement_layout_field_widget':
       form_load_include($form_state, 'inc', 'catalyst_field_api', 'widget/layout_field');
       return block_placement_layout_field_widget_form($form, $form_state, $field, $instance, $langcode, $items, $delta, $element);
+    case 'block_placement_entity_widget':
+      form_load_include($form_state, 'inc', 'catalyst_field_api', 'widget/entity');
+      return block_placement_entity_widget_form($form, $form_state, $field, $instance, $langcode, $items, $delta, $element);
+    default:
+        throw new Exception(t('Unknown widget type: @type', array('@type' => $instance['widget']['type'])));
   }
 }
 
@@ -102,6 +151,8 @@ function catalyst_field_api_field_is_empty($item, $field) {
     case 'block_placement_layout':
     case 'block_placement_layout_field':
       return empty($item['block_id']) || empty($item['region']);
+    case 'block_placement_entity':
+      return empty($item['layout_id']) || empty($item['region']) || empty($item['block_id']);
   }
 }
 
@@ -140,6 +191,26 @@ function catalyst_field_api_theme() {
       'render element' => 'element',
       'path' => $module_path . '/widget',
       'file' => 'layout.inc',
+    ),
+    'block_placement_entity_widget' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'entity.inc',
+    ),
+    'block_placement_entity_container_no_blocks' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'entity.inc',
+    ),
+    'block_placement_entity_container_no_layouts' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'entity.inc',
+    ),
+    'block_placement_entity_container_no_regions' => array(
+      'render element' => 'element',
+      'path' => $module_path . '/widget',
+      'file' => 'entity.inc',
     ),
   );
 }

@@ -21,7 +21,7 @@ function catalyst_page_field_group_info() {
   $field_group->parent_name = 'group_page_tabs';
   $field_group->data = array(
     'label' => 'Advanced',
-    'weight' => '7',
+    'weight' => '8',
     'children' => array(
       0 => 'field__html_head',
       1 => 'field__internal',
@@ -54,6 +54,7 @@ function catalyst_page_field_group_info() {
     'children' => array(
       0 => 'field__blockplacements__layfield',
       1 => 'field__blocks_related',
+      2 => 'field___block_placements_entity',
     ),
     'format_type' => 'tab',
     'format_settings' => array(
@@ -167,7 +168,7 @@ function catalyst_page_field_group_info() {
   $field_group->parent_name = 'group_page_tabs';
   $field_group->data = array(
     'label' => 'Help',
-    'weight' => '8',
+    'weight' => '9',
     'children' => array(
       0 => 'field__admin_notes',
     ),
