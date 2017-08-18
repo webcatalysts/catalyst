@@ -42,7 +42,7 @@ function catalyst_set_layout($layout = NULL, $entity_type = 'catalyst') {
         // $layout is an entity and matches the stored layout.
         case is_a($layout, 'Entity'):
           $wrapper = entity_metadata_wrapper($entity_type, $layout);
-          if (isset($wrapper->field__machine) && $stored_layout->getLayoutID() == entity_valval($wrapper->field__machine)) {
+          if (isset($wrapper->field__machine) && $stored_layout->getLayoutID() == $wrapper->field__machine->machine->value()) {
             return $stored_layout;
           }
       }
