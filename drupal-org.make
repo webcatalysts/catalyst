@@ -32,7 +32,7 @@ projects[entity][type] = "module"
 projects[entity][subdir] = "contrib"
 projects[entity][patch][] = "https://www.drupal.org/files/issues/entity-on-exception-return-null-1596594-49.patch"
 
-projects[entityreference][version] = "1.4"
+projects[entityreference][version] = "1.5"
 projects[entityreference][type] = "module"
 projects[entityreference][subdir] = "contrib"
 
@@ -115,7 +115,7 @@ projects[transliteration][version] = "3.2"
 projects[transliteration][type] = "module"
 projects[transliteration][subdir] = "contrib"
 
-projects[views][version] = "3.16"
+projects[views][version] = "3.17"
 projects[views][type] = "module"
 projects[views][subdir] = "contrib"
 
