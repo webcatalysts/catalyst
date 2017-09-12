@@ -73,13 +73,21 @@ function catalyst_block_catalyst_export_dependencies($export, $group) {
     }
 
     // Determine dependencies for entities using block placements
-    $placement_fields = array('field__blockplacements__layfield', 'field__blockplacements__layout');
+    $placement_fields = array(
+      'field__blockplacements__layfield',
+      'field__blockplacements__layout',
+      'field___block_placements_entity',
+    );
     foreach ($placement_fields AS $field) {
       if (isset($wrapper->{$field})) {
         foreach ($wrapper->{$field} AS $item) {
           $block_id = $item->block_id->value();
-          $wrapper = entity_metadata_wrapper('catalyst', entity_load_single('catalyst', $block_id));
-          catalyst_add_export($dependencies, 'block', catalyst_export_entity_id($wrapper));
+          $block = entity_metadata_wrapper('catalyst', $block_id);
+          catalyst_add_export($dependencies, 'block', catalyst_export_entity_id($block));
+          if (isset($item->layout_id) && $layout_id = $item->layout_id->value()) {
+            $layout = entity_metadata_wrapper('catalyst', $layout_id);
+            catalyst_add_export($dependencies, 'layout', catalyst_export_entity_id($layout));
+          }
         }
       }
     }
@@ -116,6 +124,19 @@ function catalyst_block_catalyst_export_alter(&$export, $original, $group, $expo
           $export->block_placements[] = $placement;
         }
         break(1);
+      }
+    }
+    $field_name = 'field___block_placements_entity';
+    if (isset($wrapper->{$field_name}) && $values = $wrapper->{$field_name}->value()) {
+      $export->entity_placements_block_id = array();
+      $export->entity_placements_layout_id = array();
+      foreach ($values AS $placement) {
+        $block = entity_metadata_wrapper('catalyst', $placement['block_id']);
+        $export->entity_placements_block_id[] = catalyst_export_entity_id($block);
+        $layout = entity_metadata_wrapper('catalyst', $placement['layout_id']);
+        $export->entity_placements_layout_id[] = catalyst_export_entity_id($layout);
+        unset($placement['block_id'], $placement['layout_id']);
+        $export->entity_placements[] = $placement;
       }
     }
   }

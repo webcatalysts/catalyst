@@ -35,6 +35,10 @@ class CatalystPageMigration extends CatalystEntityMigration {
     // Block Placements
     $this->addFieldMapping('field__blockplacements__layfield', 'block_placements');
     $this->addReferenceFieldMapping('field__blockplacements__layfield:block_id', 'block_placement_ids', 'block');
+    // Entity Placements
+    $this->addFieldMapping('field___block_placements_entity', 'entity_placements');
+    $this->addReferenceFieldMapping('field___block_placements_entity:block_id', 'entity_placements_block_id', 'block');
+    $this->addReferenceFieldMapping('field___block_placements_entity:layout_id', 'entity_placements_layout_id', 'block');
     // File field mapping
     $this->addFileFieldMapping('field__files', 'files_custom');
     // Reference field mappings
