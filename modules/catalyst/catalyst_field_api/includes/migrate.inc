@@ -37,6 +37,7 @@ class MigrateBlockPlacementBlockFieldHandler extends MigrateBlockPlacementFieldH
   public function __construct() {
     $this->registerTypes(array(
       'block_placement_block',
+      'block_placement_entity',
     ));
   }
   public function fields() {

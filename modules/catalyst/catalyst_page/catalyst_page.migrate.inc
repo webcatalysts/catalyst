@@ -22,6 +22,9 @@ class CatalystPageMigration extends CatalystEntityMigration {
       'block_placements' => t('Block placements'),
       'block_placement_ids' => t('Block placement block IDs'),
       'blocks_reference' => t('Block references'),
+      'entity_placements' => t('Entity placements'),
+      'entity_placements_layout_id' => t('Entity placements Layout IDs'),
+      'entity_placements_block_id' => t('Entity placements Block IDs'),
       'html_head' => t('Custom HTML Head'),
       'preprocess_php' => t('Preprocess PHP'),
     ) + parent::sourceFields();
@@ -38,7 +41,7 @@ class CatalystPageMigration extends CatalystEntityMigration {
     // Entity Placements
     $this->addFieldMapping('field___block_placements_entity', 'entity_placements');
     $this->addReferenceFieldMapping('field___block_placements_entity:block_id', 'entity_placements_block_id', 'block');
-    $this->addReferenceFieldMapping('field___block_placements_entity:layout_id', 'entity_placements_layout_id', 'block');
+    $this->addReferenceFieldMapping('field___block_placements_entity:layout_id', 'entity_placements_layout_id', 'layout');
     // File field mapping
     $this->addFileFieldMapping('field__files', 'files_custom');
     // Reference field mappings
