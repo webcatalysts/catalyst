@@ -465,28 +465,24 @@ function catalyst_coreblock($module, $delta = 0, $render = true) {
   )));
 }
 
-function catalyst_lookup_entity($bundle, $machine_name) {
-  $lookups = &drupal_static(__FUNCTION__);
-  if (!isset($lookups)) {
-    $lookups = array();
-  }
-  if (!isset($lookups[$bundle])) {
-    $lookups[$bundle] = array();
-  }
-  if (!isset($lookups[$bundle][$machine_name])) {
-    $query = new EntityFieldQuery;
-    $query->entityCondition('entity_type', 'catalyst')
-      ->entityCondition('bundle', $bundle)
-      ->fieldCondition('field__machine', 'machine', $machine_name, '=')
-      ->addTag(__FUNCTION__);
-    $result = $query->execute();
-    if (isset($result['catalyst'])) {
-      $result = array_keys($result['catalyst']);
-      $lookups[$bundle][$machine_name] = $result[0];
-    }
-    else {
-      $lookups[$bundle][$machine_name] = FALSE;
+function catalyst_lookup_entity($bundle, $machine_name, $entity_type = 'catalyst') {
+  $map = catalyst_entity_map();
+  return isset($map[$entity_type][$bundle][$machine_name]) ? $map[$entity_type][$bundle][$machine_name] : FALSE;
+}
+
+function catalyst_entity_map() {
+  $map = &drupal_static(__FUNCTION__);
+  if (!isset($map)) {
+    $result = db_query("SELECT entity_type, bundle, entity_id, field__machine_machine AS machine FROM {field_data_field__machine}");
+    foreach ($result AS $item) {
+      if (!isset($map[$item->entity_type])) {
+        $map[$item->entity_type] = array();
+      }
+      if (!isset($map[$item->entity_type][$item->bundle])) {
+        $map[$item->entity_type][$item->bundle] = array();
+      }
+      $map[$item->entity_type][$item->bundle][$item->machine] = $item->entity_id;
     }
   }
-  return $lookups[$bundle][$machine_name];
+  return $map;
 }
