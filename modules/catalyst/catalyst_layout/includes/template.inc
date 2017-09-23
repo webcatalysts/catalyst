@@ -81,7 +81,7 @@ class CatalystEntityLayout extends CatalystEntityTemplate implements CatalystLay
   }
 
   protected function preRender(&$template, &$variables) {
-    if ($this->has_entity) {
+    if ($this->has_entity && $this->wrapper->field__debug->value()) {
       $variables['entity'] = catalyst_entity_normalize($this->wrapper->value(), 'layout');
     }
   }
