@@ -115,7 +115,7 @@ projects[transliteration][version] = "3.2"
 projects[transliteration][type] = "module"
 projects[transliteration][subdir] = "contrib"
 
-projects[views][version] = "3.17"
+projects[views][version] = "3.18"
 projects[views][type] = "module"
 projects[views][subdir] = "contrib"
 
