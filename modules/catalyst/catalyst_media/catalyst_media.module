@@ -74,10 +74,8 @@ function catalyst_media_filepath($machine_name, $format = 'path') {
     ->fieldCondition('field__machine', 'machine', $machine_name, '=')
     ->addTag(__FUNCTION__);
   $result = $query->execute();
-  if (isset($result['catalyst'])) {
-    $results = entity_load('catalyst', array_keys($result['catalyst']));
-    $file = array_pop($results);
-    $file = entity_metadata_wrapper('catalyst', $file);
+  if ($eid = catalyst_lookup_entity('file', $machine_name)) {
+    $file = entity_metadata_wrapper('catalyst', $eid);
     switch ($file->field__media_type->value()) {
       case 'local':
       case 'remote':

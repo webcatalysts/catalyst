@@ -195,17 +195,10 @@ function catalyst_block_catalyst_twig_render_alter(&$twig, &$variables, $key = N
  *   Pass custom variables to the block.
  */
 function catalyst_block_showblock($machine_name, $variables = array()) {
-  $query = new EntityFieldQuery;
-  $query->entityCondition('entity_type', 'catalyst')
-    ->entityCondition('bundle', 'block')
-    ->fieldCondition('field__machine', 'machine', $machine_name, '=')
-    ->addTag(__FUNCTION__);
-  $result = $query->execute();
-  if (isset($result['catalyst'])) {
-    $blocks = entity_load('catalyst', array_keys($result['catalyst']));
-    foreach (array_keys($blocks) AS $i) {
-      $blocks[$i]->template_variables = $variables;
-    }
+  if ($eid = catalyst_lookup_entity('block', $machine_name)) {
+    $block = entity_load_single('catalyst', $eid);
+    $block->template_variables = $variables;
+    $blocks = array($block);
     $build = entity_view('catalyst', $blocks);
     return render($build);
   }

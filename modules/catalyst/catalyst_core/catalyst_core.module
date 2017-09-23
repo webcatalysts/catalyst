@@ -464,3 +464,29 @@ function catalyst_coreblock($module, $delta = 0, $render = true) {
     '%delta' => $delta,
   )));
 }
+
+function catalyst_lookup_entity($bundle, $machine_name) {
+  $lookups = &drupal_static(__FUNCTION__);
+  if (!isset($lookups)) {
+    $lookups = array();
+  }
+  if (!isset($lookups[$bundle])) {
+    $lookups[$bundle] = array();
+  }
+  if (!isset($lookups[$bundle][$machine_name])) {
+    $query = new EntityFieldQuery;
+    $query->entityCondition('entity_type', 'catalyst')
+      ->entityCondition('bundle', $bundle)
+      ->fieldCondition('field__machine', 'machine', $machine_name, '=')
+      ->addTag(__FUNCTION__);
+    $result = $query->execute();
+    if (isset($result['catalyst'])) {
+      $result = array_keys($result['catalyst']);
+      $lookups[$bundle][$machine_name] = $result[0];
+    }
+    else {
+      $lookups[$bundle][$machine_name] = FALSE;
+    }
+  }
+  return $lookups[$bundle][$machine_name];
+}
