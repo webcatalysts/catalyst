@@ -1,0 +1,181 @@
+{
+    "name": "codecatalysts/catalyst",
+    "description": "The Catalyst CMS hybrid for Drupal",
+    "type": "drupal-profile",
+    "license": "GPL-2.0+",
+    "version": "0.1",
+    "repositories": [
+        {
+            "type": "composer",
+            "url": "https://packages.drupal.org/7"
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-module/better_migrate",
+                "version": "1",
+                "type": "drupal-module",
+                "source": {
+                    "url": "http://git.drupal.org/sandbox/lee20/2223893.git",
+                    "type": "git",
+                    "reference": "7.x-1.x"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-module/machine",
+                "version": "1",
+                "type": "drupal-module",
+                "source": {
+                    "url": "http://git.drupal.org/sandbox/lee20/2223893.git",
+                    "type": "git",
+                    "reference": "7.x-1.x"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-library/twig",
+                "version": "1.23.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/twigphp/Twig/archive/v1.23.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-library/ace",
+                "version": "1.2.2",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/ajaxorg/ace-builds/archive/v1.2.2.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-library/modernizr",
+                "version": "2.7.1",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/Modernizr/Modernizr/archive/v2.7.1.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-library/backbone",
+                "version": "1.1.0",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/jashkenas/backbone/archive/1.1.0.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-library/underscore",
+                "version": "1.5.2",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "https://github.com/jashkenas/underscore/archive/1.5.2.zip",
+                    "type": "zip"
+                }
+            }
+        },
+        {
+            "type": "package",
+            "package": {
+                "name": "drupal-library/ckeditor",
+                "version": "4.5.6",
+                "type": "drupal-library",
+                "dist": {
+                    "url": "http://download.cksource.com/CKEditor/CKEditor/CKEditor%204.5.6/ckeditor_4.5.6_full.zip",
+                    "type": "zip"
+                }
+            }
+        }
+    ],
+    "require": {
+        "php": ">=7.0.0",
+        "drupal/better_exposed_filters": "3.x",
+        "drupal/better_formats": "1.0-beta2",
+        "drupal/ctools": "1.12",
+        "drupal/devel": "1.5",
+        "drupal/eck": " 2.0-rc9",
+        "drupal/entity": "1.8",
+        "drupal/entityreference": "1.5",
+        "drupal/entityreference_autocreate": "1.1",
+        "drupal/features": "2.10",
+        "drupal/field_group": "1.5",
+        "drupal/filefield_paths": "1.0",
+        "drupal/inline_entity_form": "1.8",
+        "drupal/libraries": "2.3",
+        "drupal/markdown": "1.5",
+        "drupal/menu_block": "2.7",
+        "drupal/migrate": "2.8",
+        "drupal/migrate_extras": "2.5",
+        "drupal/module_filter": "2.1",
+        "drupal/navbar": "1.7",
+        "drupal/responsive_preview": "1.1",
+        "drupal/select_or_other": "2.22",
+        "drupal/serialized_field": "1.0-rc1",
+        "drupal/shortcutperrole": "1.2",
+        "drupal/strongarm": "2.0",
+        "drupal/token": "1.7",
+        "drupal/transliteration": "3.2",
+        "drupal/views": "3.18",
+        "drupal/views_bulk_operations": "3.4",
+        "drupal/views_php": "1.0-alpha3",
+        "drupal/webform": " 4.15",
+        "drupal/wysiwyg": "2.x-dev",
+        
+        "drupal-module/better_migrate": "*",
+        "drupal-module/machine": "*",
+        "drupal/ace": "1.x-dev",
+        
+        "drupal-library/twig": "*",
+        "drupal-library/ace": "*",
+        "drupal-library/modernizr": "*",
+        "drupal-library/backbone": "*",
+        "drupal-library/underscore": "*",
+        "drupal-library/ckeditor": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "installer-paths": {
+            "libraries/{$name}/": ["type:drupal-library"],
+            "modules/contrib/{$name}/": ["type:drupal-module"]
+        },
+        "patches": {
+            "drupal/better_exposed_filters": {
+               "Keep secondary exposed form options collapsed with default input (https://www.drupal.org/node/2647600)": "https://www.drupal.org/files/issues/better_exposed_filters-collapse_secondary_options_if_select_widget_is_default-2647600-7.patch"
+            },
+            "drupal/eck": {
+                "Allow administrative bundle menu items to follow altered admin path (https://www.drupal.org/node/2647610)": "https://www.drupal.org/files/issues/eck-entity-custom-admin-path-2647610-2-7x2x.patch"
+            },
+            "drupal/entity": {
+                "entity-on-exception-return-null": "https://www.drupal.org/files/issues/entity-on-exception-return-null-1596594-49.patch"
+            },
+            "drupal/field_group": {
+                "Fix to missing field group names in PHP 7 (https://www.drupal.org/node/2649648)": "https://www.drupal.org/files/issues/php7_uniform_variable-2649648-5.patch"
+            }
+        }
+    }
+}
