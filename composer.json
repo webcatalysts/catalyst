@@ -13,7 +13,7 @@
             "type": "package",
             "package": {
                 "name": "drupal-module/better_migrate",
-                "version": "1",
+                "version": "*",
                 "type": "drupal-module",
                 "source": {
                     "url": "https://git.drupal.org/sandbox/lee20/2223893.git",
@@ -26,7 +26,7 @@
             "type": "package",
             "package": {
                 "name": "drupal-module/machine",
-                "version": "1",
+                "version": "*",
                 "type": "drupal-module",
                 "source": {
                     "url": "https://git.drupal.org/sandbox/lee20/2223893.git",
