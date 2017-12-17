@@ -169,7 +169,7 @@
             "custom-module": "modules/custom/{$name}/",
             "sandbox-module": "modules/sandbox/{$name}/",
             "drupal-module": "modules/contrib/${name}/",
-            "drupal-libraries": "libraries/{$name}"
+            "drupal-libraries": "libraries/{$name}/"
         },
         "patches": {
             "drupal/better_exposed_filters": {
