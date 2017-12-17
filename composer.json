@@ -12,9 +12,9 @@
         {
             "type": "package",
             "package": {
-                "name": "drupal-module/better_migrate",
+                "name": "sandbox-module/better_migrate",
                 "version": "dev-7.x-1.x",
-                "type": "drupal-module",
+                "type": "sandbox-module",
                 "source": {
                     "url": "https://git.drupal.org/sandbox/lee20/2223893.git",
                     "type": "git",
@@ -25,9 +25,9 @@
         {
             "type": "package",
             "package": {
-                "name": "drupal-module/machine",
+                "name": "sandbox-module/machine",
                 "version": "dev-7.x-1.x",
-                "type": "drupal-module",
+                "type": "sandbox-module",
                 "source": {
                     "url": "https://git.drupal.org/sandbox/lee20/2642174.git",
                     "type": "git",
@@ -144,8 +144,8 @@
         "drupal/webform": " 4.15",
         "drupal/wysiwyg": "2.x-dev",
         
-        "drupal-module/better_migrate": "*",
-        "drupal-module/machine": "*",
+        "sandbox-module/better_migrate": "*",
+        "sandbox-module/machine": "*",
         "drupal/ace": "1.x-dev",
         
         "drupal-library/twig": "*",
@@ -156,14 +156,20 @@
         "drupal-library/ckeditor": "*"
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
+    "prefer-stable": false,
     "config": {
-        "sort-packages": true
+        "sort-packages": false
     },
     "extra": {
+        "installer-types": [
+            "type:sandbox-module",
+            "type:custom-module"
+        ],
         "installer-paths": {
-            "./libraries/{$name}/": ["type:drupal-library"],
-            "./modules/contrib/{$name}/": ["type:drupal-module"]
+            "libraries/{$name}/": ["type:drupal-library"],
+            "modules/sandbox/{$name}/": ["type:sandbox-module"],
+            "modules/custom/{$name}/": ["type:custom-module"],
+            "modules/contrib/{$name}/": ["type:drupal-module"]
         },
         "patches": {
             "drupal/better_exposed_filters": {
