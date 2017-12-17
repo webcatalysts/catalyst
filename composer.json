@@ -16,7 +16,7 @@
                 "version": "1",
                 "type": "drupal-module",
                 "source": {
-                    "url": "http://git.drupal.org/sandbox/lee20/2223893.git",
+                    "url": "https://git.drupal.org/sandbox/lee20/2223893.git",
                     "type": "git",
                     "reference": "7.x-1.x"
                 }
@@ -29,7 +29,7 @@
                 "version": "1",
                 "type": "drupal-module",
                 "source": {
-                    "url": "http://git.drupal.org/sandbox/lee20/2223893.git",
+                    "url": "https://git.drupal.org/sandbox/lee20/2223893.git",
                     "type": "git",
                     "reference": "7.x-1.x"
                 }
@@ -160,8 +160,8 @@
     },
     "extra": {
         "installer-paths": {
-            "libraries/{$name}/": ["type:drupal-library"],
-            "modules/contrib/{$name}/": ["type:drupal-module"]
+            "./libraries/{$name}/": ["type:drupal-library"],
+            "./modules/contrib/{$name}/": ["type:drupal-module"]
         },
         "patches": {
             "drupal/better_exposed_filters": {
