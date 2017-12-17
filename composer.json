@@ -170,7 +170,7 @@
             "sandbox-module": "modules/sandbox/{$name}/",
             "drupal-module": "modules/contrib/${name}/",
             "drupal-libraries": "libraries/{$name}"
-        ],
+        },
         "patches": {
             "drupal/better_exposed_filters": {
                "Keep secondary exposed form options collapsed with default input (https://www.drupal.org/node/2647600)": "https://www.drupal.org/files/issues/better_exposed_filters-collapse_secondary_options_if_select_widget_is_default-2647600-7.patch"
