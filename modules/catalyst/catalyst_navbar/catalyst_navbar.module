@@ -68,3 +68,13 @@ function catalyst_alter_library(&$library) {
   }
   $library = $return;
 }
+
+function catalyst_navbar_navbar() {
+  $items['fg_admin'] = array(
+    '#attached' => array(
+      'css' => array(drupal_get_path('module', 'catalyst_navbar') . '/css/navbar.css'),
+    ),
+
+  );
+  return $items;
+}
