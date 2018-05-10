@@ -138,7 +138,7 @@
         "drupal/strongarm": "2.0",
         "drupal/token": "1.7",
         "drupal/transliteration": "3.2",
-        "drupal/views": "3.2",
+        "drupal/views": "^3.2",
         "drupal/views_bulk_operations": "3.4",
         "drupal/views_php": "1.0-alpha3",
         "drupal/webform": " 4.15",
