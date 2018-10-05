@@ -75,8 +75,7 @@ function catalyst_block_catalyst_export_dependencies($export, $group) {
     // Determine dependencies for entities using block placements
     $placement_fields = array(
       'field__blockplacements__layfield',
-      'field__blockplacements__layout',
-      'field___block_placements_entity',
+      'field__blockplacements__layout'
     );
     foreach ($placement_fields AS $field) {
       if (isset($wrapper->{$field})) {
